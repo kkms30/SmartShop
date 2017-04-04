@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B43EFA3E-AD4C-48BE-A412-211C15FA09F0}</ProjectGuid>
+    <ProjectGuid>{10CBF05A-4D27-4D6F-8C40-76C2138504B3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SmartShopWpf</RootNamespace>
