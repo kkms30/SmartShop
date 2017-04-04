@@ -1,0 +1,14 @@
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\bin\Debug\SmartShopWpf.exe.config
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\bin\Debug\SmartShopWpf.exe
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\bin\Debug\SmartShopWpf.pdb
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf.csprojResolveAssemblyReference.cache
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\MainWindow.g.cs
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\App.g.cs
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf_MarkupCompile.cache
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf_MarkupCompile.lref
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\MainWindow.baml
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf.g.resources
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf.Properties.Resources.resources
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf.csproj.GenerateResource.Cache
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf.exe
+D:\GitRep\SmartShop\SmartShop\SmartShopWpf\obj\Debug\SmartShopWpf.pdb
