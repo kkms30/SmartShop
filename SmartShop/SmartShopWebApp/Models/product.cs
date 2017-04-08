@@ -14,7 +14,7 @@ namespace SmartShopWebApp.Models
     
     public partial class Product
     {
-        public int IdProducts { get; set; }
+        public int IdProduct { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public float Price { get; set; }
