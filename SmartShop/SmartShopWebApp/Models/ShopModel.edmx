@@ -228,9 +228,9 @@
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="IdProducts" />
+            <PropertyRef Name="IdProduct" />
           </Key>
-          <Property Name="IdProducts" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Single" Nullable="false" />
@@ -417,7 +417,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="smartshopModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="IdProducts" ColumnName="idproducts" />
+                <ScalarProperty Name="IdProduct" ColumnName="idproducts" />
                 <ScalarProperty Name="Name" ColumnName="name" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Price" ColumnName="price" />
