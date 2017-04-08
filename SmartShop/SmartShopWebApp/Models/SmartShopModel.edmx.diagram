@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5cb84993ab2a4008a25e469c807639af" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="SmartShopModel.cashbox" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartShopModel.cashier" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartShopModel.category" Width="1.5" PointX="1.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartShopModel.orderdetail" Width="1.5" PointX="3.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartShopModel.product" Width="1.5" PointX="3.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartShopModel.shop" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartShopModel.transaction" Width="1.5" PointX="7.75" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="SmartShopModel.fk_cashboxs_shops1" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartShopModel.fk_orderdetails_categories1" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartShopModel.fk_products_categories1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
