@@ -17,15 +17,15 @@ namespace SmartShopWebApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.Orderdetails = new HashSet<Orderdetail>();
             this.Products = new HashSet<Product>();
         }
     
-        public int idcategories { get; set; }
-        public string name { get; set; }
+        public int IdCategory { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Orderdetail> Orderdetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

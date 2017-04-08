@@ -14,12 +14,12 @@ namespace SmartShopWebApp.Models
     
     public partial class Product
     {
-        public int idproducts { get; set; }
-        public string name { get; set; }
-        public string code { get; set; }
-        public float price { get; set; }
-        public byte[] image { get; set; }
-        public int categories_idcategories { get; set; }
+        public int IdProducts { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public float Price { get; set; }
+        public byte[] Image { get; set; }
+        public int CategoryId { get; set; }
     
         public virtual Category Category { get; set; }
     }

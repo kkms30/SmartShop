@@ -13,10 +13,10 @@ namespace SmartShopWebApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class smartshopEntities : DbContext
+    public partial class ShopEntities : DbContext
     {
-        public smartshopEntities()
-            : base("name=smartshopEntities")
+        public ShopEntities()
+            : base("name=ShopEntities")
         {
         }
     
@@ -25,10 +25,10 @@ namespace SmartShopWebApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CashBox> CashBoxes { get; set; }
+        public virtual DbSet<Cashbox> Cashboxes { get; set; }
         public virtual DbSet<Cashier> Cashiers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Orderdetail> Orderdetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }

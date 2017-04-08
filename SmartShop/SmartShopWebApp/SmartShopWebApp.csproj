@@ -128,15 +128,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Models\SmartShopModel.Context.tt">
+    <Content Include="Models\ShopModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SmartShopModel.edmx</DependentUpon>
-      <LastGenOutput>SmartShopModel.Context.cs</LastGenOutput>
+      <DependentUpon>ShopModel.edmx</DependentUpon>
+      <LastGenOutput>ShopModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\SmartShopModel.tt">
+    <Content Include="Models\ShopModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SmartShopModel.edmx</DependentUpon>
-      <LastGenOutput>SmartShopModel.cs</LastGenOutput>
+      <DependentUpon>ShopModel.edmx</DependentUpon>
+      <LastGenOutput>ShopModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -148,41 +148,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CashBox.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+    <Compile Include="Models\Cashbox.cs">
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cashier.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+    <Compile Include="Models\Orderdetail.cs">
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shop.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SmartShopModel.Context.cs">
+    <Compile Include="Models\ShopModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SmartShopModel.Context.tt</DependentUpon>
+      <DependentUpon>ShopModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SmartShopModel.cs">
+    <Compile Include="Models\ShopModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SmartShopModel.Designer.cs">
+    <Compile Include="Models\ShopModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SmartShopModel.edmx</DependentUpon>
+      <DependentUpon>ShopModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaction.cs">
-      <DependentUpon>SmartShopModel.tt</DependentUpon>
+      <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,12 +191,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\SmartShopModel.edmx">
+    <EntityDeploy Include="Models\ShopModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SmartShopModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ShopModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\SmartShopModel.edmx.diagram">
-      <DependentUpon>SmartShopModel.edmx</DependentUpon>
+    <Content Include="Models\ShopModel.edmx.diagram">
+      <DependentUpon>ShopModel.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

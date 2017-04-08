@@ -17,14 +17,14 @@ namespace SmartShopWebApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Shop()
         {
-            this.CashBoxes = new HashSet<CashBox>();
+            this.Cashboxes = new HashSet<Cashbox>();
         }
     
-        public int idshops { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
+        public int IdShop { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CashBox> CashBoxes { get; set; }
+        public virtual ICollection<Cashbox> Cashboxes { get; set; }
     }
 }

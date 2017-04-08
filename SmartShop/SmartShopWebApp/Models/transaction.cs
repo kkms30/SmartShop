@@ -14,13 +14,17 @@ namespace SmartShopWebApp.Models
     
     public partial class Transaction
     {
-        public int idtransactions { get; set; }
-        public int orderdetails_idorderdetails { get; set; }
-        public int cashboxs_idcashboxs { get; set; }
-        public int cashiers_idcashiers { get; set; }
-        public int id { get; set; }
-        public System.DateTime date { get; set; }
-        public float totalprice { get; set; }
-        public Nullable<float> discount { get; set; }
+        public int IdTransaction { get; set; }
+        public int Id { get; set; }
+        public System.DateTime Date { get; set; }
+        public float TotalPrice { get; set; }
+        public Nullable<float> Discount { get; set; }
+        public int CashboxId { get; set; }
+        public int CashierId { get; set; }
+        public int OrderdetailId { get; set; }
+    
+        public virtual Cashbox Cashbox { get; set; }
+        public virtual Cashier Cashier { get; set; }
+        public virtual Orderdetail Orderdetail { get; set; }
     }
 }

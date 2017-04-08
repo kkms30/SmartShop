@@ -14,19 +14,23 @@ namespace SmartShopWebApp.Controllers
 {
     public class CashiersController : ApiController
     {
-        private smartshopEntities db = new smartshopEntities();
+        private ShopEntities context = new ShopEntities();
 
         // GET: api/cashiers
         public IQueryable<Cashier> Getcashiers()
         {
-            return db.Cashiers;
+            Cashier cashier = new Cashier { Id = "test", Name = "test", Password = "test", Surname = "test" };
+            context.Cashiers.Add(cashier);
+            context.SaveChanges();
+
+            return context.Cashiers;
         }
 
         // GET: api/cashiers/5
         [ResponseType(typeof(Cashier))]
         public IHttpActionResult Getcashier(int id)
         {
-            Cashier cashier = db.Cashiers.Find(id);
+            Cashier cashier = context.Cashiers.Find(id);
             if (cashier == null)
             {
                 return NotFound();
@@ -44,16 +48,16 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != cashier.idcashiers)
+            if (id != cashier.IdCashier)
             {
                 return BadRequest();
             }
 
-            db.Entry(cashier).State = EntityState.Modified;
+            context.Entry(cashier).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,24 +83,24 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Cashiers.Add(cashier);
-            db.SaveChanges();
+            context.Cashiers.Add(cashier);
+            context.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cashier.idcashiers }, cashier);
+            return CreatedAtRoute("DefaultApi", new { id = cashier.IdCashier }, cashier);
         }
 
         // DELETE: api/cashiers/5
         [ResponseType(typeof(Cashier))]
         public IHttpActionResult Deletecashier(int id)
         {
-            Cashier cashier = db.Cashiers.Find(id);
+            Cashier cashier = context.Cashiers.Find(id);
             if (cashier == null)
             {
                 return NotFound();
             }
 
-            db.Cashiers.Remove(cashier);
-            db.SaveChanges();
+            context.Cashiers.Remove(cashier);
+            context.SaveChanges();
 
             return Ok(cashier);
         }
@@ -105,14 +109,14 @@ namespace SmartShopWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool cashierExists(int id)
         {
-            return db.Cashiers.Count(e => e.idcashiers == id) > 0;
+            return context.Cashiers.Count(e => e.IdCashier == id) > 0;
         }
     }
 }

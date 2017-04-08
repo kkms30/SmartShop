@@ -12,12 +12,20 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CashBox
+    public partial class Cashbox
     {
-        public int idcashboxs { get; set; }
-        public int id { get; set; }
-        public int shops_idshops { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cashbox()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
+        public int IdCashbox { get; set; }
+        public int Id { get; set; }
+        public int ShopId { get; set; }
     
         public virtual Shop Shop { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

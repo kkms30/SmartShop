@@ -12,15 +12,23 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class Orderdetail
     {
-        public int idorderdetails { get; set; }
-        public int id { get; set; }
-        public sbyte @return { get; set; }
-        public sbyte count { get; set; }
-        public Nullable<float> discount { get; set; }
-        public int categories_idcategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Orderdetail()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
+        public int IdOrderdetail { get; set; }
+        public int Id { get; set; }
+        public sbyte Return { get; set; }
+        public sbyte Count { get; set; }
+        public Nullable<float> Discount { get; set; }
+        public int CategoryId { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
