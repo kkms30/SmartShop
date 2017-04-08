@@ -16,7 +16,7 @@ namespace SmartShopWebApp.Models
     {
         public int idcashboxs { get; set; }
         public int id { get; set; }
-        public int shops_idshops { get; set; }
+        public int ShopId { get; set; }
     
         public virtual Shop Shop { get; set; }
     }

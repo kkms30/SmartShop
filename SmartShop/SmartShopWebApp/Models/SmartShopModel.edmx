@@ -161,7 +161,7 @@
           </Key>
           <Property Name="idcashboxs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="shops_idshops" Type="Int32" Nullable="false" />
+          <Property Name="ShopId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Shop" Relationship="SmartShopModel.fk_cashboxs_shops1" FromRole="CashBox" ToRole="Shop" />
         </EntityType>
         <EntityType Name="Cashier">
@@ -237,7 +237,7 @@
               <PropertyRef Name="idshops" />
             </Principal>
             <Dependent Role="CashBox">
-              <PropertyRef Name="shops_idshops" />
+              <PropertyRef Name="ShopId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -274,7 +274,7 @@
           <EntitySetMapping Name="CashBoxes">
             <EntityTypeMapping TypeName="SmartShopModel.CashBox">
               <MappingFragment StoreEntitySet="CashBoxes">
-                <ScalarProperty Name="shops_idshops" ColumnName="shops_idshops" />
+                <ScalarProperty Name="ShopId" ColumnName="shops_idshops" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idcashboxs" ColumnName="idcashboxs" />
               </MappingFragment>

@@ -12,47 +12,52 @@ using SmartShopWebApp.Models;
 
 namespace SmartShopWebApp.Controllers
 {
-    public class CashiersController : ApiController
+    public class CashBoxesController : ApiController
     {
         private smartshopEntities db = new smartshopEntities();
 
-        // GET: api/cashiers
-        public IQueryable<Cashier> Getcashiers()
+        // GET: api/CashBoxes
+        public IQueryable<CashBox> GetCashBoxes()
         {
-            CashBox cashBox = new CashBox { id = 9870, ShopId = 1};
+            Shop shop = new Shop() { name = "Test", address = "test", idshops = 5 };
+            CashBox cashBox = new CashBox() { id = 3, idcashboxs = 3, shops_idshops = 5 };
+            cashBox.Shop = shop;
+            shop.CashBoxes.Add(cashBox);
+
+            db.Shops.Add(shop);
             db.CashBoxes.Add(cashBox);
-            db.SaveChanges();
-            return db.Cashiers;
+
+            return db.CashBoxes;
         }
 
-        // GET: api/cashiers/5
-        [ResponseType(typeof(Cashier))]
-        public IHttpActionResult Getcashier(int id)
+        // GET: api/CashBoxes/5
+        [ResponseType(typeof(CashBox))]
+        public IHttpActionResult GetCashBox(int id)
         {
-            Cashier cashier = db.Cashiers.Find(id);
-            if (cashier == null)
+            CashBox cashBox = db.CashBoxes.Find(id);
+            if (cashBox == null)
             {
                 return NotFound();
             }
 
-            return Ok(cashier);
+            return Ok(cashBox);
         }
 
-        // PUT: api/cashiers/5
+        // PUT: api/CashBoxes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putcashier(int id, Cashier cashier)
+        public IHttpActionResult PutCashBox(int id, CashBox cashBox)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cashier.idcashiers)
+            if (id != cashBox.idcashboxs)
             {
                 return BadRequest();
             }
 
-            db.Entry(cashier).State = EntityState.Modified;
+            db.Entry(cashBox).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +65,7 @@ namespace SmartShopWebApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!cashierExists(id))
+                if (!CashBoxExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +78,35 @@ namespace SmartShopWebApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/cashiers
-        [ResponseType(typeof(Cashier))]
-        public IHttpActionResult Postcashier(Cashier cashier)
+        // POST: api/CashBoxes
+        [ResponseType(typeof(CashBox))]
+        public IHttpActionResult PostCashBox(CashBox cashBox)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Cashiers.Add(cashier);
+            db.CashBoxes.Add(cashBox);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cashier.idcashiers }, cashier);
+            return CreatedAtRoute("DefaultApi", new { id = cashBox.idcashboxs }, cashBox);
         }
 
-        // DELETE: api/cashiers/5
-        [ResponseType(typeof(Cashier))]
-        public IHttpActionResult Deletecashier(int id)
+        // DELETE: api/CashBoxes/5
+        [ResponseType(typeof(CashBox))]
+        public IHttpActionResult DeleteCashBox(int id)
         {
-            Cashier cashier = db.Cashiers.Find(id);
-            if (cashier == null)
+            CashBox cashBox = db.CashBoxes.Find(id);
+            if (cashBox == null)
             {
                 return NotFound();
             }
 
-            db.Cashiers.Remove(cashier);
+            db.CashBoxes.Remove(cashBox);
             db.SaveChanges();
 
-            return Ok(cashier);
+            return Ok(cashBox);
         }
 
         protected override void Dispose(bool disposing)
@@ -113,9 +118,9 @@ namespace SmartShopWebApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool cashierExists(int id)
+        private bool CashBoxExists(int id)
         {
-            return db.Cashiers.Count(e => e.idcashiers == id) > 0;
+            return db.CashBoxes.Count(e => e.idcashboxs == id) > 0;
         }
     }
 }
