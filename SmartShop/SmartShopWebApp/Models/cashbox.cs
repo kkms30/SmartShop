@@ -12,12 +12,12 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class cashbox
+    public partial class CashBox
     {
         public int idcashboxs { get; set; }
         public int id { get; set; }
         public int shops_idshops { get; set; }
     
-        public virtual shop shop { get; set; }
+        public virtual Shop Shop { get; set; }
     }
 }

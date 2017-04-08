@@ -4,8 +4,8 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SmartShopModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="cashboxs">
+    <Schema Namespace="SmartShopModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CashBoxes">
           <Key>
             <PropertyRef Name="idcashboxs" />
           </Key>
@@ -13,7 +13,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="shops_idshops" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="cashiers">
+        <EntityType Name="Cashiers">
           <Key>
             <PropertyRef Name="idcashiers" />
           </Key>
@@ -23,14 +23,14 @@
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="surname" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <EntityType Name="categories">
+        <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="idcategories" />
           </Key>
           <Property Name="idcategories" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <EntityType Name="orderdetails">
+        <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="idorderdetails" />
           </Key>
@@ -41,7 +41,7 @@
           <Property Name="discount" Type="float" />
           <Property Name="categories_idcategories" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="products">
+        <EntityType Name="Products">
           <Key>
             <PropertyRef Name="idproducts" />
           </Key>
@@ -52,7 +52,7 @@
           <Property Name="image" Type="mediumblob" />
           <Property Name="categories_idcategories" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="shops">
+        <EntityType Name="Shops">
           <Key>
             <PropertyRef Name="idshops" />
           </Key>
@@ -60,7 +60,7 @@
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="90" Nullable="false" />
         </EntityType>
-        <EntityType Name="transactions">
+        <EntityType Name="Transactions">
           <Key>
             <PropertyRef Name="idtransactions" />
           </Key>
@@ -74,96 +74,116 @@
           <Property Name="discount" Type="float" />
         </EntityType>
         <Association Name="fk_cashboxs_shops1">
-          <End Role="shops" Type="Self.shops" Multiplicity="1" />
-          <End Role="cashboxs" Type="Self.cashboxs" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="CashBoxes" Type="Self.CashBoxes" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="idshops" />
             </Principal>
-            <Dependent Role="cashboxs">
+            <Dependent Role="CashBoxes">
               <PropertyRef Name="shops_idshops" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_orderdetails_categories1">
-          <End Role="categories" Type="Self.categories" Multiplicity="1" />
-          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="Categories">
               <PropertyRef Name="idcategories" />
             </Principal>
-            <Dependent Role="orderdetails">
+            <Dependent Role="OrderDetails">
               <PropertyRef Name="categories_idcategories" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_products_categories1">
-          <End Role="categories" Type="Self.categories" Multiplicity="1" />
-          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="Categories">
               <PropertyRef Name="idcategories" />
             </Principal>
-            <Dependent Role="products">
+            <Dependent Role="Products">
               <PropertyRef Name="categories_idcategories" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SmartShopModelStoreContainer">
-          <EntitySet Name="cashboxs" EntityType="Self.cashboxs" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="cashiers" EntityType="Self.cashiers" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="categories" EntityType="Self.categories" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="orderdetails" EntityType="Self.orderdetails" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="products" EntityType="Self.products" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="shops" EntityType="Self.shops" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="transactions" EntityType="Self.transactions" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="CashBoxes" EntityType="Self.CashBoxes" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="Cashiers" EntityType="Self.Cashiers" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" Schema="smartshop" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="smartshop" store:Type="Tables" />
           <AssociationSet Name="fk_cashboxs_shops1" Association="Self.fk_cashboxs_shops1">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="cashboxs" EntitySet="cashboxs" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="CashBoxes" EntitySet="CashBoxes" />
           </AssociationSet>
           <AssociationSet Name="fk_orderdetails_categories1" Association="Self.fk_orderdetails_categories1">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="orderdetails" EntitySet="orderdetails" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="fk_products_categories1" Association="Self.fk_products_categories1">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="products" EntitySet="products" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SmartShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="cashbox">
+        <EntityContainer Name="smartshopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CashBoxes" EntityType="SmartShopModel.CashBox" />
+          <EntitySet Name="Cashiers" EntityType="SmartShopModel.Cashier" />
+          <EntitySet Name="Categories" EntityType="SmartShopModel.Category" />
+          <EntitySet Name="OrderDetails" EntityType="SmartShopModel.OrderDetail" />
+          <EntitySet Name="Products" EntityType="SmartShopModel.Product" />
+          <EntitySet Name="Shops" EntityType="SmartShopModel.Shop" />
+          <EntitySet Name="Transactions" EntityType="SmartShopModel.Transaction" />
+          <AssociationSet Name="fk_cashboxs_shops1" Association="SmartShopModel.fk_cashboxs_shops1">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="CashBox" EntitySet="CashBoxes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orderdetails_categories1" Association="SmartShopModel.fk_orderdetails_categories1">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_categories1" Association="SmartShopModel.fk_products_categories1">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CashBox">
           <Key>
             <PropertyRef Name="idcashboxs" />
           </Key>
           <Property Name="idcashboxs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="shops_idshops" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="shop" Relationship="Self.fk_cashboxs_shops1" FromRole="cashboxs" ToRole="shops" />
+          <NavigationProperty Name="Shop" Relationship="SmartShopModel.fk_cashboxs_shops1" FromRole="CashBox" ToRole="Shop" />
         </EntityType>
-        <EntityType Name="cashier">
+        <EntityType Name="Cashier">
           <Key>
             <PropertyRef Name="idcashiers" />
           </Key>
           <Property Name="idcashiers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="category">
+        <EntityType Name="Category">
           <Key>
             <PropertyRef Name="idcategories" />
           </Key>
           <Property Name="idcategories" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="orderdetails" Relationship="Self.fk_orderdetails_categories1" FromRole="categories" ToRole="orderdetails" />
-          <NavigationProperty Name="products" Relationship="Self.fk_products_categories1" FromRole="categories" ToRole="products" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderDetails" Relationship="SmartShopModel.fk_orderdetails_categories1" FromRole="Category" ToRole="OrderDetail" />
+          <NavigationProperty Name="Products" Relationship="SmartShopModel.fk_products_categories1" FromRole="Category" ToRole="Product" />
         </EntityType>
-        <EntityType Name="orderdetail">
+        <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="idorderdetails" />
           </Key>
@@ -173,30 +193,30 @@
           <Property Name="count" Type="SByte" Nullable="false" />
           <Property Name="discount" Type="Single" />
           <Property Name="categories_idcategories" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="category" Relationship="Self.fk_orderdetails_categories1" FromRole="orderdetails" ToRole="categories" />
+          <NavigationProperty Name="Category" Relationship="SmartShopModel.fk_orderdetails_categories1" FromRole="OrderDetail" ToRole="Category" />
         </EntityType>
-        <EntityType Name="product">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="idproducts" />
           </Key>
           <Property Name="idproducts" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Single" Nullable="false" />
           <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="categories_idcategories" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="category" Relationship="Self.fk_products_categories1" FromRole="products" ToRole="categories" />
+          <NavigationProperty Name="Category" Relationship="SmartShopModel.fk_products_categories1" FromRole="Product" ToRole="Category" />
         </EntityType>
-        <EntityType Name="shop">
+        <EntityType Name="Shop">
           <Key>
             <PropertyRef Name="idshops" />
           </Key>
           <Property Name="idshops" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="cashboxs" Relationship="Self.fk_cashboxs_shops1" FromRole="shops" ToRole="cashboxs" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CashBoxes" Relationship="SmartShopModel.fk_cashboxs_shops1" FromRole="Shop" ToRole="CashBox" />
         </EntityType>
-        <EntityType Name="transaction">
+        <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="idtransactions" />
           </Key>
@@ -210,140 +230,119 @@
           <Property Name="discount" Type="Single" />
         </EntityType>
         <Association Name="fk_cashboxs_shops1">
-          <End Role="shops" Type="Self.shop" Multiplicity="1" />
-          <End Role="cashboxs" Type="Self.cashbox" Multiplicity="*" />
+          <End Type="SmartShopModel.Shop" Role="Shop" Multiplicity="1" />
+          <End Type="SmartShopModel.CashBox" Role="CashBox" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shop">
               <PropertyRef Name="idshops" />
             </Principal>
-            <Dependent Role="cashboxs">
+            <Dependent Role="CashBox">
               <PropertyRef Name="shops_idshops" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_orderdetails_categories1">
-          <End Role="categories" Type="Self.category" Multiplicity="1" />
-          <End Role="orderdetails" Type="Self.orderdetail" Multiplicity="*" />
+          <End Type="SmartShopModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="SmartShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="Category">
               <PropertyRef Name="idcategories" />
             </Principal>
-            <Dependent Role="orderdetails">
+            <Dependent Role="OrderDetail">
               <PropertyRef Name="categories_idcategories" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_products_categories1">
-          <End Role="categories" Type="Self.category" Multiplicity="1" />
-          <End Role="products" Type="Self.product" Multiplicity="*" />
+          <End Type="SmartShopModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="SmartShopModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="Category">
               <PropertyRef Name="idcategories" />
             </Principal>
-            <Dependent Role="products">
+            <Dependent Role="Product">
               <PropertyRef Name="categories_idcategories" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="smartshopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cashboxs" EntityType="Self.cashbox" />
-          <EntitySet Name="cashiers" EntityType="Self.cashier" />
-          <EntitySet Name="categories" EntityType="Self.category" />
-          <EntitySet Name="orderdetails" EntityType="Self.orderdetail" />
-          <EntitySet Name="products" EntityType="Self.product" />
-          <EntitySet Name="shops" EntityType="Self.shop" />
-          <EntitySet Name="transactions" EntityType="Self.transaction" />
-          <AssociationSet Name="fk_cashboxs_shops1" Association="Self.fk_cashboxs_shops1">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="cashboxs" EntitySet="cashboxs" />
-          </AssociationSet>
-          <AssociationSet Name="fk_orderdetails_categories1" Association="Self.fk_orderdetails_categories1">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="orderdetails" EntitySet="orderdetails" />
-          </AssociationSet>
-          <AssociationSet Name="fk_products_categories1" Association="Self.fk_products_categories1">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="products" EntitySet="products" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SmartShopModelStoreContainer" CdmEntityContainer="smartshopEntities">
-          <EntitySetMapping Name="cashboxs">
-            <EntityTypeMapping TypeName="SmartShopModel.cashbox">
-              <MappingFragment StoreEntitySet="cashboxs">
-                <ScalarProperty Name="idcashboxs" ColumnName="idcashboxs" />
-                <ScalarProperty Name="id" ColumnName="id" />
+          <EntitySetMapping Name="CashBoxes">
+            <EntityTypeMapping TypeName="SmartShopModel.CashBox">
+              <MappingFragment StoreEntitySet="CashBoxes">
                 <ScalarProperty Name="shops_idshops" ColumnName="shops_idshops" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idcashboxs" ColumnName="idcashboxs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cashiers">
-            <EntityTypeMapping TypeName="SmartShopModel.cashier">
-              <MappingFragment StoreEntitySet="cashiers">
-                <ScalarProperty Name="idcashiers" ColumnName="idcashiers" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="Cashiers">
+            <EntityTypeMapping TypeName="SmartShopModel.Cashier">
+              <MappingFragment StoreEntitySet="Cashiers">
                 <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idcashiers" ColumnName="idcashiers" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="categories">
-            <EntityTypeMapping TypeName="SmartShopModel.category">
-              <MappingFragment StoreEntitySet="categories">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="SmartShopModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="idcategories" ColumnName="idcategories" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="orderdetails">
-            <EntityTypeMapping TypeName="SmartShopModel.orderdetail">
-              <MappingFragment StoreEntitySet="orderdetails">
-                <ScalarProperty Name="idorderdetails" ColumnName="idorderdetails" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="return" ColumnName="return" />
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="SmartShopModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="categories_idcategories" ColumnName="categories_idcategories" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="count" ColumnName="count" />
-                <ScalarProperty Name="discount" ColumnName="discount" />
-                <ScalarProperty Name="categories_idcategories" ColumnName="categories_idcategories" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="SmartShopModel.product">
-              <MappingFragment StoreEntitySet="products">
-                <ScalarProperty Name="idproducts" ColumnName="idproducts" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="categories_idcategories" ColumnName="categories_idcategories" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="shops">
-            <EntityTypeMapping TypeName="SmartShopModel.shop">
-              <MappingFragment StoreEntitySet="shops">
-                <ScalarProperty Name="idshops" ColumnName="idshops" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="address" ColumnName="address" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="transactions">
-            <EntityTypeMapping TypeName="SmartShopModel.transaction">
-              <MappingFragment StoreEntitySet="transactions">
-                <ScalarProperty Name="idtransactions" ColumnName="idtransactions" />
-                <ScalarProperty Name="orderdetails_idorderdetails" ColumnName="orderdetails_idorderdetails" />
-                <ScalarProperty Name="cashboxs_idcashboxs" ColumnName="cashboxs_idcashboxs" />
-                <ScalarProperty Name="cashiers_idcashiers" ColumnName="cashiers_idcashiers" />
+                <ScalarProperty Name="return" ColumnName="return" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+                <ScalarProperty Name="idorderdetails" ColumnName="idorderdetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="SmartShopModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="categories_idcategories" ColumnName="categories_idcategories" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idproducts" ColumnName="idproducts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="SmartShopModel.Shop">
+              <MappingFragment StoreEntitySet="Shops">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idshops" ColumnName="idshops" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="SmartShopModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
                 <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cashiers_idcashiers" ColumnName="cashiers_idcashiers" />
+                <ScalarProperty Name="cashboxs_idcashboxs" ColumnName="cashboxs_idcashboxs" />
+                <ScalarProperty Name="orderdetails_idorderdetails" ColumnName="orderdetails_idorderdetails" />
+                <ScalarProperty Name="idtransactions" ColumnName="idtransactions" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

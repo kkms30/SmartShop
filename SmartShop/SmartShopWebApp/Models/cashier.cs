@@ -12,7 +12,7 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class cashier
+    public partial class Cashier
     {
         public int idcashiers { get; set; }
         public string id { get; set; }

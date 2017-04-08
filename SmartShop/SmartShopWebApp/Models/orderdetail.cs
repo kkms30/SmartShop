@@ -12,7 +12,7 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class orderdetail
+    public partial class OrderDetail
     {
         public int idorderdetails { get; set; }
         public int id { get; set; }
@@ -21,6 +21,6 @@ namespace SmartShopWebApp.Models
         public Nullable<float> discount { get; set; }
         public int categories_idcategories { get; set; }
     
-        public virtual category category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

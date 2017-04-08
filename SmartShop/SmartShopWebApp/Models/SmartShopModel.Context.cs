@@ -25,12 +25,12 @@ namespace SmartShopWebApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cashbox> cashboxs { get; set; }
-        public virtual DbSet<cashier> cashiers { get; set; }
-        public virtual DbSet<category> categories { get; set; }
-        public virtual DbSet<orderdetail> orderdetails { get; set; }
-        public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<shop> shops { get; set; }
-        public virtual DbSet<transaction> transactions { get; set; }
+        public virtual DbSet<CashBox> CashBoxes { get; set; }
+        public virtual DbSet<Cashier> Cashiers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Shop> Shops { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
     }
 }

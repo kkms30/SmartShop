@@ -12,12 +12,12 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class shop
+    public partial class Shop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public shop()
+        public Shop()
         {
-            this.cashboxs = new HashSet<cashbox>();
+            this.CashBoxes = new HashSet<CashBox>();
         }
     
         public int idshops { get; set; }
@@ -25,6 +25,6 @@ namespace SmartShopWebApp.Models
         public string address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cashbox> cashboxs { get; set; }
+        public virtual ICollection<CashBox> CashBoxes { get; set; }
     }
 }

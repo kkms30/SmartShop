@@ -144,26 +144,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\cashiersController.cs" />
+    <Compile Include="Controllers\CashiersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\cashbox.cs">
+    <Compile Include="Models\CashBox.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cashier.cs">
+    <Compile Include="Models\Cashier.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\category.cs">
+    <Compile Include="Models\Category.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\orderdetail.cs">
+    <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\product.cs">
+    <Compile Include="Models\Product.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\shop.cs">
+    <Compile Include="Models\Shop.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SmartShopModel.Context.cs">
@@ -181,7 +181,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmartShopModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\transaction.cs">
+    <Compile Include="Models\Transaction.cs">
       <DependentUpon>SmartShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

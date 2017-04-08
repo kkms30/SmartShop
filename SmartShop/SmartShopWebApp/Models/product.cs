@@ -12,7 +12,7 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class product
+    public partial class Product
     {
         public int idproducts { get; set; }
         public string name { get; set; }
@@ -21,6 +21,6 @@ namespace SmartShopWebApp.Models
         public byte[] image { get; set; }
         public int categories_idcategories { get; set; }
     
-        public virtual category category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

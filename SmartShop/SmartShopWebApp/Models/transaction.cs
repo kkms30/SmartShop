@@ -12,7 +12,7 @@ namespace SmartShopWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class transaction
+    public partial class Transaction
     {
         public int idtransactions { get; set; }
         public int orderdetails_idorderdetails { get; set; }

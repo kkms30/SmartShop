@@ -12,21 +12,21 @@ using SmartShopWebApp.Models;
 
 namespace SmartShopWebApp.Controllers
 {
-    public class cashiersController : ApiController
+    public class CashiersController : ApiController
     {
         private smartshopEntities db = new smartshopEntities();
 
         // GET: api/cashiers
-        public IQueryable<cashier> Getcashiers()
+        public IQueryable<Cashier> Getcashiers()
         {
-            return db.cashiers;
+            return db.Cashiers;
         }
 
         // GET: api/cashiers/5
-        [ResponseType(typeof(cashier))]
+        [ResponseType(typeof(Cashier))]
         public IHttpActionResult Getcashier(int id)
         {
-            cashier cashier = db.cashiers.Find(id);
+            Cashier cashier = db.Cashiers.Find(id);
             if (cashier == null)
             {
                 return NotFound();
@@ -37,7 +37,7 @@ namespace SmartShopWebApp.Controllers
 
         // PUT: api/cashiers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putcashier(int id, cashier cashier)
+        public IHttpActionResult Putcashier(int id, Cashier cashier)
         {
             if (!ModelState.IsValid)
             {
@@ -71,31 +71,31 @@ namespace SmartShopWebApp.Controllers
         }
 
         // POST: api/cashiers
-        [ResponseType(typeof(cashier))]
-        public IHttpActionResult Postcashier(cashier cashier)
+        [ResponseType(typeof(Cashier))]
+        public IHttpActionResult Postcashier(Cashier cashier)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.cashiers.Add(cashier);
+            db.Cashiers.Add(cashier);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = cashier.idcashiers }, cashier);
         }
 
         // DELETE: api/cashiers/5
-        [ResponseType(typeof(cashier))]
+        [ResponseType(typeof(Cashier))]
         public IHttpActionResult Deletecashier(int id)
         {
-            cashier cashier = db.cashiers.Find(id);
+            Cashier cashier = db.Cashiers.Find(id);
             if (cashier == null)
             {
                 return NotFound();
             }
 
-            db.cashiers.Remove(cashier);
+            db.Cashiers.Remove(cashier);
             db.SaveChanges();
 
             return Ok(cashier);
@@ -112,7 +112,7 @@ namespace SmartShopWebApp.Controllers
 
         private bool cashierExists(int id)
         {
-            return db.cashiers.Count(e => e.idcashiers == id) > 0;
+            return db.Cashiers.Count(e => e.idcashiers == id) > 0;
         }
     }
 }
