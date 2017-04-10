@@ -18,8 +18,10 @@ namespace SmartShopWebApp.Core.GeneratedModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Shop()
         {
-            this.Cashboxs = new HashSet<Cashbox>();
+            this.Cashboxes = new HashSet<Cashbox>();
         }
+
+        private bool shouldSerializeCashboxes = true;
 
         [JsonProperty(Order = 1)]
         public int IdShop { get; set; }
@@ -30,6 +32,15 @@ namespace SmartShopWebApp.Core.GeneratedModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonProperty(Order = 4)]
-        public virtual ICollection<Cashbox> Cashboxs { get; set; }
+        public virtual ICollection<Cashbox> Cashboxes { get; set; }
+
+        public void SetShouldSerializeCashboxes(bool should)
+        {
+            shouldSerializeCashboxes = should;
+        }
+        public bool ShouldSerializeCashboxes()
+        {
+            return shouldSerializeCashboxes;
+        }
     }
 }

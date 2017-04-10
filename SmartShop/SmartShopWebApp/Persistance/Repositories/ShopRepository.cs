@@ -10,24 +10,24 @@ namespace SmartShopWebApp.Persistance.Repositories
 {
     public class ShopRepository : Repository<Shop>, IShopRepository
     {
-        public ShopRepository(ShopEntities context) : base(context)
+        public ShopRepository(ShopContext context) : base(context)
         {
         }
 
         public Shop GetShopWithCashboxes(int id)
         {
-            Shop shop = ShopEntities.Shops.Include(s => s.Cashboxs).SingleOrDefault(s => s.IdShop == id);
-            //List<Cashbox> cashboxes = shop.Cashboxs.ToList();
-            //cashboxes.ForEach(c => { c.Shop = null; c.Transactions = null; });
-            //shop.Cashboxs = cashboxes;
+            Shop shop = ShopContext.Shops.Include(s => s.Cashboxes).SingleOrDefault(s => s.IdShop == id);
+            shop.Cashboxes.ToList().ForEach(c =>
+            {
+                c.SetShouldSerializeShop(false);
+                c.SetShouldSerializeTransactions(false);
+            });
             return shop;
         }
 
-
-
-        public ShopEntities ShopEntities
+        public ShopContext ShopContext
         {
-            get { return context as ShopEntities;  }
+            get { return context as ShopContext; }
         }
     }
 }

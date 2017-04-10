@@ -18,9 +18,9 @@ namespace SmartShopWebApp.Controllers
 {
     public class CashiersController : ApiController
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(new ShopEntities());
+        private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
-        private ShopEntities context = new ShopEntities();
+        private ShopContext context = new ShopContext();
 
         // GET: api/cashiers
         public Shop Getcashiers()
@@ -30,9 +30,6 @@ namespace SmartShopWebApp.Controllers
 
             //List<Shop> shops = unitOfWork.Shops.GetAll().ToList(); ;
             Shop shop = unitOfWork.Shops.GetShopWithCashboxes(1);
-
-            //JsonConvert.SerializeObject(shop, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-
             return shop;
         }
 

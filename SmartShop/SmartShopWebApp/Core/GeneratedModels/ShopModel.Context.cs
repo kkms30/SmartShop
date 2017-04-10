@@ -13,9 +13,9 @@ namespace SmartShopWebApp.Core.GeneratedModels
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShopEntities : DbContext
+    public partial class ShopContext : DbContext
     {
-        public ShopEntities()
+        public ShopContext()
             : base("name=ShopEntities")
         {
             //this.Configuration.LazyLoadingEnabled = false;

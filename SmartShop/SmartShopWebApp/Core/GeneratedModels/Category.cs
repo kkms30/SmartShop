@@ -9,9 +9,10 @@
 
 namespace SmartShopWebApp.Core.GeneratedModels
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +20,27 @@ namespace SmartShopWebApp.Core.GeneratedModels
         {
             this.Products = new HashSet<Product>();
         }
-    
+
+        private bool shouldSerializeProducts = true;
+
+        [JsonProperty(Order = 1)]
         public int IdCategory { get; set; }
+        [JsonProperty(Order = 2)]
         public string Name { get; set; }
-    
+
+        [JsonProperty(Order = 3)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+
+        public void SetShouldSerializeProducts(bool should)
+        {
+            shouldSerializeProducts = should;
+        }
+
+        public bool ShouldSerializeProducts()
+        {
+            return shouldSerializeProducts;
+        }
+
     }
 }
