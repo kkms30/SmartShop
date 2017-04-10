@@ -7,13 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartShopWebApp.Models
+namespace SmartShopWebApp.Core.GeneratedModels
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int IdProduct { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
@@ -22,5 +28,7 @@ namespace SmartShopWebApp.Models
         public int CategoryId { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

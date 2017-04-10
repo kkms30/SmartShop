@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SmartShopWebApp.Core.GeneratedModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -14,7 +16,15 @@ namespace SmartShopWebApp
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.Formatters.Clear();
-            GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
+
+        
+
+            JsonMediaTypeFormatter jsonFormatter = new JsonMediaTypeFormatter();
+            //jsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+            //jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+            GlobalConfiguration.Configuration.Formatters.Add(jsonFormatter);
+
+           
         }
     }
 }

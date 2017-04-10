@@ -7,24 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartShopWebApp.Models
+namespace SmartShopWebApp.Core.GeneratedModels
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Transaction
     {
-        public int IdTransaction { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Transaction()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int IdTransactions { get; set; }
+        public int CashboxId { get; set; }
+        public int CashierId { get; set; }
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public float TotalPrice { get; set; }
         public Nullable<float> Discount { get; set; }
-        public int CashboxId { get; set; }
-        public int CashierId { get; set; }
-        public int OrderdetailId { get; set; }
     
         public virtual Cashbox Cashbox { get; set; }
         public virtual Cashier Cashier { get; set; }
-        public virtual Orderdetail Orderdetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

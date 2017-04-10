@@ -8,22 +8,32 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using SmartShopWebApp.Models;
+using SmartShopWebApp.Core.GeneratedModels;
+using SmartShopWebApp.Core.Repositories;
+using SmartShopWebApp.Persistance.Repositories;
+using SmartShopWebApp.Persistance;
+using Newtonsoft.Json;
 
 namespace SmartShopWebApp.Controllers
 {
     public class CashiersController : ApiController
     {
+        private UnitOfWork unitOfWork = new UnitOfWork(new ShopEntities());
+
         private ShopEntities context = new ShopEntities();
 
         // GET: api/cashiers
-        public IQueryable<Cashier> Getcashiers()
+        public Shop Getcashiers()
         {
-            Cashier cashier = new Cashier { Id = "test", Name = "test", Password = "test", Surname = "test" };
-            context.Cashiers.Add(cashier);
-            context.SaveChanges();
+            //unitOfWork.Shops.Add(new Shop() { Address = "test", Name = "uow" });
+            //unitOfWork.Complete();
 
-            return context.Cashiers;
+            //List<Shop> shops = unitOfWork.Shops.GetAll().ToList(); ;
+            Shop shop = unitOfWork.Shops.GetShopWithCashboxes(1);
+
+            //JsonConvert.SerializeObject(shop, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+
+            return shop;
         }
 
         // GET: api/cashiers/5

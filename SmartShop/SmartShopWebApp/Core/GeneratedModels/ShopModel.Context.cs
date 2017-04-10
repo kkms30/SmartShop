@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartShopWebApp.Models
+namespace SmartShopWebApp.Core.GeneratedModels
 {
     using System;
     using System.Data.Entity;
@@ -18,17 +18,19 @@ namespace SmartShopWebApp.Models
         public ShopEntities()
             : base("name=ShopEntities")
         {
+            //this.Configuration.LazyLoadingEnabled = false;
+            //this.Configuration.ProxyCreationEnabled = false;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cashbox> Cashboxes { get; set; }
+        public virtual DbSet<Cashbox> Cashboxs { get; set; }
         public virtual DbSet<Cashier> Cashiers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Orderdetail> Orderdetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }

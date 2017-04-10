@@ -7,26 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartShopWebApp.Models
+namespace SmartShopWebApp.Core.GeneratedModels
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Cashier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Cashier()
         {
-            this.Orderdetails = new HashSet<Orderdetail>();
-            this.Products = new HashSet<Product>();
+            this.Transactions = new HashSet<Transaction>();
         }
     
-        public int IdCategory { get; set; }
+        public int IdCashier { get; set; }
+        public string Id { get; set; }
+        public string Password { get; set; }
         public string Name { get; set; }
+        public string Surname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orderdetail> Orderdetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

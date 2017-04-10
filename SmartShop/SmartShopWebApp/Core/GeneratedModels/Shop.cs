@@ -7,25 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartShopWebApp.Models
+namespace SmartShopWebApp.Core.GeneratedModels
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Cashbox
+
+    public partial class Shop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cashbox()
+        public Shop()
         {
-            this.Transactions = new HashSet<Transaction>();
+            this.Cashboxs = new HashSet<Cashbox>();
         }
-    
-        public int IdCashbox { get; set; }
-        public int Id { get; set; }
-        public int ShopId { get; set; }
-    
-        public virtual Shop Shop { get; set; }
+
+        [JsonProperty(Order = 1)]
+        public int IdShop { get; set; }
+        [JsonProperty(Order = 2)]
+        public string Name { get; set; }
+        [JsonProperty(Order = 3)]
+        public string Address { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        [JsonProperty(Order = 4)]
+        public virtual ICollection<Cashbox> Cashboxs { get; set; }
     }
 }
