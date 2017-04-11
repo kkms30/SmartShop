@@ -1,4 +1,3 @@
-
 -- -----------------------------------------------------
 -- Table `Categories`
 -- -----------------------------------------------------
@@ -65,14 +64,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Cashboxs`
+-- Table `Cashboxes`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `Cashboxs` (
-  `idcashboxs` INT NOT NULL AUTO_INCREMENT ,
+CREATE  TABLE IF NOT EXISTS `Cashboxes` (
+  `idcashboexs` INT NOT NULL AUTO_INCREMENT ,
   `id` INT NOT NULL ,
   `shops_id` INT NOT NULL ,
-  PRIMARY KEY (`idcashboxs`) ,
-  UNIQUE INDEX `idcashboxs_UNIQUE` (`idcashboxs` ASC) ,
+  PRIMARY KEY (`idcashboexs`) ,
+  UNIQUE INDEX `idcashboxs_UNIQUE` (`idcashboexs` ASC) ,
   UNIQUE INDEX `cashboxid_UNIQUE` (`id` ASC) ,
   INDEX `fk_cashboxs_shops1` (`shops_id` ASC) ,
   CONSTRAINT `fk_cashboxs_shops1`
@@ -102,7 +101,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Transactions` (
   `idtransactions` INT NOT NULL AUTO_INCREMENT ,
-  `cashboxs_id` INT NOT NULL ,
+  `cashboxes_id` INT NOT NULL ,
   `cashiers_id` INT NOT NULL ,
   `id` INT NOT NULL ,
   `date` TIMESTAMP NOT NULL ,
@@ -110,11 +109,11 @@ CREATE  TABLE IF NOT EXISTS `Transactions` (
   `discount` FLOAT NULL ,
   PRIMARY KEY (`idtransactions`) ,
   UNIQUE INDEX `idtransactions_UNIQUE` (`idtransactions` ASC) ,
-  INDEX `fk_transactions_cashboxs1` (`cashboxs_id` ASC) ,
+  INDEX `fk_transactions_cashboxs1` (`cashboxes_id` ASC) ,
   INDEX `fk_transactions_cashiers1` (`cashiers_id` ASC) ,
   CONSTRAINT `fk_transactions_cashboxs1`
-    FOREIGN KEY (`cashboxs_id` )
-    REFERENCES `Cashboxs` (`idcashboxs` )
+    FOREIGN KEY (`cashboxes_id` )
+    REFERENCES `Cashboxes` (`idcashboexs` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_transactions_cashiers1`
@@ -144,5 +143,4 @@ CREATE  TABLE IF NOT EXISTS `OrdersToTransactions` (
     REFERENCES `Transactions` (`idtransactions` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+ENGINE = InnoDB;
