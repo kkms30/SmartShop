@@ -222,6 +222,13 @@
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Metadata\Cashbox.cs" />
+    <Compile Include="Core\Metadata\Cashier.cs" />
+    <Compile Include="Core\Metadata\Category.cs" />
+    <Compile Include="Core\Metadata\Order.cs" />
+    <Compile Include="Core\Metadata\Product.cs" />
+    <Compile Include="Core\Metadata\Shop.cs" />
+    <Compile Include="Core\Metadata\Transaction.cs" />
     <Compile Include="Core\Repositories\ICashboxRepository.cs" />
     <Compile Include="Core\Repositories\ICashierRepository.cs" />
     <Compile Include="Core\Repositories\ICategoryRepository.cs" />

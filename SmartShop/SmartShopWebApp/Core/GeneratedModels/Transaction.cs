@@ -9,11 +9,9 @@
 
 namespace SmartShopWebApp.Core.GeneratedModels
 {
-    using GeneratedModels;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Transaction
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,58 +19,18 @@ namespace SmartShopWebApp.Core.GeneratedModels
         {
             this.Orders = new HashSet<Order>();
         }
-
-        private bool shouldSerializeCashbox = true;
-        private bool shouldSerializeCashier = true;
-        private bool shouldSerializeOrders = true;
-
-        [JsonProperty(Order = 1)]
-        public int IdTransactions { get; set; }
-        [JsonProperty(Order = 2)]
+    
+        public int IdTransaction { get; set; }
         public int CashboxId { get; set; }
-        [JsonProperty(Order = 3)]
         public int CashierId { get; set; }
-        [JsonProperty(Order = 4)]
         public int Id { get; set; }
-        [JsonProperty(Order = 5)]
         public System.DateTime Date { get; set; }
-        [JsonProperty(Order = 6)]
         public float TotalPrice { get; set; }
-        [JsonProperty(Order = 7)]
         public Nullable<float> Discount { get; set; }
-
-        [JsonProperty(Order = 8)]
+    
         public virtual Cashbox Cashbox { get; set; }
-        [JsonProperty(Order = 9)]
         public virtual Cashier Cashier { get; set; }
-        [JsonProperty(Order = 10)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-
-        public void SetShouldSerializeCashbox(bool should)
-        {
-            shouldSerializeCashbox = should;
-        }
-        public void SetShouldSerializeCashier(bool should)
-        {
-            shouldSerializeCashier = should;
-        }
-        public void SetShouldSerializeOrders(bool should)
-        {
-            shouldSerializeOrders = should;
-        }
-
-        public bool ShouldSerializeCashbox()
-        {
-            return shouldSerializeCashbox;
-        }
-        public bool ShouldSerializeCashier()
-        {
-            return shouldSerializeCashier;
-        }
-        public bool ShouldSerializeOrders()
-        {
-            return shouldSerializeOrders;
-        }
     }
 }

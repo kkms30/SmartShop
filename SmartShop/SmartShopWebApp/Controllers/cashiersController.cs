@@ -29,7 +29,17 @@ namespace SmartShopWebApp.Controllers
             //unitOfWork.Complete();
 
             //List<Shop> shops = unitOfWork.Shops.GetAll().ToList(); ;
+
+            Shop shopAdd = new Shop() { Address = "Tescik", Name = "Imie" };
+            Cashbox cashbox = new Cashbox() { Id = 555 };
+
+            shopAdd.Cashboxes.Add(cashbox);
+            context.Shops.Add(shopAdd);
+            context.SaveChanges();
+
+
             Shop shop = unitOfWork.Shops.GetShopWithCashboxes(1);
+
             return shop;
         }
 

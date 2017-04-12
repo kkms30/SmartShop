@@ -9,10 +9,9 @@
 
 namespace SmartShopWebApp.Core.GeneratedModels
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Cashbox
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,41 +19,13 @@ namespace SmartShopWebApp.Core.GeneratedModels
         {
             this.Transactions = new HashSet<Transaction>();
         }
-
-        private bool shouldSerializeShop = true;
-        private bool shouldSerializeTransactions = true;
-
-        [JsonProperty(Order = 1)]
+    
         public int IdCashbox { get; set; }
-        [JsonProperty(Order = 2)]
         public int Id { get; set; }
-        [JsonProperty(Order = 3)]
         public int ShopId { get; set; }
-
-        [JsonProperty(Order = 4)]
+    
         public virtual Shop Shop { get; set; }
-        [JsonProperty(Order = 5)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]  
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
-
-        public void SetShouldSerializeShop(bool should)
-        {
-            shouldSerializeShop = should;
-        }
-
-        public void SetShouldSerializeTransactions(bool should)
-        {
-            shouldSerializeTransactions = should;
-        }
-
-        public bool ShouldSerializeShop()
-        {
-            return shouldSerializeShop;
-        }
-
-        public bool ShouldSerializeTransactions()
-        {
-            return shouldSerializeTransactions;
-        }
     }
 }

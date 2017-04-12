@@ -16,18 +16,16 @@ namespace SmartShopWebApp.Core.GeneratedModels
     public partial class ShopContext : DbContext
     {
         public ShopContext()
-            : base("name=ShopEntities")
+            : base("name=ShopContext")
         {
-            //this.Configuration.LazyLoadingEnabled = false;
-            //this.Configuration.ProxyCreationEnabled = false;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cashbox> Cashboxs { get; set; }
+        public virtual DbSet<Cashbox> Cashboxes { get; set; }
         public virtual DbSet<Cashier> Cashiers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
