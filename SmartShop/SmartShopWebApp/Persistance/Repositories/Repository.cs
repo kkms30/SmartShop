@@ -42,6 +42,11 @@ namespace SmartShopWebApp.Persistance.Repositories
             return context.Set<TEntity>().ToList();
         }
 
+        public void Attach(TEntity entity)
+        {
+            context.Set<TEntity>().Attach(entity);
+        }
+
         public void Remove(TEntity entity)
         {
             context.Set<TEntity>().Remove(entity);

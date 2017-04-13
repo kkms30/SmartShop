@@ -44,7 +44,7 @@ namespace SmartShopWebApp.Core.GeneratedModels
     public class TransactionMetaData
     {
         [JsonProperty(Order = 1)]
-        public int IdTransactions { get; set; }
+        public int IdTransaction { get; set; }
         [JsonProperty(Order = 2)]
         public int CashboxId { get; set; }
         [JsonProperty(Order = 3)]

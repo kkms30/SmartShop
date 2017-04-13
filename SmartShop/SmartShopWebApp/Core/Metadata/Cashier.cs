@@ -10,22 +10,11 @@ namespace SmartShopWebApp.Core.GeneratedModels
     [MetadataType(typeof(CashierMetaData))]
     public partial class Cashier
     {
-        private bool shouldSerializeProduct = true;
         private bool shouldSerializeTransactions = true;
-
-        public void SetShouldSerializeProduct(bool should)
-        {
-            shouldSerializeProduct = should;
-        }
 
         public void SetShouldSerializeTransactions(bool should)
         {
             shouldSerializeTransactions = should;
-        }
-
-        public bool ShouldSerializeProduct()
-        {
-            return shouldSerializeProduct;
         }
 
         public bool ShouldSerializeTransactions()
@@ -37,19 +26,17 @@ namespace SmartShopWebApp.Core.GeneratedModels
     internal class CashierMetaData
     {
         [JsonProperty(Order = 1)]
-        public int IdOrder { get; set; }
+        public int IdCashier { get; set; }
         [JsonProperty(Order = 2)]
-        public sbyte Return { get; set; }
+        public string Id { get; set; }
         [JsonProperty(Order = 3)]
-        public sbyte Count { get; set; }
+        public string Password { get; set; }
         [JsonProperty(Order = 4)]
-        public Nullable<float> Discount { get; set; }
+        public string Name { get; set; }
         [JsonProperty(Order = 5)]
-        public int ProductId { get; set; }
+        public string Surname { get; set; }
 
-        [JsonProperty(Order = 6)]
-        public virtual Product Product { get; set; }
-        [JsonProperty(Order = 7)]     
+        [JsonProperty(Order = 6)]     
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
