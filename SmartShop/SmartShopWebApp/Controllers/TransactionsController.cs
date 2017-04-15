@@ -30,7 +30,11 @@ namespace SmartShopWebApp.Controllers
             Transaction transaction = unitOfWork.Transactions.GetTransactionById(id);
             if (transaction == null)
             {
-                return NotFound();
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(string.Format("No transaction with id = {0} found", id))
+                };
+                throw new HttpResponseException(message);            
             }
             return Ok(transaction);
         }
@@ -43,9 +47,19 @@ namespace SmartShopWebApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            unitOfWork.Transactions.Add(transaction);
-            unitOfWork.Complete();      
+            try
+            {
+                unitOfWork.Transactions.Add(transaction);
+                unitOfWork.Complete();
+            }
+            catch(Exception e)
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("An error occured during inserting transaction to database.")
+                };
+                throw new HttpResponseException(message);
+            }  
 
             return CreatedAtRoute("DefaultApi", new { id = transaction.IdTransaction }, unitOfWork.Transactions.GetTransactionByIdTransaction(transaction.IdTransaction));
         }
