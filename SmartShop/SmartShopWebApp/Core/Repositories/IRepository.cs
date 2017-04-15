@@ -15,6 +15,7 @@ namespace SmartShopWebApp.Core.Repositories
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
 
+        void Modify(TEntity entity);
         void Attach(TEntity entity);
 
         void Remove(TEntity entity);

@@ -17,5 +17,12 @@ namespace SmartShopWebApp.Persistance.Repositories
         {
             get { return context as ShopContext; }
         }
+
+        public List<Cashier> GetCashiers()
+        {
+            List<Cashier> cashiers = GetAll().ToList();
+            cashiers.ForEach(c => c.SetShouldSerializeTransactions(false));
+            return cashiers;
+        }
     }   
 }

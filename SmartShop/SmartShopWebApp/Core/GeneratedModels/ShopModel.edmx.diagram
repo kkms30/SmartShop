@@ -5,19 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="16e7bac002664ac882da33aecafdf137" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="ShopModel.Cashbox" Width="1.5" PointX="7" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopModel.Cashier" Width="1.5" PointX="9.375" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopModel.Category" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopModel.Order" Width="1.5" PointX="5.125" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopModel.Product" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopModel.Shop" Width="1.5" PointX="4.875" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopModel.Transaction" Width="1.5" PointX="7.25" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="ShopModel.fk_cashboxes_shops1" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopModel.fk_transactions_cashboxes1" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopModel.fk_transactions_cashiers1" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopModel.fk_products_categories1" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopModel.fk_Orderdetails_Products1" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopModel.OrdersToTransactions" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShopModel.Cashbox" Width="1.5" PointX="3.5" PointY="1.5" />
+        <EntityTypeShape EntityType="ShopModel.Cashier" Width="1.5" PointX="3.5" PointY="5.375" />
+        <EntityTypeShape EntityType="ShopModel.Category" Width="1.5" PointX="3.5" PointY="9.625" />
+        <EntityTypeShape EntityType="ShopModel.Order" Width="1.5" PointX="8" PointY="1.125" />
+        <EntityTypeShape EntityType="ShopModel.Product" Width="1.5" PointX="5.75" PointY="9.125" />
+        <EntityTypeShape EntityType="ShopModel.Shop" Width="1.5" PointX="1.25" PointY="1.5" />
+        <EntityTypeShape EntityType="ShopModel.Transaction" Width="1.5" PointX="5.75" PointY="1" />
+        <AssociationConnector Association="ShopModel.fk_cashboxes_shops1" />
+        <AssociationConnector Association="ShopModel.fk_transactions_cashboxes1" />
+        <AssociationConnector Association="ShopModel.fk_transactions_cashiers1" />
+        <AssociationConnector Association="ShopModel.fk_products_categories1" />
+        <AssociationConnector Association="ShopModel.fk_Orderdetails_Products1" />
+        <AssociationConnector Association="ShopModel.fk_Orders_Transactions1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

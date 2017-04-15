@@ -11,16 +11,16 @@ namespace SmartShopWebApp.Core.GeneratedModels
     public partial class Order
     {
         private bool shouldSerializeProduct = true;
-        private bool shouldSerializeTransactions = true;
+        private bool shouldSerializeTransaction = true;
 
         public void SetShouldSerializeProduct(bool should)
         {
             shouldSerializeProduct = should;
         }
 
-        public void SetShouldSerializeTransactions(bool should)
+        public void SetShouldSerializeTransaction(bool should)
         {
-            shouldSerializeTransactions = should;
+            shouldSerializeTransaction = should;
         }
 
         public bool ShouldSerializeProduct()
@@ -28,9 +28,9 @@ namespace SmartShopWebApp.Core.GeneratedModels
             return shouldSerializeProduct;
         }
 
-        public bool ShouldSerializeTransactions()
+        public bool ShouldSerializeTransaction()
         {
-            return shouldSerializeTransactions;
+            return shouldSerializeTransaction;
         }
     }
 
@@ -50,7 +50,7 @@ namespace SmartShopWebApp.Core.GeneratedModels
         [JsonProperty(Order = 6)]
         public virtual Product Product { get; set; }
         [JsonProperty(Order = 7)]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual Transaction Transaction { get; set; }
 
     }
 }

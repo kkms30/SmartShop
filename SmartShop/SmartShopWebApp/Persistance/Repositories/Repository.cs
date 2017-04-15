@@ -17,7 +17,7 @@ namespace SmartShopWebApp.Persistance.Repositories
             this.context = context;
         }
 
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
         }
@@ -41,6 +41,11 @@ namespace SmartShopWebApp.Persistance.Repositories
         {
             return context.Set<TEntity>().ToList();
         }
+
+        public void Modify(TEntity entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+        }             
 
         public void Attach(TEntity entity)
         {

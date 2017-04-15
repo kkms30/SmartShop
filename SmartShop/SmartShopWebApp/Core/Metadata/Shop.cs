@@ -11,6 +11,7 @@ namespace SmartShopWebApp.Core.GeneratedModels
     public partial class Shop
     {
         private bool shouldSerializeCashboxes = true;
+
         public void SetShouldSerializeCashboxes(bool should)
         {
             shouldSerializeCashboxes = should;

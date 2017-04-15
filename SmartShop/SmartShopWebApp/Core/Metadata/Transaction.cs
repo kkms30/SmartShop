@@ -47,20 +47,20 @@ namespace SmartShopWebApp.Core.GeneratedModels
         public int IdTransaction { get; set; }
         [JsonProperty(Order = 2)]
         public int CashboxId { get; set; }
-        [JsonProperty(Order = 3)]
-        public int CashierId { get; set; }
         [JsonProperty(Order = 4)]
-        public int Id { get; set; }
-        [JsonProperty(Order = 5)]
-        public System.DateTime Date { get; set; }
+        public int CashierId { get; set; }
         [JsonProperty(Order = 6)]
-        public float TotalPrice { get; set; }
+        public int Id { get; set; }
         [JsonProperty(Order = 7)]
+        public System.DateTime Date { get; set; }
+        [JsonProperty(Order = 8)]
+        public float TotalPrice { get; set; }
+        [JsonProperty(Order = 9)]
         public Nullable<float> Discount { get; set; }
 
-        [JsonProperty(Order = 8)]
+        [JsonProperty(Order = 3)]
         public virtual Cashbox Cashbox { get; set; }
-        [JsonProperty(Order = 9)]
+        [JsonProperty(Order = 5)]
         public virtual Cashier Cashier { get; set; }
         [JsonProperty(Order = 10)]
         public virtual ICollection<Order> Orders { get; set; }

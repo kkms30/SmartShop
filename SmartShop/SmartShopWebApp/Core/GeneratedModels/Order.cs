@@ -14,20 +14,14 @@ namespace SmartShopWebApp.Core.GeneratedModels
     
     public partial class Order
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
-        {
-            this.Transactions = new HashSet<Transaction>();
-        }
-    
         public int IdOrder { get; set; }
+        public int ProductId { get; set; }
+        public Nullable<int> TransactionId { get; set; }
         public sbyte Return { get; set; }
         public sbyte Count { get; set; }
         public Nullable<float> Discount { get; set; }
-        public int ProductId { get; set; }
     
         public virtual Product Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual Transaction Transaction { get; set; }
     }
 }
