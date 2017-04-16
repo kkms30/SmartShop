@@ -110,8 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Resource Include="Images\display2.png" />
-    <Resource Include="Images\drukarka paragonu2.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
