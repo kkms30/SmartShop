@@ -13,10 +13,33 @@ namespace SmartShopWebApp.Persistance.Repositories
         public CashboxRepository(ShopContext context) : base(context)
         {
         }
-    
+
         public ShopContext ShopContext
         {
             get { return context as ShopContext; }
+        }
+
+        public Cashbox GetCashboxByIdCashbox(int id)
+        {
+            Cashbox cashbox = Find(c => c.IdCashbox == id).FirstOrDefault();
+            SetSerialization(cashbox);
+            return cashbox;
+        }
+
+        public List<Cashbox> GetCashboxes()
+        {
+            List<Cashbox> cashboxes = GetAll().ToList();
+            cashboxes.ForEach(c =>
+            {
+                SetSerialization(c);
+            });
+            return cashboxes;
+        }
+
+        private void SetSerialization(Cashbox cashbox)
+        {
+            cashbox.SetShouldSerializeTransactions(false);
+            cashbox.Shop.SetShouldSerializeCashboxes(false);
         }
     }
 }

@@ -21,11 +21,11 @@ namespace SmartShopWebApp.Core.GeneratedModels
         }
     
         public int IdProduct { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public float Price { get; set; }
         public byte[] Image { get; set; }
-        public int CategoryId { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

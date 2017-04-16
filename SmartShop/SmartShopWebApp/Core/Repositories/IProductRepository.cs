@@ -8,5 +8,6 @@ namespace SmartShopWebApp.Core.Repositories
 {
     public interface IProductRepository : IRepository<Product>
     {
+        List<Product> GetProductsWithCategories();
     }
 }

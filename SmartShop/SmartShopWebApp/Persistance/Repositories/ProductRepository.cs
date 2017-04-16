@@ -12,7 +12,20 @@ namespace SmartShopWebApp.Persistance.Repositories
     {
         public ProductRepository(DbContext context) : base(context)
         {
+        }       
+
+        public List<Product> GetProductsWithCategories()
+        {
+            List<Product> products =  ShopContext.Products.ToList();
+            products.ForEach(p =>
+            {
+                p.Category.SetShouldSerializeProducts(false);
+                p.SetShouldSerializeOrders(false);
+            });
+
+            return products;
         }
+
         public ShopContext ShopContext
         {
             get { return context as ShopContext; }

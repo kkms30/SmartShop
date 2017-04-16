@@ -21,8 +21,8 @@ namespace SmartShopWebApp.Core.GeneratedModels
         }
     
         public int IdCashbox { get; set; }
-        public int Id { get; set; }
         public int ShopId { get; set; }
+        public int Id { get; set; }
     
         public virtual Shop Shop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

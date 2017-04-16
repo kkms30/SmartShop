@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:SmartShopWpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="Test" Color="Aqua"/>
     </Application.Resources>
 </Application>

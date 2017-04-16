@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ShopModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ShopModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cashboxes">
           <Key>
             <PropertyRef Name="IdCashbox" />
           </Key>
           <Property Name="IdCashbox" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ShopId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Cashiers">
           <Key>
@@ -35,29 +35,22 @@
             <PropertyRef Name="IdOrder" />
           </Key>
           <Property Name="IdOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="int" />
           <Property Name="Return" Type="tinyint" Nullable="false" />
           <Property Name="Count" Type="tinyint" Nullable="false" />
           <Property Name="Discount" Type="float" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OrdersToTransactions">
-          <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="TransactionId" />
-          </Key>
-          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransactionId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="IdProduct" />
           </Key>
           <Property Name="IdProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Image" Type="mediumblob" />
-          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Shops">
           <Key>
@@ -91,30 +84,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Orderdetails_has_Transactions_Orderdetails1">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="OrdersToTransactions" Type="Self.OrdersToTransactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="IdOrder" />
-            </Principal>
-            <Dependent Role="OrdersToTransactions">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Orderdetails_has_Transactions_Transactions1">
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="1" />
-          <End Role="OrdersToTransactions" Type="Self.OrdersToTransactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transactions">
-              <PropertyRef Name="IdTransaction" />
-            </Principal>
-            <Dependent Role="OrdersToTransactions">
-              <PropertyRef Name="TransactionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Orderdetails_Products1">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -124,6 +93,18 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Orders_Transactions1">
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transactions">
+              <PropertyRef Name="IdTransaction" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="TransactionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -168,7 +149,6 @@
           <EntitySet Name="Cashiers" EntityType="Self.Cashiers" Schema="smartshop" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="smartshop" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="smartshop" store:Type="Tables" />
-          <EntitySet Name="OrdersToTransactions" EntityType="Self.OrdersToTransactions" Schema="smartshop" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="smartshop" store:Type="Tables" />
           <EntitySet Name="Shops" EntityType="Self.Shops" Schema="smartshop" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="smartshop" store:Type="Tables" />
@@ -176,16 +156,12 @@
             <End Role="Shops" EntitySet="Shops" />
             <End Role="Cashboxes" EntitySet="Cashboxes" />
           </AssociationSet>
-          <AssociationSet Name="fk_Orderdetails_has_Transactions_Orderdetails1" Association="Self.fk_Orderdetails_has_Transactions_Orderdetails1">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrdersToTransactions" EntitySet="OrdersToTransactions" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Orderdetails_has_Transactions_Transactions1" Association="Self.fk_Orderdetails_has_Transactions_Transactions1">
-            <End Role="Transactions" EntitySet="Transactions" />
-            <End Role="OrdersToTransactions" EntitySet="OrdersToTransactions" />
-          </AssociationSet>
           <AssociationSet Name="fk_Orderdetails_Products1" Association="Self.fk_Orderdetails_Products1">
             <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Orders_Transactions1" Association="Self.fk_Orders_Transactions1">
+            <End Role="Transactions" EntitySet="Transactions" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="fk_products_categories1" Association="Self.fk_products_categories1">
@@ -201,73 +177,106 @@
             <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ShopContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cashboxes" EntityType="ShopModel.Cashbox" />
+          <EntitySet Name="Cashiers" EntityType="ShopModel.Cashier" />
+          <EntitySet Name="Categories" EntityType="ShopModel.Category" />
+          <EntitySet Name="Orders" EntityType="ShopModel.Order" />
+          <EntitySet Name="Products" EntityType="ShopModel.Product" />
+          <EntitySet Name="Shops" EntityType="ShopModel.Shop" />
+          <EntitySet Name="Transactions" EntityType="ShopModel.Transaction" />
+          <AssociationSet Name="fk_cashboxes_shops1" Association="ShopModel.fk_cashboxes_shops1">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="Cashbox" EntitySet="Cashboxes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transactions_cashboxes1" Association="ShopModel.fk_transactions_cashboxes1">
+            <End Role="Cashbox" EntitySet="Cashboxes" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transactions_cashiers1" Association="ShopModel.fk_transactions_cashiers1">
+            <End Role="Cashier" EntitySet="Cashiers" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_categories1" Association="ShopModel.fk_products_categories1">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Orderdetails_Products1" Association="ShopModel.fk_Orderdetails_Products1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Orders_Transactions1" Association="ShopModel.fk_Orders_Transactions1">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Cashbox">
           <Key>
             <PropertyRef Name="IdCashbox" />
           </Key>
           <Property Name="IdCashbox" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="ShopId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Shop" Relationship="Self.fk_cashboxes_shops1" FromRole="Cashboxes" ToRole="Shops" />
-          <NavigationProperty Name="Transactions" Relationship="Self.fk_transactions_cashboxes1" FromRole="Cashboxes" ToRole="Transactions" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Shop" Relationship="ShopModel.fk_cashboxes_shops1" FromRole="Cashbox" ToRole="Shop" />
+          <NavigationProperty Name="Transactions" Relationship="ShopModel.fk_transactions_cashboxes1" FromRole="Cashbox" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Cashier">
           <Key>
             <PropertyRef Name="IdCashier" />
           </Key>
           <Property Name="IdCashier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Transactions" Relationship="Self.fk_transactions_cashiers1" FromRole="Cashiers" ToRole="Transactions" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transactions" Relationship="ShopModel.fk_transactions_cashiers1" FromRole="Cashier" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="IdCategory" />
           </Key>
           <Property Name="IdCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.fk_products_categories1" FromRole="Categories" ToRole="Products" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Products" Relationship="ShopModel.fk_products_categories1" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="IdOrder" />
           </Key>
           <Property Name="IdOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="Int32" />
           <Property Name="Return" Type="SByte" Nullable="false" />
           <Property Name="Count" Type="SByte" Nullable="false" />
           <Property Name="Discount" Type="Single" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.fk_Orderdetails_Products1" FromRole="Orders" ToRole="Products" />
-          <NavigationProperty Name="Transactions" Relationship="Self.OrdersToTransactions" FromRole="Orders" ToRole="Transactions" />
+          <NavigationProperty Name="Product" Relationship="ShopModel.fk_Orderdetails_Products1" FromRole="Order" ToRole="Product" />
+          <NavigationProperty Name="Transaction" Relationship="ShopModel.fk_Orders_Transactions1" FromRole="Order" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="IdProduct" />
           </Key>
           <Property Name="IdProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Single" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.fk_products_categories1" FromRole="Products" ToRole="Categories" />
-          <NavigationProperty Name="Orders" Relationship="Self.fk_Orderdetails_Products1" FromRole="Products" ToRole="Orders" />
+          <NavigationProperty Name="Category" Relationship="ShopModel.fk_products_categories1" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Orders" Relationship="ShopModel.fk_Orderdetails_Products1" FromRole="Product" ToRole="Order" />
         </EntityType>
         <EntityType Name="Shop">
           <Key>
             <PropertyRef Name="IdShop" />
           </Key>
           <Property Name="IdShop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Cashboxes" Relationship="Self.fk_cashboxes_shops1" FromRole="Shops" ToRole="Cashboxes" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cashboxes" Relationship="ShopModel.fk_cashboxes_shops1" FromRole="Shop" ToRole="Cashbox" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -280,108 +289,83 @@
           <Property Name="Date" Type="DateTime" Nullable="false" />
           <Property Name="TotalPrice" Type="Single" Nullable="false" />
           <Property Name="Discount" Type="Single" />
-          <NavigationProperty Name="Cashbox" Relationship="Self.fk_transactions_cashboxes1" FromRole="Transactions" ToRole="Cashboxes" />
-          <NavigationProperty Name="Cashier" Relationship="Self.fk_transactions_cashiers1" FromRole="Transactions" ToRole="Cashiers" />
-          <NavigationProperty Name="Orders" Relationship="Self.OrdersToTransactions" FromRole="Transactions" ToRole="Orders" />
+          <NavigationProperty Name="Cashbox" Relationship="ShopModel.fk_transactions_cashboxes1" FromRole="Transaction" ToRole="Cashbox" />
+          <NavigationProperty Name="Cashier" Relationship="ShopModel.fk_transactions_cashiers1" FromRole="Transaction" ToRole="Cashier" />
+          <NavigationProperty Name="Orders" Relationship="ShopModel.fk_Orders_Transactions1" FromRole="Transaction" ToRole="Order" />
         </EntityType>
         <Association Name="fk_cashboxes_shops1">
-          <End Role="Shops" Type="Self.Shop" Multiplicity="1" />
-          <End Role="Cashboxes" Type="Self.Cashbox" Multiplicity="*" />
+          <End Type="ShopModel.Shop" Role="Shop" Multiplicity="1" />
+          <End Type="ShopModel.Cashbox" Role="Cashbox" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Shops">
+            <Principal Role="Shop">
               <PropertyRef Name="IdShop" />
             </Principal>
-            <Dependent Role="Cashboxes">
+            <Dependent Role="Cashbox">
               <PropertyRef Name="ShopId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_transactions_cashboxes1">
-          <End Role="Cashboxes" Type="Self.Cashbox" Multiplicity="1" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <End Type="ShopModel.Cashbox" Role="Cashbox" Multiplicity="1" />
+          <End Type="ShopModel.Transaction" Role="Transaction" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cashboxes">
+            <Principal Role="Cashbox">
               <PropertyRef Name="IdCashbox" />
             </Principal>
-            <Dependent Role="Transactions">
+            <Dependent Role="Transaction">
               <PropertyRef Name="CashboxId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_transactions_cashiers1">
-          <End Role="Cashiers" Type="Self.Cashier" Multiplicity="1" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <End Type="ShopModel.Cashier" Role="Cashier" Multiplicity="1" />
+          <End Type="ShopModel.Transaction" Role="Transaction" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cashiers">
+            <Principal Role="Cashier">
               <PropertyRef Name="IdCashier" />
             </Principal>
-            <Dependent Role="Transactions">
+            <Dependent Role="Transaction">
               <PropertyRef Name="CashierId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_products_categories1">
-          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <End Type="ShopModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="ShopModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Categories">
+            <Principal Role="Category">
               <PropertyRef Name="IdCategory" />
             </Principal>
-            <Dependent Role="Products">
+            <Dependent Role="Product">
               <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Orderdetails_Products1">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <End Type="ShopModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ShopModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Products">
+            <Principal Role="Product">
               <PropertyRef Name="IdProduct" />
             </Principal>
-            <Dependent Role="Orders">
+            <Dependent Role="Order">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="OrdersToTransactions">
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+        <Association Name="fk_Orders_Transactions1">
+          <End Type="ShopModel.Transaction" Role="Transaction" Multiplicity="0..1" />
+          <End Type="ShopModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="IdTransaction" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ShopContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cashboxes" EntityType="Self.Cashbox" />
-          <EntitySet Name="Cashiers" EntityType="Self.Cashier" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="Shops" EntityType="Self.Shop" />
-          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
-          <AssociationSet Name="fk_cashboxes_shops1" Association="Self.fk_cashboxes_shops1">
-            <End Role="Shops" EntitySet="Shops" />
-            <End Role="Cashboxes" EntitySet="Cashboxes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_transactions_cashboxes1" Association="Self.fk_transactions_cashboxes1">
-            <End Role="Cashboxes" EntitySet="Cashboxes" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="fk_transactions_cashiers1" Association="Self.fk_transactions_cashiers1">
-            <End Role="Cashiers" EntitySet="Cashiers" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="fk_products_categories1" Association="Self.fk_products_categories1">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Orderdetails_Products1" Association="Self.fk_Orderdetails_Products1">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="OrdersToTransactions" Association="Self.OrdersToTransactions">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -390,84 +374,77 @@
           <EntitySetMapping Name="Cashboxes">
             <EntityTypeMapping TypeName="ShopModel.Cashbox">
               <MappingFragment StoreEntitySet="Cashboxes">
-                <ScalarProperty Name="IdCashbox" ColumnName="IdCashbox" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="IdCashbox" ColumnName="IdCashbox" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cashiers">
             <EntityTypeMapping TypeName="ShopModel.Cashier">
               <MappingFragment StoreEntitySet="Cashiers">
-                <ScalarProperty Name="IdCashier" ColumnName="IdCashier" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCashier" ColumnName="IdCashier" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="ShopModel.Category">
               <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="ShopModel.Order">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
-                <ScalarProperty Name="Return" ColumnName="Return" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Return" ColumnName="Return" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shops">
             <EntityTypeMapping TypeName="ShopModel.Shop">
               <MappingFragment StoreEntitySet="Shops">
-                <ScalarProperty Name="IdShop" ColumnName="IdShop" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdShop" ColumnName="IdShop" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="ShopModel.Transaction">
               <MappingFragment StoreEntitySet="Transactions">
-                <ScalarProperty Name="IdTransaction" ColumnName="IdTransaction" />
-                <ScalarProperty Name="CashboxId" ColumnName="CashboxId" />
-                <ScalarProperty Name="CashierId" ColumnName="CashierId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CashierId" ColumnName="CashierId" />
+                <ScalarProperty Name="CashboxId" ColumnName="CashboxId" />
+                <ScalarProperty Name="IdTransaction" ColumnName="IdTransaction" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="OrdersToTransactions" TypeName="ShopModel.OrdersToTransactions" StoreEntitySet="OrdersToTransactions">
-            <EndProperty Name="Orders">
-              <ScalarProperty Name="IdOrder" ColumnName="OrderId" />
-            </EndProperty>
-            <EndProperty Name="Transactions">
-              <ScalarProperty Name="IdTransaction" ColumnName="TransactionId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

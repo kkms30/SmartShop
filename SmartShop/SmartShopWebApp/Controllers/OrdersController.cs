@@ -13,31 +13,32 @@ using SmartShopWebApp.Persistance;
 
 namespace SmartShopWebApp.Controllers
 {
-    public class CashiersController : ApiController
+    public class OrdersController : ApiController
     {
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
-        // GET: api/Cashiers
-        public List<Cashier> GetCashiers()
+        // GET: api/Orders
+        public IEnumerable<Order> GetOrders()
         {
-            return unitOfWork.Cashiers.GetCashiers();
+            return unitOfWork.Orders.GetOrderWithProducts();
         }
 
-        // PUT: api/Cashiers/5
+        // PUT: api/Orders/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCashier(int id, Cashier cashier)
+        public IHttpActionResult PutOrder(int id, Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cashier.IdCashier)
+            if (id != order.IdOrder)
             {
                 return BadRequest();
             }
 
-            unitOfWork.Cashiers.Modify(cashier);
+            unitOfWork.Orders.Modify(order);
+
             unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -50,6 +51,6 @@ namespace SmartShopWebApp.Controllers
                 unitOfWork.Dispose();
             }
             base.Dispose(disposing);
-        }        
+        }
     }
 }
