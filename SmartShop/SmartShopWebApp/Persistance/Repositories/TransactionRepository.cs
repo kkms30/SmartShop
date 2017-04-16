@@ -54,7 +54,17 @@ namespace SmartShopWebApp.Persistance.Repositories
                 ShopContext.Categories.Attach(o.Product.Category);
             });
             ShopContext.Transactions.Add(transaction);
-        }       
+        }
+
+        public override void Modify(Transaction transaction)
+        {
+            base.Modify(transaction);
+            transaction.Orders.ToList().ForEach(o =>
+            {
+                new OrderRepository(ShopContext).Modify(o);
+            });
+        }
+
 
         private void SetSerialization(Transaction transaction)
         {

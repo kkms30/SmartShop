@@ -50,6 +50,8 @@ namespace SmartShopWebApp.Core.GeneratedModels
         [JsonProperty(Order = 6)]
         public virtual Product Product { get; set; }
         [JsonProperty(Order = 7)]
+        public Nullable<int> TransactionId { get; set; }
+        [JsonProperty(Order = 8)]
         public virtual Transaction Transaction { get; set; }
 
     }

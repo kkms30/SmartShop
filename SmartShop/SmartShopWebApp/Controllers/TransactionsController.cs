@@ -75,7 +75,7 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != transaction.Id)
+            if (id != transaction.IdTransaction)
             {
                 return BadRequest();
             }

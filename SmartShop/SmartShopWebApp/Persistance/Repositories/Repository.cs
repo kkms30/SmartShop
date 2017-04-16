@@ -42,7 +42,7 @@ namespace SmartShopWebApp.Persistance.Repositories
             return context.Set<TEntity>().ToList();
         }
 
-        public void Modify(TEntity entity)
+        public virtual void Modify(TEntity entity)
         {
             context.Entry(entity).State = EntityState.Modified;
         }             

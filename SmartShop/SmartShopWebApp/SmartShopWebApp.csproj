@@ -189,10 +189,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CashboxesController.cs" />
     <Compile Include="Controllers\CashiersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Core\GeneratedModels\Cashbox.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
