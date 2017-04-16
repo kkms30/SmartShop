@@ -32,9 +32,9 @@ namespace SmartShopWebApp.Persistance.Repositories
             return transaction;
         }
 
-        public Transaction GetTransactionById(int id)
+        public Transaction GetTransactionById(int idTransaction)
         {
-            Transaction transaction = Find(t => t.Id == id).FirstOrDefault();
+            Transaction transaction = Find(t => t.IdTransaction == idTransaction).FirstOrDefault();
             if (transaction == null)
             {
                 return null;
