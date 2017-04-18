@@ -1,11 +1,12 @@
+
 -- -----------------------------------------------------
 -- Table `Categories`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Categories` (
-  `idcategories` INT NOT NULL AUTO_INCREMENT ,
+  `idcategory` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idcategories`) ,
-  UNIQUE INDEX `idcategories_UNIQUE` (`idcategories` ASC) )
+  PRIMARY KEY (`idcategory`) ,
+  UNIQUE INDEX `idcategories_UNIQUE` (`idcategory` ASC) )
 ENGINE = InnoDB;
 
 
@@ -13,39 +14,19 @@ ENGINE = InnoDB;
 -- Table `Products`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Products` (
-  `idproducts` INT NOT NULL AUTO_INCREMENT ,
+  `idproduct` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `code` VARCHAR(45) NOT NULL ,
   `price` FLOAT NOT NULL ,
   `image` MEDIUMBLOB NULL ,
-  `categories_id` INT NOT NULL ,
-  PRIMARY KEY (`idproducts`) ,
-  UNIQUE INDEX `idproducts_UNIQUE` (`idproducts` ASC) ,
+  `category_id` INT NOT NULL ,
+  PRIMARY KEY (`idproduct`) ,
+  UNIQUE INDEX `idproducts_UNIQUE` (`idproduct` ASC) ,
   UNIQUE INDEX `code_UNIQUE` (`code` ASC) ,
-  INDEX `fk_products_categories1` (`categories_id` ASC) ,
+  INDEX `fk_products_categories1` (`category_id` ASC) ,
   CONSTRAINT `fk_products_categories1`
-    FOREIGN KEY (`categories_id` )
-    REFERENCES `Categories` (`idcategories` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Orders`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `Orders` (
-  `idorders` INT NOT NULL AUTO_INCREMENT ,
-  `return` TINYINT NOT NULL DEFAULT 0 ,
-  `count` TINYINT NOT NULL DEFAULT 0 ,
-  `discount` FLOAT NULL ,
-  `products_id` INT NOT NULL ,
-  PRIMARY KEY (`idorders`) ,
-  UNIQUE INDEX `idtransactions_UNIQUE` (`idorders` ASC) ,
-  INDEX `fk_Orderdetails_Products1` (`products_id` ASC) ,
-  CONSTRAINT `fk_Orderdetails_Products1`
-    FOREIGN KEY (`products_id` )
-    REFERENCES `Products` (`idproducts` )
+    FOREIGN KEY (`category_id` )
+    REFERENCES `Categories` (`idcategory` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -55,11 +36,11 @@ ENGINE = InnoDB;
 -- Table `Shops`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Shops` (
-  `idshops` INT NOT NULL AUTO_INCREMENT ,
+  `idshop` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `address` VARCHAR(90) NOT NULL ,
-  PRIMARY KEY (`idshops`) ,
-  UNIQUE INDEX `idshops_UNIQUE` (`idshops` ASC) )
+  PRIMARY KEY (`idshop`) ,
+  UNIQUE INDEX `idshops_UNIQUE` (`idshop` ASC) )
 ENGINE = InnoDB;
 
 
@@ -67,16 +48,16 @@ ENGINE = InnoDB;
 -- Table `Cashboxes`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Cashboxes` (
-  `idcashboexs` INT NOT NULL AUTO_INCREMENT ,
+  `idcashbox` INT NOT NULL AUTO_INCREMENT ,
   `id` INT NOT NULL ,
-  `shops_id` INT NOT NULL ,
-  PRIMARY KEY (`idcashboexs`) ,
-  UNIQUE INDEX `idcashboxs_UNIQUE` (`idcashboexs` ASC) ,
+  `shop_id` INT NOT NULL ,
+  PRIMARY KEY (`idcashbox`) ,
+  UNIQUE INDEX `idcashboxs_UNIQUE` (`idcashbox` ASC) ,
   UNIQUE INDEX `cashboxid_UNIQUE` (`id` ASC) ,
-  INDEX `fk_cashboxs_shops1` (`shops_id` ASC) ,
+  INDEX `fk_cashboxs_shops1` (`shop_id` ASC) ,
   CONSTRAINT `fk_cashboxs_shops1`
-    FOREIGN KEY (`shops_id` )
-    REFERENCES `Shops` (`idshops` )
+    FOREIGN KEY (`shop_id` )
+    REFERENCES `Shops` (`idshop` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -86,13 +67,13 @@ ENGINE = InnoDB;
 -- Table `Cashiers`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Cashiers` (
-  `idcashiers` INT NOT NULL AUTO_INCREMENT ,
+  `idcashier` INT NOT NULL AUTO_INCREMENT ,
   `id` VARCHAR(45) NOT NULL ,
   `password` VARCHAR(45) NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
   `surname` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idcashiers`) ,
-  UNIQUE INDEX `idcashiers_UNIQUE` (`idcashiers` ASC) )
+  PRIMARY KEY (`idcashier`) ,
+  UNIQUE INDEX `idcashiers_UNIQUE` (`idcashier` ASC) )
 ENGINE = InnoDB;
 
 
@@ -100,47 +81,52 @@ ENGINE = InnoDB;
 -- Table `Transactions`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Transactions` (
-  `idtransactions` INT NOT NULL AUTO_INCREMENT ,
-  `cashboxes_id` INT NOT NULL ,
-  `cashiers_id` INT NOT NULL ,
+  `idtransaction` INT NOT NULL AUTO_INCREMENT ,
+  `cashbox_id` INT NOT NULL ,
+  `cashier_id` INT NOT NULL ,
   `id` INT NOT NULL ,
   `date` TIMESTAMP NOT NULL ,
   `totalprice` FLOAT NOT NULL ,
   `discount` FLOAT NULL ,
-  PRIMARY KEY (`idtransactions`) ,
-  UNIQUE INDEX `idtransactions_UNIQUE` (`idtransactions` ASC) ,
-  INDEX `fk_transactions_cashboxs1` (`cashboxes_id` ASC) ,
-  INDEX `fk_transactions_cashiers1` (`cashiers_id` ASC) ,
+  PRIMARY KEY (`idtransaction`) ,
+  UNIQUE INDEX `idtransactions_UNIQUE` (`idtransaction` ASC) ,
+  INDEX `fk_transactions_cashboxs1` (`cashbox_id` ASC) ,
+  INDEX `fk_transactions_cashiers1` (`cashier_id` ASC) ,
   CONSTRAINT `fk_transactions_cashboxs1`
-    FOREIGN KEY (`cashboxes_id` )
-    REFERENCES `Cashboxes` (`idcashboexs` )
+    FOREIGN KEY (`cashbox_id` )
+    REFERENCES `Cashboxes` (`idcashbox` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_transactions_cashiers1`
-    FOREIGN KEY (`cashiers_id` )
-    REFERENCES `Cashiers` (`idcashiers` )
+    FOREIGN KEY (`cashier_id` )
+    REFERENCES `Cashiers` (`idcashier` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `OrdersToTransactions`
+-- Table `Orders`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `OrdersToTransactions` (
-  `orders_id` INT NOT NULL AUTO_INCREMENT ,
-  `transactions_id` INT NOT NULL ,
-  PRIMARY KEY (`orders_id`, `transactions_id`) ,
-  INDEX `fk_Orderdetails_has_Transactions_Transactions1` (`transactions_id` ASC) ,
-  INDEX `fk_Orderdetails_has_Transactions_Orderdetails1` (`orders_id` ASC) ,
-  CONSTRAINT `fk_Orderdetails_has_Transactions_Orderdetails1`
-    FOREIGN KEY (`orders_id` )
-    REFERENCES `Orders` (`idorders` )
+CREATE  TABLE IF NOT EXISTS `Orders` (
+  `idorder` INT NOT NULL AUTO_INCREMENT ,
+  `return` TINYINT NOT NULL DEFAULT 0 ,
+  `count` TINYINT NOT NULL DEFAULT 0 ,
+  `discount` FLOAT NULL ,
+  `product_id` INT NOT NULL ,
+  `transaction_id` INT NOT NULL ,
+  PRIMARY KEY (`idorder`) ,
+  UNIQUE INDEX `idtransactions_UNIQUE` (`idorder` ASC) ,
+  INDEX `fk_Orderdetails_Products1` (`product_id` ASC) ,
+  INDEX `fk_Orders_Transactions1` (`transaction_id` ASC) ,
+  CONSTRAINT `fk_Orderdetails_Products1`
+    FOREIGN KEY (`product_id` )
+    REFERENCES `Products` (`idproduct` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Orderdetails_has_Transactions_Transactions1`
-    FOREIGN KEY (`transactions_id` )
-    REFERENCES `Transactions` (`idtransactions` )
+  CONSTRAINT `fk_Orders_Transactions1`
+    FOREIGN KEY (`transaction_id` )
+    REFERENCES `Transactions` (`idtransaction` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB;
