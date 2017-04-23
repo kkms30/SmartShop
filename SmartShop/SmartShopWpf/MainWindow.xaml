@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SmartShopWpf"
         mc:Ignorable="d"
         Background="Black"
+        ResizeMode="NoResize"
         Title="MainWindow" Height="729" Width="1131">
 
 
