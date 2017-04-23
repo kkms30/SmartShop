@@ -6,72 +6,28 @@
         xmlns:local="clr-namespace:SmartShopWpf"
         mc:Ignorable="d"
         Background="Black"
-        Title="MainWindow" Height="660" Width="990">
+        Title="MainWindow" Height="729" Width="1131">
 
-    <Window.Resources>
-        <ImageBrush ImageSource="/SmartShopWpf;component\Rescources\Images\ObramowanieOknaGlownego.png"   Stretch="UniformToFill" x:Key="obramowanie"/>
-    </Window.Resources>
-   
-    <Grid Background="{DynamicResource obramowanie}">
+
+    <Grid Background="{StaticResource Obramowanie}" Height="698" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="1123">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="23*"/>
-            <RowDefinition Height="561"/>
-        </Grid.RowDefinitions>        
-        
-        
-        <TabControl x:Name="tabObsluga" HorizontalAlignment="Left" Height="533" Margin="479,0,0,0" VerticalAlignment="Top" Width="430" Background="Black" Grid.RowSpan="2" Grid.Row="1">
-            <TabItem Header="TabReczny">
-                <Grid Background="Black" Margin="0,12,-1,-1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="33*"/>
-                        <RowDefinition Height="427*"/>
-                        <RowDefinition Height="33*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40*"/>
-                        <ColumnDefinition Width="354*"/>
-                        <ColumnDefinition Width="40*"/>
-                    </Grid.ColumnDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-                    <Label x:Name="lblKod" Content="Label" HorizontalAlignment="Left" Height="102" Margin="1,1,0,0" VerticalAlignment="Top" Width="346" Background="DarkRed" Grid.Column="1" Grid.Row="1"/>
-
-                    <Button x:Name="btn1" Content="1"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="1,103,0,0" Grid.Column="1" Grid.Row="1"  />
-                    <Button x:Name="btn2" Content="2"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="116,103,0,0" Grid.Column="1" Grid.Row="1"  />
-                    <Button x:Name="btn3" Content="3"  Background="Darkorange" HorizontalAlignment="Right" VerticalAlignment="Top" Height="82" Width="116" Margin="0,103,0,0" Grid.Column="1" Grid.Row="1"   />
-                    <Button x:Name="btn4" Content="4"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="1,184,0,0" Grid.Column="1" Grid.Row="1"   />
-                    <Button x:Name="btn5" Content="5"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="116,184,0,0" Grid.Column="1" Grid.Row="1"  />
-                    <Button x:Name="btn6" Content="6"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="231,184,0,0" Grid.Column="1" Grid.Row="1"  />
-                    <Button x:Name="btn7" Content="7"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="1,265,0,0" Grid.Column="1" Grid.Row="1"   />
-                    <Button x:Name="btn8" Content="8"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="116,265,0,0" Grid.Column="1" Grid.Row="1"  />
-                    <Button x:Name="btn9" Content="9"  Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="231,265,0,0" Grid.Column="1" Grid.Row="1"  />
-
-                    <Button x:Name="btnC"         Content="C"           Background="Darkred"    HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="1,346,0,0" Grid.Column="1" Grid.Row="1"   />
-                    <Button x:Name="btn0"         Content="0"           Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="116,346,0,0" Grid.Column="1" Grid.Row="1"  />
-                    <Button x:Name="btnBackSpace" Content="Backspace"   Background="Darkred"    HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="231,346,0,0" Grid.Column="1" Grid.Row="1"  />
-                </Grid>
-            </TabItem>
-            <TabItem Header="TabZListy">
-                <Grid Background="#FFE5E5E5" Margin="0,0,4,2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="171*"/>
-                        <ColumnDefinition Width="196*"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <Grid   x:Name="GridPasekGorny"    HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="1000" Margin="59,37,0,0"  Background="{StaticResource Szary}"/>
+        <Label  x:Name="lblNrKasyNapis"    HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="135"  Margin="604,37,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,0,1" BorderBrush="{StaticResource Bialy}" Content="Numer Kasy:"    Style="{StaticResource LblFont12.5}" HorizontalContentAlignment="Center"/>
+        <Label  x:Name="lblNrKasy"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="48"   Margin="739,37,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="0,1,1,1" BorderBrush="{StaticResource Bialy}" Content=""               Style="{StaticResource LblFont12.5}" HorizontalContentAlignment="Center"/>
+        <Label  x:Name="lblNrKasjeraNapis" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="135"  Margin="786,37,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,0,1" BorderBrush="{StaticResource Bialy}" Content="Numer Kasjera:" Style="{StaticResource LblFont12.5}" HorizontalContentAlignment="Center"/>
+        <Label  x:Name="lblNrKasjera"      HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="48"   Margin="921,37,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="0,1,1,1" BorderBrush="{StaticResource Bialy}" Content=""               Style="{StaticResource LblFont12.5}" HorizontalContentAlignment="Center"/>
+        <Button x:Name="btnWyloguj"        HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="91"   Margin="968,37,0,0" Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Wyloguj"        Style="{StaticResource BtnFont12.5}" HorizontalContentAlignment="Center"/>
 
 
-        <Label  x:Name="lblNrKasyNapis"    Content="Numer Kasy:"    Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="77"  Margin="53,0,0,0"  Grid.Row="1" FontSize="10"></Label>
-        <Label  x:Name="lblNrKasy"         Content=""               Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="47"  Margin="130,0,0,0" Grid.Row="1"  ></Label>
-        <Button x:Name="btnWyloguj"        Content="Wyloguj"        Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="172" Margin="177,0,0,0" Grid.Row="1" BorderThickness="1,0" />
-        <Label  x:Name="lblNrKasjeraNapis" Content="Numer Kasjera:" Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="77"  Margin="349,0,0,0" Grid.Row="1" FontSize="10"/>
-        <Label  x:Name="lblNrKasjera"      Content=""               Background="Darkorange" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="47"  Margin="426,0,0,0" Grid.Row="1" />
+        <Label    x:Name="lblPodsumowanie" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="497"  Margin="85,84,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="0" Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display"/>
 
-        <ListView x:Name="lstVKoszyk" HorizontalAlignment="Left" Height="311" Margin="52,0,0,0" VerticalAlignment="Top" Width="422" Background="DarkRed" OpacityMask="#FF341414" BorderBrush="{x:Null}" Grid.Row="2" BorderThickness="1,0,1,1">
+        <ListView x:Name="lstVKoszyk"      HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="497"  Margin="85,130,0,0" Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" OpacityMask="{StaticResource Bialy}"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -80,20 +36,137 @@
         </ListView>
 
 
-        <Grid HorizontalAlignment="Left" Height="127" Margin="52,316,0,0" Grid.Row="2" VerticalAlignment="Top" Width="215" Background="DarkOrange">
-            <CheckBox    x:Name="checkBoxZnizka"      Content="Znizka"     HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" />
-            <RadioButton x:Name="rdbZnizkaPojedyncza" Content="Pojedyncza" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,35,0,0" />
-            <RadioButton x:Name="rdbZnizkaCalosciowa" Content="Calosciowa" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="91,35,0,0" />
-            <RadioButton x:Name="rdbZnizkaProcentowa" Content="Procentowa" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,55,0,0" />
-            <RadioButton x:Name="rdbZnizkaKwotowa"    Content="Kwotowa"    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="91,58,0,0" />
-            <TextBox     x:Name="txtZapisZnizki"      Text=""              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,78,0,0" TextWrapping="Wrap" Height="19" Width="154"/>
-        </Grid>
+        <Button x:Name="btnZaznaczWszystkie" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="497" Margin="85,452,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Zaznacz Wszystkie"  Style="{StaticResource BtnFont18}" />
+        <Button x:Name="btnUsun"             HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="85,479,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Usuń"               Style="{StaticResource BtnFont30}"/>
+        <Button x:Name="btnEdytuj"           HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="333,479,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Edytuj"             Style="{StaticResource BtnFont30}"/>
+        <Button x:Name="btnZnizka"           HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="85,528,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Zniżka"             Style="{StaticResource BtnFont30}"/>
+        <Button x:Name="btnVat"              HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="333,528,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="VAT"                Style="{StaticResource BtnFont30}"/>
+        <Button x:Name="btnPodsumowanie"     HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="497" Margin="85,577,0,0"  Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Podsumowanie"       Style="{StaticResource BtnFont30}"/>
 
-        <Button x:Name="btnUsun"         Content="Usun" HorizontalAlignment="Left" Height="66" Margin="272,316,0,0" VerticalAlignment="Top" Width="201" Grid.Row="2"/>
-        <Button x:Name="btnVat"          Content="VAT" HorizontalAlignment="Left" Margin="272,382,0,0" Grid.Row="2" VerticalAlignment="Top" Width="201" Height="61"/>
-        <Label  x:Name="lblPodsumowanie" Content="Label" HorizontalAlignment="Left" Height="33" Margin="51,448,0,0" VerticalAlignment="Top" Width="422" Background="Darkred" Grid.Row="2"/>
-        <Button x:Name="btnPodsumowanie" HorizontalAlignment="Left" Margin="47,486,0,0" VerticalAlignment="Top" Width="426" Height="30" Grid.Row="2"></Button>
 
+
+        <TabControl x:Name="tabObsluga" HorizontalAlignment="Left" VerticalAlignment="Top" Height="540" Width="430"  Margin="604,84,0,0" Background="{StaticResource Czarny}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}">
+
+            <TabItem Header="Kod Ręcznie" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="80" Margin="-2,1,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TabItmFont12.5}"  >
+                
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Czarny}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="lblKodRecznieNaglowekKodu"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="346" Margin="40,34,0,0" Background="{StaticResource Czerwony}" BorderThickness="1,1,1,0" BorderBrush="{StaticResource Bialy}" Content="Kod produktu"  Style="{StaticResource LblFont14}" HorizontalContentAlignment="Center" TextOptions.TextFormattingMode="Display"/>
+                    <Label x:Name="lblKodRecznieWpisywanieKodu" HorizontalAlignment="Left" VerticalAlignment="Top" Height="71" Width="346" Margin="40,66,0,0" Background="{StaticResource Czerwony}" BorderThickness="1,0,1,1" BorderBrush="{StaticResource Bialy}" Content="0"             Style="{StaticResource LblFont36}" HorizontalContentAlignment="Right"  TextOptions.TextFormattingMode="Display" />
+
+                    <Button x:Name="btn1"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="40,136,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="1"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn2"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="155,136,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="2"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn3"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="270,136,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="3"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn4"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="40,217,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="4"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn5"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="155,217,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="5"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn6"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="270,217,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="6"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn7"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="40,298,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="7"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn8"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="155,298,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="8"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btn9"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="270,298,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="9"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btnC"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="58"  Margin="40,379,0,0"  Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="C"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btnBackspace" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="58"  Margin="98,379,0,0"  Background="{StaticResource Czerwony}"     BorderThickness="0,1,1,1" BorderBrush="{StaticResource Bialy}" Content="&#xE112;"  Style="{StaticResource BtnFont30}" FontFamily="Segoe UI Symbol" />
+                    <Button x:Name="btn0"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="155,379,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="0"         Style="{StaticResource BtnFont30}"/>
+                    <Button x:Name="btnDodaj"     HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="116" Margin="270,379,0,0" Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Dodaj"     Style="{StaticResource BtnFont30}"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Kod z Listy" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="80" Margin="-3,1,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TabItmFont12.5}">
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Czarny}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="txtZListyWyszukiwarka" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="41" Width="303" Margin="40,34,0,0"  Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TxtFont26}" />
+                    <Button  x:Name="btnZListyWyszukaj"     HorizontalAlignment="Left"  VerticalAlignment="Top" Height="41" Width="43"  Margin="343,34,0,0" Background="{StaticResource Lupa}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}"/>
+
+                    <ListView x:Name="listVZListyListaDostepnychProduktow" HorizontalAlignment="Left" VerticalAlignment="Top" Height="332"  Width="346" Margin="40,74,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="btntabZListyDodaj"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="346" Margin="40,405,0,0" Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Dodaj" Style="{StaticResource BtnFont30}"  />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Top 10" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="65" Margin="-4,1,0,0" Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TabItmFont12.5}">
+                
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Czarny}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView x:Name="listVTop10ListaTop10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427"  Width="346" Margin="40,34,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Zwroty" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="65" Margin="-5,1,0,0"  Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TabItmFont12.5}">
+                
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Czarny}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="txtZwrotyIdTransakcji" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="41" Width="303" Margin="40,34,0,0"  Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TxtFont26}" />
+                    <Button  x:Name="btnZwrotyWyszukaj"     HorizontalAlignment="Left"  VerticalAlignment="Top" Height="41" Width="43"  Margin="343,34,0,0" Background="{StaticResource Lupa}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}"/>
+
+                    <ListView x:Name="listVZwortyListaProduktowDoZwrotu" HorizontalAlignment="Left" VerticalAlignment="Top" Height="332"  Width="346" Margin="40,74,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="btnZwrotyZaznaczWszystkie" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="346" Margin="40,378,0,0" Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Zaznacz Wszystkie" Style="{StaticResource BtnFont18}" />
+                    <Button x:Name="btntabZwrotyZwroc"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="346" Margin="40,405,0,0" Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Zwróć"             Style="{StaticResource BtnFont30}" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Raporty"  HorizontalAlignment="Left" VerticalAlignment="Top"  Height="22" Width="65" Margin="-6,1,0,0"  Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TabItmFont12.5}">
+               
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Czarny}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Transakcje" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="22" Width="71" Margin="-7,1,0,0"  Background="{StaticResource Czerwony}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Style="{StaticResource TabItmFont12.5}"    >
+               
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Czarny}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

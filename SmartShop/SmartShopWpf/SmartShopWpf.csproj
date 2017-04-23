@@ -93,7 +93,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Rescources\Images\ObramowanieOknaGlownego.png">
@@ -101,7 +103,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Rescources\Images\drukarka paragonu2.png" />
+    <Resource Include="Rescources\Images\Lupa.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
