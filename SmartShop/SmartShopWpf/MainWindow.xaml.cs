@@ -23,6 +23,7 @@ namespace SmartShopWpf
         public MainWindow()
         {
             InitializeComponent();
+       
         }
     }
 }
