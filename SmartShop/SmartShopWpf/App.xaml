@@ -4,13 +4,13 @@
              xmlns:local="clr-namespace:SmartShopWpf"
              StartupUri="OknoLogowania.xaml">
     <Application.Resources>
-        
+
         <SolidColorBrush x:Key="Pomaranczowy" Color="DarkOrange"/>
         <SolidColorBrush x:Key="Czerwony"     Color="DarkRed"/>
         <SolidColorBrush x:Key="Bialy"        Color="White"/>
         <SolidColorBrush x:Key="Czarny"       Color="Black"/>
         <SolidColorBrush x:Key="Szary"        Color="Gray"/>
-        
+
 
         <Style TargetType="{x:Type Label}" x:Key="LblFont12.5" >
             <Setter Property="FontWeight" Value="Bold" />
@@ -48,20 +48,20 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Border>                        
-                    <ControlTemplate.Triggers>                       
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background"  TargetName="border" Value="{StaticResource Bialy}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" TargetName="border"  Value="{StaticResource Czarny}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
-                        </Trigger>                       
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -89,7 +89,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style TargetType="{x:Type Button }" x:Key="BtnFont30">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="30"/>
@@ -118,26 +118,26 @@
         <Style TargetType="{x:Type TabItem}" x:Key="TabItmFont12.5">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="12.5"/>            
+            <Setter Property="FontSize" Value="12.5"/>
             <Setter Property="Template">
                 <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Grid>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
                             <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"   >
                                 <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"  ContentSource="Header"  Margin="0,0,0,0"    />
-                               
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">                                   
-                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource Bialy}" />
-                                    <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
-                                </Trigger>                             
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-        </Style>    
+
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource Bialy}" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
 
         <ImageBrush x:Key="Obramowanie" ImageSource="/SmartShopWpf;component\Rescources\Images\ObramowanieOknaGlownego.png"   Stretch="UniformToFill"/>

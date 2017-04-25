@@ -25,7 +25,6 @@
         <Label  x:Name="lblNrKasjera"      HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="48"   Margin="921,37,0,0" Background="{StaticResource Pomaranczowy}" BorderThickness="0,1,1,1" BorderBrush="{StaticResource Bialy}" Content=""               Style="{StaticResource LblFont12.5}" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnWyloguj"        HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="91"   Margin="968,37,0,0" Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="Wyloguj"        Style="{StaticResource BtnFont12.5}" HorizontalContentAlignment="Center"/>
 
-
         <Label    x:Name="lblPodsumowanie" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="497"  Margin="85,84,0,0"  Background="{StaticResource Pomaranczowy}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" Content="0" Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display"/>
 
         <ListView x:Name="lstVKoszyk"      HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="497"  Margin="85,130,0,0" Background="{StaticResource Czerwony}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource Bialy}" OpacityMask="{StaticResource Bialy}"  >
