@@ -2,15 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmartShopWpf"
-             StartupUri="OknoLogowania.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
-
+        
         <SolidColorBrush x:Key="Pomaranczowy" Color="DarkOrange"/>
         <SolidColorBrush x:Key="Czerwony"     Color="DarkRed"/>
         <SolidColorBrush x:Key="Bialy"        Color="White"/>
         <SolidColorBrush x:Key="Czarny"       Color="Black"/>
         <SolidColorBrush x:Key="Szary"        Color="Gray"/>
-
+        
 
         <Style TargetType="{x:Type Label}" x:Key="LblFont12.5" >
             <Setter Property="FontWeight" Value="Bold" />
@@ -40,9 +40,65 @@
         <Style TargetType="{x:Type TextBox}" x:Key="TxtFont26">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="26"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"  >
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>                    
+                </Setter.Value>
+            </Setter>
+        </Style>        
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnFontRed12.5">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>                        
+                    <ControlTemplate.Triggers>                       
+                        <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkRed" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                        </Trigger>                       
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
-        <Style TargetType="{x:Type Button}" x:Key="BtnFont12.5">
+        <Style TargetType="{x:Type Button}" x:Key="BtnFontOrange12.5">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="12.5"/>
             <Setter Property="Template">
@@ -53,11 +109,27 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background"  TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkOrange" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="border"  Value="{StaticResource Czarny}"/>
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -66,7 +138,7 @@
             </Setter>
         </Style>
 
-        <Style TargetType="{x:Type Button}" x:Key="BtnFont18">
+        <Style TargetType="{x:Type Button}" x:Key="BtnFontRed18">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Template">
@@ -77,11 +149,27 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background"  TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkRed" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="border"  Value="{StaticResource Czarny}"/>
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -90,9 +178,9 @@
             </Setter>
         </Style>
 
-        <Style TargetType="{x:Type Button }" x:Key="BtnFont30">
+        <Style TargetType="{x:Type Button}" x:Key="BtnFontOrange18">
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -101,11 +189,107 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background"  TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkOrange" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="border"  Value="{StaticResource Czarny}"/>
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button }" x:Key="BtnFontRed30">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="30"/>            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkRed" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>                                
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button }" x:Key="BtnFontOrange30">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkOrange" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background"  TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -115,7 +299,50 @@
         </Style>
 
 
-        <Style TargetType="{x:Type TabItem}" x:Key="TabItmFont12.5">
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItmFontRed12.5">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12.5"/>            
+            <Setter Property="Template">
+                <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"  ContentSource="Header"  Margin="0,0,0,0"/>                               
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  TargetName="Border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="DarkRed" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background"  TargetName="Border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkRed"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
+                                </Trigger>                             
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItmFontOrange12.5">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="12.5"/>
@@ -123,14 +350,34 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
                         <Grid>
-                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"   >
-                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"  ContentSource="Header"  Margin="0,0,0,0"    />
-
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"  ContentSource="Header"  Margin="0,0,0,0"/>
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  TargetName="Border">
+                                    <Setter.Value>                                       
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="White"/>
+                                                    <GradientStop Color="DarkOrange" Offset="1"/>
+                                                </RadialGradientBrush>                                            
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
+                            </Trigger>
+                            
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource Bialy}" />
+                                <Setter Property="Background"  TargetName="Border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFFDF9F9" Offset="0.894"/>
+                                            <GradientStop Color="DarkOrange"/>
+                                            <GradientStop Color="#FFE3CCCC" Offset="0.648"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -138,7 +385,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
 
         <ImageBrush x:Key="Obramowanie" ImageSource="/SmartShopWpf;component\Rescources\Images\ObramowanieOknaGlownego.png"   Stretch="UniformToFill"/>
         <ImageBrush x:Key="Lupa"        ImageSource="/SmartShopWpf;component\Rescources\Images\Lupa.png"                      Stretch="UniformToFill"/>
