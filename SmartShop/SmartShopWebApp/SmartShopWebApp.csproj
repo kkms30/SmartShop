@@ -273,6 +273,7 @@
     <Content Include="Core\GeneratedModels\ShopModel.edmx.diagram">
       <DependentUpon>ShopModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\smartshop.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
