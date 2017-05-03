@@ -5,11 +5,11 @@
              StartupUri="OknoLogowania.xaml">
     <Application.Resources>
         
-        <SolidColorBrush x:Key="Pomaranczowy" Color="DarkOrange"/>
-        <SolidColorBrush x:Key="Czerwony"     Color="DarkRed"/>
-        <SolidColorBrush x:Key="Bialy"        Color="White"/>
-        <SolidColorBrush x:Key="Czarny"       Color="Black"/>
-        <SolidColorBrush x:Key="Szary"        Color="Gray"/>
+        <SolidColorBrush x:Key="Orange" Color="DarkOrange"/>
+        <SolidColorBrush x:Key="Red"    Color="DarkRed"/>
+        <SolidColorBrush x:Key="White"  Color="White"/>
+        <SolidColorBrush x:Key="Black"  Color="Black"/>
+        <SolidColorBrush x:Key="Gray"   Color="Gray"/>
         
 
         <Style TargetType="{x:Type Label}" x:Key="LblFont12.5" >
@@ -50,7 +50,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>                    
@@ -77,7 +77,7 @@
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background"  TargetName="border">
@@ -90,7 +90,7 @@
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                         </Trigger>                       
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -117,7 +117,7 @@
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background"  TargetName="border">
@@ -130,7 +130,7 @@
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -157,7 +157,7 @@
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background"  TargetName="border">
@@ -170,7 +170,7 @@
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -197,7 +197,7 @@
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background"  TargetName="border">
@@ -210,7 +210,7 @@
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -237,7 +237,7 @@
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background"  TargetName="border">
@@ -250,7 +250,7 @@
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>                                
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>                                
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -277,7 +277,7 @@
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background"  TargetName="border">
@@ -290,7 +290,7 @@
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Bialy}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -386,8 +386,8 @@
             </Setter>
         </Style>
 
-        <ImageBrush x:Key="Obramowanie" ImageSource="/SmartShopWpf;component\Rescources\Images\ObramowanieOknaGlownego.png"   Stretch="UniformToFill"/>
-        <ImageBrush x:Key="Lupa"        ImageSource="/SmartShopWpf;component\Rescources\Images\Lupa.png"                      Stretch="UniformToFill"/>
+        <ImageBrush x:Key="Frame" ImageSource="/SmartShopWpf;component\Rescources\Images\Frame.png" Stretch="UniformToFill"/>
+        <ImageBrush x:Key="Loupe" ImageSource="/SmartShopWpf;component\Rescources\Images\Loupe.png" Stretch="UniformToFill"/>
 
     </Application.Resources>
 </Application>

@@ -24,7 +24,7 @@ namespace SmartShopWpf
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mW = new MainWindow();
             mW.Show();
