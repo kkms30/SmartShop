@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShop.Tests", "SmartSho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShop.Models", "SmartShop.Models\SmartShop.Models.csproj", "{5C8528E3-AFAD-420A-9D67-023E2CE6881A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShop.CommunicateToWebService", "SmartShop.CommunicateToWebService\SmartShop.CommunicateToWebService.csproj", "{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

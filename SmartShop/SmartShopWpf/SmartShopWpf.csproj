@@ -78,13 +78,6 @@
     <Compile Include="OknoLogowania.xaml.cs">
       <DependentUpon>OknoLogowania.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cashbox.cs" />
-    <Compile Include="Models\Cashier.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Shop.cs" />
-    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -121,7 +114,12 @@
   <ItemGroup>
     <Resource Include="Rescources\Images\Lupa.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
+      <Project>{5c8528e3-afad-420a-9d67-023e2ce6881a}</Project>
+      <Name>SmartShop.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
