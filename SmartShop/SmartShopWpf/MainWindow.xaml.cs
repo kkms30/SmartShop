@@ -25,5 +25,12 @@ namespace SmartShopWpf
             InitializeComponent();
        
         }
+
+        private void btnWyloguj_Click(object sender, RoutedEventArgs e)
+        {
+            OknoLogowania oL = new OknoLogowania();
+            oL.Show();
+            this.Close();
+        }
     }
 }
