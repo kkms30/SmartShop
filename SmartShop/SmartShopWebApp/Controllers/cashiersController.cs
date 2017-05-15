@@ -18,6 +18,7 @@ namespace SmartShopWebApp.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Cashiers
+        [Authorize]
         public List<Cashier> GetCashiers()
         {
             return unitOfWork.Cashiers.GetCashiers();

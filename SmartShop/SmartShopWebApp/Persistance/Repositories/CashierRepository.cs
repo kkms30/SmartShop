@@ -24,5 +24,11 @@ namespace SmartShopWebApp.Persistance.Repositories
             cashiers.ForEach(c => c.SetShouldSerializeTransactions(false));
             return cashiers;
         }
+
+        public Cashier GetCashierByCredentials(string id, string password)
+        {
+            Cashier cashier = Find(c => c.Id == id && c.Password == password).FirstOrDefault();
+            return cashier;
+        }
     }   
 }
