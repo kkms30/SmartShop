@@ -21,9 +21,7 @@ namespace SmartShopWebApp.Provider
                 var id = context.UserName;
                 var password = context.Password;
 
-                UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
-
-               
+                UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());                            
 
                 Cashier cashier = unitOfWork.Cashiers.GetCashierByCredentials(id, password);
 
