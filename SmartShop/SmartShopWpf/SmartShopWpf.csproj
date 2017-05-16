@@ -111,9 +111,6 @@
     <Resource Include="Rescources\Images\Loupe.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Rescources\Images\Lupa.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
       <Project>{5c8528e3-afad-420a-9d67-023e2ce6881a}</Project>
       <Name>SmartShop.Models</Name>
