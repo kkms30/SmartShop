@@ -89,10 +89,16 @@
                     <TextBox x:Name="txtFromListProductName" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="45" Width="333" Margin="24,14,0,0"  Background="{StaticResource Red}"   BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TxtFont26}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FocusVisualStyle="{x:Null}" Tag="Wyszukaj..."  />
                     <Button  x:Name="btnFromListSearch"      HorizontalAlignment="Left"  VerticalAlignment="Top" Height="45" Width="43"  Margin="357,14,0,0" Background="{StaticResource Loupe}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource BtnLoupe}"/>
 
-                    <ListView x:Name="listVFromListListOfProducts" HorizontalAlignment="Left" VerticalAlignment="Top" Height="363"  Width="376" Margin="24,58,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}">
+                    <ListView x:Name="listVFromListListOfProducts" HorizontalAlignment="Left" VerticalAlignment="Top" Height="363"  Width="376" Margin="24,58,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn/>
+
+                                <GridViewColumn Header="Nr" Width="30"   DisplayMemberBinding="{Binding [0]}"  />
+                                <GridViewColumn Header="Nazwa" Width="100" DisplayMemberBinding="{Binding [1]}"/>
+                                <GridViewColumn Header="Zdjęcie" Width="80" DisplayMemberBinding="{Binding [2]}"/>
+                                <GridViewColumn Header="Cena" Width="70"    DisplayMemberBinding="{Binding [3]}" />
+                                <GridViewColumn Header="Kategoria" Width="100"   DisplayMemberBinding="{Binding [4]}"/>
+                            
                             </GridView>
                         </ListView.View>
                     </ListView>
