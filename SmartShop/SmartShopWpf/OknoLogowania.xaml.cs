@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SmartShop.CommunicateToWebService;
+using SmartShopWpf.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,13 +24,23 @@ namespace SmartShopWpf
         public OknoLogowania()
         {
             InitializeComponent();
+            txtLogin.Text = "5";
+            txtHaslo.Text = "test";
         }
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mW = new MainWindow();
-            mW.Show();
-            this.Close();
+            //MainWindow mW = new MainWindow();
+            //mW.Show();
+            //this.Close();
+            LoginClient client = new LoginClient();
+            string token = client.GetToken(txtLogin.Text, txtHaslo.Text);
+            Cashier cashier = client.Login(txtLogin.Text, token);
+            
+            if (cashier != null)
+            {
+                MessageBox.Show("Dziala!");
+            }
         }
     }
 }

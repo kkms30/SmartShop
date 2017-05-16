@@ -38,6 +38,10 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,12 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiAuthenticationResponse.cs" />
+    <Compile Include="Endpoint.cs" />
+    <Compile Include="LoginClient.cs" />
+    <Compile Include="LoginResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
+      <Project>{5C8528E3-AFAD-420A-9D67-023E2CE6881A}</Project>
+      <Name>SmartShop.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

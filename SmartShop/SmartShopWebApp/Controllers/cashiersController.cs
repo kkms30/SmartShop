@@ -17,6 +17,23 @@ namespace SmartShopWebApp.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
+        // GET: api/Cashiers/5
+        
+        [ResponseType(typeof(Cashier))]
+        public IHttpActionResult GetCashier(string id)
+        {
+            Cashier cashier = unitOfWork.Cashiers.GetCashierById(id);
+            if (cashier == null)
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(string.Format("No cashier with id = {0} found", id))
+                };
+                throw new HttpResponseException(message);
+            }
+            return Ok(cashier);
+        }
+
         // GET: api/Cashiers
         [Authorize]
         public List<Cashier> GetCashiers()
