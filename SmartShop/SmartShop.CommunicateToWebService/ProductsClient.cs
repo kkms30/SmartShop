@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SmartShop.CommunicateToWebService
 {
-    public class ProductClient
+    public class ProductsClient
     {
         private RestClient client;
 
-        public ProductClient()
+        public ProductsClient()
         {
             client = new RestClient(Endpoint.BASE_URL);
         }

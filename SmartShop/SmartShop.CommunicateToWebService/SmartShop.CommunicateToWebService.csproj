@@ -55,7 +55,7 @@
     <Compile Include="ApiAuthenticationResponse.cs" />
     <Compile Include="Endpoint.cs" />
     <Compile Include="LoginClient.cs" />
-    <Compile Include="ProductClient.cs" />
+    <Compile Include="ProductsClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
