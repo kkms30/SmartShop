@@ -24,23 +24,13 @@ namespace SmartShopWpf
         public LoginWindow()
         {
             InitializeComponent();
-            txtLogin.Text = "5";
-            txtHaslo.Text = "test";
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //MainWindow mW = new MainWindow();
-            //mW.Show();
-            //this.Close();
-            LoginClient client = new LoginClient();
-            string token = client.GetToken(txtLogin.Text, txtHaslo.Text);
-            Cashier cashier = client.Login(txtLogin.Text, token);
-            
-            if (cashier != null)
-            {
-                MessageBox.Show("Dziala!");
-            }
+            MainWindow mW = new MainWindow();
+            mW.Show();
+            this.Close();
         }
     }
 }
