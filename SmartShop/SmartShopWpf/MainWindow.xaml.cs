@@ -25,12 +25,15 @@ namespace SmartShopWpf
         const string manuallyCodeEntryContent = "  0";
 
 
-        public MainWindow()
+        public MainWindow(bool withPlugin)
         {
             InitializeComponent();
             lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
 
-            InitView();
+            if (!withPlugin)
+            {
+                InitView();
+            }            
         }
 
         private void InitView()
