@@ -11,7 +11,7 @@ namespace SmartShopWebApp
 {
     public partial class Startup
     {
-        private static readonly string TOKEN_ENDPOINT = "/login";
+        private static readonly string TOKEN_ENDPOINT = "/token";
         public static OAuthAuthorizationServerOptions OauthOptions { get; set; }
 
         static Startup()

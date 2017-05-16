@@ -18,6 +18,16 @@ namespace SmartShopWebApp.Persistance.Repositories
             get { return context as ShopContext; }
         }
 
+        public Cashier GetCashierById(string id)
+        {
+            Cashier cashier = Find(c => c.Id == id).FirstOrDefault();
+            if (cashier != null)
+            {
+                cashier.SetShouldSerializeTransactions(false);
+            }
+            return cashier;
+        }
+
         public List<Cashier> GetCashiers()
         {
             List<Cashier> cashiers = GetAll().ToList();
