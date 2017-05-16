@@ -46,12 +46,12 @@ namespace SmartShopWpf
             lblCashRegisterNumber.Content = data.CashboxId;
         }
 
-        private void btnWyloguj_Click(object sender, RoutedEventArgs e)
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow oL = new LoginWindow();
             oL.Show();
             this.Close();
-        }
+        }      
 
         private void btnManually1_Click(object sender, RoutedEventArgs e)
         {
@@ -224,6 +224,6 @@ namespace SmartShopWpf
                     lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
                 }
             }
-        }
+        }       
     }
 }
