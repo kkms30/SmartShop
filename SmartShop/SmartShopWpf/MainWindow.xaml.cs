@@ -28,7 +28,7 @@ namespace SmartShopWpf
 
         private void btnWyloguj_Click(object sender, RoutedEventArgs e)
         {
-            OknoLogowania oL = new OknoLogowania();
+            LoginWindow oL = new LoginWindow();
             oL.Show();
             this.Close();
         }

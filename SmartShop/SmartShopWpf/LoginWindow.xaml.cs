@@ -17,18 +17,18 @@ using System.Windows.Shapes;
 namespace SmartShopWpf
 {
     /// <summary>
-    /// Interaction logic for OknoLogowania.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class OknoLogowania : Window
+    public partial class LoginWindow : Window
     {
-        public OknoLogowania()
+        public LoginWindow()
         {
             InitializeComponent();
             txtLogin.Text = "5";
             txtHaslo.Text = "test";
         }
 
-        private void btnZaloguj_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //MainWindow mW = new MainWindow();
             //mW.Show();
