@@ -9,5 +9,6 @@ namespace SmartShopWebApp.Core.Repositories
     public interface ICashierRepository : IRepository<Cashier>
     {
         List<Cashier> GetCashiers();
+        Cashier GetCashierByCredentials(string id, string password);
     }
 }
