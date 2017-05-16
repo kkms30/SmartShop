@@ -11,15 +11,16 @@ namespace SmartShopWebApp
 {
     public partial class Startup
     {
+        private static readonly string TOKEN_ENDPOINT = "/login";
         public static OAuthAuthorizationServerOptions OauthOptions { get; set; }
 
         static Startup()
         {
             OauthOptions = new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString("/token"),
+                TokenEndpointPath = new PathString(TOKEN_ENDPOINT),
                 Provider = new OAuthAppProvider(),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(2),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 AllowInsecureHttp = true
             };
         }
