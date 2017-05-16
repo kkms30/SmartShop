@@ -1,4 +1,5 @@
 ﻿using SmartShop.CommunicateToWebService;
+using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,35 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mW = new MainWindow();
-            mW.Show();
-            this.Close();
+            Cashier cashier = null;
+            string id = txtLogin.Text;
+            string password = txtPassword.Text;
+
+            LoginClient loginClient = new LoginClient();
+            string token = loginClient.GetToken(id, password);
+            
+
+            if (token != null)
+            {
+                cashier = loginClient.Login(id, token);
+            }
+
+            if (cashier != null)
+            {
+                InitAppData(cashier);
+
+                MainWindow mW = new MainWindow();
+                mW.Show();
+                this.Close();
+            }           
+        }
+
+        private void InitAppData(Cashier cashier)
+        {
+            DataHandler data = DataHandler.GetInstance();
+
+            data.Cashier = cashier;
+            data.CashboxId = "777";
         }
     }
 }

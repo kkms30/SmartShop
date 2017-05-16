@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartShopWpf.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,14 +22,24 @@ namespace SmartShopWpf
     public partial class MainWindow : Window
     {
         const string manuallyCodeEntryContent = "  0";
-
-
-      
+        
+              
         public MainWindow()
         {
             InitializeComponent();
             lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
-       
+
+            InitView();
+        }
+
+        private void InitView()
+        {
+            DateTime dateTime = DateTime.UtcNow.Date;
+            lblDate.Content = dateTime.ToString("dd/MM/yyyy");
+
+            DataHandler data = DataHandler.GetInstance();
+            lblCashierNumber.Content = data.Cashier.Id;
+            lblCashRegisterNumber.Content = data.CashboxId;
         }
 
         private void btnWyloguj_Click(object sender, RoutedEventArgs e)
