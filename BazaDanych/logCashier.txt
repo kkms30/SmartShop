@@ -1,0 +1,21 @@
+create procedure logCashier (in Id1 varchar(45), in Password1 varchar(45))
+BEGIN
+IF EXISTS (select Id from Cashiers where Id = Id1) THEN
+BEGIN
+select Password into @dbPassword from Cashiers where Id = Id1; -- and Password = AES_ENCRYPT(Password1,SHA2(Id1,512));
+IF (@dbPassword = AES_ENCRYPT(Password1,SHA2(Id1,512))) THEN
+BEGIN
+select * from Cashiers where Id = Id1 and Password = AES_ENCRYPT(Password1,SHA2(Id1,512));
+END;
+ELSE
+BEGIN
+select 'Wrong ID or Password!';
+END;
+END IF;
+END;
+ELSE
+BEGIN
+select 'Wrong ID or Password!';
+END;
+END IF;
+END
