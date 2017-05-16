@@ -38,7 +38,7 @@ namespace SmartShopWebApp.Provider
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "Error");
+                    context.SetError("Invalid grant", "Bad id or password.");
                 }
             });
         }
