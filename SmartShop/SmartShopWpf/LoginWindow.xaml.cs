@@ -29,6 +29,10 @@ namespace SmartShopWpf
         public LoginWindow()
         {
             InitializeComponent();
+
+            txtLogin.Text = "5";
+            txtPassword.Text = "test";
+
             di = new DirectoryInfo(".");
         }
 

@@ -43,10 +43,12 @@ namespace SmartShopWpf
 
             DataHandler data = DataHandler.GetInstance();
 
-            List<Product> products = data.Products;
+            listVFromListListOfProducts.ItemsSource = data.Products;
 
             lblCashierNumber.Content = data.Cashier.Id;
             lblCashRegisterNumber.Content = data.CashboxId;
+
+            
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
