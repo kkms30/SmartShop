@@ -9,13 +9,13 @@ select * from Cashiers where Id = Id1 and Password = AES_ENCRYPT(Password1,SHA2(
 END;
 ELSE
 BEGIN
-select 'Wrong ID or Password!';
+select null;
 END;
 END IF;
 END;
 ELSE
 BEGIN
-select 'Wrong ID or Password!';
+select null;
 END;
 END IF;
 END
