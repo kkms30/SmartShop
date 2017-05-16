@@ -1,4 +1,5 @@
 ﻿using SmartShopWpf.Data;
+using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,8 @@ namespace SmartShopWpf
     public partial class MainWindow : Window
     {
         const string manuallyCodeEntryContent = "  0";
-        
-              
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +39,9 @@ namespace SmartShopWpf
             lblDate.Content = dateTime.ToString("dd/MM/yyyy");
 
             DataHandler data = DataHandler.GetInstance();
+
+            List<Product> products = data.Products;
+
             lblCashierNumber.Content = data.Cashier.Id;
             lblCashRegisterNumber.Content = data.CashboxId;
         }
@@ -53,7 +57,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -68,7 +72,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -82,7 +86,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -96,7 +100,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -110,7 +114,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -123,9 +127,9 @@ namespace SmartShopWpf
 
         private void btnManually6_Click(object sender, RoutedEventArgs e)
         {
-           string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -139,7 +143,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -153,7 +157,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -167,7 +171,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
 
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
@@ -182,7 +186,7 @@ namespace SmartShopWpf
         {
             string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
 
-            if (currentmanuallyCodeEntryContent.Length <9)
+            if (currentmanuallyCodeEntryContent.Length < 9)
             {
                 if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
                 {
@@ -200,7 +204,7 @@ namespace SmartShopWpf
             {
                 lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
             }
-           
+
         }
 
         private void btnManuallyBackspace_Click(object sender, RoutedEventArgs e)
@@ -209,7 +213,7 @@ namespace SmartShopWpf
 
             if (currentmanuallyCodeEntryContent != manuallyCodeEntryContent)
             {
-                string sub = currentmanuallyCodeEntryContent.Substring(0, currentmanuallyCodeEntryContent.Length - 1);              
+                string sub = currentmanuallyCodeEntryContent.Substring(0, currentmanuallyCodeEntryContent.Length - 1);
 
                 if (currentmanuallyCodeEntryContent.Length > 1)
                 {

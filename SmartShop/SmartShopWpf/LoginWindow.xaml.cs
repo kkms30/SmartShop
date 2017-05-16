@@ -30,33 +30,42 @@ namespace SmartShopWpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Cashier cashier = null;
+            List<Product> products = new List<Product>();
+
             string id = txtLogin.Text;
             string password = txtPassword.Text;
 
+            ProductsClient productsClient = new ProductsClient();
             LoginClient loginClient = new LoginClient();
-            string token = loginClient.GetToken(id, password);
-            
+
+            string token = loginClient.GetToken(id, password);            
 
             if (token != null)
             {
                 cashier = loginClient.Login(id, token);
+                products = productsClient.GetProducts(token);
             }
 
-            if (cashier != null)
+            if (cashier != null && products.Count > 0)
             {
-                InitAppData(cashier);
+                InitAppData(cashier, products);
 
                 MainWindow mW = new MainWindow();
                 mW.Show();
                 this.Close();
-            }           
+            }     
+            else
+            {
+                MessageBox.Show("Błąd logowania");
+            }      
         }
 
-        private void InitAppData(Cashier cashier)
+        private void InitAppData(Cashier cashier, List<Product> products)
         {
             DataHandler data = DataHandler.GetInstance();
 
             data.Cashier = cashier;
+            data.Products = products;
             data.CashboxId = "777";
         }
     }
