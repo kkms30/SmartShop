@@ -11,5 +11,6 @@ namespace SmartShop.CommunicateToWebService
         public static readonly string BASE_URL = "http://localhost:46468";
         public static readonly string TOKEN = "/token";
         public static readonly string LOGIN = "/api/Cashiers/";
+        public static readonly string PRODUCTS = "/api/Products/";
     }
 }
