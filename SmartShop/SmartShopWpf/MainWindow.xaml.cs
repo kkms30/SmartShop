@@ -25,12 +25,15 @@ namespace SmartShopWpf
         const string manuallyCodeEntryContent = "  0";
 
 
-        public MainWindow()
+        public MainWindow(bool withPlugin)
         {
             InitializeComponent();
             lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
 
-            InitView();
+            if (!withPlugin)
+            {
+                InitView();
+            }            
         }
 
         private void InitView()
@@ -48,12 +51,12 @@ namespace SmartShopWpf
             
         }
 
-        private void btnWyloguj_Click(object sender, RoutedEventArgs e)
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow oL = new LoginWindow();
             oL.Show();
             this.Close();
-        }
+        }      
 
         private void btnManually1_Click(object sender, RoutedEventArgs e)
         {
@@ -226,6 +229,6 @@ namespace SmartShopWpf
                     lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
                 }
             }
-        }
+        }       
     }
 }

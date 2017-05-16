@@ -121,6 +121,12 @@
       <Name>SmartShop.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PluginMockLogowanie\PluginMockLogowanie.csproj">
+      <Project>{77fc000d-71fa-4b52-8361-5259834c7767}</Project>
+      <Name>PluginMockLogowanie</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
