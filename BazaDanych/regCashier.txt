@@ -1,0 +1,4 @@
+create procedure regCashier (in Id1 varchar(45), in Password1 varchar(45), in Name1 varchar(45), in Surname1 varchar(45))
+BEGIN
+insert into Cashiers (Id, Password, Name, Surname) values (Id1, AES_ENCRYPT(Password1,SHA2(Id1,512)), Name1, Surname1);
+END
