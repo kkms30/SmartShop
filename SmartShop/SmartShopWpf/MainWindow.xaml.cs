@@ -1,19 +1,6 @@
 ﻿using SmartShopWpf.Data;
-using SmartShopWpf.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SmartShopWpf
 {
@@ -22,18 +9,16 @@ namespace SmartShopWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        const string manuallyCodeEntryContent = "  0";
-
+        private const string manuallyCodeEntryContent = "  0";
 
         public MainWindow(bool withPlugin)
         {
             InitializeComponent();
-            lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
 
             if (!withPlugin)
             {
                 InitView();
-            }            
+            }
         }
 
         private void InitView()
@@ -47,8 +32,6 @@ namespace SmartShopWpf
 
             lblCashierNumber.Content = data.Cashier.Id;
             lblCashRegisterNumber.Content = data.CashboxId;
-
-            
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -56,179 +39,130 @@ namespace SmartShopWpf
             LoginWindow oL = new LoginWindow();
             oL.Show();
             this.Close();
-        }      
+        }
 
         private void btnManually1_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "1";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "1";
             }
         }
 
         private void btnManually2_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "2";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "2";
             }
         }
 
         private void btnManually3_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "3";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "3";
             }
         }
 
         private void btnManually4_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "4";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "4";
             }
         }
 
         private void btnManually5_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "5";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "5";
             }
-
         }
 
         private void btnManually6_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "6";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "6";
             }
         }
 
         private void btnManually7_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "7";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "7";
             }
         }
 
         private void btnManually8_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "8";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "8";
             }
         }
 
         private void btnManually9_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "9";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "9";
             }
         }
 
         private void btnManually0_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
             if (currentmanuallyCodeEntryContent.Length < 9)
             {
-                if (currentmanuallyCodeEntryContent == manuallyCodeEntryContent)
-                {
-                    lblManuallyCodeEntry.Content = "";
-                }
-                lblManuallyCodeEntry.Content = lblManuallyCodeEntry.Content + "0";
+                txtManuallyCodeEntry.Text = txtManuallyCodeEntry.Text + "0";
             }
         }
 
         private void btnManuallyC_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
-
-            if (currentmanuallyCodeEntryContent != manuallyCodeEntryContent)
-            {
-                lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
-            }
-
+            txtManuallyCodeEntry.Text = "";
         }
 
         private void btnManuallyBackspace_Click(object sender, RoutedEventArgs e)
         {
-            string currentmanuallyCodeEntryContent = lblManuallyCodeEntry.Content.ToString();
+            string currentmanuallyCodeEntryContent = txtManuallyCodeEntry.Text.ToString();
 
-            if (currentmanuallyCodeEntryContent != manuallyCodeEntryContent)
+            if (currentmanuallyCodeEntryContent != "")
             {
                 string sub = currentmanuallyCodeEntryContent.Substring(0, currentmanuallyCodeEntryContent.Length - 1);
 
                 if (currentmanuallyCodeEntryContent.Length > 1)
                 {
-                    lblManuallyCodeEntry.Content = sub;
+                    txtManuallyCodeEntry.Text = sub;
                 }
                 else
                 {
-                    lblManuallyCodeEntry.Content = manuallyCodeEntryContent;
+                    txtManuallyCodeEntry.Text = "";
                 }
             }
-        }       
+        }
     }
 }
