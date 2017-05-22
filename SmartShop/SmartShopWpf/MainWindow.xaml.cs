@@ -9,8 +9,6 @@ namespace SmartShopWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string manuallyCodeEntryContent = "  0";
-
         public MainWindow(bool withPlugin)
         {
             InitializeComponent();
