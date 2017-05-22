@@ -62,7 +62,7 @@ namespace SmartShopWpf
 
             if (cashier != null && products.Count > 0)
             {
-                InitAppData(cashier, products);
+                InitAppData(cashier, products, token);
 
                 MainWindow mW = new MainWindow(false);
                 mW.Show();
@@ -74,13 +74,19 @@ namespace SmartShopWpf
             }      
         }
 
-        private void InitAppData(Cashier cashier, List<Product> products)
+        private void InitAppData(Cashier cashier, List<Product> products, string token)
         {
             DataHandler data = DataHandler.GetInstance();
+            data.Token = token;
+
+            Cashbox cashbox = new Cashbox();
+            cashbox.IdCashbox = 13;
+            cashbox.ShopId = 14;
+            cashbox.Id = 1;
 
             data.Cashier = cashier;
             data.Products = products;
-            data.CashboxId = "777";
+            data.Cashbox = cashbox;
         }
 
         private void btnLogin_ClickWithPlugin(object sender, RoutedEventArgs e)

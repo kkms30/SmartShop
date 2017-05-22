@@ -9,7 +9,7 @@ namespace SmartShopWebApp.Core.Repositories
     public interface ICashboxRepository : IRepository<Cashbox>
     {
         List<Cashbox> GetCashboxes();
-        Cashbox GetCashboxByIdCashbox(int id);
+        Cashbox GetCashboxById(int id);
   
     }
 }

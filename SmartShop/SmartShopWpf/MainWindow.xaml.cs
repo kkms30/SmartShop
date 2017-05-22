@@ -1,4 +1,6 @@
-﻿using SmartShopWpf.Data;
+﻿using SmartShop.CommunicateToWebService.Clients;
+using SmartShopWpf.Data;
+using SmartShopWpf.Models;
 using System;
 using System.Windows;
 
@@ -29,7 +31,21 @@ namespace SmartShopWpf
             listVFromListListOfProducts.ItemsSource = data.Products;
 
             lblCashierNumber.Content = data.Cashier.Id;
-            lblCashRegisterNumber.Content = data.CashboxId;
+            lblCashRegisterNumber.Content = data.Cashbox.Id;
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            DataHandler data = DataHandler.GetInstance();
+            Transaction transaction = new Transaction();
+            transaction.Cashbox = data.Cashbox;
+            transaction.Cashier = data.Cashier;
+            transaction.Id = 785123;
+
+            TransactionClient transactionClient = new TransactionClient(data.Token);
+
+            Transaction newTransaction = transactionClient.CreateNew(transaction);
+            Console.WriteLine();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -161,6 +177,6 @@ namespace SmartShopWpf
                     txtManuallyCodeEntry.Text = "";
                 }
             }
-        }
+        }       
     }
 }

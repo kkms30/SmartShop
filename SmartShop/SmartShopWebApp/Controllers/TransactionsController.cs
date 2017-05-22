@@ -43,25 +43,30 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult PostTransaction(Transaction transaction)
         {
+            Transaction t = new Transaction();
+            t.Cashbox = unitOfWork.Cashboxes.GetCashboxById(1);
+            t.Cashier = unitOfWork.Cashiers.GetCashierById(5.ToString());
+            t.Id = 788896;
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            try
-            {
-                unitOfWork.Transactions.Add(transaction);
+            //try
+            //{
+                unitOfWork.Transactions.Add(transaction;
                 unitOfWork.Complete();
-            }
-            catch(Exception e)
-            {
-                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent("An error occured during inserting transaction to database.")
-                };
-                throw new HttpResponseException(message);
-            }  
+            //}
+            //catch(Exception e)
+            //{
+            //    var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            //    {
+            //        Content = new StringContent("An error occured during inserting transaction to database.")
+            //    };
+            //    throw new HttpResponseException(message);
+            //}  
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.IdTransaction }, unitOfWork.Transactions.GetTransactionByIdTransaction(transaction.IdTransaction));
+            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, unitOfWork.Transactions.GetTransactionById(transaction.Id));
         }
 
 

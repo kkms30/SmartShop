@@ -45,5 +45,21 @@ namespace SmartShop.CommunicateToWebService.Clients
 
             return item;
         }
+
+        protected T Post(T item)
+        {
+            var request = new RestRequest(endpoint, Method.POST);
+            var json = JsonConvert.SerializeObject(item);
+
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            request.AddParameter("Authorization", "Bearer " + token, ParameterType.HttpHeader);
+
+            var response = client.Execute(request);
+            T itemReturned = JsonConvert.DeserializeObject<T>(response.Content);
+
+            Console.WriteLine();
+
+            return itemReturned;
+        }
     }
 }

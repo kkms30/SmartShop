@@ -27,7 +27,7 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Cashbox))]
         public IHttpActionResult GetCashbox(int id)
         {
-            Cashbox cashbox = unitOfWork.Cashboxes.GetCashboxByIdCashbox(id);
+            Cashbox cashbox = unitOfWork.Cashboxes.GetCashboxById(id);
             if (cashbox == null)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
