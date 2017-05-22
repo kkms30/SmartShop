@@ -1,5 +1,7 @@
 ﻿using PluginMockLogowanie;
 using SmartShop.CommunicateToWebService;
+using SmartShop.CommunicateToWebService.Authentication;
+using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using System;
@@ -38,20 +40,23 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            ProductsClient productsClient = null;
+            CashierClient cashierClient= null;
             Cashier cashier = null;
+
             List<Product> products = new List<Product>();
 
             string id = txtLogin.Text;
-            string password = txtPassword.Text;
+            string password = txtPassword.Text;            
 
-            ProductsClient productsClient = new ProductsClient();
-            LoginClient loginClient = new LoginClient();
-
-            string token = loginClient.GetToken(id, password);            
+            string token = TokenRequester.ReuqestToken(id, password);           
 
             if (token != null)
             {
-                cashier = loginClient.Login(id, token);
+                cashierClient = new CashierClient(token);
+                productsClient = new ProductsClient(token);
+
+                cashier = cashierClient.Login(id);
                 products = productsClient.GetProducts(token);
             }
 

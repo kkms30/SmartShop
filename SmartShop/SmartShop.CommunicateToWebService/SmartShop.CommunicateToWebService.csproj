@@ -53,10 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\ApiAuthenticationResponse.cs" />
+    <Compile Include="Authentication\TokenRequester.cs" />
     <Compile Include="Clients\BaseClient.cs" />
+    <Compile Include="Clients\CashierClient.cs" />
     <Compile Include="Clients\TransactionClient.cs" />
     <Compile Include="Utils\Endpoint.cs" />
-    <Compile Include="Clients\LoginClient.cs" />
     <Compile Include="Clients\ProductsClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

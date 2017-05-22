@@ -12,13 +12,13 @@ namespace SmartShop.CommunicateToWebService
 {
     public class ProductsClient : BaseClient<Product>
     {
-        public ProductsClient() : base(Endpoint.PRODUCTS)
+        public ProductsClient(string token) : base(token, Endpoint.PRODUCTS)
         {
         }
 
         public List<Product> GetProducts(string token)
         {
-            return base.Get(token);
+            return base.Get();
         }
     }
 }
