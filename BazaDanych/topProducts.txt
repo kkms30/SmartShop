@@ -1,0 +1,6 @@
+create procedure topProducts()
+BEGIN
+select ProductId, Name, SUM(Count) from Orders o join Products p 
+where o.ProductId = p.IdProduct group by Name order by SUM(Count)
+desc limit 10;
+END
