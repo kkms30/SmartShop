@@ -12,5 +12,6 @@ namespace SmartShop.CommunicateToWebService
         public static readonly string TOKEN = "/token";
         public static readonly string LOGIN = "/api/Cashiers/";
         public static readonly string PRODUCTS = "/api/Products/";
+        public static readonly string TRANSACTION = "/api/Transactions/";
     }
 }

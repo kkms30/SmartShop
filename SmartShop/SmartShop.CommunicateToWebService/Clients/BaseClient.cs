@@ -1,33 +1,34 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
-using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartShop.CommunicateToWebService
+namespace SmartShop.CommunicateToWebService.Clients
 {
-    public class ProductsClient
+    public abstract class BaseClient<T>
     {
         private RestClient client;
+        private string endpoint;
 
-        public ProductsClient()
+        protected BaseClient(string endpoint)
         {
             client = new RestClient(Endpoint.BASE_URL);
+            this.endpoint = endpoint;
         }
 
-        public List<Product> GetProducts(string token)
+        protected List<T> Get(string token)
         {
-            var request = new RestRequest(Endpoint.PRODUCTS, Method.GET);
+            var request = new RestRequest(endpoint, Method.GET);
             request.AddParameter("Content-Type", "application/json", ParameterType.HttpHeader);
             request.AddParameter("Authorization", "Bearer " + token, ParameterType.HttpHeader);
 
             var response = client.Execute(request);
-            List<Product> products = JsonConvert.DeserializeObject<List<Product>>(response.Content);
+            List<T> items = JsonConvert.DeserializeObject<List<T>>(response.Content);
 
-            return products;
+            return items;
         }
     }
 }
