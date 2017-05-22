@@ -1,6 +1,7 @@
 ﻿using SmartShopWpf.Data;
 using System;
 using System.Windows;
+using SmartShopWpf.Models;
 
 namespace SmartShopWpf
 {
@@ -161,6 +162,13 @@ namespace SmartShopWpf
                     txtManuallyCodeEntry.Text = "";
                 }
             }
+        }
+
+        private void btnFromListAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Product p = (Product)listVFromListListOfProducts.SelectedItem;
+            txtManuallyCodeEntry.Text = p.Code.ToString();
+            tabService.SelectedItem = tabManually;
         }
     }
 }
