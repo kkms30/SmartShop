@@ -1,6 +1,8 @@
 ﻿using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.ReceipeMethods;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 
@@ -13,7 +15,7 @@ namespace SmartShopWpf
     {
         private const string tagForManuDisplCode = "Kod produktu";
         private const string tagForManuDisplQuan = "Ilość";
-
+        private List<Basket> listOfBoughtItems = new List<Basket>();
         public MainWindow(bool withPlugin)
         {
             InitializeComponent();
@@ -206,7 +208,7 @@ namespace SmartShopWpf
                     int getCount = Convert.ToInt32(txtManuallyCodeEntry.Text.Trim());
                     int counter = lstVBacket.Items.Count;
                     counter++;
-
+                    listOfBoughtItems.Add(manCod.AddToBasketList(getCount, counter));
                     lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
 
                     float SumOfPrices = float.Parse(lblAmount.Content.ToString().Trim(), CultureInfo.InvariantCulture);
@@ -218,6 +220,22 @@ namespace SmartShopWpf
                    
                 }
             }
+        }
+
+        private void btnPayment_Click(object sender, RoutedEventArgs e)
+        {
+            Receipe recp = new Receipe();
+            recp.TransactionNumber = 5555;
+            recp.Data = DateTime.Now;
+            recp.listOfBoughtProducts = listOfBoughtItems;
+            recp.PriceSum = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture);
+            recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+            recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
+            rPDFGen.GeneratePDF();
+            lstVBacket.Items.Clear();
+            listOfBoughtItems.Clear();
+            lblAmount.Content = 0;
         }
     }
 }

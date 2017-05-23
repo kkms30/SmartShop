@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartShopWpf.Data
 {
-    class Basket
+    public class Basket
     {
 
         public int Number { get; set; }
