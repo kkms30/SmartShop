@@ -33,9 +33,18 @@
         <Label    x:Name="lblAmount"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="497"  Margin="85,62,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="0" Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display" Grid.Row="1"/>
 
         <ListView x:Name="lstVBacket" HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="497"  Margin="85,108,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" OpacityMask="{StaticResource White}" Grid.Row="1"  >
-            <ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Foreground" Value="{StaticResource Black}"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="DemiBold"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+   
+            <ListView.View>                
                 <GridView>
-                    <GridViewColumn Header="Nr" Width="30"   DisplayMemberBinding="{Binding IdProduct}"  />
+                    <GridViewColumn Header="Nr" Width="30"   DisplayMemberBinding="{Binding Number}"  />
                     <GridViewColumn Header="Nazwa produktu" Width="170">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -44,7 +53,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Zdjęcie" Width="70" DisplayMemberBinding="{Binding [2]}"/>
-                    <GridViewColumn Header="Ilość" Width="70" DisplayMemberBinding="{Binding Orders.Count}"/>
+                    <GridViewColumn Header="Ilość" Width="70" DisplayMemberBinding="{Binding Count}"/>
                     <GridViewColumn Header="Cena" Width="70"    DisplayMemberBinding="{Binding Price}" />
                     <GridViewColumn Header="Zaznacz" Width="50" >
                         <GridViewColumn.CellTemplate>
@@ -92,7 +101,7 @@
                     <Button x:Name="btnManuallyC"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="88" Width="63"  Margin="24,388,0,0"  Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="C"         Style="{StaticResource BtnFontRed30}"    Click="btnManuallyC_Click"/>
                     <Button x:Name="btnManuallyBackspace" HorizontalAlignment="Left" VerticalAlignment="Top" Height="88" Width="63"  Margin="87,388,0,0"  Background="{StaticResource Red}"    BorderThickness="0,1,1,1" BorderBrush="{StaticResource White}" Content="&#xE112;"  Style="{StaticResource BtnFontRed30}"    Click="btnManuallyBackspace_Click" FontFamily="Segoe UI Symbol"  />
                     <Button x:Name="btnManually0"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="88" Width="126" Margin="149,388,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="0"         Style="{StaticResource BtnFontOrange30}" Click="btnManually0_Click"/>
-                    <Button x:Name="btnManuallyAdd"       HorizontalAlignment="Left" VerticalAlignment="Top" Height="88" Width="126" Margin="274,388,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Dodaj"     Style="{StaticResource BtnFontRed30}"/>
+                    <Button x:Name="btnManuallyAdd"       HorizontalAlignment="Left" VerticalAlignment="Top" Height="88" Width="126" Margin="274,388,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Dodaj"     Style="{StaticResource BtnFontRed30}" Click="btnManuallyAdd_Click"/>
                 </Grid>
             </TabItem>
 
