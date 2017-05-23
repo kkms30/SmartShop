@@ -1,6 +1,7 @@
 ﻿using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using System;
+using System.Globalization;
 using System.Windows;
 
 namespace SmartShopWpf
@@ -207,8 +208,14 @@ namespace SmartShopWpf
                     counter++;
 
                     lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
+
+                    float SumOfPrices = float.Parse(lblAmount.Content.ToString().Trim(), CultureInfo.InvariantCulture);
+                    lblAmount.Content = SumOfPrices + ManuallyCode.basketContainer.Price;
+
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
                     txtManuallyCodeEntry.Text = "";
+
+                   
                 }
             }
         }
