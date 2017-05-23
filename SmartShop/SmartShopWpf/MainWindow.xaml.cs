@@ -1,7 +1,7 @@
 ﻿using SmartShopWpf.Data;
+using SmartShopWpf.Models;
 using System;
 using System.Windows;
-using SmartShopWpf.Models;
 
 namespace SmartShopWpf
 {
@@ -10,6 +10,9 @@ namespace SmartShopWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string tagForManuDisplCode = "Kod produktu";
+        private const string tagForManuDisplQuan = "Ilość";
+
         public MainWindow(bool withPlugin)
         {
             InitializeComponent();
@@ -169,6 +172,45 @@ namespace SmartShopWpf
             Product p = (Product)listVFromListListOfProducts.SelectedItem;
             txtManuallyCodeEntry.Text = p.Code.ToString();
             tabService.SelectedItem = tabManually;
+        }
+
+        private void btnManuallyAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ManuallyCode manCod = ManuallyCode.GetInstance();
+            DataHandler data = DataHandler.GetInstance();
+
+            if (lblManuallyTagOfCode.Content.ToString() == tagForManuDisplCode)
+            {
+                string code = txtManuallyCodeEntry.Text.ToString().Trim();
+                bool checkCode = manCod.CheckTheCode(code, data.Products);
+
+                if (checkCode == true)
+                {
+                    lblManuallyTagOfCode.Content = tagForManuDisplQuan;
+                    txtManuallyCodeEntry.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Zly Kod!");
+                }
+            }
+            else
+            {
+                if (txtManuallyCodeEntry.Text == "0" || txtManuallyCodeEntry.Text == "")
+                {
+                    MessageBox.Show("Dodałeś 0 produktów :)");
+                }
+                else
+                {
+                    int getCount = Convert.ToInt32(txtManuallyCodeEntry.Text.Trim());
+                    int counter = lstVBacket.Items.Count;
+                    counter++;
+
+                    lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
+                    lblManuallyTagOfCode.Content = tagForManuDisplCode;
+                    txtManuallyCodeEntry.Text = "";
+                }
+            }
         }
     }
 }
