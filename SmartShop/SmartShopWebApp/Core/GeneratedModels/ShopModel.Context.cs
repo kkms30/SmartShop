@@ -12,7 +12,8 @@ namespace SmartShopWebApp.Core.GeneratedModels
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Linq;
+
     public partial class ShopContext : DbContext
     {
         public ShopContext()
@@ -32,5 +33,7 @@ namespace SmartShopWebApp.Core.GeneratedModels
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+
+       
     }
 }

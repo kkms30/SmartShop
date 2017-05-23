@@ -3,6 +3,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,6 +61,21 @@ namespace SmartShop.CommunicateToWebService.Clients
             Console.WriteLine();
 
             return itemReturned;
+        }
+
+        protected void Put(int id, T item)
+        {
+            var request = new RestRequest(endpoint + id, Method.PUT);
+            var json = JsonConvert.SerializeObject(item);
+
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            request.AddParameter("Authorization", "Bearer " + token, ParameterType.HttpHeader);
+
+            var response = client.Execute(request);
+
+            /*eturn response.Content == HttpStatusCode.NoContent ? true : false;*/
+
+
         }
     }
 }

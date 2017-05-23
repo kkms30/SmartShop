@@ -28,7 +28,7 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetTransaction(int id)
         {
-            Transaction transaction = unitOfWork.Transactions.GetTransactionById(id);
+            Transaction transaction = unitOfWork.Transactions.GetTransactionByIdTransaction(id);
             if (transaction == null)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
@@ -55,7 +55,7 @@ namespace SmartShopWebApp.Controllers
             }
             //try
             //{
-                unitOfWork.Transactions.Add(t);
+                unitOfWork.Transactions.Add(transaction);
                 unitOfWork.Complete();
             //}
             //catch(Exception e)
@@ -67,9 +67,7 @@ namespace SmartShopWebApp.Controllers
             //    throw new HttpResponseException(message);
             //}  
 
-            Thread.Sleep(3000);
-            Transaction returnTransaction = unitOfWork.Transactions.GetTransactionByIdTransaction(t.IdTransaction);
-            return CreatedAtRoute("DefaultApi", new { id = t.Id }, unitOfWork.Transactions.GetTransactionByIdTransaction(t.IdTransaction));
+            return CreatedAtRoute("DefaultApi", new { id = transaction.IdTransaction }, unitOfWork.Transactions.GetTransactionByIdTransaction(transaction.IdTransaction));
         }
 
 
@@ -83,12 +81,20 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != transaction.IdTransaction)
-            {
-                return BadRequest();
-            }
+            //if (id != transaction.IdTransaction)
+            //{
+            //    return BadRequest();
+            //}
 
-            unitOfWork.Transactions.Modify(transaction);
+            Transaction test = unitOfWork.Transactions.GetTransactionByIdTransaction(1077);
+            Product product = unitOfWork.Products.Get(1);
+            Order order = new Order();
+            order.ProductId = product.IdProduct;
+            order.Count = 3;
+
+            test.Orders.Add(order);
+
+            unitOfWork.Transactions.ModifyWithNewOrders(test);
             unitOfWork.Complete();        
 
             return StatusCode(HttpStatusCode.NoContent);

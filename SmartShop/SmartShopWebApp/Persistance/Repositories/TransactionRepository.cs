@@ -47,7 +47,7 @@ namespace SmartShopWebApp.Persistance.Repositories
         {
             ShopContext.Cashboxes.Attach(transaction.Cashbox);
             ShopContext.Cashiers.Attach(transaction.Cashier);
-            ShopContext.Shops.Attach(transaction.Cashbox.Shop);
+            ShopContext.Shops.Attach(transaction.Cashbox.Shop);     
             transaction.Orders.ToList().ForEach(o =>
             {
                 ShopContext.Products.Attach(o.Product);
@@ -56,6 +56,9 @@ namespace SmartShopWebApp.Persistance.Repositories
             ShopContext.Transactions.Add(transaction);
         }
 
+        /// <summary>
+        ///  This class performs an important function.
+        /// </summary>
         public override void Modify(Transaction transaction)
         {
             base.Modify(transaction);
@@ -65,6 +68,14 @@ namespace SmartShopWebApp.Persistance.Repositories
             });
         }
 
+        public void ModifyWithNewOrders(Transaction transaction)
+        {
+            transaction.Orders.ToList().ForEach(o =>
+            {
+                new OrderRepository(ShopContext).Add(o);
+            });
+            base.Modify(transaction);            
+        }
 
         private void SetSerialization(Transaction transaction)
         {

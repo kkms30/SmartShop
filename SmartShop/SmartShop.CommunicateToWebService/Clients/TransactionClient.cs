@@ -15,5 +15,10 @@ namespace SmartShop.CommunicateToWebService.Clients
         {
             return base.Post(transaction);
         }
+
+        public void UpdateTransaction(Transaction transaction)
+        {
+            base.Put(transaction.IdTransaction, transaction);
+        }
     }
 }

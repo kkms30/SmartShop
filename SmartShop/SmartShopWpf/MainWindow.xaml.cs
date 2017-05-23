@@ -42,12 +42,30 @@ namespace SmartShopWpf
             transaction.Cashier = data.Cashier;
             //transaction.Id = 785123;
 
-            transaction.Date = DateTime.UtcNow.Date;
+            //transaction.Date = DateTime.UtcNow.Date;
 
             TransactionClient transactionClient = new TransactionClient(data.Token);
 
             Transaction newTransaction = transactionClient.CreateNew(transaction);
-            Console.WriteLine();
+
+            data.Transaction = newTransaction;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            DataHandler data = DataHandler.GetInstance();
+            Product product = data.Products[0];
+            Order order = new Order();
+            order.Product = product;
+            order.Count = 3;
+            order.ProductId = product.IdProduct;
+
+            order.TransactionId = data.Transaction.IdTransaction;
+            data.Transaction.Orders.Add(order);
+
+            TransactionClient transactionClient = new TransactionClient(data.Token);
+
+            transactionClient.UpdateTransaction(data.Transaction);
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -179,6 +197,6 @@ namespace SmartShopWpf
                     txtManuallyCodeEntry.Text = "";
                 }
             }
-        }       
+        }        
     }
 }
