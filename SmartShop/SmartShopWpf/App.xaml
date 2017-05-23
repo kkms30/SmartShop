@@ -37,6 +37,55 @@
             <Setter Property="FontSize" Value="36" />
         </Style>
 
+        <Style TargetType="{x:Type PasswordBox}" x:Key="PswFont26">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"  SnapsToDevicePixels="True">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+
+                                <TextBlock x:Name="InternalWatermarkLabel"
+                                   Text="{TemplateBinding Tag}"
+                                    Visibility="Collapsed" Focusable="False"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="Thin"
+                                    FontStyle="Italic"
+                                    Foreground="{StaticResource White}"
+                                    Background="Transparent" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsFocused" Value="False" />
+                                    <Condition Property="BorderBrush" Value="{StaticResource White}" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Visibility" TargetName="InternalWatermarkLabel"   Value="Visible" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="{x:Type TextBox}" x:Key="TxtFont26">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="20" />
