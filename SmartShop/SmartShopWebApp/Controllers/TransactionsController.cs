@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
+using System.Threading;
 
 namespace SmartShopWebApp.Controllers
 {
@@ -46,15 +47,15 @@ namespace SmartShopWebApp.Controllers
             Transaction t = new Transaction();
             t.Cashbox = unitOfWork.Cashboxes.GetCashboxById(1);
             t.Cashier = unitOfWork.Cashiers.GetCashierById(5.ToString());
-            t.Id = 788896;
-           
+            //t.Id = 788896;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             //try
             //{
-                unitOfWork.Transactions.Add(transaction;
+                unitOfWork.Transactions.Add(t);
                 unitOfWork.Complete();
             //}
             //catch(Exception e)
@@ -66,7 +67,9 @@ namespace SmartShopWebApp.Controllers
             //    throw new HttpResponseException(message);
             //}  
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, unitOfWork.Transactions.GetTransactionById(transaction.Id));
+            Thread.Sleep(3000);
+            Transaction returnTransaction = unitOfWork.Transactions.GetTransactionByIdTransaction(t.IdTransaction);
+            return CreatedAtRoute("DefaultApi", new { id = t.Id }, unitOfWork.Transactions.GetTransactionByIdTransaction(t.IdTransaction));
         }
 
 

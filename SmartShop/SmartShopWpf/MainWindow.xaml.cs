@@ -40,7 +40,9 @@ namespace SmartShopWpf
             Transaction transaction = new Transaction();
             transaction.Cashbox = data.Cashbox;
             transaction.Cashier = data.Cashier;
-            transaction.Id = 785123;
+            //transaction.Id = 785123;
+
+            transaction.Date = DateTime.UtcNow.Date;
 
             TransactionClient transactionClient = new TransactionClient(data.Token);
 
