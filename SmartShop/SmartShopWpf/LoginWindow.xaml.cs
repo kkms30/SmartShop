@@ -5,18 +5,8 @@ using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SmartShopWpf
 {
@@ -25,14 +15,14 @@ namespace SmartShopWpf
     /// </summary>
     public partial class LoginWindow : Window
     {
-        DirectoryInfo di;
+        private DirectoryInfo di;
+
         public LoginWindow()
         {
             InitializeComponent();
 
             txtLogin.Text = "5";
-            txtPassword.Text = "test";
-
+            pswPassword.Password = "test";
             di = new DirectoryInfo(".");
         }
 
@@ -42,12 +32,12 @@ namespace SmartShopWpf
             List<Product> products = new List<Product>();
 
             string id = txtLogin.Text;
-            string password = txtPassword.Text;
+            string password = pswPassword.Password;
 
             ProductsClient productsClient = new ProductsClient();
             LoginClient loginClient = new LoginClient();
 
-            string token = loginClient.GetToken(id, password);            
+            string token = loginClient.GetToken(id, password);
 
             if (token != null)
             {
@@ -62,11 +52,20 @@ namespace SmartShopWpf
                 MainWindow mW = new MainWindow(false);
                 mW.Show();
                 this.Close();
-            }     
+            }
             else
             {
                 MessageBox.Show("Błąd logowania");
-            }      
+            }
+        }
+
+
+        private void pswPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(pswPassword.Password))
+                pswPassword.Tag = "Hasło";
+            else
+                pswPassword.Tag = "";
         }
 
         private void InitAppData(Cashier cashier, List<Product> products)
@@ -81,7 +80,7 @@ namespace SmartShopWpf
         private void btnLogin_ClickWithPlugin(object sender, RoutedEventArgs e)
         {
             string login = txtLogin.Text.Trim();
-            string password = txtPassword.Text.Trim();
+            string password = pswPassword.Password.Trim();
             // bool checkLoginDataByPlugin = false;
 
             foreach (FileInfo fi in di.GetFiles("PluginMockLogowanie.dll"))
@@ -106,7 +105,6 @@ namespace SmartShopWpf
                     }
                 }
             }
-
         }
     }
 }
