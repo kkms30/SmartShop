@@ -38,8 +38,8 @@ namespace SmartShopWpf
         {
             DataHandler data = DataHandler.GetInstance();
             Transaction transaction = new Transaction();
-            transaction.Cashbox = data.Cashbox;
-            transaction.Cashier = data.Cashier;
+            transaction.CashboxId = data.Cashbox.IdCashbox;
+            transaction.CashierId = data.Cashier.IdCashier;
             //transaction.Id = 785123;
 
             //transaction.Date = DateTime.UtcNow.Date;

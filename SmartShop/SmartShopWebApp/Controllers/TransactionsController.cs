@@ -67,7 +67,7 @@ namespace SmartShopWebApp.Controllers
             //    throw new HttpResponseException(message);
             //}  
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.IdTransaction }, unitOfWork.Transactions.GetTransactionByIdTransaction(transaction.IdTransaction));
+            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, unitOfWork.Transactions.GetTransactionById(transaction.Id));
         }
 
 
@@ -81,20 +81,20 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            //if (id != transaction.IdTransaction)
-            //{
-            //    return BadRequest();
-            //}
+            if (id != transaction.IdTransaction)
+            {
+                return BadRequest();
+            }
 
-            Transaction test = unitOfWork.Transactions.GetTransactionByIdTransaction(1077);
-            Product product = unitOfWork.Products.Get(1);
-            Order order = new Order();
-            order.ProductId = product.IdProduct;
-            order.Count = 3;
+            //Transaction test = unitOfWork.Transactions.GetTransactionByIdTransaction(1077);
+            //Product product = unitOfWork.Products.Get(1);
+            //Order order = new Order();
+            //order.ProductId = product.IdProduct;
+            //order.Count = 3;
 
-            test.Orders.Add(order);
+            //test.Orders.Add(order);
 
-            unitOfWork.Transactions.ModifyWithNewOrders(test);
+            unitOfWork.Transactions.ModifyWithNewOrders(transaction);
             unitOfWork.Complete();        
 
             return StatusCode(HttpStatusCode.NoContent);
