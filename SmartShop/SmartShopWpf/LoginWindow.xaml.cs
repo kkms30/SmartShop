@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SmartShopWpf
@@ -30,8 +31,10 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
             ProductsClient productsClient = null;
             CashierClient cashierClient= null;
+
             Cashier cashier = null;
 
             List<Product> products = new List<Product>();

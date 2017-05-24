@@ -70,6 +70,10 @@ namespace SmartShopWebApp.Persistance.Repositories
             transaction.Orders.ToList().ForEach(o =>
             {
                 ShopContext.Products.Attach(o.Product);
+
+                ShopContext.Categories.Attach(o.Product.Category);
+
+
                 new OrderRepository(ShopContext).Add(o);
             });
             base.Modify(transaction);            

@@ -1,7 +1,9 @@
 ﻿using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.ReceipeMethods;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 
@@ -14,7 +16,7 @@ namespace SmartShopWpf
     {
         private const string tagForManuDisplCode = "Kod produktu";
         private const string tagForManuDisplQuan = "Ilość";
-
+        private List<Basket> listOfBoughtItems = new List<Basket>();
         public MainWindow(bool withPlugin)
         {
             InitializeComponent();
@@ -40,36 +42,12 @@ namespace SmartShopWpf
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            DataHandler data = DataHandler.GetInstance();
-            Transaction transaction = new Transaction();
-            transaction.CashboxId = data.Cashbox.IdCashbox;
-            transaction.CashierId = data.Cashier.IdCashier;
-            //transaction.Id = 785123;
-
-            //transaction.Date = DateTime.UtcNow.Date;
-
-            TransactionClient transactionClient = new TransactionClient(data.Token);
-
-            Transaction newTransaction = transactionClient.CreateNew(transaction);
-
-            data.Transaction = newTransaction;
+         
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            DataHandler data = DataHandler.GetInstance();
-            Product product = data.Products[0];
-            Order order = new Order();
-            order.Product = product;
-            order.Count = 3;
-            order.ProductId = product.IdProduct;
-
-            order.TransactionId = data.Transaction.IdTransaction;
-            data.Transaction.Orders.Add(order);
-
-            TransactionClient transactionClient = new TransactionClient(data.Token);
-
-            transactionClient.UpdateTransaction(data.Transaction);
+           
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -239,9 +217,15 @@ namespace SmartShopWpf
                 else
                 {
                     int getCount = Convert.ToInt32(txtManuallyCodeEntry.Text.Trim());
-                    int counter = lstVBacket.Items.Count;
+                    int counter = lstVBacket.Items.Count;                         
                     counter++;
 
+                    if (counter == 1)
+                    {
+                        new TransactionManager().PrepareNewTransaction();
+                    }
+
+                    listOfBoughtItems.Add(manCod.AddToBasketList(getCount, counter));
                     lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
 
                     float SumOfPrices = float.Parse(lblAmount.Content.ToString().Trim(), CultureInfo.InvariantCulture);
@@ -250,9 +234,28 @@ namespace SmartShopWpf
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
                     txtManuallyCodeEntry.Text = "";
 
-                   
+                    lblTransactionNumber.Content = data.Transaction.Id;
+                    new TransactionManager().AddNewOrderToTransaction(ManuallyCode.checkedProduct, getCount);                   
                 }
             }
+        }
+
+        private void btnPayment_Click(object sender, RoutedEventArgs e)
+        {
+            new TransactionManager().FinalizeTransaction();
+
+            Receipe recp = new Receipe();
+            recp.TransactionNumber = 5555;
+            recp.Data = DateTime.Now;
+            recp.listOfBoughtProducts = listOfBoughtItems;
+            recp.PriceSum = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture);
+            recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+            recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
+            rPDFGen.GeneratePDF();
+            lstVBacket.Items.Clear();
+            listOfBoughtItems.Clear();
+            lblAmount.Content = 0;
         }
     }
 }

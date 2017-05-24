@@ -37,8 +37,17 @@
     <CodeAnalysisRuleSet />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Spire.License, Version=1.3.6.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.PDF.3.9.82\lib\net40\Spire.License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=3.9.82.2040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.PDF.3.9.82\lib\net40\Spire.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Receipe.cs" />
+    <Compile Include="Data\TransactionManager.cs" />
+    <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,6 +111,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,6 +135,10 @@
     <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
       <Project>{5c8528e3-afad-420a-9d67-023e2ce6881a}</Project>
       <Name>SmartShop.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartShopWebApp\SmartShopWebApp.csproj">
+      <Project>{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}</Project>
+      <Name>SmartShopWebApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
