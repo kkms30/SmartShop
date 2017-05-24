@@ -11,5 +11,6 @@ namespace SmartShopWebApp.Core.Repositories
         List<Transaction> GetTransactions();
         Transaction GetTransactionByIdTransaction(int id);
         Transaction GetTransactionById(int id);
+        void ModifyWithNewOrders(Transaction transaction);
     }
 }
