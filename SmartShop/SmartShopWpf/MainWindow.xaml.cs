@@ -242,7 +242,7 @@ namespace SmartShopWpf
 
 
                     lblTransactionNumber.Content = data.Transaction.Id;
-                    new TransactionManager().AddNewOrderToTransaction(ManuallyCode.checkedProduct, getCount);                   
+                    new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);                   
 
                 }
             }
@@ -283,10 +283,6 @@ namespace SmartShopWpf
                 lstVBacket.UnselectAll();
                 flagToTickAll = true;
             }
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }
