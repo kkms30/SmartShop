@@ -1,10 +1,10 @@
-﻿using SmartShop.CommunicateToWebService.Clients;
-using SmartShopWpf.Data;
+﻿using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SmartShopWpf
@@ -43,12 +43,10 @@ namespace SmartShopWpf
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-         
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-           
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -189,7 +187,7 @@ namespace SmartShopWpf
             tabService.SelectedItem = tabManually;
         }
 
-        private void btnManuallyAdd_Click(object sender, RoutedEventArgs e)
+        private async void btnManuallyAdd_Click(object sender, RoutedEventArgs e)
         {
             string tagForManuDisplCode = "Kod produktu";
             string tagForManuDisplQuan = "Ilość";
@@ -221,28 +219,32 @@ namespace SmartShopWpf
                 else
                 {
                     int getCount = Convert.ToInt32(txtManuallyCodeEntry.Text.Trim());
-                    int counter = lstVBacket.Items.Count;                         
+                    int counter = lstVBacket.Items.Count;
                     counter++;
-
+                    Task taskOne = new Task(delegate { 
                     if (counter == 1)
                     {
                         new TransactionManager().PrepareNewTransaction();
                     }
-
+                    });
+                    taskOne.Start();
                     listOfBoughtItems.Add(manCod.AddToBasketList(getCount, counter));
                     lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
-
                     float SumOfPrices = float.Parse(lblAmount.Content.ToString().Trim(), CultureInfo.InvariantCulture);
-                    lblAmount.Content = SumOfPrices + manCod.basketContainer.Price;
 
+                    lblAmount.Content = SumOfPrices + ManuallyCode.GetInstance().basketContainer.Price;
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
-                    txtManuallyCodeEntry.Text = "";
 
                     flagToTagForManuDisp = true;
 
-
+                    txtManuallyCodeEntry.Text = "";
+                    await taskOne.ContinueWith(_=> {
+                        Dispatcher.BeginInvoke(new Action(delegate { 
                     lblTransactionNumber.Content = data.Transaction.Id;
-                    new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);                   
+                        }));
+                        new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);
+                    });
+
 
                 }
             }
