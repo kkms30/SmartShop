@@ -1,6 +1,7 @@
 ﻿using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.Models.Mappers;
 using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
@@ -256,6 +257,16 @@ namespace SmartShopWpf
             lstVBacket.Items.Clear();
             listOfBoughtItems.Clear();
             lblAmount.Content = 0;
+        }
+
+        private void tabService_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (top10.IsSelected)
+            {
+                Top10Client top10Client = new Top10Client(DataHandler.GetInstance().Token);
+                List<BestSellingProduct> top10 = top10Client.GetTop10Products();
+                listVTop10ListTop10.ItemsSource = top10;
+            }
         }
     }
 }

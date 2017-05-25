@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\BestSellingProduct.cs" />
     <Compile Include="Models\Cashbox.cs" />
     <Compile Include="Models\Cashier.cs" />
     <Compile Include="Models\Category.cs" />

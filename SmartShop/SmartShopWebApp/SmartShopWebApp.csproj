@@ -230,6 +230,7 @@
     <Compile Include="Controllers\CashiersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Top10Controller.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Core\GeneratedModels\Cashbox.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>

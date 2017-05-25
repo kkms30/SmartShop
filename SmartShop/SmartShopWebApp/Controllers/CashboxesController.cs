@@ -10,7 +10,6 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
-using SmartShopWebApp.Persistance.Mappers;
 
 namespace SmartShopWebApp.Controllers
 {
@@ -19,15 +18,10 @@ namespace SmartShopWebApp.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Cashboxes
-        public List<BestSellingProduct> GetCashboxes()
+        public List<Cashbox> GetCashboxes()
         {
-            ExtraFeatures features = new ExtraFeatures();
-            return features.GetTop10SellingProducts();            
+            return unitOfWork.Cashboxes.GetCashboxes();
         }
-        //public List<Cashbox> GetCashboxes()
-        //{
-        //    return unitOfWork.Cashboxes.GetCashboxes();
-        //}
 
         // GET: api/Cashboxes/5
         [ResponseType(typeof(Cashbox))]

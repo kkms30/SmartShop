@@ -16,7 +16,7 @@ namespace SmartShop.CommunicateToWebService
         {
         }
 
-        public List<Product> GetProducts(string token)
+        public List<Product> GetProducts()
         {
             return base.Get();
         }
