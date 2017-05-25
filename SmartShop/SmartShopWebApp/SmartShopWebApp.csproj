@@ -274,6 +274,7 @@
     <Compile Include="Core\Metadata\Order.cs" />
     <Compile Include="Core\Metadata\Product.cs" />
     <Compile Include="Core\Metadata\Shop.cs" />
+    <Compile Include="Core\Metadata\ShopContext.cs" />
     <Compile Include="Core\Metadata\Transaction.cs" />
     <Compile Include="Core\Repositories\ICashboxRepository.cs" />
     <Compile Include="Core\Repositories\ICashierRepository.cs" />

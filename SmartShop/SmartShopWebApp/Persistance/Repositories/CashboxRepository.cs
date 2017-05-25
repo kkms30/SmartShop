@@ -19,9 +19,9 @@ namespace SmartShopWebApp.Persistance.Repositories
             get { return context as ShopContext; }
         }
 
-        public Cashbox GetCashboxByIdCashbox(int id)
+        public Cashbox GetCashboxById(int id)
         {
-            Cashbox cashbox = Find(c => c.IdCashbox == id).FirstOrDefault();
+            Cashbox cashbox = Find(c => c.Id == id).FirstOrDefault();
             SetSerialization(cashbox);
             return cashbox;
         }

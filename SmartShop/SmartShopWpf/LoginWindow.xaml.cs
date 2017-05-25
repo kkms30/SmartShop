@@ -1,5 +1,7 @@
 ﻿using PluginMockLogowanie;
 using SmartShop.CommunicateToWebService;
+using SmartShop.CommunicateToWebService.Authentication;
+using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using System;
@@ -29,27 +31,31 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            ProductsClient productsClient = null;
+            CashierClient cashierClient= null;
+
             Cashier cashier = null;
+
             List<Product> products = new List<Product>();
 
             string id = txtLogin.Text;
             string password = pswPassword.Password;
 
-            ProductsClient productsClient = new ProductsClient();
-            LoginClient loginClient = new LoginClient();
-
-            string token = loginClient.GetToken(id, password);
-
+            string token = TokenRequester.ReuqestToken(id, password);          
+              
             if (token != null)
             {
-                cashier = loginClient.Login(id, token);
+                cashierClient = new CashierClient(token);
+                productsClient = new ProductsClient(token);
+
+                cashier = cashierClient.Login(id);
                 products = productsClient.GetProducts(token);
             }
 
             if (cashier != null && products.Count > 0)
             {
-                InitAppData(cashier, products);
+                InitAppData(cashier, products, token);
 
                 MainWindow mW = new MainWindow(false);
                 mW.Show();
@@ -70,13 +76,19 @@ namespace SmartShopWpf
                 pswPassword.Tag = "";
         }
 
-        private void InitAppData(Cashier cashier, List<Product> products)
+        private void InitAppData(Cashier cashier, List<Product> products, string token)
         {
             DataHandler data = DataHandler.GetInstance();
+            data.Token = token;
+
+            Cashbox cashbox = new Cashbox();
+            cashbox.IdCashbox = 13;
+            cashbox.ShopId = 14;
+            cashbox.Id = 1;
 
             data.Cashier = cashier;
             data.Products = products;
-            data.CashboxId = "777";
+            data.Cashbox = cashbox;
         }
 
         private void btnLogin_ClickWithPlugin(object sender, RoutedEventArgs e)

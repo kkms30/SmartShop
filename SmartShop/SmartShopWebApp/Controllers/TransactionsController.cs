@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
+using System.Threading;
 
 namespace SmartShopWebApp.Controllers
 {
@@ -27,7 +28,7 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetTransaction(int id)
         {
-            Transaction transaction = unitOfWork.Transactions.GetTransactionById(id);
+            Transaction transaction = unitOfWork.Transactions.GetTransactionByIdTransaction(id);
             if (transaction == null)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
@@ -43,25 +44,30 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult PostTransaction(Transaction transaction)
         {
+            Transaction t = new Transaction();
+            t.Cashbox = unitOfWork.Cashboxes.GetCashboxById(1);
+            t.Cashier = unitOfWork.Cashiers.GetCashierById(5.ToString());
+            //t.Id = 788896;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            try
-            {
+            //try
+            //{
                 unitOfWork.Transactions.Add(transaction);
                 unitOfWork.Complete();
-            }
-            catch(Exception e)
-            {
-                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent("An error occured during inserting transaction to database.")
-                };
-                throw new HttpResponseException(message);
-            }  
+            //}
+            //catch(Exception e)
+            //{
+            //    var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            //    {
+            //        Content = new StringContent("An error occured during inserting transaction to database.")
+            //    };
+            //    throw new HttpResponseException(message);
+            //}  
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.IdTransaction }, unitOfWork.Transactions.GetTransactionByIdTransaction(transaction.IdTransaction));
+            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, unitOfWork.Transactions.GetTransactionById(transaction.Id));
         }
 
 
@@ -80,7 +86,15 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest();
             }
 
-            unitOfWork.Transactions.Modify(transaction);
+            //Transaction test = unitOfWork.Transactions.GetTransactionByIdTransaction(1077);
+            //Product product = unitOfWork.Products.Get(1);
+            //Order order = new Order();
+            //order.ProductId = product.IdProduct;
+            //order.Count = 3;
+
+            //test.Orders.Add(order);
+
+            unitOfWork.Transactions.ModifyWithNewOrders(transaction);
             unitOfWork.Complete();        
 
             return StatusCode(HttpStatusCode.NoContent);

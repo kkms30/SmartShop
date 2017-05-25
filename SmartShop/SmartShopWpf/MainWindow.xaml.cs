@@ -1,4 +1,5 @@
-﻿using SmartShopWpf.Data;
+﻿using SmartShop.CommunicateToWebService.Clients;
+using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using SmartShopWpf.ReceipeMethods;
 using System;
@@ -37,7 +38,17 @@ namespace SmartShopWpf
             listVFromListListOfProducts.ItemsSource = data.Products;
 
             lblCashierNumber.Content = data.Cashier.Id;
-            lblCashRegisterNumber.Content = data.CashboxId;
+            lblCashRegisterNumber.Content = data.Cashbox.Id;
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+         
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -210,8 +221,14 @@ namespace SmartShopWpf
                 else
                 {
                     int getCount = Convert.ToInt32(txtManuallyCodeEntry.Text.Trim());
-                    int counter = lstVBacket.Items.Count;
+                    int counter = lstVBacket.Items.Count;                         
                     counter++;
+
+                    if (counter == 1)
+                    {
+                        new TransactionManager().PrepareNewTransaction();
+                    }
+
                     listOfBoughtItems.Add(manCod.AddToBasketList(getCount, counter));
                     lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
 
@@ -220,13 +237,21 @@ namespace SmartShopWpf
 
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
                     txtManuallyCodeEntry.Text = "";
+
                     flagToTagForManuDisp = true;
+
+
+                    lblTransactionNumber.Content = data.Transaction.Id;
+                    new TransactionManager().AddNewOrderToTransaction(ManuallyCode.checkedProduct, getCount);                   
+
                 }
             }
         }
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
+            new TransactionManager().FinalizeTransaction();
+
             Receipe recp = new Receipe();
             recp.TransactionNumber = 5555;
             recp.Data = DateTime.Now;

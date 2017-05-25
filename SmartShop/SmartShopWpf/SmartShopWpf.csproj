@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Receipe.cs" />
+    <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -134,6 +135,10 @@
     <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
       <Project>{5c8528e3-afad-420a-9d67-023e2ce6881a}</Project>
       <Name>SmartShop.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartShopWebApp\SmartShopWebApp.csproj">
+      <Project>{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}</Project>
+      <Name>SmartShopWebApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
