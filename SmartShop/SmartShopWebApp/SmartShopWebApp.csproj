@@ -288,6 +288,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Persistance\ExtraFeatures.cs" />
+    <Compile Include="Persistance\Mappers\BestSellingProduct.cs" />
     <Compile Include="Persistance\Repositories\CashboxRepository.cs" />
     <Compile Include="Persistance\Repositories\CashierRepository.cs" />
     <Compile Include="Persistance\Repositories\CategoryRepository.cs" />
