@@ -5,9 +5,9 @@ namespace SmartShopWpf.Data
 {
     internal sealed class ManuallyCode
     {
-        static public Product checkedProduct = new Product();
-        static public Basket basketContainer = new Basket();
-        static public Order o = new Order();
+         public Product checkedProduct = new Product();
+         public Basket basketContainer = new Basket();
+        
        
 
         private static ManuallyCode instance;
@@ -27,9 +27,9 @@ namespace SmartShopWpf.Data
 
         public Basket AddToBasketList(int getCount, int counter)
         {
-            string getName = ManuallyCode.checkedProduct.Name.Trim();
-            byte[] getImage = ManuallyCode.checkedProduct.Image;            
-            float getPrice = ManuallyCode.checkedProduct.Price*getCount;
+            string getName = checkedProduct.Name.Trim();
+            byte[] getImage = checkedProduct.Image;            
+            float getPrice = checkedProduct.Price*getCount;
 
             Basket basket = new Basket() { Number = counter, Name = getName, Image = getImage, Count = getCount, Price = getPrice };
             basketContainer = basket;

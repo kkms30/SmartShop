@@ -14,8 +14,8 @@ namespace SmartShopWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string tagForManuDisplCode = "Kod produktu";
-        private const string tagForManuDisplQuan = "Ilość";
+        private bool flagToTickAll = true;
+        private bool flagToTagForManuDisp = true;
         private List<Basket> listOfBoughtItems = new List<Basket>();
 
         public MainWindow(bool withPlugin)
@@ -189,10 +189,12 @@ namespace SmartShopWpf
 
         private async void btnManuallyAdd_Click(object sender, RoutedEventArgs e)
         {
+            string tagForManuDisplCode = "Kod produktu";
+            string tagForManuDisplQuan = "Ilość";
             ManuallyCode manCod = ManuallyCode.GetInstance();
             DataHandler data = DataHandler.GetInstance();
 
-            if (lblManuallyTagOfCode.Content.ToString() == tagForManuDisplCode)
+            if (flagToTagForManuDisp==true)
             {
                 string code = txtManuallyCodeEntry.Text.ToString().Trim();
                 bool checkCode = manCod.CheckTheCode(code, data.Products);
@@ -201,10 +203,11 @@ namespace SmartShopWpf
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
+                    flagToTagForManuDisp = false;
                 }
                 else
                 {
-                    MessageBox.Show("Zly Kod!");
+                    MessageBox.Show("Zły Kod!");
                 }
             }
             else
@@ -229,16 +232,19 @@ namespace SmartShopWpf
                     lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
                     float SumOfPrices = float.Parse(lblAmount.Content.ToString().Trim(), CultureInfo.InvariantCulture);
 
-                    lblAmount.Content = SumOfPrices + ManuallyCode.basketContainer.Price;
+                    lblAmount.Content = SumOfPrices + ManuallyCode.GetInstance().basketContainer.Price;
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
+
+                    flagToTagForManuDisp = true;
 
                     txtManuallyCodeEntry.Text = "";
                     await taskOne.ContinueWith(_=> {
                         Dispatcher.BeginInvoke(new Action(delegate { 
                     lblTransactionNumber.Content = data.Transaction.Id;
                         }));
-                        new TransactionManager().AddNewOrderToTransaction(ManuallyCode.checkedProduct, getCount);
+                        new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);
                     });
+
 
                 }
             }
@@ -260,6 +266,25 @@ namespace SmartShopWpf
             lstVBacket.Items.Clear();
             listOfBoughtItems.Clear();
             lblAmount.Content = 0;
+        }
+
+        private void btnTickAll_Click(object sender, RoutedEventArgs e)
+        {
+            string ContentTick = "Zaznacz Wszystkie";
+            string ContentUnTick = "Odznacz Wszystkie";
+
+            if (flagToTickAll == true)
+            {
+                btnTickAll.Content = ContentUnTick;
+                lstVBacket.SelectAll();
+                flagToTickAll = false;
+            }
+            else
+            {
+                btnTickAll.Content = ContentTick;
+                lstVBacket.UnselectAll();
+                flagToTickAll = true;
+            }
         }
     }
 }
