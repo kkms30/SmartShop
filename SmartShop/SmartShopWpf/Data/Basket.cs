@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SmartShopWpf.Data
 {
@@ -15,8 +16,10 @@ namespace SmartShopWpf.Data
         public int Count { get; set; }
 
         public float Price { get; set; }
-        
-       
 
+        public static explicit operator Basket(ListViewItem v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
