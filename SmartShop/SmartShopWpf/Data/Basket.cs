@@ -13,9 +13,13 @@ namespace SmartShopWpf.Data
         public int Number { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
-        public int Count { get; set; }
+        public int Count { get; set; }        
+        public float SigleWithoutVatPrice { get; set; }        
+        public float SingleWithVatPrice { get; set; }
+        public float TotalPriceWithoutVat { get; set; }
+        public float TotalPriceWithVat { get; set; }
 
-        public float Price { get; set; }
+
 
         public static explicit operator Basket(ListViewItem v)
         {

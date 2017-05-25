@@ -72,7 +72,7 @@ namespace SmartShopWpf.ReceipeMethods
             {
                 string ilosc = x.Count.ToString();
                 string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
-                string cena = x.Price.ToString();
+                string cena = x.TotalPriceWithVat.ToString();
                 if (pageoneh < 310)
                 {
                     page.Canvas.DrawString(nazwa, font2, brush, 0, pageoneh, leftAlignment);
