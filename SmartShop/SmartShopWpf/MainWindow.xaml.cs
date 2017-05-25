@@ -261,11 +261,15 @@ namespace SmartShopWpf
 
         private void tabService_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (top10.IsSelected)
+            if (tabTop10.IsSelected)
             {
                 Top10Client top10Client = new Top10Client(DataHandler.GetInstance().Token);
                 List<BestSellingProduct> top10 = top10Client.GetTop10Products();
                 listVTop10ListTop10.ItemsSource = top10;
+            }
+            if (tabTransactions.IsSelected)
+            {
+                List<Transaction> transactions = new TransactionManager().GetTransactions();
             }
         }
     }

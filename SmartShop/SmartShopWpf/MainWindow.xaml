@@ -144,7 +144,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem x:Name="top10" Header="Top 10" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="65" Margin="-4,1,0,0" Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TabItmFontRed12.5}">
+            <TabItem x:Name="tabTop10" Header="Top 10" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="65" Margin="-4,1,0,0" Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TabItmFontRed12.5}">
 
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Black}">
                     <Grid.RowDefinitions>
@@ -213,7 +213,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Transakcje" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="22" Width="71" Margin="-7,1,0,0"  Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TabItmFontRed12.5}"    >
+            <TabItem x:Name="tabTransactions" Header="Transakcje" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="22" Width="71" Margin="-7,1,0,0"  Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TabItmFontRed12.5}"    >
 
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Black}">
                     <Grid.RowDefinitions>
