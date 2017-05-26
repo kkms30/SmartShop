@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 
 namespace SmartShopWpf
 {
@@ -17,6 +18,7 @@ namespace SmartShopWpf
     {
         private bool flagToTickAll = true;
         private bool flagToTagForManuDisp = true;
+        private bool flagToVat = true;
         private List<Basket> listOfBoughtItems = new List<Basket>();
 
         public MainWindow(bool withPlugin)
@@ -194,6 +196,7 @@ namespace SmartShopWpf
             string tagForManuDisplQuan = "Ilość";
             ManuallyCode manCod = ManuallyCode.GetInstance();
             DataHandler data = DataHandler.GetInstance();
+            Binding myBinding = new Binding();
 
             if (flagToTagForManuDisp == true)
             {
@@ -230,16 +233,29 @@ namespace SmartShopWpf
                         }
                     });
                     taskOne.Start();
-                    listOfBoughtItems.Add(manCod.AddToBasketList(getCount, counter));
-                    lstVBacket.Items.Add(manCod.AddToBasketList(getCount, counter));
-                    float SumOfPrices = float.Parse(lblAmount.Content.ToString().Trim(), CultureInfo.InvariantCulture);
 
-                    lblAmount.Content = SumOfPrices + ManuallyCode.GetInstance().basketContainer.Price;
+                    Basket basket = manCod.AddToBasketList(getCount, counter);
+
+                    double SumOfPrices = Convert.ToDouble(lblAmount.Content.ToString().Trim());
+
+                    if (flagToVat == true)
+                    {
+                        basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithVat;
+                        lblAmount.Content = Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
+                    }
+                    else
+                    {
+                        basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithoutVat;
+                        lblAmount.Content = Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
+                    }
+
+                    listOfBoughtItems.Add(basket);
+                    lstVBacket.Items.Add(basket);
+
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
-
                     flagToTagForManuDisp = true;
-
                     txtManuallyCodeEntry.Text = "";
+
                     await taskOne.ContinueWith(_ =>
                     {
                         Dispatcher.BeginInvoke(new Action(delegate
@@ -248,8 +264,6 @@ namespace SmartShopWpf
                         }));
                         new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);
                     });
-
-
                 }
             }
         }
@@ -306,6 +320,49 @@ namespace SmartShopWpf
                     .Where(x => x.Name.ToLower().Contains(beginOfSearchedWord.ToLower()));
                 listVFromListListOfProducts.ItemsSource = query;
             }
+        }
+        private void btnVat_Click(object sender, RoutedEventArgs e)
+        {
+            float totalPrice = 0;
+
+            if (flagToVat)
+            {
+                lblVat.Content = "";
+                flagToVat = false;
+
+                foreach (Basket v in lstVBacket.Items)
+                {
+                    foreach (Basket v2 in listOfBoughtItems)
+                    {
+                        v.ChoseOptionPrice = v.TotalPriceWithoutVat;
+                        v2.ChoseOptionPrice = v2.TotalPriceWithoutVat;
+                        totalPrice = totalPrice + v.ChoseOptionPrice;
+                    }
+                }
+
+
+                lstVBacket.Items.Refresh();
+            }
+            else
+            {
+
+                lblVat.Content = "VAT";
+                flagToVat = true;
+
+                foreach (Basket v in lstVBacket.Items)
+                {
+                    foreach (Basket v2 in listOfBoughtItems)
+                    {
+                        v.ChoseOptionPrice = v.TotalPriceWithVat;
+                        v2.ChoseOptionPrice = v2.TotalPriceWithVat;
+                        totalPrice = totalPrice + v.ChoseOptionPrice;
+                    }
+                }
+
+                lstVBacket.Items.Refresh();
+            }
+
+            lblAmount.Content = Math.Round(totalPrice, 2);
         }
     }
 }
