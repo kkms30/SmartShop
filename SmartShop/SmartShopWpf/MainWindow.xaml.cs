@@ -4,6 +4,7 @@ using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -194,7 +195,7 @@ namespace SmartShopWpf
             ManuallyCode manCod = ManuallyCode.GetInstance();
             DataHandler data = DataHandler.GetInstance();
 
-            if (flagToTagForManuDisp==true)
+            if (flagToTagForManuDisp == true)
             {
                 string code = txtManuallyCodeEntry.Text.ToString().Trim();
                 bool checkCode = manCod.CheckTheCode(code, data.Products);
@@ -221,11 +222,12 @@ namespace SmartShopWpf
                     int getCount = Convert.ToInt32(txtManuallyCodeEntry.Text.Trim());
                     int counter = lstVBacket.Items.Count;
                     counter++;
-                    Task taskOne = new Task(delegate { 
-                    if (counter == 1)
+                    Task taskOne = new Task(delegate
                     {
-                        new TransactionManager().PrepareNewTransaction();
-                    }
+                        if (counter == 1)
+                        {
+                            new TransactionManager().PrepareNewTransaction();
+                        }
                     });
                     taskOne.Start();
                     listOfBoughtItems.Add(manCod.AddToBasketList(getCount, counter));
@@ -238,9 +240,11 @@ namespace SmartShopWpf
                     flagToTagForManuDisp = true;
 
                     txtManuallyCodeEntry.Text = "";
-                    await taskOne.ContinueWith(_=> {
-                        Dispatcher.BeginInvoke(new Action(delegate { 
-                    lblTransactionNumber.Content = data.Transaction.Id;
+                    await taskOne.ContinueWith(_ =>
+                    {
+                        Dispatcher.BeginInvoke(new Action(delegate
+                        {
+                            lblTransactionNumber.Content = data.Transaction.Id;
                         }));
                         new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);
                     });
@@ -284,6 +288,23 @@ namespace SmartShopWpf
                 btnTickAll.Content = ContentTick;
                 lstVBacket.UnselectAll();
                 flagToTickAll = true;
+            }
+        }
+
+        private void txtFromListProductName_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            DataHandler data = DataHandler.GetInstance();
+            List<Product> RegularListWithAllProducts = data.Products;
+            if (txtFromListProductName.Text == "" || txtFromListProductName.Text == " ")
+            {
+                listVFromListListOfProducts.ItemsSource = data.Products;
+            }
+            else
+            {
+                string beginOfSearchedWord = txtFromListProductName.Text.Trim();
+                var query = RegularListWithAllProducts
+                    .Where(x => x.Name.ToLower().Contains(beginOfSearchedWord.ToLower()));
+                listVFromListListOfProducts.ItemsSource = query;
             }
         }
     }
