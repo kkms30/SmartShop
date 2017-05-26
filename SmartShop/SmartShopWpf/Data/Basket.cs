@@ -19,6 +19,8 @@ namespace SmartShopWpf.Data
         public float TotalPriceWithoutVat { get; set; }
         public float TotalPriceWithVat { get; set; }
 
+        public float ChoseOptionPrice { get; set; }
+
 
 
         public static explicit operator Basket(ListViewItem v)
