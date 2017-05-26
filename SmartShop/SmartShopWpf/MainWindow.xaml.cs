@@ -4,6 +4,7 @@ using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -304,14 +305,30 @@ namespace SmartShopWpf
             }
         }
 
+        private void txtFromListProductName_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            DataHandler data = DataHandler.GetInstance();
+            List<Product> RegularListWithAllProducts = data.Products;
+            if (txtFromListProductName.Text == "" || txtFromListProductName.Text == " ")
+            {
+                listVFromListListOfProducts.ItemsSource = data.Products;
+            }
+            else
+            {
+                string beginOfSearchedWord = txtFromListProductName.Text.Trim();
+                var query = RegularListWithAllProducts
+                    .Where(x => x.Name.ToLower().Contains(beginOfSearchedWord.ToLower()));
+                listVFromListListOfProducts.ItemsSource = query;
+            }
+        }
         private void btnVat_Click(object sender, RoutedEventArgs e)
         {
-            float totalPrice=0;
+            float totalPrice = 0;
 
             if (flagToVat)
             {
                 lblVat.Content = "";
-                flagToVat = false;                
+                flagToVat = false;
 
                 foreach (Basket v in lstVBacket.Items)
                 {
@@ -323,7 +340,7 @@ namespace SmartShopWpf
                     }
                 }
 
-                
+
                 lstVBacket.Items.Refresh();
             }
             else
@@ -342,10 +359,10 @@ namespace SmartShopWpf
                     }
                 }
 
-                lstVBacket.Items.Refresh();                
+                lstVBacket.Items.Refresh();
             }
 
-            lblAmount.Content = Math.Round(totalPrice,2);
+            lblAmount.Content = Math.Round(totalPrice, 2);
         }
     }
 }
