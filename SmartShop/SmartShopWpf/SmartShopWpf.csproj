@@ -69,7 +69,14 @@
     </ApplicationDefinition>
     <Compile Include="Data\Receipe.cs" />
     <Compile Include="Data\TransactionManager.cs" />
+    <Compile Include="DiscountWindow.xaml.cs">
+      <DependentUpon>DiscountWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
+    <Page Include="DiscountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

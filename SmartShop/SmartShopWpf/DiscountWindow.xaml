@@ -1,0 +1,16 @@
+﻿<Window x:Class="SmartShopWpf.DiscountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartShopWpf"
+        mc:Ignorable="d"
+        Background="{StaticResource Black}"
+        ResizeMode="NoResize"
+        Title="DiscountWindow" Height="300" Width="300">
+    <Grid>
+
+        <Label  x:Name="lblTitle"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="33"  Width="294"  Background="{StaticResource Orange}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Dodaj Zniżkę"   Style="{StaticResource LblFont12.5}"    HorizontalContentAlignment="Center"/>
+
+    </Grid>
+</Window>
