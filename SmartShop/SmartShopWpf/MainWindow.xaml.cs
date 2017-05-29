@@ -1,4 +1,5 @@
 ﻿using SmartShop.CommunicateToWebService.Clients;
+using SmartShopWpf.Asynchronous;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
 using SmartShopWpf.Models.Mappers;
@@ -30,7 +31,7 @@ namespace SmartShopWpf
             if (!withPlugin)
             {
                 InitView();
-            }
+            }           
         }
 
         private void InitView()
@@ -44,6 +45,9 @@ namespace SmartShopWpf
 
             lblCashierNumber.Content = data.Cashier.Id;
             lblCashRegisterNumber.Content = data.Cashbox.Id;
+
+            new Top10Invoker().Download(listVTop10ListTop10);
+            new DoneTransactionInvoker().Download(listVTransactions);
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -293,13 +297,11 @@ namespace SmartShopWpf
         {
             if (tabTop10.IsSelected)
             {
-                Top10Client top10Client = new Top10Client(DataHandler.GetInstance().Token);
-                List<BestSellingProduct> top10 = top10Client.GetTop10Products();
-                listVTop10ListTop10.ItemsSource = top10;
+                new Top10Invoker().Download(listVTop10ListTop10);
             }
             if (tabTransactions.IsSelected)
             {
-                List<Transaction> transactions = new TransactionManager().GetTransactions();
+                new DoneTransactionInvoker().Download(listVTransactions);
             }
         }
 

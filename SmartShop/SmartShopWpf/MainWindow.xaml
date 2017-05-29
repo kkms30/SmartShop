@@ -148,9 +148,22 @@
                     </Grid.ColumnDefinitions>
 
                     <ListView x:Name="listVTop10ListTop10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="462"  Width="376" Margin="24,14,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn/>
+                                <GridViewColumn Header="Pozycja" Width="50"    DisplayMemberBinding="{Binding Ordinal}"  />
+                                <GridViewColumn Header="Nazwa" Width="190">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Ilość sprzedanych" Width="120"    DisplayMemberBinding="{Binding TotalSales}"  />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -203,6 +216,28 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+
+                    <ListView x:Name="listVTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="462"  Width="376" Margin="24,14,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" Width="50"    DisplayMemberBinding="{Binding Id}"  />
+                                <!--<GridViewColumn Header="Nazwa" Width="190">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Ilość sprzedanych" Width="120"    DisplayMemberBinding="{Binding TotalSales}"  />-->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
                 </Grid>
             </TabItem>
         </TabControl>

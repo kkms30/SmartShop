@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
+    <Compile Include="Asynchronous\Top10Invoker.cs" />
     <Compile Include="Data\Receipe.cs" />
     <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
@@ -147,6 +149,7 @@
       <Name>PluginMockLogowanie</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

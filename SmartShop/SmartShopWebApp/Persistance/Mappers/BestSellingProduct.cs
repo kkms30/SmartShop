@@ -7,7 +7,7 @@ namespace SmartShopWebApp.Persistance.Mappers
 {
     public class BestSellingProduct
     {
-        public int ProductId { get; set; }
+        public int Ordinal { get; set; }
         public String Name { get; set; }
         public int TotalSales { get; set; }
     }
