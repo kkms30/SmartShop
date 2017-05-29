@@ -20,7 +20,6 @@ namespace SmartShopWpf.Models
         public System.DateTime Date { get; set; }
         public float TotalPrice { get; set; }
         public Nullable<float> Discount { get; set; }
-
         public virtual Cashbox Cashbox { get; set; }
         public virtual Cashier Cashier { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
