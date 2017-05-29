@@ -20,5 +20,10 @@ namespace SmartShop.CommunicateToWebService.Clients
         {
             base.Put(transaction.IdTransaction, transaction);
         }
+
+        public List<Transaction> GetTransactions()
+        {
+            return base.Get();
+        }
     }
 }

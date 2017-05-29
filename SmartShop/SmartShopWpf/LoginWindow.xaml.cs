@@ -50,7 +50,7 @@ namespace SmartShopWpf
                 productsClient = new ProductsClient(token);
 
                 cashier = cashierClient.Login(id);
-                products = productsClient.GetProducts(token);
+                products = productsClient.GetProducts();
             }
 
             if (cashier != null && products.Count > 0)

@@ -1,5 +1,8 @@
-﻿using SmartShopWpf.Data;
+﻿using SmartShop.CommunicateToWebService.Clients;
+using SmartShopWpf.Asynchronous;
+using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.Models.Mappers;
 using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
@@ -28,7 +31,7 @@ namespace SmartShopWpf
             if (!withPlugin)
             {
                 InitView();
-            }
+            }           
         }
 
         private void InitView()
@@ -42,6 +45,9 @@ namespace SmartShopWpf
 
             lblCashierNumber.Content = data.Cashier.Id;
             lblCashRegisterNumber.Content = data.Cashbox.Id;
+
+            new Top10Invoker().Download(listVTop10ListTop10);
+            new DoneTransactionInvoker().Download(listVTransactions);
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -286,6 +292,19 @@ namespace SmartShopWpf
             lblAmount.Content = 0;
         }
 
+
+        private void tabService_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (tabTop10.IsSelected)
+            {
+                new Top10Invoker().Download(listVTop10ListTop10);
+            }
+            if (tabTransactions.IsSelected)
+            {
+                new DoneTransactionInvoker().Download(listVTransactions);
+            }
+        }
+
         private void btnTickAll_Click(object sender, RoutedEventArgs e)
         {
             string ContentTick = "Zaznacz Wszystkie";
@@ -363,6 +382,7 @@ namespace SmartShopWpf
             }
 
             lblAmount.Content = Math.Round(totalPrice, 2);
+
         }
     }
 }

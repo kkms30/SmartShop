@@ -230,6 +230,7 @@
     <Compile Include="Controllers\CashiersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Top10Controller.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Core\GeneratedModels\Cashbox.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
@@ -288,6 +289,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Persistance\ExtraFeatures.cs" />
+    <Compile Include="Persistance\Mappers\BestSellingProduct.cs" />
     <Compile Include="Persistance\Repositories\CashboxRepository.cs" />
     <Compile Include="Persistance\Repositories\CashierRepository.cs" />
     <Compile Include="Persistance\Repositories\CategoryRepository.cs" />

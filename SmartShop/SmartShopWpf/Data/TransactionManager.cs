@@ -17,6 +17,11 @@ namespace SmartShopWpf.Data
             data = DataHandler.GetInstance();
         }
 
+        public List<Transaction> GetTransactions()
+        {
+            return new TransactionClient(data.Token).GetTransactions();
+        }
+
         public void PrepareNewTransaction()
         {
             Transaction transaction = new Transaction();
