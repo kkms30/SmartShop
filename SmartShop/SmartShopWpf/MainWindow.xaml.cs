@@ -276,6 +276,8 @@ namespace SmartShopWpf
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
+            DataHandler.GetInstance().Transaction.TotalPrice = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);           
+
             new TransactionManager().FinalizeTransaction();
 
             Receipe recp = new Receipe();

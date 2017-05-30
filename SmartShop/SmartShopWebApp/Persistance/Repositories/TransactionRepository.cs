@@ -76,6 +76,7 @@ namespace SmartShopWebApp.Persistance.Repositories
 
                 new OrderRepository(ShopContext).Add(o);
             });
+            ShopContext.Transactions.Attach(transaction);
             base.Modify(transaction);            
         }
 
