@@ -21,11 +21,15 @@ namespace SmartShopWpf.Data
             return instance;
         }
 
-        public Cashier Cashier { get; set; }
+        public Cashier Cashier { get; set; }      
         public List<Product> Products { get; set; }
         public Cashbox Cashbox { get; set; }
         public Transaction Transaction { get; set; }
         public string Token { get; set; }
-        
+
+        public void ClearTransaction()
+        {
+            Transaction = null;
+        }
     }
 }

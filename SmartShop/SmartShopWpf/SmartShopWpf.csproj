@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
+    <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />
     <Compile Include="Data\Receipe.cs" />
     <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />

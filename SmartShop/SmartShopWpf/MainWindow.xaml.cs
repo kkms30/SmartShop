@@ -276,22 +276,34 @@ namespace SmartShopWpf
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
-            DataHandler.GetInstance().Transaction.TotalPrice = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);           
+            DataHandler data = DataHandler.GetInstance();
 
-            new TransactionManager().FinalizeTransaction();
+            if (data.Transaction != null)
+            {
+                data.Transaction.TotalPrice = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                
+                Receipe recp = new Receipe();
+                recp.TransactionNumber = data.Transaction.Id;
+                recp.Data = DateTime.Now;
+                recp.listOfBoughtProducts = listOfBoughtItems;
+                recp.PriceSum = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture);
+                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+                ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
+                rPDFGen.GeneratePDF();
+                lstVBacket.Items.Clear();
+                listOfBoughtItems.Clear();
+                lblAmount.Content = 0;
+                lblTransactionNumber.Content = "";
 
-            Receipe recp = new Receipe();
-            recp.TransactionNumber = 5555;
-            recp.Data = DateTime.Now;
-            recp.listOfBoughtProducts = listOfBoughtItems;
-            recp.PriceSum = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture);
-            recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
-            recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
-            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-            rPDFGen.GeneratePDF();
-            lstVBacket.Items.Clear();
-            listOfBoughtItems.Clear();
-            lblAmount.Content = 0;
+
+                new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
+            }
+            else
+            {
+                MessageBox.Show("Rozpocznij nową transakcje dodając produkt do zamówienia");
+            }
+           
         }
 
 
