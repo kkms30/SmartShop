@@ -32,6 +32,7 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
             string id = txtLogin.Text;
             string password = pswPassword.Password;
             ProductsClient productsClient = null;
@@ -39,6 +40,8 @@ namespace SmartShopWpf
             Cashier cashier = null;
             List<Product> products = new List<Product>();
             string token = "";
+            btnLogin.IsEnabled = false;
+            Task.Factory.StartNew((Action)delegate { 
 
             foreach (FileInfo fi in di.GetFiles("PluginLogIn.dll"))
             {
@@ -50,12 +53,16 @@ namespace SmartShopWpf
                         ILogIn TypeLoadedFromPlugin = (ILogIn)Activator.CreateInstance(pluginType);
                         if (TypeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient, ref cashier, ref products, ref token))
                         {
-                            InitAppData(cashier, products, token);
 
-                            MainWindow mW = new MainWindow(false);
-                            mW.Show();
-                            this.Close();
-                        }
+                                InitAppData(cashier, products, token);
+                                Dispatcher.BeginInvoke(new Action(delegate
+                                {
+                                    
+                                    MainWindow mW = new MainWindow(false);
+                                    mW.Show();
+                                    this.Close();
+                                }));
+                            }
                         else
                         {
                             MessageBox.Show("Invalid login or password. Please check the data", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -63,6 +70,7 @@ namespace SmartShopWpf
                     }
                 }
             }
+            });
         }
 
 
