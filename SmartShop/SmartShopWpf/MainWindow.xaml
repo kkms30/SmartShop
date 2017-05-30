@@ -121,7 +121,13 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Zdjęcie" Width="55" DisplayMemberBinding="{Binding [2]}"/>
+                                <GridViewColumn Header="Zdjęcie" Width="55">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Image}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                                 <GridViewColumn Header="Cena" Width="50"    DisplayMemberBinding="{Binding Price}" />
                                 <GridViewColumn Header="Kategoria" Width="100">
                                     <GridViewColumn.CellTemplate>
