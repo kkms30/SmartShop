@@ -170,11 +170,13 @@ namespace SmartShopWpf.ReceipeMethods
             //restor graphics
             page.Canvas.Restore(state);
             //Save doc file.
-            doc.SaveToFile("Receipe.pdf");
+            String fileName = "Receipe" + _recp.TransactionNumber + ".pdf";
+
+            doc.SaveToFile(fileName);
             doc.Close();
 
             //Launching the Pdf file.
-            System.Diagnostics.Process.Start("Receipe.pdf");
+            System.Diagnostics.Process.Start(fileName);
         }
 
     }

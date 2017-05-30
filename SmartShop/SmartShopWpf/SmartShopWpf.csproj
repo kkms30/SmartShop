@@ -73,6 +73,7 @@
     <Compile Include="Data\Receipe.cs" />
     <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
+    <Compile Include="ViewModel\DoneTransactionViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

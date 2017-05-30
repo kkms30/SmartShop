@@ -45,7 +45,7 @@ namespace SmartShopWpf.Data
             order.ProductId = product.IdProduct;
 
             order.TransactionId = data.Transaction.IdTransaction;
-            data.Transaction.Orders.Add(order);      
+            data.Transaction.Orders.Add(order);            
                   
         }
 

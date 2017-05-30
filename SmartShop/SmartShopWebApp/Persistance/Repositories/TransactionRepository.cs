@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace SmartShopWebApp.Persistance.Repositories
 {
@@ -55,7 +56,7 @@ namespace SmartShopWebApp.Persistance.Repositories
             //});
             ShopContext.Transactions.Add(transaction);
         }
-        
+
         public override void Modify(Transaction transaction)
         {
             base.Modify(transaction);
@@ -67,17 +68,29 @@ namespace SmartShopWebApp.Persistance.Repositories
 
         public void ModifyWithNewOrders(Transaction transaction)
         {
-            transaction.Orders.ToList().ForEach(o =>
+            Transaction oldTransaction = GetTransactionById(transaction.Id);
+
+            Task changeStates = Task.Factory.StartNew(() =>
             {
-                ShopContext.Products.Attach(o.Product);
 
-                ShopContext.Categories.Attach(o.Product.Category);
+                transaction.Orders.ToList().ForEach(o =>
+                {
+                    oldTransaction.Orders.Add(o);
 
+                    Category currentCategory = ShopContext.Categories.Find(o.Product.CategoryId);
+                    ShopContext.Entry(currentCategory).State = EntityState.Unchanged;
 
-                new OrderRepository(ShopContext).Add(o);
+                    Product currentProduct = ShopContext.Products.Find(o.ProductId);
+                    ShopContext.Entry(currentProduct).State = EntityState.Unchanged;
+
+                });
             });
-            ShopContext.Transactions.Attach(transaction);
-            base.Modify(transaction);            
+
+            changeStates.Wait();
+
+            oldTransaction.TotalPrice = transaction.TotalPrice;
+
+            base.Modify(oldTransaction);
         }
 
         private void SetSerialization(Transaction transaction)

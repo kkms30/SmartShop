@@ -1,5 +1,6 @@
 ﻿using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,10 +16,14 @@ namespace SmartShopWpf.Asynchronous
     {
         public void Download(ListView transactionsListView)
         {
-            Task.Factory.StartNew<List<Transaction>>(() =>
+            Task.Factory.StartNew<List<DoneTransactionViewModel>>(() =>
             {
                 List<Transaction> transactions = new TransactionManager().GetTransactions();
-                return transactions;
+                List<DoneTransactionViewModel> viewModels = new List<DoneTransactionViewModel>();
+
+                transactions.ForEach(t => viewModels.Add(new DoneTransactionViewModel(t)));
+                             
+                return viewModels;
 
             }).ContinueWith((asct) =>
             {
