@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Amount.cs" />
     <Compile Include="Data\Receipe.cs" />
     <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="DiscountWindow.xaml.cs">
@@ -153,6 +154,9 @@
       <Project>{77fc000d-71fa-4b52-8361-5259834c7767}</Project>
       <Name>PluginMockLogowanie</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Rescources\Images\FrameToDiscount.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

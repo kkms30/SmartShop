@@ -498,7 +498,8 @@
             </Setter>
         </Style>
 
-        <ImageBrush x:Key="Frame" ImageSource="/SmartShopWpf;component\Rescources\Images\Frame.png" Stretch="UniformToFill" />
-        <ImageBrush x:Key="Loupe" ImageSource="/SmartShopWpf;component\Rescources\Images\Loupe.png" Stretch="UniformToFill" />
+        <ImageBrush x:Key="Frame"           ImageSource="/SmartShopWpf;component\Rescources\Images\Frame.png" Stretch="UniformToFill" />
+        <ImageBrush x:Key="FrameToDiscount" ImageSource="/SmartShopWpf;component\Rescources\Images\Frame.png" Stretch="UniformToFill" />
+        <ImageBrush x:Key="Loupe"           ImageSource="/SmartShopWpf;component\Rescources\Images\Loupe.png" Stretch="UniformToFill" />
     </Application.Resources>
 </Application>
