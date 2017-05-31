@@ -68,16 +68,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Amount.cs" />
+    <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
+    <Compile Include="Asynchronous\Top10Invoker.cs" />
+    <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />
     <Compile Include="Data\Receipe.cs" />
     <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="DiscountWindow.xaml.cs">
       <DependentUpon>DiscountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
+
     <Page Include="DiscountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
+    <Compile Include="ViewModel\DoneTransactionViewModel.cs" />
+
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,6 +143,10 @@
     <Resource Include="Rescources\Images\Loupe.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PluginLogIn\PluginLogIn.csproj">
+      <Project>{7bfbb479-6b69-4b3f-9538-e5d7a5603c71}</Project>
+      <Name>PluginLogIn</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartShop.CommunicateToWebService\SmartShop.CommunicateToWebService.csproj">
       <Project>{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}</Project>
       <Name>SmartShop.CommunicateToWebService</Name>
@@ -157,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Rescources\Images\FrameToDiscount.png" />
+    <Resource Include="Rescources\Images\SMlogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

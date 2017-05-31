@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{7BFBB479-6B69-4B3F-9538-E5D7A5603C71}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SmartShop.CommunicateToWebService</RootNamespace>
-    <AssemblyName>SmartShop.CommunicateToWebService</AssemblyName>
+    <RootNamespace>PluginLogIn</RootNamespace>
+    <AssemblyName>PluginLogIn</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\SmartShopWpf\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,15 +33,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,28 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\ApiAuthenticationResponse.cs" />
-    <Compile Include="Authentication\TokenRequester.cs" />
-    <Compile Include="Clients\BaseClient.cs" />
-    <Compile Include="Clients\CashierClient.cs" />
-    <Compile Include="Clients\Top10Client.cs" />
-    <Compile Include="Clients\TransactionClient.cs" />
-    <Compile Include="Utils\Endpoint.cs" />
-    <Compile Include="Clients\ProductsClient.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ILogIn.cs" />
+    <Compile Include="LogIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SmartShop.CommunicateToWebService\SmartShop.CommunicateToWebService.csproj">
+      <Project>{a2be606f-69ab-4bc3-aef3-9e8dedacf1c2}</Project>
+      <Name>SmartShop.CommunicateToWebService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
-      <Project>{5C8528E3-AFAD-420A-9D67-023E2CE6881A}</Project>
+      <Project>{5c8528e3-afad-420a-9d67-023e2ce6881a}</Project>
       <Name>SmartShop.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

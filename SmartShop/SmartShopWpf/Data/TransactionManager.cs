@@ -17,11 +17,18 @@ namespace SmartShopWpf.Data
             data = DataHandler.GetInstance();
         }
 
+        public List<Transaction> GetTransactions()
+        {
+            return new TransactionClient(data.Token).GetTransactions();
+        }
+
         public void PrepareNewTransaction()
         {
             Transaction transaction = new Transaction();
+
             transaction.CashboxId = data.Cashbox.IdCashbox;
             transaction.CashierId = data.Cashier.IdCashier;
+            transaction.Date = DateTime.Now;
 
             TransactionClient transactionClient = new TransactionClient(data.Token);
 
@@ -39,7 +46,7 @@ namespace SmartShopWpf.Data
             order.ProductId = product.IdProduct;
 
             order.TransactionId = data.Transaction.IdTransaction;
-            data.Transaction.Orders.Add(order);      
+            data.Transaction.Orders.Add(order);            
                   
         }
 

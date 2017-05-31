@@ -1,4 +1,5 @@
-﻿using PluginMockLogowanie;
+﻿using PluginLogIn;
+using PluginMockLogowanie;
 using SmartShop.CommunicateToWebService;
 using SmartShop.CommunicateToWebService.Authentication;
 using SmartShop.CommunicateToWebService.Clients;
@@ -32,39 +33,44 @@ namespace SmartShopWpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
 
-            ProductsClient productsClient = null;
-            CashierClient cashierClient= null;
-
-            Cashier cashier = null;
-
-            List<Product> products = new List<Product>();
-
             string id = txtLogin.Text;
             string password = pswPassword.Password;
+            ProductsClient productsClient = null;
+            CashierClient cashierClient = null;
+            Cashier cashier = null;
+            List<Product> products = new List<Product>();
+            string token = "";
+            btnLogin.IsEnabled = false;
+            Task.Factory.StartNew((Action)delegate { 
 
-            string token = TokenRequester.ReuqestToken(id, password);          
-              
-            if (token != null)
+            foreach (FileInfo fi in di.GetFiles("PluginLogIn.dll"))
             {
-                cashierClient = new CashierClient(token);
-                productsClient = new ProductsClient(token);
+                Assembly pluginAssembly = Assembly.LoadFrom(fi.FullName);
+                foreach (Type pluginType in pluginAssembly.GetExportedTypes())
+                {
+                    if (pluginType.GetInterface(typeof(ILogIn).Name) != null)
+                    {
+                        ILogIn TypeLoadedFromPlugin = (ILogIn)Activator.CreateInstance(pluginType);
+                        if (TypeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient, ref cashier, ref products, ref token))
+                        {
 
-                cashier = cashierClient.Login(id);
-                products = productsClient.GetProducts(token);
+                                InitAppData(cashier, products, token);
+                                Dispatcher.BeginInvoke(new Action(delegate
+                                {
+                                    
+                                    MainWindow mW = new MainWindow(false);
+                                    mW.Show();
+                                    this.Close();
+                                }));
+                            }
+                        else
+                        {
+                            MessageBox.Show("Invalid login or password. Please check the data", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        }
+                    }
+                }
             }
-
-            if (cashier != null && products.Count > 0)
-            {
-                InitAppData(cashier, products, token);
-
-                MainWindow mW = new MainWindow(false);
-                mW.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Błąd logowania");
-            }
+            });
         }
 
 
@@ -91,34 +97,5 @@ namespace SmartShopWpf
             data.Cashbox = cashbox;
         }
 
-        private void btnLogin_ClickWithPlugin(object sender, RoutedEventArgs e)
-        {
-            string login = txtLogin.Text.Trim();
-            string password = pswPassword.Password.Trim();
-            // bool checkLoginDataByPlugin = false;
-
-            foreach (FileInfo fi in di.GetFiles("PluginMockLogowanie.dll"))
-            {
-                Assembly pluginAssembly = Assembly.LoadFrom(fi.FullName);
-                foreach (Type pluginType in pluginAssembly.GetExportedTypes())
-                {
-                    if (pluginType.GetInterface(typeof(IMockLogowania).Name) != null)
-                    {
-                        IMockLogowania TypeLoadedFromPlugin = (IMockLogowania)Activator.CreateInstance(pluginType);
-                        //checkLoginDataByPlugin = TypeLoadedFromPlugin.CheckLoginData(login,password);
-                        if (TypeLoadedFromPlugin.CheckLoginData(login, password))
-                        {
-                            MainWindow mW = new MainWindow(true);
-                            mW.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid login or password. Please check the data", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        }
-                    }
-                }
-            }
-        }
     }
 }

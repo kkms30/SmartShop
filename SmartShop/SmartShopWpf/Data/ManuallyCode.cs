@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace SmartShopWpf.Data
 {
-    internal sealed class ManuallyCode
+    public sealed class ManuallyCode
     {
         public Product checkedProduct = new Product();
         public Basket basketContainer = new Basket();
@@ -29,10 +29,13 @@ namespace SmartShopWpf.Data
 
         public Basket AddToBasketList(int getCount, int counter)
         {
+            if (getCount < 0 || counter < 0)
+                throw new ArgumentException();
+
             string getName = checkedProduct.Name.Trim();
             byte[] getImage = checkedProduct.Image;
-
             float getSingleWithoutVatPrice = checkedProduct.Price;
+
             double countSingleWithVat = Math.Round(getSingleWithoutVatPrice * vat, 2);
             float getSingleWithVatPrice = (float)countSingleWithVat;
             float getTotalPriceWithVat = getSingleWithVatPrice * getCount;
@@ -49,6 +52,9 @@ namespace SmartShopWpf.Data
 
         public bool CheckTheCode(string codeToCheck, List<Product> lstOfProd)
         {
+            if (codeToCheck == null || lstOfProd == null)
+                return false;
+
             foreach (var codeInList in lstOfProd)
             {
                 if (codeToCheck.Equals(codeInList.Code.Trim()))

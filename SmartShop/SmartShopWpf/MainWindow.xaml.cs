@@ -1,5 +1,8 @@
-﻿using SmartShopWpf.Data;
+﻿using SmartShop.CommunicateToWebService.Clients;
+using SmartShopWpf.Asynchronous;
+using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.Models.Mappers;
 using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
@@ -32,7 +35,7 @@ namespace SmartShopWpf
             if (!withPlugin)
             {
                 InitView();
-            }
+            }           
         }
 
         private void InitView()
@@ -46,6 +49,9 @@ namespace SmartShopWpf
 
             lblCashierNumber.Content = data.Cashier.Id;
             lblCashRegisterNumber.Content = data.Cashbox.Id;
+
+            new Top10Invoker().Download(listVTop10ListTop10);
+            new DoneTransactionInvoker().Download(listVTransactions);
         }
 
         public void UpdateDiscount()
@@ -289,14 +295,19 @@ namespace SmartShopWpf
                     if (flagToVat == true)
                     {
                         basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithVat;
+
                         basket.BeforeDiscount = basket.ChoseOptionPrice;
                         overwallAmount = Math.Round((SumOfPrices + basket.ChoseOptionPrice), 2);
                         lblAmount.Content = overwallAmount;
                         lblAmountWithoutDiscount.Content = lblAmount.Content;
+
+                        //lblAmount.Content = ((float)SumOfPrices + basket.ChoseOptionPrice).ToString("0.00");
+
                     }
                     else
                     {
                         basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithoutVat;
+
                         basket.ChoseOptionPrice = basket.ChoseOptionPrice;
                         overwallAmount = Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
                         lblAmount.Content = overwallAmount;
@@ -341,6 +352,8 @@ namespace SmartShopWpf
                             lblAmountWithoutDiscount.Content = overwallAmount;
                             lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
                         }
+                        //lblAmount.Content = ((float)SumOfPrices + basket.ChoseOptionPrice).ToString("0.00");
+
                     }
 
                     listOfBoughtItems.Add(basket);
@@ -362,28 +375,58 @@ namespace SmartShopWpf
             }
         }
 
-        private void btnPayment_Click(object sender, RoutedEventArgs e)
-        {
-            listOfBoughtItems.Clear();
-            foreach(Basket b in listVBasket.Items)
-            {
-                listOfBoughtItems.Add(b);
-            }
-            new TransactionManager().FinalizeTransaction();
 
-            Receipe recp = new Receipe();
-            recp.TransactionNumber = 5555;
-            recp.Data = DateTime.Now;
-            recp.listOfBoughtProducts = listOfBoughtItems;
-            recp.PriceSum = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture);
-            recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
-            recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
-            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-            rPDFGen.GeneratePDF();
-            listVBasket.Items.Clear();
-            listOfBoughtItems.Clear();
-            lblAmount.Content = 0;
-            lblAmountWithoutDiscount.Content = 0;
+        private void btnPayment_Click(object sender, RoutedEventArgs e)
+        {      
+            DataHandler data = DataHandler.GetInstance();
+
+            if (data.Transaction != null)
+            {
+
+                listOfBoughtItems.Clear();
+                foreach (Basket b in listVBasket.Items)
+                {
+                    listOfBoughtItems.Add(b);
+                }
+
+                float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                data.Transaction.TotalPrice = price / 100;
+
+                Receipe recp = new Receipe();
+                recp.TransactionNumber = data.Transaction.Id;
+                recp.Data = DateTime.Now;
+                recp.listOfBoughtProducts = listOfBoughtItems;
+                recp.PriceSum = data.Transaction.TotalPrice;
+                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+                ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
+                rPDFGen.GeneratePDF();
+                listVBasket.Items.Clear();
+                listOfBoughtItems.Clear();
+                lblAmount.Content = 0;
+                lblTransactionNumber.Content = "";
+
+
+                new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
+            }
+            else
+            {
+                MessageBox.Show("Rozpocznij nową transakcje dodając produkt do zamówienia");
+            }
+           
+        }
+
+
+        private void tabService_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (tabTop10.IsSelected)
+            {
+                new Top10Invoker().Download(listVTop10ListTop10);
+            }
+            if (tabTransactions.IsSelected)
+            {
+                new DoneTransactionInvoker().Download(listVTransactions);
+            }
         }
 
         private void btnTickAll_Click(object sender, RoutedEventArgs e)
@@ -500,6 +543,10 @@ namespace SmartShopWpf
                 dW.Owner = this;
                 dW.ShowDialog();
             }
+
+            //lblAmount.Content = Math.Round(totalPrice, 2);
+
+
         }
     }
 }
