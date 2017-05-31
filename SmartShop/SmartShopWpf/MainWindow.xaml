@@ -30,10 +30,12 @@
         <Button x:Name="btnLogout"                HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="147"  Margin="912,15,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Wyloguj"              Style="{StaticResource BtnFontRed12.5}" HorizontalContentAlignment="Center" Grid.Row="1" Click="btnLogout_Click"/>
 
 
-        <Label    x:Name="lblAmount"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="441"  Margin="141,62,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="0"   Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display" Grid.Row="1"/>
-        <Label    x:Name="lblVat"     HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="57"   Margin="85,62,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,0,1" BorderBrush="{StaticResource White}" Content="VAT" Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display" Grid.Row="1"/>
+        <Label    x:Name="lblAmount"                 HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="220"  Margin="362,62,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="0"   Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display" Grid.Row="1"/>
+        <Label    x:Name="lblAmountWithoutDiscount"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="220"  Margin="143,62,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="0"   Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display" Grid.Row="1"/>
+        <Label    x:Name="lblVat"                    HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="58"   Margin="85,62,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,0,1" BorderBrush="{StaticResource White}" Content="VAT" Style="{StaticResource LblFont26}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextOptions.TextFormattingMode="Display" Grid.Row="1"/>
 
-        <ListView x:Name="lstVBacket" HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="497"  Margin="85,108,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" OpacityMask="{StaticResource White}" Grid.Row="1"  >
+      
+        <ListView x:Name="listVBasket"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="497"  Margin="85,109,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" OpacityMask="{StaticResource White}" Grid.Row="1"  >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -53,15 +55,19 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
                     <GridViewColumn Header="Zdjęcie" Width="55">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding Image}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Ilość" Width="70" DisplayMemberBinding="{Binding Count}"/>
-                    <GridViewColumn Header="Cena" Width="70"  DisplayMemberBinding="{Binding ChoseOptionPrice}"/>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Ilość"   Width="70" DisplayMemberBinding="{Binding Count}"/>
+                    <GridViewColumn Header="Cena"    Width="70" DisplayMemberBinding="{Binding ChoseOptionPrice}"/>
+                    <GridViewColumn Header="Zniżka C"  Width="70" DisplayMemberBinding="{Binding OverwallDiscountName}"/>
+                    <GridViewColumn Header="Zniżka K"  Width="70" DisplayMemberBinding="{Binding SigleDiscountName}"/>
+
                 </GridView>
             </ListView.View>
         </ListView>
@@ -70,7 +76,7 @@
         <Button x:Name="btnTickAll"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="28"  Width="497" Margin="85,430,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zaznacz Wszystkie"  Style="{StaticResource BtnFontOrange18}" Grid.Row="1" Click="btnTickAll_Click" />
         <Button x:Name="btnDelete"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="85,457,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Usuń"               Style="{StaticResource BtnFontOrange30}" Grid.Row="1" Click="btnDelete_Click"/>
         <Button x:Name="btnEdit"     HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="333,457,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Edytuj"             Style="{StaticResource BtnFontOrange30}" Grid.Row="1"/>
-        <Button x:Name="btnDiscount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="85,506,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zniżka"             Style="{StaticResource BtnFontOrange30}" Grid.Row="1"/>
+        <Button x:Name="btnDiscount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="85,506,0,0"  Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zniżka"             Style="{StaticResource BtnFontOrange30}" Grid.Row="1" Click="btnDiscount_Click"/>
         <Button x:Name="btnVat"      HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="249" Margin="333,506,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="VAT"                Style="{StaticResource BtnFontOrange30}" Grid.Row="1" Click="btnVat_Click"/>
         <Button x:Name="btnPayment"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"  Width="497" Margin="85,555,0,0"  Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Płatność"           Style="{StaticResource BtnFontRed30}"    Grid.Row="1" Click="btnPayment_Click"/>
 

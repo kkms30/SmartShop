@@ -21,6 +21,13 @@ namespace SmartShopWpf.Data
 
         public float ChoseOptionPrice { get; set; }
 
+        public string OverwallDiscountName { get;  set; }
+        public string SigleDiscountName { get;  set; }
+        public float SingleDiscount { get; set; }
+        public float BeforeDiscount { get; set; }
+
+        public string DiscountName { get; set; }
+
 
 
         public static explicit operator Basket(ListViewItem v)
