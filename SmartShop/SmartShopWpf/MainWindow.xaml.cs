@@ -247,12 +247,12 @@ namespace SmartShopWpf
                     if (flagToVat == true)
                     {
                         basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithVat;
-                        lblAmount.Content = Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
+                        lblAmount.Content = ((float)SumOfPrices + basket.ChoseOptionPrice).ToString("0.00");
                     }
                     else
                     {
                         basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithoutVat;
-                        lblAmount.Content = Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
+                        lblAmount.Content = ((float)SumOfPrices + basket.ChoseOptionPrice).ToString("0.00");
                     }
 
                     listOfBoughtItems.Add(basket);
@@ -274,22 +274,38 @@ namespace SmartShopWpf
             }
         }
 
+
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
-            new TransactionManager().FinalizeTransaction();
+            DataHandler data = DataHandler.GetInstance();
 
-            Receipe recp = new Receipe();
-            recp.TransactionNumber = 5555;
-            recp.Data = DateTime.Now;
-            recp.listOfBoughtProducts = listOfBoughtItems;
-            recp.PriceSum = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture);
-            recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
-            recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
-            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-            rPDFGen.GeneratePDF();
-            lstVBacket.Items.Clear();
-            listOfBoughtItems.Clear();
-            lblAmount.Content = 0;
+            if (data.Transaction != null)
+            {
+                float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                data.Transaction.TotalPrice = price / 100;
+
+                Receipe recp = new Receipe();
+                recp.TransactionNumber = data.Transaction.Id;
+                recp.Data = DateTime.Now;
+                recp.listOfBoughtProducts = listOfBoughtItems;
+                recp.PriceSum = data.Transaction.TotalPrice;
+                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+                ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
+                rPDFGen.GeneratePDF();
+                lstVBacket.Items.Clear();
+                listOfBoughtItems.Clear();
+                lblAmount.Content = 0;
+                lblTransactionNumber.Content = "";
+
+
+                new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
+            }
+            else
+            {
+                MessageBox.Show("Rozpocznij nową transakcje dodając produkt do zamówienia");
+            }
+           
         }
 
 

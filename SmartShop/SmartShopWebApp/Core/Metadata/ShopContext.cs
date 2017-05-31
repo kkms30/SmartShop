@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -16,8 +17,16 @@ namespace SmartShopWebApp.Core.GeneratedModels
         {
             var entriesToReload = ChangeTracker.Entries<Transaction>().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified).ToList();
 
-            int rowCount;
-            rowCount = base.SaveChanges();
+            int rowCount = 0;
+
+            try
+            {
+                rowCount = base.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine("Wyłapałem wyjątek, który nic nie zmienia");
+            }
 
             if (rowCount > 0)
             {

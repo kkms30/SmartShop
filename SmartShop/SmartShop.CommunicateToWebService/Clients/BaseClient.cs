@@ -2,6 +2,7 @@
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -52,6 +53,8 @@ namespace SmartShop.CommunicateToWebService.Clients
             var request = new RestRequest(endpoint, Method.POST);
             var json = JsonConvert.SerializeObject(item);
 
+            Trace.WriteLine(json.ToString());
+
             request.AddParameter("application/json", json, ParameterType.RequestBody);
             request.AddParameter("Authorization", "Bearer " + token, ParameterType.HttpHeader);
 
@@ -67,6 +70,8 @@ namespace SmartShop.CommunicateToWebService.Clients
         {
             var request = new RestRequest(endpoint + id, Method.PUT);
             var json = JsonConvert.SerializeObject(item);
+
+            Trace.WriteLine(json.ToString());
 
             request.AddParameter("application/json", json, ParameterType.RequestBody);
             request.AddParameter("Authorization", "Bearer " + token, ParameterType.HttpHeader);
