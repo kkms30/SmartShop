@@ -68,8 +68,10 @@ namespace SmartShopWpf
             {
                 if(DiscountWindow.typeOfDis=="%")
                 {
+                    
                     double amount = DiscountWindow.overwallAmountWithDiscount * DiscountWindow.OverwallDicountValue*0.01;
                     DiscountWindow.overwallAmountWithDiscount = Math.Round(amount,2);
+                   
                 }
 
                 else
@@ -78,6 +80,13 @@ namespace SmartShopWpf
                     DiscountWindow.overwallAmountWithDiscount = Math.Round(amount, 2);
                 }
             }
+
+            else
+            {
+                DiscountWindow.overwallAmountWithDiscount = Math.Round(DiscountWindow.overwallAmountWithDiscount, 2);
+            }
+          
+            overwallAmount = DiscountWindow.overwallAmountWithDiscount;
             lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
         }
 

@@ -94,11 +94,30 @@ namespace SmartShopWpf
                         if (btnTypeOfDiscount.Content.ToString().Trim() == "%")
                         {
                             double percent = 100 - discountValue;
-                            b.ChoseOptionPrice =(float)Math.Round((MainWindow.overwallAmount * percent * 0.01), 2);
+                            if (b.BeforeDiscount != 0)
+                            {
+                                b.ChoseOptionPrice = (float)Math.Round((b.BeforeDiscount * percent * 0.01), 2);
+                              
+
+                            }
+                            else
+                            {
+                                b.BeforeDiscount = b.ChoseOptionPrice;
+                                b.ChoseOptionPrice = (float)Math.Round((b.ChoseOptionPrice * percent * 0.01), 2);
+                                MessageBox.Show(b.ChoseOptionPrice.ToString());
+                            }
                         }
                         else
                         {
-                            b.ChoseOptionPrice = b.ChoseOptionPrice - discountValue;
+                            if (b.BeforeDiscount != 0)
+                            {
+                                b.ChoseOptionPrice = b.BeforeDiscount - (discountValue*b.Count);
+                            }
+
+                            else
+                            {
+                                b.ChoseOptionPrice = b.ChoseOptionPrice - (discountValue*b.Count);
+                            }
                         }
                     }
 
