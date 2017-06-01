@@ -18,7 +18,7 @@ namespace SmartShopWebApp.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Cashiers/5
-        
+        [Authorize]
         [ResponseType(typeof(Cashier))]
         public IHttpActionResult GetCashier(string id)
         {
