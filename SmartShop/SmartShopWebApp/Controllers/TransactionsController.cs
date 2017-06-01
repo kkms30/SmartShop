@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SmartShopWebApp.Controllers
 {
@@ -19,12 +20,14 @@ namespace SmartShopWebApp.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Transactions
+        [Authorize]
         public List<Transaction> GetTransactions()
         {
             return unitOfWork.Transactions.GetTransactions();
         }
 
         // GET: api/Transactions/5
+        [Authorize]
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetTransaction(int id)
         {
@@ -35,37 +38,37 @@ namespace SmartShopWebApp.Controllers
                 {
                     Content = new StringContent(string.Format("No transaction with id = {0} found", id))
                 };
-                throw new HttpResponseException(message);            
+                throw new HttpResponseException(message);
             }
             return Ok(transaction);
         }
 
         // POST: api/Transactions
+        [Authorize]
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult PostTransaction(Transaction transaction)
         {
-            Transaction t = new Transaction();
-            t.Cashbox = unitOfWork.Cashboxes.GetCashboxById(1);
-            t.Cashier = unitOfWork.Cashiers.GetCashierById(5.ToString());
-            //t.Id = 788896;
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            //try
-            //{
-                unitOfWork.Transactions.Add(transaction);
-                unitOfWork.Complete();
-            //}
-            //catch(Exception e)
-            //{
-            //    var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
-            //    {
-            //        Content = new StringContent("An error occured during inserting transaction to database.")
-            //    };
-            //    throw new HttpResponseException(message);
-            //}  
+            try
+            {
+                Task addTransaction = Task.Factory.StartNew(() =>
+                {
+                    unitOfWork.Transactions.Add(transaction);
+                    unitOfWork.Complete();
+                });
+                addTransaction.Wait();
+            }
+            catch (Exception e)
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("An error occured during inserting transaction to database.")
+                };
+                throw new HttpResponseException(message);
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, unitOfWork.Transactions.GetTransactionById(transaction.Id));
         }
@@ -73,6 +76,7 @@ namespace SmartShopWebApp.Controllers
 
 
         // PUT: api/Transactions/5
+        [Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTransaction(int id, Transaction transaction)
         {
@@ -84,21 +88,13 @@ namespace SmartShopWebApp.Controllers
             if (id != transaction.IdTransaction)
             {
                 return BadRequest();
-            }
-
-            //Transaction test = unitOfWork.Transactions.GetTransactionByIdTransaction(1077);
-            //Product product = unitOfWork.Products.Get(1);
-            //Order order = new Order();
-            //order.ProductId = product.IdProduct;
-            //order.Count = 3;
-
-            //test.Orders.Add(order);
+            };
 
             unitOfWork.Transactions.ModifyWithNewOrders(transaction);
-            unitOfWork.Complete();        
+            unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
-        }      
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -107,6 +103,6 @@ namespace SmartShopWebApp.Controllers
                 unitOfWork.Dispose();
             }
             base.Dispose(disposing);
-        }   
+        }
     }
 }

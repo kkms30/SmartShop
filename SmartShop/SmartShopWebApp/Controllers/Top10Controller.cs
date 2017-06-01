@@ -11,6 +11,7 @@ namespace SmartShopWebApp.Controllers
 {
     public class Top10Controller : ApiController
     {
+        [Authorize]
         public List<BestSellingProduct> GetTop10()
         {
             ExtraFeatures features = new ExtraFeatures();

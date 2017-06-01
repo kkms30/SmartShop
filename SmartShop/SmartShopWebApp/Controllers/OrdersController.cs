@@ -18,12 +18,14 @@ namespace SmartShopWebApp.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Orders
+        [Authorize]
         public IEnumerable<Order> GetOrders()
         {
             return unitOfWork.Orders.GetOrderWithProducts();
         }
 
         // PUT: api/Orders/5
+        [Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutOrder(int id, Order order)
         {

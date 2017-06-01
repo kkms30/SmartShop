@@ -35,25 +35,20 @@ namespace SmartShopWebApp.Persistance.Repositories
 
         public Transaction GetTransactionById(int id)
         {
+            Transaction transaction2 = ShopContext.Transactions.Include(t => t.Cashbox).Include(t => t.Cashier).Where(t => t.Id == id).FirstOrDefault();
+
             Transaction transaction = Find(t => t.Id == id).FirstOrDefault();
-            if (transaction == null)
+            if (transaction2 == null)
             {
                 return null;
             }
-            SetSerialization(transaction);
-            return transaction;
+            
+            SetSerialization(transaction2);
+            return transaction2;
         }
 
         public override void Add(Transaction transaction)
         {
-            //ShopContext.Cashboxes.Attach(transaction.Cashbox);
-            //ShopContext.Cashiers.Attach(transaction.Cashier);
-            //ShopContext.Shops.Attach(transaction.Cashbox.Shop);
-            //transaction.Orders.ToList().ForEach(o =>
-            //{
-            //    ShopContext.Products.Attach(o.Product);
-            //    ShopContext.Categories.Attach(o.Product.Category);
-            //});
             ShopContext.Transactions.Add(transaction);
         }
 

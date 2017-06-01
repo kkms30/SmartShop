@@ -18,12 +18,14 @@ namespace SmartShopWebApp.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Cashboxes
+        [Authorize]
         public List<Cashbox> GetCashboxes()
         {
             return unitOfWork.Cashboxes.GetCashboxes();
         }
 
         // GET: api/Cashboxes/5
+        [Authorize]
         [ResponseType(typeof(Cashbox))]
         public IHttpActionResult GetCashbox(int id)
         {
