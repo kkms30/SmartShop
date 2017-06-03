@@ -104,6 +104,38 @@ namespace SmartShopWpf
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            List<Basket> newList = new List<Basket>();
+            foreach(var v in listVBasket.SelectedItems)
+            {
+                newList.Add((Basket)v);
+            }
+            float newSuma = float.Parse(lblAmount.Content.ToString());
+            float newSumaWithoutDiscounts = float.Parse(lblAmountWithoutDiscount.Content.ToString());
+            foreach (var v in newList)
+            {
+
+                if (v.OverwallDiscountName != null && v.OverwallDiscountName.Contains("%"))
+                {
+                    float OverwallDiscountName = float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 1));
+                    newSuma -= v.ChoseOptionPrice * (1-(OverwallDiscountName/100));
+                    newSumaWithoutDiscounts -= v.BeforeDiscount;
+                }
+                else if (v.OverwallDiscountName != null && v.OverwallDiscountName.Contains("zł"))
+                {
+                    float OverwallDiscountName = float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 2));
+                    newSuma = newSuma - v.ChoseOptionPrice;
+                    newSumaWithoutDiscounts -= v.BeforeDiscount;
+                }
+                else
+                {
+                    newSuma -= v.ChoseOptionPrice;
+                    newSumaWithoutDiscounts -= v.BeforeDiscount;
+                }
+                listOfBoughtItems.Remove(v);
+                listVBasket.Items.Remove(v);
+            }
+            lblAmount.Content = Math.Round(Convert.ToDouble(newSuma),2);
+            lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(newSumaWithoutDiscounts), 2);
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
