@@ -22,6 +22,7 @@ namespace SmartShopWpf
         private bool flagToTickAll = true;
         private bool flagToTagForManuDisp = true;
         private bool flagToVat = true;
+        private bool flagToEditQuantity = false;
         public static bool flagToTagKindOfDiscount = true;
         public static bool flagToOverwallDiscount = true;
 
@@ -100,6 +101,50 @@ namespace SmartShopWpf
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            Basket basketToEditHisQuantity = (Basket)listVBasket.SelectedItem;
+            string tagForManuDisplCode = "Kod produktu";
+            string tagForManuDisplQuan = "Ilość";
+            bool ifFound = false;
+            if (flagToEditQuantity == false)
+            {
+                lblManuallyTagOfCode.Content = tagForManuDisplQuan;
+                btnEdit.Content = "Potwierdz";
+                flagToEditQuantity = true;
+                btnManuallyAdd.IsEnabled = false;
+            }
+            else
+            {
+                foreach(var v in listOfBoughtItems)
+                {
+                    if(v.Number == basketToEditHisQuantity.Number)
+                    {
+                        float Sum = float.Parse(lblAmount.Content.ToString());
+                        Sum -= v.BeforeDiscount;
+                        float SinglePrice = v.BeforeDiscount / v.Count;
+                        v.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
+                        basketToEditHisQuantity.Count= Convert.ToInt32(txtManuallyCodeEntry.Text);
+                        v.BeforeDiscount = SinglePrice * v.Count;
+                        Sum += v.BeforeDiscount;
+                        v.ChoseOptionPrice = v.BeforeDiscount;
+                        basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
+                        lblAmount.Content = Math.Round(Convert.ToDouble(Sum),2);
+                        lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
+                        ifFound = true;
+                        flagToEditQuantity = false;
+                        lblManuallyTagOfCode.Content = tagForManuDisplCode;
+                        btnEdit.Content = "Edytuj";
+                        btnManuallyAdd.IsEnabled = true;
+                        txtManuallyCodeEntry.Text = "0";
+                    }
+                }
+                if(ifFound==true)
+                {
+
+                    listVBasket.SelectedItem = basketToEditHisQuantity;
+                    listVBasket.Items.Refresh();
+                }
+            }
+
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -436,8 +481,10 @@ namespace SmartShopWpf
                 listVBasket.Items.Clear();
                 listOfBoughtItems.Clear();
                 lblAmount.Content = 0;
+                lblAmountWithoutDiscount.Content = 0;
                 lblTransactionNumber.Content = "";
-
+                btnEdit.IsEnabled = true;
+                btnVat.IsEnabled = true;
 
                 new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
             }
@@ -545,7 +592,7 @@ namespace SmartShopWpf
         private void btnDiscount_Click(object sender, RoutedEventArgs e)
         {
             btnVat.IsEnabled = false;
-
+            btnEdit.IsEnabled = false;
             if (listVBasket.Items.Count <= 0)
             {
                 MessageBox.Show("Transakcja nie została rozpoczęta!");
