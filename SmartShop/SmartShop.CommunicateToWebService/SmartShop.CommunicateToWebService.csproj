@@ -59,6 +59,7 @@
     <Compile Include="Clients\OrderClient.cs" />
     <Compile Include="Clients\MonthlyReportClient.cs" />
     <Compile Include="Clients\DailyReportClient.cs" />
+    <Compile Include="Clients\ReturnOrderClient.cs" />
     <Compile Include="Clients\Top10Client.cs" />
     <Compile Include="Clients\TransactionClient.cs" />
     <Compile Include="Utils\Endpoint.cs" />
