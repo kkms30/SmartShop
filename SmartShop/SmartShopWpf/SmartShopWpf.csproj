@@ -78,6 +78,8 @@
     <Compile Include="DiscountWindow.xaml.cs">
       <DependentUpon>DiscountWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReceipeMethods\DailyPDFGenerator.cs" />
+    <Compile Include="ReceipeMethods\MonthlyPDFGenerator.cs" />
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
     <Page Include="DiscountWindow.xaml">
       <SubType>Designer</SubType>
