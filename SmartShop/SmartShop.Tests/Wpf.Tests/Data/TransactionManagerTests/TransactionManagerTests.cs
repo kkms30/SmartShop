@@ -45,7 +45,7 @@ namespace SmartShop.Tests.Wpf.Tests.Data
             Transaction tran = new Transaction() { IdTransaction = 5 };
             data.Transaction = tran;
             //ACT
-            tM.AddNewOrderToTransaction(product, 2);
+            //tM.AddNewOrderToTransaction(product, 2);
             //ASSERT
             Assert.AreEqual(true, data.Transaction.Orders.Count > 0);
         }

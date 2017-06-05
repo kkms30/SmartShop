@@ -73,7 +73,9 @@
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
     <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />
+    <Compile Include="Data\OrderManager.cs" />
     <Compile Include="Data\Receipe.cs" />
+    <Compile Include="Data\ReturnObject.cs" />
     <Compile Include="Data\TransactionManager.cs" />
     <Compile Include="DiscountWindow.xaml.cs">
       <DependentUpon>DiscountWindow.xaml</DependentUpon>
