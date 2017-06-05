@@ -17,5 +17,23 @@ namespace SmartShopWebApp.Persistance
                 return bestSelling;
             }
         }
+
+        public List<Report> GetMonthlyReport()
+        {
+            using (var context = new ShopContext())
+            {
+                var monthReport = context.Database.SqlQuery<Report>("reportMonth").ToList();
+                return monthReport;
+            }
+        }
+
+        public List<Report> GetDailyReport()
+        {
+            using (var context = new ShopContext())
+            {
+                var dailyReport = context.Database.SqlQuery<Report>("reportDay").ToList();
+                return dailyReport;
+            }
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace SmartShop.CommunicateToWebService
         public static readonly string PRODUCTS = "/api/Products/";
         public static readonly string TRANSACTION = "/api/Transactions/";
         public static readonly string TOP10 = "/api/Top10/";
+        public static readonly string REPORT_DAILY = "/api/Report/daily";
+        public static readonly string REPORT_MONTHLY = "/api/Report/monthly";
     }
 }

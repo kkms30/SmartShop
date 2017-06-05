@@ -18,7 +18,7 @@ namespace SmartShopWpf.Asynchronous
             Task.Factory.StartNew<List<BestSellingProduct>>(() =>
             {
                 Top10Client top10Client = new Top10Client(DataHandler.GetInstance().Token);
-                List<BestSellingProduct> top10 = top10Client.GetTop10Products();    
+                List<BestSellingProduct> top10 = top10Client.GetTop10Products();
                 return top10;
 
             }).ContinueWith((asct) =>
