@@ -56,6 +56,8 @@
     <Compile Include="Authentication\TokenRequester.cs" />
     <Compile Include="Clients\BaseClient.cs" />
     <Compile Include="Clients\CashierClient.cs" />
+    <Compile Include="Clients\MonthlyReportClient.cs" />
+    <Compile Include="Clients\DailyReportClient.cs" />
     <Compile Include="Clients\Top10Client.cs" />
     <Compile Include="Clients\TransactionClient.cs" />
     <Compile Include="Utils\Endpoint.cs" />
@@ -71,6 +73,10 @@
     <ProjectReference Include="..\SmartShop.Models\SmartShop.Models.csproj">
       <Project>{5C8528E3-AFAD-420A-9D67-023E2CE6881A}</Project>
       <Name>SmartShop.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartShopWebApp\SmartShopWebApp.csproj">
+      <Project>{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}</Project>
+      <Name>SmartShopWebApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

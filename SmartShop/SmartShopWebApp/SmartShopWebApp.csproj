@@ -230,6 +230,7 @@
     <Compile Include="Controllers\CashiersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\Top10Controller.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Core\GeneratedModels\Cashbox.cs">
@@ -291,6 +292,7 @@
     </Compile>
     <Compile Include="Persistance\ExtraFeatures.cs" />
     <Compile Include="Persistance\Mappers\BestSellingProduct.cs" />
+    <Compile Include="Persistance\Mappers\Report.cs" />
     <Compile Include="Persistance\Repositories\CashboxRepository.cs" />
     <Compile Include="Persistance\Repositories\CashierRepository.cs" />
     <Compile Include="Persistance\Repositories\CategoryRepository.cs" />

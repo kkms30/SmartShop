@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Asynchronous\DailyReportInvoker.cs" />
+    <Compile Include="Asynchronous\MonthlyReportInvoker.cs" />
     <Compile Include="Data\Amount.cs" />
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
@@ -77,14 +79,11 @@
       <DependentUpon>DiscountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
-
     <Page Include="DiscountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Compile Include="ViewModel\DoneTransactionViewModel.cs" />
-
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

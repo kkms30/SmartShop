@@ -627,5 +627,15 @@ namespace SmartShopWpf
 
 
         }
+
+        private void dailyReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new DailyReportInvoker().Download();
+        }
+
+        private void monthlyReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new MonthlyReportInvoker().Download();
+        }
     }
 }
