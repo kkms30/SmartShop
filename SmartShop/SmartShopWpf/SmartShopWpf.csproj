@@ -69,8 +69,8 @@
     </ApplicationDefinition>
     <Compile Include="Asynchronous\DailyReportInvoker.cs" />
     <Compile Include="Asynchronous\MonthlyReportInvoker.cs" />
-    <Compile Include="Data\Amount.cs" />
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
+    <Compile Include="Asynchronous\ReturnOrderInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
     <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />
     <Compile Include="Data\OrderManager.cs" />

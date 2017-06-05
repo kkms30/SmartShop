@@ -694,7 +694,7 @@ namespace SmartShopWpf
         }
 
         private void btnReturnsTickAll_Click(object sender, RoutedEventArgs e)
-        {
+        {          
             string ContentTick = "Zaznacz Wszystkie";
             string ContentUnTick = "Odznacz Wszystkie";
 
