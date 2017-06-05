@@ -34,12 +34,13 @@ namespace SmartShopWpf.Data
             data.Transaction = newTransaction;
         }
 
-        public void AddNewOrderToTransaction(Product product, int count)
+        public void AddNewOrderToTransaction(Product product, int count, float discount)
         {
             Order order = new Order();
             order.Product = product;
             order.Count = (sbyte)count;
             order.ProductId = product.IdProduct;
+            order.Discount = discount;
 
             order.TransactionId = data.Transaction.IdTransaction;
             data.Transaction.Orders.Add(order);

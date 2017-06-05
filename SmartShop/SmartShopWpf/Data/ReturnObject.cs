@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartShopWpf.Data
+﻿namespace SmartShopWpf.Data
 {
-   public class ReturnObject
+    public class ReturnObject
     {
-
-
         public int Number { get; set; }
+        public int idOrder { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
         public int Count { get; set; }
+        public int CountToReturn { get; set; }
         public float Price { get; set; }
-        public float? Discount { get; set;}
+        public float? Discount { get; set; }
     }
 }

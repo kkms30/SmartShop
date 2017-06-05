@@ -252,7 +252,8 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Header="Ilość"   Width="70" DisplayMemberBinding="{Binding Count}"/>
-                                <GridViewColumn Header="Cena"    Width="70" DisplayMemberBinding="{Binding Price}"/>                              
+                                <GridViewColumn Header="Cena"    Width="70" DisplayMemberBinding="{Binding Price}"/>
+                                <GridViewColumn Header="Zniżka"    Width="70" DisplayMemberBinding="{Binding Discount}"/>
                                 <GridViewColumn/>
                             </GridView>
                         </ListView.View>
