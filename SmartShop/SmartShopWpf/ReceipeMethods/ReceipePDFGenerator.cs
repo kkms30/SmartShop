@@ -71,9 +71,25 @@ namespace SmartShopWpf.ReceipeMethods
             //_recp.listOfBoughtProducts.RemoveRange(24, _recp.listOfBoughtProducts.Count-24);
             foreach (var x in _recp.listOfBoughtProducts)
             {
-                string ilosc = x.Count.ToString();
-                string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
+                string ilosc = "";
                 string cena = x.ChoseOptionPrice.ToString();
+                if (x.OverwallDiscountName!=null && x.SigleDiscountName==null)
+                {
+                    ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName);
+                }
+                else if(x.SigleDiscountName!=null && x.OverwallDiscountName==null)
+                {
+                    ilosc = (x.Count.ToString() + ",Znizka Poj." + x.SigleDiscountName);
+                }
+                else if (x.SigleDiscountName != null && x.OverwallDiscountName != null)
+                {
+                    ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName + ",Znizka Poj." + x.SigleDiscountName);
+                }
+                else
+                {
+                    ilosc = x.Count.ToString();
+                }
+                string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
                 if (pageoneh < 310)
                 {
                     page.Canvas.DrawString(nazwa, font2, brush, 0, pageoneh, leftAlignment);
