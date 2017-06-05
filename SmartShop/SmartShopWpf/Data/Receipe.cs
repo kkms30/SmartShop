@@ -13,7 +13,9 @@ namespace SmartShopWpf.Data
         public int TransactionNumber { get; set; }
         public DateTime Data { get; set; }
         public List<Basket> listOfBoughtProducts { get; set; }
+        public List<Basket> listOfDeletedProducts { get; set; }
         public float PriceSum { get; set; }
+        public string OverDiscount;
         public int CashNumber { get; set; }
         public int CashierNumber { get; set; }
     }

@@ -27,6 +27,7 @@ namespace SmartShopWpf
         public static bool flagToOverwallDiscount = true;
 
         public static List<Basket> listOfBoughtItems = new List<Basket>();
+        public static List<Basket> listOfDeletedItems = new List<Basket>();
         static public double overwallAmount;
 
         public MainWindow(bool withPlugin)
@@ -178,6 +179,7 @@ namespace SmartShopWpf
                 }
                 listOfBoughtItems.Remove(v);
                 listVBasket.Items.Remove(v);
+                listOfDeletedItems.Add(v);
             }
             lblAmount.Content = Math.Round(Convert.ToDouble(newSuma),2);
             lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(newSumaWithoutDiscounts), 2);
@@ -476,10 +478,13 @@ namespace SmartShopWpf
                 recp.PriceSum = data.Transaction.TotalPrice;
                 recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
                 recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+                if (listOfDeletedItems.Count > 0)
+                    recp.listOfDeletedProducts = listOfDeletedItems;
                 ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
                 rPDFGen.GeneratePDF();
                 listVBasket.Items.Clear();
                 listOfBoughtItems.Clear();
+                listOfDeletedItems.Clear();
                 lblAmount.Content = 0;
                 lblAmountWithoutDiscount.Content = 0;
                 lblTransactionNumber.Content = "";

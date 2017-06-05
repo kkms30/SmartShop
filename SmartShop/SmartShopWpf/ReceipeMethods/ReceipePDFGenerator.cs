@@ -35,6 +35,7 @@ namespace SmartShopWpf.ReceipeMethods
             //Draw the text - alignment
             PdfFont font = new PdfFont(PdfFontFamily.Courier, 6f);
             PdfFont font2 = new PdfFont(PdfFontFamily.Courier, 4f);
+            PdfFont font3 = new PdfFont(PdfFontFamily.Courier, 4f, PdfFontStyle.Strikeout);
             PdfSolidBrush brush = new PdfSolidBrush(System.Drawing.Color.Black);
 
             PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
@@ -111,6 +112,54 @@ namespace SmartShopWpf.ReceipeMethods
                     page4.Canvas.DrawString(nazwa, font2, brush, 0, pagefourh, leftAlignment);
                     page4.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagefourh, rightAlignment);
                     pagefourh += 10;
+                }
+            }
+            if (_recp.listOfDeletedProducts != null && _recp.listOfDeletedProducts.Count > 0)
+            {
+                foreach (var x in _recp.listOfDeletedProducts)
+                {
+                    string ilosc = x.Count.ToString();
+                    string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
+                    string cena = x.ChoseOptionPrice.ToString();
+                    if (pageoneh < 310)
+                    {
+                        page.Canvas.DrawString(nazwa, font3, brush, 0, pageoneh, leftAlignment);
+                        page.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pageoneh, rightAlignment);
+                        pageoneh += 10;
+                    }
+                    if (pageoneh == 310)
+                    {
+                        if (page2 == null)
+                            page2 = doc.Pages.Add(PdfPageSize.A6);
+                    }
+                    if (pageoneh == 310 && pagetwoh < 310)
+                    {
+                        page2.Canvas.DrawString(nazwa, font3, brush, 0, pagetwoh, leftAlignment);
+                        page2.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagetwoh, rightAlignment);
+                        pagetwoh += 10;
+                    }
+                    if (pagetwoh == 310)
+                    {
+                        if (page3 == null)
+                            page3 = doc.Pages.Add(PdfPageSize.A6);
+                    }
+                    if (pagetwoh == 310 && pagethreeh < 310)
+                    {
+                        page3.Canvas.DrawString(nazwa, font3, brush, 0, pagethreeh, leftAlignment);
+                        page3.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagethreeh, rightAlignment);
+                        pagethreeh += 10;
+                    }
+                    if (pagethreeh == 310)
+                    {
+                        if (page4 == null)
+                            page4 = doc.Pages.Add(PdfPageSize.A6);
+                    }
+                    if (pagethreeh == 310 && pagefourh < 310)
+                    {
+                        page4.Canvas.DrawString(nazwa, font3, brush, 0, pagefourh, leftAlignment);
+                        page4.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagefourh, rightAlignment);
+                        pagefourh += 10;
+                    }
                 }
             }
             PdfPath path2 = null;
