@@ -12,14 +12,24 @@ namespace SmartShop.Tests.Wpf.Tests.Data
     [TestFixture]
     public class TransactionManagerTests
     {
+        private DataHandler data;
+        TransactionManager tM;
+        [OneTimeSetUp]
+        public void Init()
+        {
+            data = DataHandler.GetInstance();
+            tM = new TransactionManager();
+        }
+
         [Test]
         public void PrepareNewTrasactionIfHappend()
         {
             //ARRANGE
-            TransactionManager tM = new TransactionManager();
-            DataHandler data = DataHandler.GetInstance();
-            data.Cashbox = new Cashbox();
-            data.Cashier = new Cashier();
+            //TransactionManager tM = new TransactionManager();
+            //DataHandler data = DataHandler.GetInstance();
+            data.Cashbox = new Cashbox() { IdCashbox = 5 };
+            data.Cashier = new Cashier() { IdCashier = 5 };
+            data.Token = "opo";
             //ACT
             tM.PrepareNewTransaction();
             //ASSERT
@@ -29,7 +39,7 @@ namespace SmartShop.Tests.Wpf.Tests.Data
         public void AddNewOrderToTransactionIfHappend()
         {
             //ARRANGE
-            TransactionManager tM = new TransactionManager();
+            //TransactionManager tM = new TransactionManager();
             Product product = new Product() { IdProduct = 5 };
             DataHandler data = DataHandler.GetInstance();
             Transaction tran = new Transaction() { IdTransaction = 5 };
@@ -37,7 +47,7 @@ namespace SmartShop.Tests.Wpf.Tests.Data
             //ACT
             //tM.AddNewOrderToTransaction(product, 2);
             //ASSERT
-            Assert.AreEqual(true,data.Transaction.Orders.Count > 0);
+            Assert.AreEqual(true, data.Transaction.Orders.Count > 0);
         }
 
     }
