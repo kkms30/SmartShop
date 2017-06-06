@@ -70,6 +70,7 @@
     <Compile Include="Asynchronous\DailyReportInvoker.cs" />
     <Compile Include="Asynchronous\MonthlyReportInvoker.cs" />
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
+    <Compile Include="Asynchronous\ReturnOrderInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
     <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />
     <Compile Include="Data\OrderManager.cs" />
@@ -79,9 +80,14 @@
     <Compile Include="DiscountWindow.xaml.cs">
       <DependentUpon>DiscountWindow.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
+
+    <Compile Include="ReceipeMethods\DailyPDFGenerator.cs" />
+    <Compile Include="ReceipeMethods\MonthlyPDFGenerator.cs" />
+
     <Compile Include="ReceipeMethods\ReceipePDFGenerator.cs" />
     <Page Include="DiscountWindow.xaml">
       <SubType>Designer</SubType>

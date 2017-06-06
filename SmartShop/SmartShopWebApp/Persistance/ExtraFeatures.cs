@@ -1,4 +1,5 @@
-﻿using SmartShopWebApp.Core.GeneratedModels;
+﻿using MySql.Data.MySqlClient;
+using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance.Mappers;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,21 @@ namespace SmartShopWebApp.Persistance
             {
                 var bestSelling = context.Database.SqlQuery<BestSellingProduct>("topProducts").ToList();
                 return bestSelling;
+            }
+        }
+
+        public void ReturnOrder(ReturnOrder returnOrder)
+        {
+            using (var context = new ShopContext())
+            {
+                MySqlParameter[] queryParams = new MySqlParameter[] {
+                     new MySqlParameter("@IdOrder", returnOrder.IdOrder),
+                     new MySqlParameter("@Count", returnOrder.Count)
+            };
+
+                var affectedRows = context.Database.ExecuteSqlCommand("CALL returnProduct({0}, {1});", returnOrder.IdOrder, returnOrder.Count);
+
+
             }
         }
 
