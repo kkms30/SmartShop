@@ -7,7 +7,7 @@ namespace SmartShopWebApp.Persistance.Mappers
 {
     public class Report
     {
-        public String Name { get; set; } 
+        public string Name { get; set; } 
         public int Sum { get; set; }
         public decimal TotalPrice { get; set; }
     }
