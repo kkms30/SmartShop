@@ -62,13 +62,15 @@ namespace SmartShopWpf
 
                 this.Close();
             }
+
+        private void btnPayByCash_Click(object sender, RoutedEventArgs e)
+        {
+
         }
+    }
 
     
 
-        public void CheckOneKindOfPayment()
-        {
-          
-        }
-    }
+     
+    
 }
