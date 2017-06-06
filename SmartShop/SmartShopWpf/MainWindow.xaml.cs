@@ -451,7 +451,8 @@ namespace SmartShopWpf
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
-            DataHandler data = DataHandler.GetInstance();
+            DataHandler data = DataHandler.GetInstance();          
+
             float amountWithSingleWithoutOverwall = 0;
             listOfBoughtItems.Clear();
 
@@ -471,7 +472,10 @@ namespace SmartShopWpf
                 }
 
                 float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-               //      new TransactionManager().AddOrdersToTransaction(listOfBoughtItems);
+                data.Transaction.TotalPrice = price / 100;
+
+                new TransactionManager().AddOrdersToTransaction(listOfBoughtItems);
+
                 new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
 
                 pW.Owner = this;
