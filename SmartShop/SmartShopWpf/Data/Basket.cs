@@ -6,6 +6,7 @@ namespace SmartShopWpf.Data
     public class Basket
     {
         public int Number { get; set; }
+        public int IdProduct { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
         public int Count { get; set; }

@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Asynchronous\DailyReportInvoker.cs" />
+    <Compile Include="Asynchronous\MonthlyReportInvoker.cs" />
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
     <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />

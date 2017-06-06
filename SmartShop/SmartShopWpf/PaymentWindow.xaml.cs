@@ -32,7 +32,7 @@ namespace SmartShopWpf
             MainWindow mW = Owner as MainWindow;
 
             int idT = Convert.ToInt32(mW.lblTransactionNumber.Content.ToString().Trim());
-        
+
             int index = 0;
 
             float amountPrceWithSIgleWihoutOverwall = 0;
@@ -48,7 +48,6 @@ namespace SmartShopWpf
                 MainWindow.listOfBoughtItems.Clear();
                 MainWindow.listOfBoughtItems.Add(b);
             }
-
 
             float price = float.Parse(mW.lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
             //  data.Transaction.TotalPrice = price / 100;
@@ -66,11 +65,10 @@ namespace SmartShopWpf
             recp.PriceSum = dataTotalPrice;
             recp.CashNumber = Convert.ToInt32(mW.lblCashRegisterNumber.Content);
             recp.CashierNumber = Convert.ToInt32(mW.lblCashierNumber.Content);
+            if (MainWindow.listOfDeletedItems.Count > 0)
+                recp.listOfDeletedProducts = MainWindow.listOfDeletedItems;
             ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
             rPDFGen.GeneratePDF();
-
-         
-            
 
             mW.listVBasket.Items.Clear();
             MainWindow.listOfBoughtItems.Clear();
@@ -78,6 +76,8 @@ namespace SmartShopWpf
             mW.lblAmountWithoutDiscount.Content = 0;
             mW.lblTransactionNumber.Content = "";
 
+            mW.btnEdit.IsEnabled = true;
+            mW.btnVat.IsEnabled = true;
 
             this.Close();
         }

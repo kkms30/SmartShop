@@ -35,6 +35,7 @@ namespace SmartShopWpf.Data
             string getName = checkedProduct.Name.Trim();
             byte[] getImage = checkedProduct.Image;
             float getSingleWithoutVatPrice = checkedProduct.Price;
+            int getIdProduct = checkedProduct.IdProduct;
 
             double countSingleWithVat = Math.Round(getSingleWithoutVatPrice * vat, 2);
             float getSingleWithVatPrice = (float)countSingleWithVat;
@@ -45,7 +46,7 @@ namespace SmartShopWpf.Data
             //MessageBox.Show("Cena z Vatem przed float"+countSingleWithVat);
             //MessageBox.Show("Cena z Vatem po float" + getSingleWithVatPrice);
 
-            Basket basket = new Basket() { Number = counter, Name = getName, Image = getImage, Count = getCount,SigleWithoutVatPrice=getSingleWithoutVatPrice, SingleWithVatPrice = getSingleWithVatPrice, TotalPriceWithoutVat = getTotalPriceWithoutVat, TotalPriceWithVat=getTotalPriceWithVat };
+            Basket basket = new Basket() { Number = counter,IdProduct=getIdProduct, Name = getName, Image = getImage, Count = getCount,SigleWithoutVatPrice=getSingleWithoutVatPrice, SingleWithVatPrice = getSingleWithVatPrice, TotalPriceWithoutVat = getTotalPriceWithoutVat, TotalPriceWithVat=getTotalPriceWithVat };
             basketContainer = basket;
             return basket;
         }
