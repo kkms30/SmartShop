@@ -1,8 +1,6 @@
 ﻿using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Windows;
 
 namespace SmartShopWpf.Data
 {
@@ -46,7 +44,7 @@ namespace SmartShopWpf.Data
             //MessageBox.Show("Cena z Vatem przed float"+countSingleWithVat);
             //MessageBox.Show("Cena z Vatem po float" + getSingleWithVatPrice);
 
-            Basket basket = new Basket() { Number = counter,IdProduct=getIdProduct, Name = getName, Image = getImage, Count = getCount,SigleWithoutVatPrice=getSingleWithoutVatPrice, SingleWithVatPrice = getSingleWithVatPrice, TotalPriceWithoutVat = getTotalPriceWithoutVat, TotalPriceWithVat=getTotalPriceWithVat };
+            Basket basket = new Basket() { Number = counter, IdProduct = getIdProduct, Product = checkedProduct, Name = getName, Image = getImage, Count = getCount, SigleWithoutVatPrice = getSingleWithoutVatPrice, SingleWithVatPrice = getSingleWithVatPrice, TotalPriceWithoutVat = getTotalPriceWithoutVat, TotalPriceWithVat = getTotalPriceWithVat };
             basketContainer = basket;
             return basket;
         }
