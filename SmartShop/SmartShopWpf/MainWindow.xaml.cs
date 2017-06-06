@@ -471,7 +471,8 @@ namespace SmartShopWpf
                 }
 
                 float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                     new TransactionManager().AddOrdersToTransaction(listOfBoughtItems);
+
+                new TransactionManager().AddOrdersToTransaction(listOfBoughtItems);
                 new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
 
                 pW.Owner = this;
