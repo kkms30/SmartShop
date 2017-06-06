@@ -99,7 +99,7 @@ namespace SmartShopWpf
                             {
                                 b.BeforeDiscount = b.ChoseOptionPrice;
                                 b.ChoseOptionPrice = (float)Math.Round((b.ChoseOptionPrice * percent * 0.01), 2);
-                                MessageBox.Show(b.ChoseOptionPrice.ToString());
+                              
                             }
                         }
                         else

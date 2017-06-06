@@ -4,11 +4,8 @@ using SmartShopWpf.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace SmartShopWpf.Asynchronous
 {
@@ -22,9 +19,8 @@ namespace SmartShopWpf.Asynchronous
                 List<DoneTransactionViewModel> viewModels = new List<DoneTransactionViewModel>();
 
                 transactions.ForEach(t => viewModels.Add(new DoneTransactionViewModel(t)));
-                             
-                return viewModels;
 
+                return viewModels;
             }).ContinueWith((asct) =>
             {
                 transactionsListView.Dispatcher.BeginInvoke(new Action(() =>

@@ -1,7 +1,6 @@
 ﻿using SmartShopWpf.Asynchronous;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
-using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -300,7 +299,7 @@ namespace SmartShopWpf
                         lblAmountWithoutDiscount.Content = lblAmount.Content;
                     }
 
-                    if (flagToOverwallDiscount == false)
+                    if (flagToOverwallDiscount == true)
                     {
                         bool flagToChar = true;
 
@@ -357,7 +356,7 @@ namespace SmartShopWpf
                         {
                             lblTransactionNumber.Content = data.Transaction.Id;
                         }));
-                        new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount, basket.DiscountValue);
+                        new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount);
                     });
                 }
             }
@@ -375,57 +374,40 @@ namespace SmartShopWpf
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
-            float AmountPrceWithSIgleWihoutOverwall = 0;
+            int counter = 1;
 
-            foreach(Basket b in listVBasket.Items)
-               {
-
-            }
             DataHandler data = DataHandler.GetInstance();
+            float amountWithSingleWithoutOverwall=0;
+            listOfBoughtItems.Clear();
+
+            foreach (Basket b in listVBasket.Items)
+            {
+                amountWithSingleWithoutOverwall = amountWithSingleWithoutOverwall+ b.ChoseOptionPrice;
+                listOfBoughtItems.Add(b);
+            }
 
             if (data.Transaction != null)
             {
-                listOfBoughtItems.Clear();
-                foreach (Basket b in listVBasket.Items)
-                {
-                    if (b.SigleDiscountName != null)
-                    {
-                        if (flagToOverwallDiscount == true)
-                        {
-                            //b.DiscountValue = DiscountValueForOrders(DiscountWindow.overwallAmountWithDiscount);
-                        }
-                        else
-                        {
-                            b.DiscountValue = b.ChoseOptionPrice;
-                        }
+                PaymentWindow pW = new PaymentWindow(data.Transaction.TotalPrice, data.Transaction.Id);
 
-                        //b.DiscountValue = DiscountValueForOrders(DiscountWindow.overwallAmountWithDiscount, overwallAmount, b.ChoseOptionPrice, b.Count);
-                        //listOfBoughtItems.Add(b);
-                    }
-                    else
-                    {
-                    }
+                foreach (Order o in data.Transaction.Orders)
+                {
+                    foreach (Basket b in listOfBoughtItems)
+
+                        if (counter == b.Number)
+                        {
+                            b.DiscountValue = DiscountValueForOrders(overwallAmount,amountWithSingleWithoutOverwall,b.ChoseOptionPrice);
+                            o.Discount = b.DiscountValue;
+                            counter++;
+                            break;
+                        }
                 }
 
                 float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                data.Transaction.TotalPrice = price / 100;
-
-                Receipe recp = new Receipe();
-                recp.TransactionNumber = data.Transaction.Id;
-                recp.Data = DateTime.Now;
-                recp.listOfBoughtProducts = listOfBoughtItems;
-                recp.PriceSum = data.Transaction.TotalPrice;
-                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
-                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
-                ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-                rPDFGen.GeneratePDF();
-                listVBasket.Items.Clear();
-                listOfBoughtItems.Clear();
-                lblAmount.Content = 0;
-                lblAmountWithoutDiscount.Content = 0;
-                lblTransactionNumber.Content = "";
-
                 new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
+
+                pW.Owner = this;
+                pW.ShowDialog();
             }
             else
             {
@@ -591,16 +573,9 @@ namespace SmartShopWpf
             foreach (Order o in orders)
             {
                 counter++;
-                if (o.Discount == 0)
-                {
-                    ReturnObject rO = new ReturnObject { Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Product.Price };
-                    listVReturnsListOfProductsToReturn.Items.Add(rO);
-                }
-                else
-                {
-                    ReturnObject rO = new ReturnObject { Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
-                    listVReturnsListOfProductsToReturn.Items.Add(rO);
-                }
+
+                ReturnObject rO = new ReturnObject { Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
+                listVReturnsListOfProductsToReturn.Items.Add(rO);
             }
         }
 
