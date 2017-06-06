@@ -50,7 +50,7 @@ namespace SmartShopWpf
             }
 
             float price = float.Parse(mW.lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-            //  data.Transaction.TotalPrice = price / 100;
+         
 
             dataTotalPrice = price / 100;
 

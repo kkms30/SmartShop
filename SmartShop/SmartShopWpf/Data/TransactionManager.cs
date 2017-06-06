@@ -46,7 +46,8 @@ namespace SmartShopWpf.Data
         {
             Order order = new Order();
             order.Product = basket.Product;
-            order.Count = (sbyte)basket.DiscountValue;
+            order.Count = (sbyte)basket.Count;
+            order.Discount = basket.DiscountValue;
             order.ProductId = basket.Product.IdProduct;
             order.TransactionId = data.Transaction.IdTransaction;
             data.Transaction.Orders.Add(order);
