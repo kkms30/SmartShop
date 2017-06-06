@@ -1,10 +1,10 @@
 ﻿using SmartShopWpf.Data;
-using SmartShopWpf.Models;
 using SmartShopWpf.ReceipeMethods;
 using System;
-using System.Collections.Generic;
+
 using System.Globalization;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SmartShopWpf
 {
@@ -15,71 +15,87 @@ namespace SmartShopWpf
     {
         public float dataTotalPrice;
         public int dataId;
+        public bool flagToCard = false;
+        public bool flagToCash = false;
 
         public PaymentWindow(float dataTotalPrice, int dataId)
         {
             this.dataId = dataId;
-            this.dataTotalPrice = dataTotalPrice;
+            this.dataTotalPrice = dataTotalPrice;       
             InitializeComponent();
+            lblTitle.Content = lblTitle.Content + " " + dataTotalPrice.ToString();
         }
 
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
-            TransactionManager tM = new TransactionManager();
-            List<Transaction> transactions = new List<Transaction>();
-            transactions = tM.GetTransactions();
 
-            MainWindow mW = Owner as MainWindow;
-
-            int idT = Convert.ToInt32(mW.lblTransactionNumber.Content.ToString().Trim());
-
-            int index = 0;
-
-            float amountPrceWithSIgleWihoutOverwall = 0;
-
-            foreach (Basket b in mW.listVBasket.Items)
+            if (flagToCash == false && flagToCard == false)
             {
-                amountPrceWithSIgleWihoutOverwall = amountPrceWithSIgleWihoutOverwall + b.ChoseOptionPrice;
-                index++;
+                MessageBox.Show("Musisz wybrać sposób płatności");
             }
 
-            foreach (Basket b in mW.listVBasket.Items)
+            else
             {
+                MainWindow mW = Owner as MainWindow;
+
+                float price = float.Parse(mW.lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                dataTotalPrice = price / 100;
+
+                Receipe recp = new Receipe();
+                //recp.TransactionNumber = data.Transaction.Id;
+                recp.TransactionNumber = dataId;
+                recp.Data = DateTime.Now;
+                recp.listOfBoughtProducts = MainWindow.listOfBoughtItems;
+                //recp.PriceSum = data.Transaction.TotalPrice;
+
+                MessageBox.Show(dataTotalPrice.ToString());
+                recp.PriceSum = dataTotalPrice;
+                recp.CashNumber = Convert.ToInt32(mW.lblCashRegisterNumber.Content);
+                recp.CashierNumber = Convert.ToInt32(mW.lblCashierNumber.Content);
+                if (MainWindow.listOfDeletedItems.Count > 0)
+                    recp.listOfDeletedProducts = MainWindow.listOfDeletedItems;
+                ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
+                rPDFGen.GeneratePDF();
+
+                mW.listVBasket.Items.Clear();
                 MainWindow.listOfBoughtItems.Clear();
-                MainWindow.listOfBoughtItems.Add(b);
+                mW.lblAmount.Content = 0;
+                mW.lblAmountWithoutDiscount.Content = 0;
+                mW.lblTransactionNumber.Content = "";
+
+                mW.btnEdit.IsEnabled = true;
+                mW.btnVat.IsEnabled = true;
+
+                this.Close();
             }
+        }
 
-            float price = float.Parse(mW.lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-         
+        private void btnPayByCard_Click(object sender, RoutedEventArgs e)
+        {
+            flagToCard = true;
+            flagToCash = false;
+        }
 
-            dataTotalPrice = price / 100;
+        private void BtnPayByCash_Click(object sender, RoutedEventArgs e)
+        {
+            flagToCash = true;
+            flagToCard = false;
+        }
 
-            Receipe recp = new Receipe();
-            //recp.TransactionNumber = data.Transaction.Id;
-            recp.TransactionNumber = dataId;
-            recp.Data = DateTime.Now;
-            recp.listOfBoughtProducts = MainWindow.listOfBoughtItems;
-            //recp.PriceSum = data.Transaction.TotalPrice;
+        public void CheckOneKindOfPayment()
+        {
+            if (flagToCard == true && flagToCash == false)
+            {
+                btnPayByCard.Background = new SolidColorBrush(Colors.White);
+                btnPayByCash.Background = new SolidColorBrush(Colors.DarkOrange);
+            }
+            if (flagToCash == true && flagToCard == false)
 
-            MessageBox.Show(dataTotalPrice.ToString());
-            recp.PriceSum = dataTotalPrice;
-            recp.CashNumber = Convert.ToInt32(mW.lblCashRegisterNumber.Content);
-            recp.CashierNumber = Convert.ToInt32(mW.lblCashierNumber.Content);
-            if (MainWindow.listOfDeletedItems.Count > 0)
-                recp.listOfDeletedProducts = MainWindow.listOfDeletedItems;
-            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-            rPDFGen.GeneratePDF();
-
-            mW.listVBasket.Items.Clear();
-            MainWindow.listOfBoughtItems.Clear();
-            mW.lblAmount.Content = 0;
-            mW.lblAmountWithoutDiscount.Content = 0;
-            mW.lblTransactionNumber.Content = "";
-
-            mW.btnEdit.IsEnabled = true;
-            mW.btnVat.IsEnabled = true;
-
-            this.Close();
+            {
+                btnPayByCash.Background = new SolidColorBrush(Colors.White);
+                btnPayByCard.Background = new SolidColorBrush(Colors.DarkOrange);
+            }
         }
     }
 }
