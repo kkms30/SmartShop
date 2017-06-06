@@ -11,10 +11,10 @@
 
     <Grid Background="{StaticResource FrameToDiscount}" Height="310" Width="490">
 
-        <Label  x:Name="lblTitle"    HorizontalAlignment="Left" VerticalAlignment="Top" Height="45"  Width="436" Margin="26,18,0,0"   Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Wybierz sposób płatności"   Style="{StaticResource LblFont26}"    HorizontalContentAlignment="Center" />
-        <Label  x:Name="lblToPayTag" HorizontalAlignment="Left" VerticalAlignment="Top" Height="43"  Width="293" Margin="100,111,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Do Zapłaty:"                Style="{StaticResource LblFont14}"    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button x:Name="btnPayByCash" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" Width="293"  Margin="100,153,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Gotówka" Style="{StaticResource BtnFontOrange12.5}" Click="btnPayByCash_Click" />
-        <Button x:Name="btnPay"       HorizontalAlignment="Left" VerticalAlignment="Top" Height="43" Width="293"  Margin="100,212,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zapłać" Style="{StaticResource BtnFontRed12.5}" Click="btnPay_Click" />
+        <Label  x:Name="lblTitle"         HorizontalAlignment="Left" VerticalAlignment="Top" Height="45"  Width="436" Margin="26,18,0,0"   Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Wybierz sposób płatności"   Style="{StaticResource LblFont26}"    HorizontalContentAlignment="Center" />
+        <Label  x:Name="lblToPayTag"      HorizontalAlignment="Left" VerticalAlignment="Top" Height="43"  Width="293" Margin="100,111,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Do Zapłaty:"                Style="{StaticResource LblFont14}"    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Button x:Name="btnKinfOfPayment" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" Width="293"  Margin="100,153,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Gotówka" Style="{StaticResource BtnFontOrange12.5}" Click="btnKinfOfPayment_Click" />
+        <Button x:Name="btnPay"           HorizontalAlignment="Left" VerticalAlignment="Top" Height="43" Width="293"  Margin="100,212,0,0" Background="{StaticResource Red}"    BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zapłać" Style="{StaticResource BtnFontRed12.5}" Click="btnPay_Click" />
 
 
     </Grid>

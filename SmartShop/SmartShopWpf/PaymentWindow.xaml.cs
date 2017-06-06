@@ -63,9 +63,19 @@ namespace SmartShopWpf
                 this.Close();
             }
 
-        private void btnPayByCash_Click(object sender, RoutedEventArgs e)
+        private void btnKinfOfPayment_Click(object sender, RoutedEventArgs e)
         {
+            if(flagToKindOfPayment==true)
+            {
+                btnKinfOfPayment.Content = "Karta";
+                flagToKindOfPayment = false;
+            }
 
+            else
+            {
+                btnKinfOfPayment.Content = "Gotówka";
+                flagToKindOfPayment = true;
+            }
         }
     }
 
