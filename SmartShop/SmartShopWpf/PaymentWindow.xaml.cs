@@ -15,8 +15,8 @@ namespace SmartShopWpf
     {
         public float dataTotalPrice;
         public int dataId;
-        public bool flagToCard = false;
-        public bool flagToCash = false;
+        public bool flagToKindOfPayment = true;
+        
 
         public PaymentWindow(float dataTotalPrice, int dataId)
         {
@@ -28,14 +28,7 @@ namespace SmartShopWpf
 
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
-
-            if (flagToCash == false && flagToCard == false)
-            {
-                MessageBox.Show("Musisz wybrać sposób płatności");
-            }
-
-            else
-            {
+            
                 MainWindow mW = Owner as MainWindow;
 
                 float price = float.Parse(mW.lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
@@ -71,31 +64,11 @@ namespace SmartShopWpf
             }
         }
 
-        private void btnPayByCard_Click(object sender, RoutedEventArgs e)
-        {
-            flagToCard = true;
-            flagToCash = false;
-        }
-
-        private void BtnPayByCash_Click(object sender, RoutedEventArgs e)
-        {
-            flagToCash = true;
-            flagToCard = false;
-        }
+    
 
         public void CheckOneKindOfPayment()
         {
-            if (flagToCard == true && flagToCash == false)
-            {
-                btnPayByCard.Background = new SolidColorBrush(Colors.White);
-                btnPayByCash.Background = new SolidColorBrush(Colors.DarkOrange);
-            }
-            if (flagToCash == true && flagToCard == false)
-
-            {
-                btnPayByCash.Background = new SolidColorBrush(Colors.White);
-                btnPayByCard.Background = new SolidColorBrush(Colors.DarkOrange);
-            }
+          
         }
     }
 }
