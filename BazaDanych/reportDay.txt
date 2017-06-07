@@ -1,0 +1,7 @@
+create procedure reportDay()
+BEGIN
+select p.Name, SUM(o.Count), (p.Price * SUM(o.Count)) as 'sell'
+from Orders o join Transactions t join Products p
+where o.TransactionId = t.IdTransaction and o.ProductId = p.IdProduct and o.`Return` = 0
+and day(t.Date) = day(curdate()) group by Name with rollup;
+END
