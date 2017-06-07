@@ -626,38 +626,16 @@ namespace SmartShopWpf
         private void btnReturnsSearch_Click(object sender, RoutedEventArgs e)
         {
             listVReturnsListOfProductsToReturn.Items.Clear();
-            TransactionManager tM = new TransactionManager();
-            List<Transaction> transactions = tM.GetTransactions();
-            List<Order> orders = new List<Order>();
-            int idT = 0;
 
-            string getIdTFromTxt = txtReturnsNumberOfTransaction.Text;
+            string idTransactionText = txtReturnsNumberOfTransaction.Text;
+            int idTransaction = 0;
 
-            try { idT = Convert.ToInt32(getIdTFromTxt); }
+            try { idTransaction = Convert.ToInt32(idTransactionText); }
             catch { MessageBox.Show("Zły format"); }
 
-            foreach (Transaction t in transactions)
-            {
-                if (t.Id == idT)
-                {
-                    IdTransToReturn = t.Id;
-                    foreach (Order o in t.Orders)
-                    {
-                        orders.Add(o);
-                    }
-
-                    break;
-                }
-            }
-
-            int counter = 0;
-            foreach (Order o in orders)
-            {
-                counter++;
-
-                ReturnObject rO = new ReturnObject { IdOrder = o.IdOrder, Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
-                listVReturnsListOfProductsToReturn.Items.Add(rO);
-            }
+            ReturnSearchInvoker returnSearchInvoker = new ReturnSearchInvoker();
+            returnSearchInvoker.ShowReturnedProducts(idTransaction, listVReturnsListOfProductsToReturn, informationLabel);
+            informationLabel.Content = "Szukam transakcji...";
         }
 
         private void btnReturnsTickAll_Click(object sender, RoutedEventArgs e)
@@ -691,52 +669,60 @@ namespace SmartShopWpf
 
         private void btnReturnsReturn_Click(object sender, RoutedEventArgs e)
         {
+            bool alreadyReturned = false;
+
             List<ReturnObject> listReturns = new List<ReturnObject>();
             List<ReturnObject> listRecipeBeforeReturn = new List<ReturnObject>();
-            float priceToReturn=0;
+            float priceToReturn = 0;
             float totalPriceAfterReturn = 0;
-            
 
             foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.Items)
             {
                 listRecipeBeforeReturn.Add(returnObject);
-              
             }
 
             foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
             {
+                if (returnObject.ReturnedText.Equals("TAK"))
+                {
+                    alreadyReturned = true;
+                }
+
                 listReturns.Add(returnObject);
                 priceToReturn = priceToReturn + (float)returnObject.Discount;
             }
 
-
             if (listVReturnsListOfProductsToReturn.SelectedItems.Count >= 1)
             {
-                ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
-                returnOrderInvoker.Return();
+                if (!alreadyReturned)
+                {
+                    ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
+                    returnOrderInvoker.Return();
 
-                Receipe recp = new Receipe();
-                recp.TransactionNumber = IdTransToReturn;
-                recp.Data = DateTime.Now;
-                recp.listOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
-                recp.PriceToReturn = priceToReturn;
-                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
-                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+                    Receipe recp = new Receipe();
+                    recp.TransactionNumber = IdTransToReturn;
+                    recp.Data = DateTime.Now;
+                    recp.listOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
+                    recp.PriceToReturn = priceToReturn;
+                    recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+                    recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
 
-                if (listReturns.Count > 0)
-                    recp.listOfReturnsOrders = listReturns;
-                ReturnPDFGenerator rPDFGen = new ReturnPDFGenerator(recp);
-                rPDFGen.GeneratePDF();
+                    if (listReturns.Count > 0)
+                        recp.listOfReturnsOrders = listReturns;
+                    ReturnPDFGenerator rPDFGen = new ReturnPDFGenerator(recp);
+                    rPDFGen.GeneratePDF();
 
-
-                listVReturnsListOfProductsToReturn.Items.Clear();
-                txtReturnsNumberOfTransaction.Text = "";
-
+                    listVReturnsListOfProductsToReturn.Items.Clear();
+                    txtReturnsNumberOfTransaction.Text = "";
+                }
+                else
+                {
+                    informationLabel.Content = "Produkt już został zwrócony";
+                }
             }
-
             else
             {
-                MessageBox.Show("Wybierz Produkt do zwrotu!");
+                informationLabel.Content = "Wybierz Produkt do zwrotu!";
             }
         }
     }

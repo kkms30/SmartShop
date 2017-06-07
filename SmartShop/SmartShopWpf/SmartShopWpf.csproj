@@ -71,6 +71,7 @@
     <Compile Include="Asynchronous\MonthlyReportInvoker.cs" />
     <Compile Include="Asynchronous\DoneTransactionInvoker.cs" />
     <Compile Include="Asynchronous\ReturnOrderInvoker.cs" />
+    <Compile Include="Asynchronous\ReturnSearchInvoker.cs" />
     <Compile Include="Asynchronous\Top10Invoker.cs" />
     <Compile Include="Asynchronous\TransactionFinalizationInvoker.cs" />
     <Compile Include="Data\OrderManager.cs" />
