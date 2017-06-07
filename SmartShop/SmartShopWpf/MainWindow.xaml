@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartShopWpf"
         mc:Ignorable="d"
+        Icon="shop.ico"
         Background="{StaticResource Black}"
         ResizeMode="NoResize"
         Title="MainWindow" Height="729" Width="1131">
@@ -48,7 +49,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr" Width="30"   DisplayMemberBinding="{Binding Number}"  />
-                    <GridViewColumn Header="Nazwa produktu" Width="170">
+                    <GridViewColumn Header="Nazwa produktu" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
@@ -63,10 +64,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Ilość"   Width="70" DisplayMemberBinding="{Binding Count}"/>
-                    <GridViewColumn Header="Cena"    Width="70" DisplayMemberBinding="{Binding ChoseOptionPrice}"/>
-                    <GridViewColumn Header="Zniżka C"  Width="70" DisplayMemberBinding="{Binding OverwallDiscountName}"/>
-                    <GridViewColumn Header="Zniżka K"  Width="70" DisplayMemberBinding="{Binding SigleDiscountName}"/>
+                    <GridViewColumn Header="Ilość"   Width="50" DisplayMemberBinding="{Binding Count}"/>
+                    <GridViewColumn Header="Cena"    Width="65" DisplayMemberBinding="{Binding ChoseOptionPrice}"/>
+                    <GridViewColumn Header="Zniżka C"  Width="65" DisplayMemberBinding="{Binding OverwallDiscountName}"/>
+                    <GridViewColumn Header="Zniżka K"  Width="65" DisplayMemberBinding="{Binding SigleDiscountName}"/>
 
                 </GridView>
             </ListView.View>

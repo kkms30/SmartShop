@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartShopWpf"
         mc:Ignorable="d"
+        Icon="shop.ico"
         Background="{StaticResource White}"
         ResizeMode="NoResize"
         Title="DiscountWindow" Height="350" Width="510">
