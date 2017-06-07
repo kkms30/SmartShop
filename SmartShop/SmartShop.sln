@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShopWpf", "SmartShopWpf\SmartShopWpf.csproj", "{10CBF05A-4D27-4D6F-8C40-76C2138504B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShopWebApp", "SmartShopWebApp\SmartShopWebApp.csproj", "{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShop.Tests", "SmartShop.Tests\SmartShop.Tests.csproj", "{5B3C7C5D-D3B8-4462-BDAF-E3484ABD327F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginMockLogowanie", "PluginMockLogowanie\PluginMockLogowanie.csproj", "{77FC000D-71FA-4B52-8361-5259834C7767}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShop.Models", "SmartShop.Models\SmartShop.Models.csproj", "{5C8528E3-AFAD-420A-9D67-023E2CE6881A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShop.CommunicateToWebService", "SmartShop.CommunicateToWebService\SmartShop.CommunicateToWebService.csproj", "{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginLogIn", "PluginLogIn\PluginLogIn.csproj", "{7BFBB479-6B69-4B3F-9538-E5D7A5603C71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10CBF05A-4D27-4D6F-8C40-76C2138504B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CBF05A-4D27-4D6F-8C40-76C2138504B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CBF05A-4D27-4D6F-8C40-76C2138504B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CBF05A-4D27-4D6F-8C40-76C2138504B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE52FE3-B90E-4BAC-B9FA-F95D62B8E2DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3C7C5D-D3B8-4462-BDAF-E3484ABD327F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3C7C5D-D3B8-4462-BDAF-E3484ABD327F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3C7C5D-D3B8-4462-BDAF-E3484ABD327F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3C7C5D-D3B8-4462-BDAF-E3484ABD327F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77FC000D-71FA-4B52-8361-5259834C7767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77FC000D-71FA-4B52-8361-5259834C7767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77FC000D-71FA-4B52-8361-5259834C7767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77FC000D-71FA-4B52-8361-5259834C7767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C8528E3-AFAD-420A-9D67-023E2CE6881A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BE606F-69AB-4BC3-AEF3-9E8DEDACF1C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BFBB479-6B69-4B3F-9538-E5D7A5603C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BFBB479-6B69-4B3F-9538-E5D7A5603C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BFBB479-6B69-4B3F-9538-E5D7A5603C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BFBB479-6B69-4B3F-9538-E5D7A5603C71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
