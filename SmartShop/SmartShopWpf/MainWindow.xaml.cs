@@ -1,6 +1,7 @@
 ﻿using SmartShopWpf.Asynchronous;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;
+using SmartShopWpf.ReceipeMethods;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,6 +24,7 @@ namespace SmartShopWpf
         public static bool flagToTagKindOfDiscount = true;
         public static bool flagToOverwallDiscount = false;
         public static string totalPriceToPaymentLabel;
+        public static int IdTransToReturn;
 
         public static List<Basket> listOfBoughtItems = new List<Basket>();
 
@@ -331,9 +333,8 @@ namespace SmartShopWpf
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
-                    flagToTagForManuDisp = false;                    
+                    flagToTagForManuDisp = false;
                     tabFromList.IsEnabled = false;
-                   
                 }
                 else
                 {
@@ -639,7 +640,7 @@ namespace SmartShopWpf
             {
                 if (t.Id == idT)
                 {
-                    MessageBox.Show(t.Id.ToString());
+                    IdTransToReturn = t.Id;
                     foreach (Order o in t.Orders)
                     {
                         orders.Add(o);
@@ -691,16 +692,52 @@ namespace SmartShopWpf
         private void btnReturnsReturn_Click(object sender, RoutedEventArgs e)
         {
             List<ReturnObject> listReturns = new List<ReturnObject>();
-            foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
+            List<ReturnObject> listRecipeBeforeReturn = new List<ReturnObject>();
+            float priceToReturn=0;
+            float totalPriceAfterReturn = 0;
+            
+
+            foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.Items)
             {
-                MessageBox.Show(returnObject.IdOrder.ToString() + " " + returnObject.Count.ToString());
-                listReturns.Add(returnObject);
+                listRecipeBeforeReturn.Add(returnObject);
+              
             }
 
-            ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
-            returnOrderInvoker.Return();
-            listVReturnsListOfProductsToReturn.Items.Clear();
-            txtReturnsNumberOfTransaction.Text = "";
+            foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
+            {
+                listReturns.Add(returnObject);
+                priceToReturn = priceToReturn + (float)returnObject.Discount;
+            }
+
+
+            if (listVReturnsListOfProductsToReturn.SelectedItems.Count >= 1)
+            {
+                ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
+                returnOrderInvoker.Return();
+
+                Receipe recp = new Receipe();
+                recp.TransactionNumber = IdTransToReturn;
+                recp.Data = DateTime.Now;
+                recp.listOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
+                recp.PriceToReturn = priceToReturn;
+                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+
+                if (listReturns.Count > 0)
+                    recp.listOfReturnsOrders = listReturns;
+                ReturnPDFGenerator rPDFGen = new ReturnPDFGenerator(recp);
+                rPDFGen.GeneratePDF();
+
+
+                listVReturnsListOfProductsToReturn.Items.Clear();
+                txtReturnsNumberOfTransaction.Text = "";
+
+            }
+
+            else
+            {
+                MessageBox.Show("Wybierz Produkt do zwrotu!");
+            }
         }
     }
 }
