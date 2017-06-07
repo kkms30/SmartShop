@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SmartShopWpf"
         mc:Ignorable="d"
         ResizeMode="NoResize"
+        Icon="shop.ico"
         Title="Okno Logowania" Height="729" Width="1131">
 
     <Window.Resources>

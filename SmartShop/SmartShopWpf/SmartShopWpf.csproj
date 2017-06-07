@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>shop.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Spire.License, Version=1.3.6.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\Spire.PDF.3.9.82\lib\net40\Spire.License.dll</HintPath>
@@ -181,6 +184,9 @@
   <ItemGroup>
     <Resource Include="Rescources\Images\FrameToDiscount.png" />
     <Resource Include="Rescources\Images\SMlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="shop.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
