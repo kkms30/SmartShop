@@ -678,7 +678,11 @@ namespace SmartShopWpf
 
             foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.Items)
             {
-                listRecipeBeforeReturn.Add(returnObject);
+                if (returnObject.ReturnedText.Equals("NIE"))
+                {
+                    listRecipeBeforeReturn.Add(returnObject);
+                    totalPriceAfterReturn = totalPriceAfterReturn + (float)returnObject.Discount;
+                }
             }
 
             foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
@@ -690,6 +694,7 @@ namespace SmartShopWpf
 
                 listReturns.Add(returnObject);
                 priceToReturn = priceToReturn + (float)returnObject.Discount;
+                totalPriceAfterReturn = totalPriceAfterReturn - (float)returnObject.Discount;
             }
 
             if (listVReturnsListOfProductsToReturn.SelectedItems.Count >= 1)
@@ -704,6 +709,7 @@ namespace SmartShopWpf
                     recp.Data = DateTime.Now;
                     recp.listOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
                     recp.PriceToReturn = priceToReturn;
+                    recp.PriceSum = totalPriceAfterReturn;
                     recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
                     recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
 
