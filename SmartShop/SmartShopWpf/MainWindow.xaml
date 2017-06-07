@@ -112,7 +112,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Kod z Listy" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="80" Margin="-3,1,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TabItmFontOrange12.5}">
+            <TabItem Name="tabFromList" Header="Kod z Listy" HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="22" Width="80" Margin="-3,1,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TabItmFontOrange12.5}">
 
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="425"  Margin="0,10,0,0" Background="{StaticResource Black}" Focusable="True">
                     <Grid.ColumnDefinitions>
@@ -232,34 +232,27 @@
                     <TextBox x:Name="txtReturnsNumberOfTransaction" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="45" Width="333" Margin="24,14,0,0"  Background="{StaticResource Red}"       BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource TxtFont26}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FocusVisualStyle="{x:Null}" Tag="Wyszukaj..."  />
                     <Button  x:Name="btnReturnsSearch"              HorizontalAlignment="Left"  VerticalAlignment="Top" Height="45" Width="43"  Margin="357,14,0,0" Background="{StaticResource Loupe}"     BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Style="{StaticResource BtnLoupe}" Click="btnReturnsSearch_Click" />
 
-                    <ListView x:Name="listVReturnsListOfProductsToReturn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="336"  Width="376" Margin="24,58,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}">
+                    <ListView x:Name="listVReturnsListOfProductsToReturn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="336"  Width="376" Margin="24,58,0,0" Background="{StaticResource Orange}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Nr" Width="30"   DisplayMemberBinding="{Binding Number}"  />
-                                <GridViewColumn Header="Nazwa produktu" Width="170">
+                               
+                                <GridViewColumn Header="Nazwa produktu" Width="120">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-
-                                <GridViewColumn Header="Zdjęcie" Width="55">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Image Source="{Binding Image}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Ilość"   Width="70" DisplayMemberBinding="{Binding Count}"/>
-                                <GridViewColumn Header="Cena"    Width="70" DisplayMemberBinding="{Binding Price}"/>
-                                <GridViewColumn Header="Zniżka"    Width="70" DisplayMemberBinding="{Binding Discount}"/>
+                                </GridViewColumn>                             
+                               
+                                <GridViewColumn Header="Ilość"   Width="40" DisplayMemberBinding="{Binding Count}"/>
+                                <GridViewColumn Header="Cena poj. netto"    Width="100" DisplayMemberBinding="{Binding Price}"/>
+                                <GridViewColumn Header="Kwota do zwrotu"    Width="110" DisplayMemberBinding="{Binding Discount}"/>
                                 <GridViewColumn/>
                             </GridView>
                         </ListView.View>
                     </ListView>
                     <Button x:Name="btnReturnsTickAll" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="376" Margin="24,393,0,0" Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zaznacz Wszystkie" Style="{StaticResource BtnFontRed18}" Click="btnReturnsTickAll_Click" />
-                    <Button x:Name="btnReturnsReturn"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="376" Margin="24,420,0,0" Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zwróć"             Style="{StaticResource BtnFontRed30}" />
+                    <Button x:Name="btnReturnsReturn"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="376" Margin="24,420,0,0" Background="{StaticResource Red}" BorderThickness="1,1,1,1" BorderBrush="{StaticResource White}" Content="Zwróć"             Style="{StaticResource BtnFontRed30}" Click="btnReturnsReturn_Click" />
                 </Grid>
             </TabItem>
 

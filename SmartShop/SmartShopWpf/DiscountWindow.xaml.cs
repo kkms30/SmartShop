@@ -27,13 +27,11 @@ namespace SmartShopWpf
         {
             if (flagToTagTypeOfDiscount)
             {
-                lblKindOfDis.Content = "Zniżka Kwotowa";
                 btnTypeOfDiscount.Content = "zł";
                 flagToTagTypeOfDiscount = false;
             }
             else
             {
-                lblKindOfDis.Content = "Zniżka Procentowa";
                 btnTypeOfDiscount.Content = "%";
                 flagToTagTypeOfDiscount = true;
             }
@@ -99,7 +97,6 @@ namespace SmartShopWpf
                             {
                                 b.BeforeDiscount = b.ChoseOptionPrice;
                                 b.ChoseOptionPrice = (float)Math.Round((b.ChoseOptionPrice * percent * 0.01), 2);
-                              
                             }
                         }
                         else

@@ -10,6 +10,7 @@ namespace SmartShopWpf.Data
     {
         public const string NAME = "SMARTSHOP";
         public const string ADDRESS = "Katowice, ul. Mariusza Cebuli 8";
+        public string kindOfPayment { get; set; }
         public int TransactionNumber { get; set; }
         public DateTime Data { get; set; }
         public List<Basket> listOfBoughtProducts { get; set; }

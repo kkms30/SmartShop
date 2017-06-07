@@ -189,6 +189,7 @@ namespace SmartShopWpf.ReceipeMethods
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page4.Canvas.DrawPath(pen2, path2);
 
+                page4.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagefourh + 10, leftAlignment);
                 page4.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
 
             }
@@ -200,7 +201,7 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page3.Canvas.DrawPath(pen2, path2);
-
+                page3.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagethreeh + 10, leftAlignment);
                 page3.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
 
             }
@@ -212,7 +213,7 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page2.Canvas.DrawPath(pen2, path2);
-
+                page2.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagetwoh + 10, leftAlignment);
                 page2.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
 
             }
@@ -224,7 +225,7 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page.Canvas.DrawPath(pen2, path2);
-
+                page.Canvas.DrawString("PLATNOSC: "+_recp.kindOfPayment, font2, brush, 0, pageoneh + 10, leftAlignment);
                 page.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
 
             }

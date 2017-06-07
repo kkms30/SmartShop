@@ -22,12 +22,15 @@ namespace SmartShopWpf
         private bool flagToEditQuantity = false;
         public static bool flagToTagKindOfDiscount = true;
         public static bool flagToOverwallDiscount = false;
+        public static string totalPriceToPaymentLabel;
 
         public static List<Basket> listOfBoughtItems = new List<Basket>();
 
         static public float overwallAmount;
 
         public static List<Basket> listOfDeletedItems = new List<Basket>();
+
+        public object tabFormList { get; private set; }
 
         public MainWindow(bool withPlugin)
         {
@@ -312,6 +315,7 @@ namespace SmartShopWpf
 
         private async void btnManuallyAdd_Click(object sender, RoutedEventArgs e)
         {
+            tabFromList.IsEnabled = true;
             string tagForManuDisplCode = "Kod produktu";
             string tagForManuDisplQuan = "Ilość";
             ManuallyCode manCod = ManuallyCode.GetInstance();
@@ -327,7 +331,9 @@ namespace SmartShopWpf
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
-                    flagToTagForManuDisp = false;
+                    flagToTagForManuDisp = false;                    
+                    tabFromList.IsEnabled = false;
+                   
                 }
                 else
                 {
@@ -451,7 +457,8 @@ namespace SmartShopWpf
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
-            DataHandler data = DataHandler.GetInstance();          
+            DataHandler data = DataHandler.GetInstance();
+            totalPriceToPaymentLabel = lblAmount.Content.ToString();
 
             float amountWithSingleWithoutOverwall = 0;
             listOfBoughtItems.Clear();
@@ -632,6 +639,7 @@ namespace SmartShopWpf
             {
                 if (t.Id == idT)
                 {
+                    MessageBox.Show(t.Id.ToString());
                     foreach (Order o in t.Orders)
                     {
                         orders.Add(o);
@@ -646,13 +654,13 @@ namespace SmartShopWpf
             {
                 counter++;
 
-                ReturnObject rO = new ReturnObject { Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
+                ReturnObject rO = new ReturnObject { IdOrder = o.IdOrder, Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
                 listVReturnsListOfProductsToReturn.Items.Add(rO);
             }
         }
 
         private void btnReturnsTickAll_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             string ContentTick = "Zaznacz Wszystkie";
             string ContentUnTick = "Odznacz Wszystkie";
 
@@ -678,6 +686,21 @@ namespace SmartShopWpf
         private void monthlyReportBtn_Click(object sender, RoutedEventArgs e)
         {
             new MonthlyReportInvoker().Download();
+        }
+
+        private void btnReturnsReturn_Click(object sender, RoutedEventArgs e)
+        {
+            List<ReturnObject> listReturns = new List<ReturnObject>();
+            foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
+            {
+                MessageBox.Show(returnObject.IdOrder.ToString() + " " + returnObject.Count.ToString());
+                listReturns.Add(returnObject);
+            }
+
+            ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
+            returnOrderInvoker.Return();
+            listVReturnsListOfProductsToReturn.Items.Clear();
+            txtReturnsNumberOfTransaction.Text = "";
         }
     }
 }
