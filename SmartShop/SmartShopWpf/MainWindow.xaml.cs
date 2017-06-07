@@ -331,9 +331,9 @@ namespace SmartShopWpf
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
-                    flagToTagForManuDisp = false;                    
+                    flagToTagForManuDisp = false;
                     tabFromList.IsEnabled = false;
-                   
+
                 }
                 else
                 {
@@ -625,38 +625,16 @@ namespace SmartShopWpf
         private void btnReturnsSearch_Click(object sender, RoutedEventArgs e)
         {
             listVReturnsListOfProductsToReturn.Items.Clear();
-            TransactionManager tM = new TransactionManager();
-            List<Transaction> transactions = tM.GetTransactions();
-            List<Order> orders = new List<Order>();
-            int idT = 0;
 
-            string getIdTFromTxt = txtReturnsNumberOfTransaction.Text;
+            string idTransactionText = txtReturnsNumberOfTransaction.Text;
+            int idTransaction = 0;
 
-            try { idT = Convert.ToInt32(getIdTFromTxt); }
+            try { idTransaction = Convert.ToInt32(idTransactionText); }
             catch { MessageBox.Show("Zły format"); }
 
-            foreach (Transaction t in transactions)
-            {
-                if (t.Id == idT)
-                {
-                    MessageBox.Show(t.Id.ToString());
-                    foreach (Order o in t.Orders)
-                    {
-                        orders.Add(o);
-                    }
-
-                    break;
-                }
-            }
-
-            int counter = 0;
-            foreach (Order o in orders)
-            {
-                counter++;
-
-                ReturnObject rO = new ReturnObject { IdOrder = o.IdOrder, Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
-                listVReturnsListOfProductsToReturn.Items.Add(rO);
-            }
+            ReturnSearchInvoker returnSearchInvoker = new ReturnSearchInvoker();
+            returnSearchInvoker.ShowReturnedProducts(idTransaction, listVReturnsListOfProductsToReturn, informationLabel);
+            informationLabel.Content = "Szukam transakcji...";
         }
 
         private void btnReturnsTickAll_Click(object sender, RoutedEventArgs e)
@@ -690,17 +668,27 @@ namespace SmartShopWpf
 
         private void btnReturnsReturn_Click(object sender, RoutedEventArgs e)
         {
+            bool alreadyReturned = false;
+
             List<ReturnObject> listReturns = new List<ReturnObject>();
             foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
             {
-                MessageBox.Show(returnObject.IdOrder.ToString() + " " + returnObject.Count.ToString());
+                if (returnObject.ReturnedText.Equals("TAK"))
+                {
+                    alreadyReturned = true;
+                }                                
                 listReturns.Add(returnObject);
             }
 
-            ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
-            returnOrderInvoker.Return();
-            listVReturnsListOfProductsToReturn.Items.Clear();
-            txtReturnsNumberOfTransaction.Text = "";
+            if (!alreadyReturned) {
+                ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
+                returnOrderInvoker.Return();
+                listVReturnsListOfProductsToReturn.Items.Clear();
+                txtReturnsNumberOfTransaction.Text = "";
+            } else
+            {
+                informationLabel.Content = "Produkt już został zwrócony";
+            }
         }
     }
 }
