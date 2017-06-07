@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using SmartShopWpf.Models;
+using System;
 using System.Windows.Controls;
 
 namespace SmartShopWpf.Data
@@ -6,6 +8,8 @@ namespace SmartShopWpf.Data
     public class Basket
     {
         public int Number { get; set; }
+        public Product Product { get; set; }
+        public int IdProduct { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
         public int Count { get; set; }

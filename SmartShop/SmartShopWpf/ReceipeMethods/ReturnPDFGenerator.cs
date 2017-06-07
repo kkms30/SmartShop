@@ -1,8 +1,6 @@
 ﻿using SmartShopWpf.Data;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
-using Spire.Pdf.Lists;
-using Spire.Pdf.Tables;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace SmartShopWpf.ReceipeMethods
 {
-    public class ReceipePDFGenerator
+    class ReturnPDFGenerator
     {
+
         Receipe _recp;
-        public ReceipePDFGenerator(Receipe recp)
+        public ReturnPDFGenerator(Receipe recp)
         {
             _recp = recp;
         }
@@ -54,7 +53,7 @@ namespace SmartShopWpf.ReceipeMethods
                 font, brush, page.Canvas.ClientSize.Width / 2, 30, centerAlignment2);
             PdfStringFormat centerAlignment3
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString("PARAGON FISKALNY",
+            page.Canvas.DrawString("PARAGON FISKALNY - ZWROT",
                 font, brush, page.Canvas.ClientSize.Width / 2, 50, centerAlignment3);
 
             PdfPath path = new PdfPath();
@@ -69,74 +68,64 @@ namespace SmartShopWpf.ReceipeMethods
             float pagethreeh = 20;
             float pagefourh = 20;
             //_recp.listOfBoughtProducts.RemoveRange(24, _recp.listOfBoughtProducts.Count-24);
-            foreach (var x in _recp.listOfBoughtProducts)
+            foreach (var x in _recp.listOfAllOrdersInTransactionToReturn)
             {
-                string ilosc = "";
-                string cena = x.ChoseOptionPrice.ToString();
-                if (x.OverwallDiscountName!=null && x.SigleDiscountName==null)
+                if (!_recp.listOfReturnsOrders.Contains(x))
                 {
-                    ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName);
-                }
-                else if(x.SigleDiscountName!=null && x.OverwallDiscountName==null)
-                {
-                    ilosc = (x.Count.ToString() + ",Znizka Poj." + x.SigleDiscountName);
-                }
-                else if (x.SigleDiscountName != null && x.OverwallDiscountName != null)
-                {
-                    ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName + ",Znizka Poj." + x.SigleDiscountName);
-                }
-                else
-                {
+                    string ilosc = "";
+                    string cena = x.Discount.ToString();
+
                     ilosc = x.Count.ToString();
-                }
-                string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
-                if (pageoneh < 310)
-                {
-                    page.Canvas.DrawString(nazwa, font2, brush, 0, pageoneh, leftAlignment);
-                    page.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pageoneh, rightAlignment);
-                    pageoneh += 10;
-                }
-                if (pageoneh == 310)
-                {
-                    if (page2 == null)
-                        page2 = doc.Pages.Add(PdfPageSize.A6);
-                }
-                if (pageoneh == 310 && pagetwoh < 310)
-                {
-                    page2.Canvas.DrawString(nazwa, font2, brush, 0, pagetwoh, leftAlignment);
-                    page2.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagetwoh, rightAlignment);
-                    pagetwoh += 10;
-                }
-                if (pagetwoh == 310)
-                {
-                    if (page3 == null)
-                        page3 = doc.Pages.Add(PdfPageSize.A6);
-                }
-                if (pagetwoh == 310 && pagethreeh < 310)
-                {
-                    page3.Canvas.DrawString(nazwa, font2, brush, 0, pagethreeh, leftAlignment);
-                    page3.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagethreeh, rightAlignment);
-                    pagethreeh += 10;
-                }
-                if (pagethreeh == 310)
-                {
-                    if (page4 == null)
-                        page4 = doc.Pages.Add(PdfPageSize.A6);
-                }
-                if (pagethreeh == 310 && pagefourh < 310)
-                {
-                    page4.Canvas.DrawString(nazwa, font2, brush, 0, pagefourh, leftAlignment);
-                    page4.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagefourh, rightAlignment);
-                    pagefourh += 10;
+
+                    string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
+                    if (pageoneh < 310)
+                    {
+                        page.Canvas.DrawString(nazwa, font2, brush, 0, pageoneh, leftAlignment);
+                        page.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pageoneh, rightAlignment);
+                        pageoneh += 10;
+                    }
+                    if (pageoneh == 310)
+                    {
+                        if (page2 == null)
+                            page2 = doc.Pages.Add(PdfPageSize.A6);
+                    }
+                    if (pageoneh == 310 && pagetwoh < 310)
+                    {
+                        page2.Canvas.DrawString(nazwa, font2, brush, 0, pagetwoh, leftAlignment);
+                        page2.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagetwoh, rightAlignment);
+                        pagetwoh += 10;
+                    }
+                    if (pagetwoh == 310)
+                    {
+                        if (page3 == null)
+                            page3 = doc.Pages.Add(PdfPageSize.A6);
+                    }
+                    if (pagetwoh == 310 && pagethreeh < 310)
+                    {
+                        page3.Canvas.DrawString(nazwa, font2, brush, 0, pagethreeh, leftAlignment);
+                        page3.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagethreeh, rightAlignment);
+                        pagethreeh += 10;
+                    }
+                    if (pagethreeh == 310)
+                    {
+                        if (page4 == null)
+                            page4 = doc.Pages.Add(PdfPageSize.A6);
+                    }
+                    if (pagethreeh == 310 && pagefourh < 310)
+                    {
+                        page4.Canvas.DrawString(nazwa, font2, brush, 0, pagefourh, leftAlignment);
+                        page4.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagefourh, rightAlignment);
+                        pagefourh += 10;
+                    }
                 }
             }
-            if (_recp.listOfDeletedProducts != null && _recp.listOfDeletedProducts.Count > 0)
+            if (_recp.listOfReturnsOrders != null && _recp.listOfReturnsOrders.Count > 0)
             {
-                foreach (var x in _recp.listOfDeletedProducts)
+                foreach (var x in _recp.listOfReturnsOrders)
                 {
                     string ilosc = x.Count.ToString();
                     string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
-                    string cena = x.ChoseOptionPrice.ToString();
+                    string cena = x.Discount.ToString();
                     if (pageoneh < 310)
                     {
                         page.Canvas.DrawString(nazwa, font3, brush, 0, pageoneh, leftAlignment);
@@ -189,8 +178,8 @@ namespace SmartShopWpf.ReceipeMethods
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page4.Canvas.DrawPath(pen2, path2);
 
-                page4.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagefourh + 10, leftAlignment);
-                page4.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
+                page4.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pagefourh + 10, leftAlignment);
+                page4.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
 
             }
             else if (page4 == null && page3 != null)
@@ -201,8 +190,9 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page3.Canvas.DrawPath(pen2, path2);
-                page3.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagethreeh + 10, leftAlignment);
-                page3.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
+
+                page3.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pagethreeh + 10, leftAlignment);
+                page3.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
 
             }
             else if (page3 == null && page2 != null)
@@ -213,8 +203,9 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page2.Canvas.DrawPath(pen2, path2);
-                page2.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagetwoh + 10, leftAlignment);
-                page2.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
+
+                page2.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pagetwoh + 10, leftAlignment);
+                page2.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
 
             }
             else if (page2 == null && page != null)
@@ -225,8 +216,9 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page.Canvas.DrawPath(pen2, path2);
-                page.Canvas.DrawString("PLATNOSC: "+_recp.kindOfPayment, font2, brush, 0, pageoneh + 10, leftAlignment);
-                page.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
+
+                page.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pageoneh + 10, leftAlignment);
+                page.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
 
             }
             //page.Canvas.DrawString("Left!", font, brush, 0, 60, leftAlignment);
@@ -236,7 +228,7 @@ namespace SmartShopWpf.ReceipeMethods
             //restor graphics
             page.Canvas.Restore(state);
             //Save doc file.
-            String fileName = "Receipe" + _recp.TransactionNumber + ".pdf";
+            String fileName = "ReceipeReturn" + _recp.TransactionNumber + ".pdf";
 
             doc.SaveToFile(fileName);
             doc.Close();
@@ -246,6 +238,6 @@ namespace SmartShopWpf.ReceipeMethods
         }
 
     }
-
 }
+
 

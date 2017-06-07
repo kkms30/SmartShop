@@ -23,6 +23,8 @@ namespace SmartShopWpf
         private bool flagToEditQuantity = false;
         public static bool flagToTagKindOfDiscount = true;
         public static bool flagToOverwallDiscount = false;
+        public static string totalPriceToPaymentLabel;
+        public static int IdTransToReturn;
 
         public static List<Basket> listOfBoughtItems = new List<Basket>();
 
@@ -30,6 +32,7 @@ namespace SmartShopWpf
 
         public static List<Basket> listOfDeletedItems = new List<Basket>();
 
+        public object tabFormList { get; private set; }
 
         public MainWindow(bool withPlugin)
         {
@@ -107,20 +110,20 @@ namespace SmartShopWpf
             }
             else
             {
-                foreach(var v in listOfBoughtItems)
+                foreach (var v in listOfBoughtItems)
                 {
-                    if(v.Number == basketToEditHisQuantity.Number)
+                    if (v.Number == basketToEditHisQuantity.Number)
                     {
                         float Sum = float.Parse(lblAmount.Content.ToString());
                         Sum -= v.BeforeDiscount;
                         float SinglePrice = v.BeforeDiscount / v.Count;
                         v.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
-                        basketToEditHisQuantity.Count= Convert.ToInt32(txtManuallyCodeEntry.Text);
+                        basketToEditHisQuantity.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
                         v.BeforeDiscount = SinglePrice * v.Count;
                         Sum += v.BeforeDiscount;
                         v.ChoseOptionPrice = v.BeforeDiscount;
                         basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
-                        lblAmount.Content = Math.Round(Convert.ToDouble(Sum),2);
+                        lblAmount.Content = Math.Round(Convert.ToDouble(Sum), 2);
                         lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
                         ifFound = true;
                         flagToEditQuantity = false;
@@ -130,20 +133,18 @@ namespace SmartShopWpf
                         txtManuallyCodeEntry.Text = "0";
                     }
                 }
-                if(ifFound==true)
+                if (ifFound == true)
                 {
-
                     listVBasket.SelectedItem = basketToEditHisQuantity;
                     listVBasket.Items.Refresh();
                 }
             }
-
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             List<Basket> newList = new List<Basket>();
-            foreach(var v in listVBasket.SelectedItems)
+            foreach (var v in listVBasket.SelectedItems)
             {
                 newList.Add((Basket)v);
             }
@@ -151,11 +152,10 @@ namespace SmartShopWpf
             float newSumaWithoutDiscounts = float.Parse(lblAmountWithoutDiscount.Content.ToString());
             foreach (var v in newList)
             {
-
                 if (v.OverwallDiscountName != null && v.OverwallDiscountName.Contains("%"))
                 {
                     float OverwallDiscountName = float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 1));
-                    newSuma -= v.ChoseOptionPrice * (1-(OverwallDiscountName/100));
+                    newSuma -= v.ChoseOptionPrice * (1 - (OverwallDiscountName / 100));
                     newSumaWithoutDiscounts -= v.BeforeDiscount;
                 }
                 else if (v.OverwallDiscountName != null && v.OverwallDiscountName.Contains("zł"))
@@ -173,7 +173,7 @@ namespace SmartShopWpf
                 listVBasket.Items.Remove(v);
                 listOfDeletedItems.Add(v);
             }
-            lblAmount.Content = Math.Round(Convert.ToDouble(newSuma),2);
+            lblAmount.Content = Math.Round(Convert.ToDouble(newSuma), 2);
             lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(newSumaWithoutDiscounts), 2);
         }
 
@@ -317,6 +317,7 @@ namespace SmartShopWpf
 
         private async void btnManuallyAdd_Click(object sender, RoutedEventArgs e)
         {
+            tabFromList.IsEnabled = true;
             string tagForManuDisplCode = "Kod produktu";
             string tagForManuDisplQuan = "Ilość";
             ManuallyCode manCod = ManuallyCode.GetInstance();
@@ -333,6 +334,7 @@ namespace SmartShopWpf
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
                     flagToTagForManuDisp = false;
+                    tabFromList.IsEnabled = false;
                 }
                 else
                 {
@@ -382,7 +384,7 @@ namespace SmartShopWpf
                         lblAmountWithoutDiscount.Content = lblAmount.Content;
                     }
 
-                    if (flagToOverwallDiscount == false)
+                    if (flagToOverwallDiscount == true)
                     {
                         bool flagToChar = true;
 
@@ -439,7 +441,6 @@ namespace SmartShopWpf
                         {
                             lblTransactionNumber.Content = data.Transaction.Id;
                         }));
-                        new TransactionManager().AddNewOrderToTransaction(ManuallyCode.GetInstance().checkedProduct, getCount, basket.DiscountValue);
                     });
                 }
             }
@@ -457,64 +458,36 @@ namespace SmartShopWpf
 
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
-            float AmountPrceWithSIgleWihoutOverwall = 0;
-
-            foreach(Basket b in listVBasket.Items)
-               {
-
-            }
             DataHandler data = DataHandler.GetInstance();
+            totalPriceToPaymentLabel = lblAmount.Content.ToString();
+
+            float amountWithSingleWithoutOverwall = 0;
+            listOfBoughtItems.Clear();
+
+            foreach (Basket b in listVBasket.Items)
+            {
+                amountWithSingleWithoutOverwall = amountWithSingleWithoutOverwall + b.ChoseOptionPrice;
+                listOfBoughtItems.Add(b);
+            }
 
             if (data.Transaction != null)
             {
-                listOfBoughtItems.Clear();
-                foreach (Basket b in listVBasket.Items)
-                {
-                    if (b.SigleDiscountName != null)
-                    {
-                        if (flagToOverwallDiscount == true)
-                        {
-                            //b.DiscountValue = DiscountValueForOrders(DiscountWindow.overwallAmountWithDiscount);
-                        }
-                        else
-                        {
-                            b.DiscountValue = b.ChoseOptionPrice;
-                        }
+                PaymentWindow pW = new PaymentWindow(data.Transaction.TotalPrice, data.Transaction.Id);
 
-                        //b.DiscountValue = DiscountValueForOrders(DiscountWindow.overwallAmountWithDiscount, overwallAmount, b.ChoseOptionPrice, b.Count);
-                        //listOfBoughtItems.Add(b);
-                    }
-                    else
-                    {
-                    }
+                foreach (Basket b in listOfBoughtItems)
+                {
+                    b.DiscountValue = DiscountValueForOrders(overwallAmount, amountWithSingleWithoutOverwall, b.ChoseOptionPrice);
                 }
 
                 float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 data.Transaction.TotalPrice = price / 100;
 
-                Receipe recp = new Receipe();
-                recp.TransactionNumber = data.Transaction.Id;
-                recp.Data = DateTime.Now;
-                recp.listOfBoughtProducts = listOfBoughtItems;
-                recp.PriceSum = data.Transaction.TotalPrice;
-                recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
-                recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
-                if (listOfDeletedItems.Count > 0)
-                    recp.listOfDeletedProducts = listOfDeletedItems;
-                ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-                rPDFGen.GeneratePDF();
-                listVBasket.Items.Clear();
-                listOfBoughtItems.Clear();
-                listOfDeletedItems.Clear();
-                lblAmount.Content = 0;
-                lblAmountWithoutDiscount.Content = 0;
-                lblTransactionNumber.Content = "";
-
-                btnEdit.IsEnabled = true;
-                btnVat.IsEnabled = true;
-
+                new TransactionManager().AddOrdersToTransaction(listOfBoughtItems);
 
                 new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
+
+                pW.Owner = this;
+                pW.ShowDialog();
             }
             else
             {
@@ -653,48 +626,20 @@ namespace SmartShopWpf
         private void btnReturnsSearch_Click(object sender, RoutedEventArgs e)
         {
             listVReturnsListOfProductsToReturn.Items.Clear();
-            TransactionManager tM = new TransactionManager();
-            List<Transaction> transactions = tM.GetTransactions();
-            List<Order> orders = new List<Order>();
-            int idT = 0;
 
-            string getIdTFromTxt = txtReturnsNumberOfTransaction.Text;
+            string idTransactionText = txtReturnsNumberOfTransaction.Text;
+            int idTransaction = 0;
 
-            try { idT = Convert.ToInt32(getIdTFromTxt); }
+            try { idTransaction = Convert.ToInt32(idTransactionText); }
             catch { MessageBox.Show("Zły format"); }
 
-            foreach (Transaction t in transactions)
-            {
-                if (t.Id == idT)
-                {
-                    foreach (Order o in t.Orders)
-                    {
-                        orders.Add(o);
-                    }
-
-                    break;
-                }
-            }
-
-            int counter = 0;
-            foreach (Order o in orders)
-            {
-                counter++;
-                if (o.Discount == 0)
-                {
-                    ReturnObject rO = new ReturnObject { Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Product.Price };
-                    listVReturnsListOfProductsToReturn.Items.Add(rO);
-                }
-                else
-                {
-                    ReturnObject rO = new ReturnObject { Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
-                    listVReturnsListOfProductsToReturn.Items.Add(rO);
-                }
-            }
+            ReturnSearchInvoker returnSearchInvoker = new ReturnSearchInvoker();
+            returnSearchInvoker.ShowReturnedProducts(idTransaction, listVReturnsListOfProductsToReturn, informationLabel);
+            informationLabel.Content = "Szukam transakcji...";
         }
 
         private void btnReturnsTickAll_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             string ContentTick = "Zaznacz Wszystkie";
             string ContentUnTick = "Odznacz Wszystkie";
 
@@ -720,6 +665,71 @@ namespace SmartShopWpf
         private void monthlyReportBtn_Click(object sender, RoutedEventArgs e)
         {
             new MonthlyReportInvoker().Download();
+        }
+
+        private void btnReturnsReturn_Click(object sender, RoutedEventArgs e)
+        {
+            bool alreadyReturned = false;
+
+            List<ReturnObject> listReturns = new List<ReturnObject>();
+            List<ReturnObject> listRecipeBeforeReturn = new List<ReturnObject>();
+            float priceToReturn = 0;
+            float totalPriceAfterReturn = 0;
+
+            foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.Items)
+            {
+                if (returnObject.ReturnedText.Equals("NIE"))
+                {
+                    listRecipeBeforeReturn.Add(returnObject);
+                    totalPriceAfterReturn = totalPriceAfterReturn + (float)returnObject.Discount;
+                }
+            }
+
+            foreach (ReturnObject returnObject in listVReturnsListOfProductsToReturn.SelectedItems)
+            {
+                if (returnObject.ReturnedText.Equals("TAK"))
+                {
+                    alreadyReturned = true;
+                }
+
+                listReturns.Add(returnObject);
+                priceToReturn = priceToReturn + (float)returnObject.Discount;
+                totalPriceAfterReturn = totalPriceAfterReturn - (float)returnObject.Discount;
+            }
+
+            if (listVReturnsListOfProductsToReturn.SelectedItems.Count >= 1)
+            {
+                if (!alreadyReturned)
+                {
+                    ReturnOrderInvoker returnOrderInvoker = new ReturnOrderInvoker(listReturns);
+                    returnOrderInvoker.Return();
+
+                    Receipe recp = new Receipe();
+                    recp.TransactionNumber = IdTransToReturn;
+                    recp.Data = DateTime.Now;
+                    recp.listOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
+                    recp.PriceToReturn = priceToReturn;
+                    recp.PriceSum = totalPriceAfterReturn;
+                    recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
+                    recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
+
+                    if (listReturns.Count > 0)
+                        recp.listOfReturnsOrders = listReturns;
+                    ReturnPDFGenerator rPDFGen = new ReturnPDFGenerator(recp);
+                    rPDFGen.GeneratePDF();
+
+                    listVReturnsListOfProductsToReturn.Items.Clear();
+                    txtReturnsNumberOfTransaction.Text = "";
+                }
+                else
+                {
+                    informationLabel.Content = "Produkt już został zwrócony";
+                }
+            }
+            else
+            {
+                informationLabel.Content = "Wybierz Produkt do zwrotu!";
+            }
         }
     }
 }

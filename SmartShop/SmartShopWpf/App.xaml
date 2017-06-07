@@ -232,7 +232,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background"  TargetName="border" Value="{StaticResource WhiteSomke}" />
+                                <Setter Property="Background"  TargetName="border" Value="{StaticResource WhiteSmoke}" />
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource White}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">

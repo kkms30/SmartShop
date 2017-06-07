@@ -34,17 +34,25 @@ namespace SmartShopWpf.Data
             data.Transaction = newTransaction;
         }
 
-        public void AddNewOrderToTransaction(Product product, int count, float discount)
+        public void AddOrdersToTransaction(List<Basket> basketsList)
+        {
+            foreach (Basket basket in basketsList)
+            {
+                AddNewOrderToTransaction(basket);
+            }
+        }
+
+        public void AddNewOrderToTransaction(Basket basket)
         {
             Order order = new Order();
-            order.Product = product;
-            order.Count = (sbyte)count;
-            order.ProductId = product.IdProduct;
-            order.Discount = discount;
-
+            order.Product = basket.Product;
+            order.Count = (sbyte)basket.Count;
+            order.Discount = basket.DiscountValue;
+            order.ProductId = basket.Product.IdProduct;
             order.TransactionId = data.Transaction.IdTransaction;
             data.Transaction.Orders.Add(order);
         }
+     
 
         public void FinalizeTransaction()
         {

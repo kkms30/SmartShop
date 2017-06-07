@@ -34,7 +34,7 @@ namespace SmartShopWpf.Asynchronous
                 foreach (var returnObject in returnObjects)
                 {
                     ReturnOrder returnOrder = new ReturnOrder();
-                    returnOrder.IdOrder = returnObject.idOrder;
+                    returnOrder.IdOrder = returnObject.IdOrder;
                     returnOrder.Count = returnObject.Count;
                     returnClient.ReturnOrder(returnOrder);
                 }
