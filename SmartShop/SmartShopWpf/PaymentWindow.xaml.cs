@@ -30,15 +30,16 @@ namespace SmartShopWpf
 
             float price = float.Parse(mW.lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
-            dataTotalPrice = price / 100;
+              dataTotalPrice = price / 100;
 
+          
             Receipe recp = new Receipe();
             //recp.TransactionNumber = data.Transaction.Id;
             recp.TransactionNumber = dataId;
             recp.Data = DateTime.Now;
             recp.listOfBoughtProducts = MainWindow.listOfBoughtItems;
-            //recp.PriceSum = data.Transaction.TotalPrice;
-            if (flagToKindOfPayment == true)
+            recp.PriceSum = dataTotalPrice;
+            if (flagToKindOfPayment)
             {
                 recp.kindOfPayment = "Gotowka";
             }
@@ -57,10 +58,11 @@ namespace SmartShopWpf
 
             mW.listVBasket.Items.Clear();
             MainWindow.listOfBoughtItems.Clear();
+            MainWindow.listOfDeletedItems.Clear();
             mW.lblAmount.Content = 0;
             mW.lblAmountWithoutDiscount.Content = 0;
             mW.lblTransactionNumber.Content = "";
-
+            MainWindow.flagToOverwallDiscount = false;
             mW.btnEdit.IsEnabled = true;
             mW.btnVat.IsEnabled = true;
 
@@ -69,7 +71,7 @@ namespace SmartShopWpf
 
         private void btnKinfOfPayment_Click(object sender, RoutedEventArgs e)
         {
-            if (flagToKindOfPayment == true)
+            if (flagToKindOfPayment)
             {
                 btnKinfOfPayment.Content = "Karta";
                 flagToKindOfPayment = false;

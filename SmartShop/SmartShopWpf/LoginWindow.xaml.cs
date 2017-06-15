@@ -25,8 +25,8 @@ namespace SmartShopWpf
         {
             InitializeComponent();
 
-            txtLogin.Text = "5";
-            pswPassword.Password = "test";
+            //txtLogin.Text = "5";
+            //pswPassword.Password = "test";
             di = new DirectoryInfo(".");
         }
 
