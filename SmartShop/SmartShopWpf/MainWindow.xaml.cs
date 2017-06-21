@@ -97,46 +97,77 @@ namespace SmartShopWpf
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Basket basketToEditHisQuantity = (Basket)listVBasket.SelectedItem;
-            string tagForManuDisplCode = "Kod produktu";
-            string tagForManuDisplQuan = "Ilość";
-            bool ifFound = false;
-            if (flagToEditQuantity == false)
+            if (listVBasket.SelectedItems.Count != 1)
             {
-                lblManuallyTagOfCode.Content = tagForManuDisplQuan;
-                btnEdit.Content = "Potwierdz";
-                flagToEditQuantity = true;
-                btnManuallyAdd.IsEnabled = false;
+                MessageBox.Show("Musisz zaznaczyć jeden produkt");
             }
+
             else
             {
-                foreach (var v in listOfBoughtItems)
+                Basket basketToEditHisQuantity = (Basket)listVBasket.SelectedItem;
+                string tagForManuDisplCode = "Kod produktu";
+                string tagForManuDisplQuan = "Ilość";
+                bool ifFound = false;
+                if (flagToEditQuantity == false)
                 {
-                    if (v.Number == basketToEditHisQuantity.Number)
-                    {
-                        float Sum = float.Parse(lblAmount.Content.ToString());
-                        Sum -= v.BeforeDiscount;
-                        float SinglePrice = v.BeforeDiscount / v.Count;
-                        v.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
-                        basketToEditHisQuantity.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
-                        v.BeforeDiscount = SinglePrice * v.Count;
-                        Sum += v.BeforeDiscount;
-                        v.ChoseOptionPrice = v.BeforeDiscount;
-                        basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
-                        lblAmount.Content = Math.Round(Convert.ToDouble(Sum), 2);
-                        lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
-                        ifFound = true;
-                        flagToEditQuantity = false;
-                        lblManuallyTagOfCode.Content = tagForManuDisplCode;
-                        btnEdit.Content = "Edytuj";
-                        btnManuallyAdd.IsEnabled = true;
-                        txtManuallyCodeEntry.Text = "0";
-                    }
+                    lblManuallyTagOfCode.Content = tagForManuDisplQuan;
+                    btnEdit.Content = "Potwierdz";
+                    flagToEditQuantity = true;
+                    btnManuallyAdd.IsEnabled = false;
                 }
-                if (ifFound == true)
+                else
                 {
-                    listVBasket.SelectedItem = basketToEditHisQuantity;
-                    listVBasket.Items.Refresh();
+                    if (txtManuallyCodeEntry.Text == "" || txtManuallyCodeEntry.Text == "0")
+                    {
+                        MessageBox.Show("Ilosc musi byc wieksza niż 0");
+                    }
+                    else
+                    {
+                        foreach (var v in listOfBoughtItems)
+                        {
+                            if (v.Number == basketToEditHisQuantity.Number)
+                            {
+                                //Przekazujemy całą kwotę ze zniżkami
+                                float Sum = float.Parse(lblAmount.Content.ToString());
+                                   
+                                //Od sumy odejmujemy cenę Orderu przed zniżką 
+                                    Sum -= v.BeforeDiscount;
+                                    float SinglePrice = 0;
+
+                                    SinglePrice  = v.BeforeDiscount / v.Count;                              
+                            
+                                //Ilość z Ręcznej klawiatury
+                                    v.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
+
+                                    basketToEditHisQuantity.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
+                                    v.BeforeDiscount = SinglePrice * v.Count;
+                             
+
+                                   //Do sumy pdodajemy cenę Orderu przed zniżką
+                                   Sum += v.BeforeDiscount;
+
+                                //Cena pojdeycznego Orderu = Cenie przed Zniżką
+                                    v.ChoseOptionPrice = v.BeforeDiscount;
+                                    basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
+                                    lblAmount.Content = Math.Round(Convert.ToDouble(Sum), 2);
+                                    lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
+                                
+
+                                ifFound = true;
+                                flagToEditQuantity = false;
+                                lblManuallyTagOfCode.Content = tagForManuDisplCode;
+                                btnEdit.Content = "Edytuj";
+                                btnManuallyAdd.IsEnabled = true;
+                                txtManuallyCodeEntry.Text = "";
+                            }
+                        }
+                    }
+
+                    if (ifFound)
+                    {
+                        listVBasket.SelectedItem = basketToEditHisQuantity;
+                        listVBasket.Items.Refresh();
+                    }
                 }
             }
         }
@@ -324,12 +355,12 @@ namespace SmartShopWpf
             DataHandler data = DataHandler.GetInstance();
             Binding myBinding = new Binding();
 
-            if (flagToTagForManuDisp == true)
+            if (flagToTagForManuDisp)
             {
                 string code = txtManuallyCodeEntry.Text.ToString().Trim();
                 bool checkCode = manCod.CheckTheCode(code, data.Products);
 
-                if (checkCode == true)
+                if (checkCode)
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
@@ -365,10 +396,9 @@ namespace SmartShopWpf
 
                     double SumOfPrices = Convert.ToDouble(lblAmountWithoutDiscount.Content.ToString().Trim());
 
-                    if (flagToVat == true)
+                    if (flagToVat)
                     {
                         basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithVat;
-
                         basket.BeforeDiscount = basket.ChoseOptionPrice;
                         overwallAmount = (float)Math.Round((SumOfPrices + basket.ChoseOptionPrice), 2);
                         lblAmount.Content = overwallAmount;
@@ -377,14 +407,13 @@ namespace SmartShopWpf
                     else
                     {
                         basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithoutVat;
-
-                        basket.ChoseOptionPrice = basket.ChoseOptionPrice;
+                        basket.BeforeDiscount = basket.ChoseOptionPrice;
                         overwallAmount = (float)Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
                         lblAmount.Content = overwallAmount;
                         lblAmountWithoutDiscount.Content = lblAmount.Content;
                     }
 
-                    if (flagToOverwallDiscount == true)
+                    if (flagToOverwallDiscount)
                     {
                         bool flagToChar = true;
 
@@ -409,13 +438,13 @@ namespace SmartShopWpf
                         }
                         double percent = (100 - Convert.ToDouble(discountValue)) * 0.01;
 
-                        if (flagToChar == true)
+                        if (flagToChar)
                         {
                             DiscountWindow.overwallAmountWithDiscount = (float)Math.Round((overwallAmount * percent), 2);
                             lblAmountWithoutDiscount.Content = overwallAmount;
                             lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
                         }
-                        else if (flagToChar == false)
+                        else if (!flagToChar)
 
                         {
                             DiscountWindow.overwallAmountWithDiscount = (float)(overwallAmount - Convert.ToDouble(discountValue));
@@ -430,7 +459,7 @@ namespace SmartShopWpf
 
                     listOfBoughtItems.Add(basket);
                     listVBasket.Items.Add(basket);
-
+                    btnVat.IsEnabled = false;
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
                     flagToTagForManuDisp = true;
                     txtManuallyCodeEntry.Text = "";
@@ -460,6 +489,7 @@ namespace SmartShopWpf
         {
             DataHandler data = DataHandler.GetInstance();
             totalPriceToPaymentLabel = lblAmount.Content.ToString();
+            overwallAmount = (float)Convert.ToDouble(totalPriceToPaymentLabel);
 
             float amountWithSingleWithoutOverwall = 0;
             listOfBoughtItems.Clear();

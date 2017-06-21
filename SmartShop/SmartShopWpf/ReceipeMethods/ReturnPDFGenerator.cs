@@ -2,18 +2,14 @@
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartShopWpf.ReceipeMethods
 {
-    class ReturnPDFGenerator
+    internal class ReturnPDFGenerator
     {
+        private Receipe _recp;
 
-        Receipe _recp;
         public ReturnPDFGenerator(Receipe recp)
         {
             _recp = recp;
@@ -180,7 +176,6 @@ namespace SmartShopWpf.ReceipeMethods
 
                 page4.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pagefourh + 10, leftAlignment);
                 page4.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
-
             }
             else if (page4 == null && page3 != null)
             {
@@ -193,7 +188,6 @@ namespace SmartShopWpf.ReceipeMethods
 
                 page3.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pagethreeh + 10, leftAlignment);
                 page3.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
-
             }
             else if (page3 == null && page2 != null)
             {
@@ -206,7 +200,6 @@ namespace SmartShopWpf.ReceipeMethods
 
                 page2.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pagetwoh + 10, leftAlignment);
                 page2.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
-
             }
             else if (page2 == null && page != null)
             {
@@ -219,11 +212,8 @@ namespace SmartShopWpf.ReceipeMethods
 
                 page.Canvas.DrawString("SUMA PLN PO ZWROCIE: " + _recp.PriceSum, font2, brush, 0, pageoneh + 10, leftAlignment);
                 page.Canvas.DrawString("SUMA PLN DO ZWROTU: " + _recp.PriceToReturn, font2, brush, page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
-
             }
             //page.Canvas.DrawString("Left!", font, brush, 0, 60, leftAlignment);
-
-
 
             //restor graphics
             page.Canvas.Restore(state);
@@ -236,8 +226,5 @@ namespace SmartShopWpf.ReceipeMethods
             //Launching the Pdf file.
             System.Diagnostics.Process.Start(fileName);
         }
-
     }
 }
-
-
