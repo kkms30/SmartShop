@@ -8,6 +8,7 @@
         Icon="shop.ico"
         Background="{StaticResource White}"
         ResizeMode="NoResize"
+        Loaded ="PaymentWindow_Loaded" 
         Title="PaymentWindow" Height="350" Width="510">
 
     <Grid Background="{StaticResource FrameToDiscount}" Height="310" Width="490">
