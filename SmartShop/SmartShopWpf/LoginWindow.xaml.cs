@@ -32,7 +32,6 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
             string id = txtLogin.Text;
             string password = pswPassword.Password;
             ProductsClient productsClient = null;
@@ -42,7 +41,6 @@ namespace SmartShopWpf
             string token = "";
             btnLogin.IsEnabled = false;
             Task.Factory.StartNew((Action)delegate { 
-
             foreach (FileInfo fi in di.GetFiles("PluginLogIn.dll"))
             {
                 Assembly pluginAssembly = Assembly.LoadFrom(fi.FullName);
