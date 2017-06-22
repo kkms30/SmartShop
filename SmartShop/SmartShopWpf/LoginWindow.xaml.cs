@@ -63,7 +63,7 @@ namespace SmartShopWpf
                             }
                         else
                         {
-                            MessageBox.Show("Invalid login or password. Please check the data", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            MessageBox.Show("Nieprawidłowy login lub hasło!", "Błąd logowania", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         }
                     }
                 }
