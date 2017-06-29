@@ -19,7 +19,7 @@ namespace SmartShopWpf
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private DirectoryInfo di;
+        private DirectoryInfo _directoryInfo;
 
         public LoginWindow()
         {
@@ -27,7 +27,7 @@ namespace SmartShopWpf
 
             //txtLogin.Text = "5";
             //pswPassword.Password = "test";
-            di = new DirectoryInfo(".");
+            _directoryInfo = new DirectoryInfo(".");
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -41,15 +41,15 @@ namespace SmartShopWpf
             string token = "";
             btnLogin.IsEnabled = false;
             Task.Factory.StartNew((Action)delegate { 
-            foreach (FileInfo fi in di.GetFiles("PluginLogIn.dll"))
+            foreach (FileInfo fi in _directoryInfo.GetFiles("PluginLogIn.dll"))
             {
                 Assembly pluginAssembly = Assembly.LoadFrom(fi.FullName);
                 foreach (Type pluginType in pluginAssembly.GetExportedTypes())
                 {
                     if (pluginType.GetInterface(typeof(ILogIn).Name) != null)
                     {
-                        ILogIn TypeLoadedFromPlugin = (ILogIn)Activator.CreateInstance(pluginType);
-                        if (TypeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient, ref cashier, ref products, ref token))
+                        ILogIn typeLoadedFromPlugin = (ILogIn)Activator.CreateInstance(pluginType);
+                        if (typeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient, ref cashier, ref products, ref token))
                         {
 
                                 InitAppData(cashier, products, token);
@@ -74,10 +74,7 @@ namespace SmartShopWpf
 
         private void pswPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(pswPassword.Password))
-                pswPassword.Tag = "Hasło";
-            else
-                pswPassword.Tag = "";
+            pswPassword.Tag = string.IsNullOrWhiteSpace(pswPassword.Password) ? "Hasło" : "";
         }
 
         private void InitAppData(Cashier cashier, List<Product> products, string token)
@@ -85,10 +82,12 @@ namespace SmartShopWpf
             DataHandler data = DataHandler.GetInstance();
             data.Token = token;
 
-            Cashbox cashbox = new Cashbox();
-            cashbox.IdCashbox = 13;
-            cashbox.ShopId = 14;
-            cashbox.Id = 1;
+            Cashbox cashbox = new Cashbox
+            {
+                IdCashbox = 13,
+                ShopId = 14,
+                Id = 1
+            };
 
             data.Cashier = cashier;
             data.Products = products;
