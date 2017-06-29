@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace SmartShopWpf.Models
+namespace SmartShop.Models.Models
 {
     public class Product
     {
@@ -22,6 +18,5 @@ namespace SmartShopWpf.Models
 
         public virtual Category Category { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-
     }
 }

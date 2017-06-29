@@ -1,7 +1,7 @@
 ﻿using SmartShop.CommunicateToWebService.Clients;
-using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
+using SmartShop.Models.Models;
 
 namespace SmartShopWpf.Data
 {

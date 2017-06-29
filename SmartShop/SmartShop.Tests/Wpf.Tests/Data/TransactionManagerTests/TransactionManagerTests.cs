@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
 using SmartShopWpf.Data;
-using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartShop.Models.Models;
 
 namespace SmartShop.Tests.Wpf.Tests.Data
 {

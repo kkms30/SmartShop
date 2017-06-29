@@ -1,6 +1,6 @@
-﻿using SmartShopWpf.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SmartShop.CommunicateToWebService.Utils;
+using SmartShop.Models.Models;
 
 namespace SmartShop.CommunicateToWebService.Clients
 {

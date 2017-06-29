@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SmartShop.CommunicateToWebService;
 using SmartShop.CommunicateToWebService.Clients;
-using SmartShopWpf.Models;
 using SmartShop.CommunicateToWebService.Authentication;
+using SmartShop.Models.Models;
 
 namespace PluginLogIn
 {

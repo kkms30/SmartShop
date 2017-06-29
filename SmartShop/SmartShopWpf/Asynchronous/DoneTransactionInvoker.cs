@@ -1,11 +1,11 @@
 ﻿using SmartShopWpf.Data;
-using SmartShopWpf.Models;
 using SmartShopWpf.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using SmartShop.Models.Models;
 
 namespace SmartShopWpf.Asynchronous
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SmartShopWebApp.Persistance.Mappers
+﻿namespace SmartShopWebApp.Persistance.Mappers
 {
     public class BestSellingProduct
     {

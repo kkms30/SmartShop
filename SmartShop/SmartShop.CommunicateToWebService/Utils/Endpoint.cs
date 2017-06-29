@@ -12,6 +12,5 @@
         public static readonly string ReportDaily = "/api/Report/daily/";
         public static readonly string ReportMonthly = "/api/Report/monthly/";
         public static readonly string ReturnOrder = "/api/ReturnOrder/";
-
     }
 }

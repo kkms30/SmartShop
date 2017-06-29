@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using SmartShopWpf.Models;
 using SmartShopWpf.Data;
 using NUnit.Framework.Constraints;
+using SmartShop.Models.Models;
 
 namespace SmartShop.Tests.Wpf.Tests
 {

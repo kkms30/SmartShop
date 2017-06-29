@@ -2,13 +2,13 @@
 using SmartShop.CommunicateToWebService;
 using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
-using SmartShopWpf.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using SmartShop.Models.Models;
 
 namespace SmartShopWpf
 {

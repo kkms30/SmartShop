@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using SmartShop.CommunicateToWebService.Clients;
+using SmartShop.Models.Mappers;
 using SmartShopWpf.Data;
-using SmartShopWpf.Models.Mappers;
 
 namespace SmartShopWpf.Asynchronous
 {

@@ -1,5 +1,5 @@
 ﻿using SmartShop.CommunicateToWebService.Utils;
-using SmartShopWpf.Models;
+using SmartShop.Models.Models;
 
 namespace SmartShop.CommunicateToWebService.Clients
 {

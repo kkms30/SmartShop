@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using SmartShop.CommunicateToWebService.Utils;
-using SmartShopWpf.Models.Mappers;
+using SmartShop.Models.Mappers;
 
 namespace SmartShop.CommunicateToWebService.Clients
 {

@@ -1,4 +1,4 @@
-﻿using SmartShopWpf.Models;
+﻿using SmartShop.Models.Models;
 
 namespace SmartShopWpf.ViewModel
 {
