@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartShop.CommunicateToWebService
+﻿namespace SmartShop.CommunicateToWebService.Utils
 {
-    public class Endpoint
+    public static class Endpoint
     {
-        public static readonly string BASE_URL = "http://localhost:46468";
-        public static readonly string TOKEN = "/token";
-        public static readonly string CASHIER = "/api/Cashiers/";
-        public static readonly string PRODUCTS = "/api/Products/";
-        public static readonly string TRANSACTION = "/api/Transactions/";
-        public static readonly string TOP10 = "/api/Top10/";
-        public static readonly string ORDER = "/api/Orders/";
-        public static readonly string REPORT_DAILY = "/api/Report/daily/";
-        public static readonly string REPORT_MONTHLY = "/api/Report/monthly/";
-        public static readonly string RETURN_ORDER = "/api/ReturnOrder/";
+        public static readonly string BaseUrl = "http://localhost:46468";
+        public static readonly string Token = "/token";
+        public static readonly string Cashier = "/api/Cashiers/";
+        public static readonly string Products = "/api/Products/";
+        public static readonly string Transaction = "/api/Transactions/";
+        public static readonly string Top10 = "/api/Top10/";
+        public static readonly string Order = "/api/Orders/";
+        public static readonly string ReportDaily = "/api/Report/daily/";
+        public static readonly string ReportMonthly = "/api/Report/monthly/";
+        public static readonly string ReturnOrder = "/api/ReturnOrder/";
 
     }
 }

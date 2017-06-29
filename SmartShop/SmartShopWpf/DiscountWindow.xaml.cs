@@ -9,14 +9,14 @@ namespace SmartShopWpf
     /// </summary>
     public partial class DiscountWindow : Window
     {
-        private bool flagToTagTypeOfDiscount = true;
-        static public string overwallDiscount;
-        static public string singleDiscount;
+        public static string OverwallDiscount;
+        public static string SingleDiscount;
+        public static float OverwallAmountWithDiscount; // Wartosc konkretnej kwoty po całosciowej znizce
+        public static double OverwallDicountValue; // wartosc z txtBoxa
 
-        static public float overwallAmountWithDiscount; // Wartosc konkretnej kwoty po całosciowej znizce
-        static public double OverwallDicountValue; // wartosc z txtBoxa
+        public static string TypeOfDiscount;
 
-        static public string typeOfDis;
+        private bool _flagToTagTypeOfDiscount = true;
 
         public DiscountWindow()
         {
@@ -25,15 +25,15 @@ namespace SmartShopWpf
 
         private void btnTypeOfDiscount_Click(object sender, RoutedEventArgs e)
         {
-            if (flagToTagTypeOfDiscount)
+            if (_flagToTagTypeOfDiscount)
             {
                 btnTypeOfDiscount.Content = "zł";
-                flagToTagTypeOfDiscount = false;
+                _flagToTagTypeOfDiscount = false;
             }
             else
             {
                 btnTypeOfDiscount.Content = "%";
-                flagToTagTypeOfDiscount = true;
+                _flagToTagTypeOfDiscount = true;
             }
         }
 
@@ -41,10 +41,16 @@ namespace SmartShopWpf
         {
             double discountValueConverter = 0;
 
-            try { discountValueConverter = Convert.ToDouble(txtDiscount.Text.Trim().ToString()); }
-            catch { MessageBox.Show("Zły Format Zniżki!"); }
+            try
+            {
+                discountValueConverter = Convert.ToDouble(txtDiscount.Text.Trim().ToString());
+            }
+            catch
+            {
+                MessageBox.Show("Zły Format Zniżki!");
+            }
 
-            float discountValue = (float)discountValueConverter;
+            float discountValue = (float) discountValueConverter;
 
             if (discountValue <= 0)
             {
@@ -54,29 +60,30 @@ namespace SmartShopWpf
             {
                 MainWindow mW = Owner as MainWindow;
 
-                if (MainWindow.flagToTagKindOfDiscount)
+                if (MainWindow.FlagToTagKindOfDiscount)
                 {
                     foreach (Basket b in mW.listVBasket.Items)
                     {
                         b.OverwallDiscountName = discountValue.ToString() + btnTypeOfDiscount.Content;
 
-                        MainWindow.flagToOverwallDiscount = true;
+                        MainWindow.FlagToOverwallDiscount = true;
                     }
-                    overwallDiscount = discountValue.ToString() + btnTypeOfDiscount.Content;
+                    OverwallDiscount = discountValue.ToString() + btnTypeOfDiscount.Content;
 
                     if (btnTypeOfDiscount.Content.ToString().Trim() == "%")
                     {
-                        typeOfDis = "%";
+                        TypeOfDiscount = "%";
                         double percent = 100 - discountValue;
                         OverwallDicountValue = percent;
-                        overwallAmountWithDiscount = (float)Math.Round((MainWindow.overwallAmount * percent * 0.01), 2);
+                        OverwallAmountWithDiscount =
+                            (float) Math.Round((MainWindow.OverwallAmount * percent * 0.01), 2);
                         mW.UpdateDiscount();
                     }
                     else
                     {
-                        typeOfDis = "zl";
+                        TypeOfDiscount = "zl";
                         OverwallDicountValue = discountValue;
-                        overwallAmountWithDiscount = (float)Math.Round((MainWindow.overwallAmount - discountValue), 2);
+                        OverwallAmountWithDiscount = (float) Math.Round((MainWindow.OverwallAmount - discountValue), 2);
                         mW.UpdateDiscount();
                     }
                 }
@@ -91,12 +98,12 @@ namespace SmartShopWpf
                             double percent = 100 - discountValue;
                             if (b.BeforeDiscount != 0)
                             {
-                                b.ChoseOptionPrice = (float)Math.Round((b.BeforeDiscount * percent * 0.01), 2);
+                                b.ChoseOptionPrice = (float) Math.Round((b.BeforeDiscount * percent * 0.01), 2);
                             }
                             else
                             {
                                 b.BeforeDiscount = b.ChoseOptionPrice;
-                                b.ChoseOptionPrice = (float)Math.Round((b.ChoseOptionPrice * percent * 0.01), 2);
+                                b.ChoseOptionPrice = (float) Math.Round((b.ChoseOptionPrice * percent * 0.01), 2);
                             }
                         }
                         else

@@ -1,10 +1,11 @@
-﻿using SmartShopWebApp.Persistance.Mappers;
+﻿using SmartShop.CommunicateToWebService.Utils;
+using SmartShopWebApp.Persistance.Mappers;
 
 namespace SmartShop.CommunicateToWebService.Clients
 {
     public class ReturnOrderClient : BaseClient<ReturnOrder>
     {
-        public ReturnOrderClient(string token) : base(token, Endpoint.RETURN_ORDER)
+        public ReturnOrderClient(string token) : base(token, Endpoint.ReturnOrder)
         {
         }
 

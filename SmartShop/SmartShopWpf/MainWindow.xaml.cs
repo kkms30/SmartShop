@@ -17,31 +17,26 @@ namespace SmartShopWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool flagToTickAll = true;
-        private bool flagToTagForManuDisp = true;
-        private bool flagToVat = true;
-        private bool flagToEditQuantity = false;
-        public static bool flagToTagKindOfDiscount = true;
-        public static bool flagToOverwallDiscount = false;
-        public static string totalPriceToPaymentLabel;
+        public static bool FlagToTagKindOfDiscount = true;
+        public static bool FlagToOverwallDiscount = false;
+        public static string TotalPriceToPaymentLabel;
         public static int IdTransToReturn;
+        public static float OverwallAmount;
 
-        public static List<Basket> listOfBoughtItems = new List<Basket>();
+        public static List<Basket> ListOfBoughtItems = new List<Basket>();
+        public static List<Basket> ListOfDeletedItems = new List<Basket>();
 
-        static public float overwallAmount;
+        private bool _flagToTickAll = true;
+        private bool _flagToTagForManuDisp = true;
+        private bool _flagToVat = true;
+        private bool _flagToEditQuantity = false;
 
-        public static List<Basket> listOfDeletedItems = new List<Basket>();
+        public object TabFormList { get; private set; }
 
-        public object tabFormList { get; private set; }
-
-        public MainWindow(bool withPlugin)
+        public MainWindow()
         {
             InitializeComponent();
-
-            if (!withPlugin)
-            {
-                InitView();
-            }
+            InitView();
         }
 
         private void InitView()
@@ -62,37 +57,40 @@ namespace SmartShopWpf
 
         public void UpdateDiscount()
         {
-            lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
+            lblAmount.Content = DiscountWindow.OverwallAmountWithDiscount;
         }
 
         public void UpdateSigleDiscount()
         {
-            DiscountWindow.overwallAmountWithDiscount = 0;
+            DiscountWindow.OverwallAmountWithDiscount = 0;
             foreach (Basket b in listVBasket.Items)
             {
-                DiscountWindow.overwallAmountWithDiscount = DiscountWindow.overwallAmountWithDiscount + b.ChoseOptionPrice;
+                DiscountWindow.OverwallAmountWithDiscount =
+                    DiscountWindow.OverwallAmountWithDiscount + b.ChoseOptionPrice;
             }
 
-            if (DiscountWindow.overwallDiscount != null)
+            if (DiscountWindow.OverwallDiscount != null)
             {
-                if (DiscountWindow.typeOfDis == "%")
+                if (DiscountWindow.TypeOfDiscount == "%")
                 {
-                    double amount = DiscountWindow.overwallAmountWithDiscount * DiscountWindow.OverwallDicountValue * 0.01;
-                    DiscountWindow.overwallAmountWithDiscount = (float)Math.Round(amount, 2);
+                    double amount = DiscountWindow.OverwallAmountWithDiscount * DiscountWindow.OverwallDicountValue *
+                                    0.01;
+                    DiscountWindow.OverwallAmountWithDiscount = (float) Math.Round(amount, 2);
                 }
                 else
                 {
-                    double amount = DiscountWindow.overwallAmountWithDiscount - DiscountWindow.OverwallDicountValue;
-                    DiscountWindow.overwallAmountWithDiscount = (float)Math.Round(amount, 2);
+                    double amount = DiscountWindow.OverwallAmountWithDiscount - DiscountWindow.OverwallDicountValue;
+                    DiscountWindow.OverwallAmountWithDiscount = (float) Math.Round(amount, 2);
                 }
             }
             else
             {
-                DiscountWindow.overwallAmountWithDiscount = (float)Math.Round(DiscountWindow.overwallAmountWithDiscount, 2);
+                DiscountWindow.OverwallAmountWithDiscount =
+                    (float) Math.Round(DiscountWindow.OverwallAmountWithDiscount, 2);
             }
 
-            overwallAmount = DiscountWindow.overwallAmountWithDiscount;
-            lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
+            OverwallAmount = DiscountWindow.OverwallAmountWithDiscount;
+            lblAmount.Content = DiscountWindow.OverwallAmountWithDiscount;
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -104,15 +102,15 @@ namespace SmartShopWpf
 
             else
             {
-                Basket basketToEditHisQuantity = (Basket)listVBasket.SelectedItem;
+                Basket basketToEditHisQuantity = (Basket) listVBasket.SelectedItem;
                 string tagForManuDisplCode = "Kod produktu";
                 string tagForManuDisplQuan = "Ilość";
                 bool ifFound = false;
-                if (flagToEditQuantity == false)
+                if (_flagToEditQuantity == false)
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     btnEdit.Content = "Potwierdz";
-                    flagToEditQuantity = true;
+                    _flagToEditQuantity = true;
                     btnManuallyAdd.IsEnabled = false;
                 }
                 else
@@ -123,38 +121,38 @@ namespace SmartShopWpf
                     }
                     else
                     {
-                        foreach (var v in listOfBoughtItems)
+                        foreach (var v in ListOfBoughtItems)
                         {
                             if (v.Number == basketToEditHisQuantity.Number)
                             {
                                 //Przekazujemy całą kwotę ze zniżkami
                                 float Sum = float.Parse(lblAmount.Content.ToString());
-                                   
+
                                 //Od sumy odejmujemy cenę Orderu przed zniżką 
-                                    Sum -= v.BeforeDiscount;
-                                    float SinglePrice = 0;
+                                Sum -= v.BeforeDiscount;
+                                float singlePrice = 0;
 
-                                    SinglePrice  = v.BeforeDiscount / v.Count;                              
-                            
+                                singlePrice = v.BeforeDiscount / v.Count;
+
                                 //Ilość z Ręcznej klawiatury
-                                    v.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
+                                v.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
 
-                                    basketToEditHisQuantity.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
-                                    v.BeforeDiscount = SinglePrice * v.Count;
-                             
+                                basketToEditHisQuantity.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
+                                v.BeforeDiscount = singlePrice * v.Count;
 
-                                   //Do sumy pdodajemy cenę Orderu przed zniżką
-                                   Sum += v.BeforeDiscount;
+
+                                //Do sumy pdodajemy cenę Orderu przed zniżką
+                                Sum += v.BeforeDiscount;
 
                                 //Cena pojdeycznego Orderu = Cenie przed Zniżką
-                                    v.ChoseOptionPrice = v.BeforeDiscount;
-                                    basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
-                                    lblAmount.Content = Math.Round(Convert.ToDouble(Sum), 2);
-                                    lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
-                                
+                                v.ChoseOptionPrice = v.BeforeDiscount;
+                                basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
+                                lblAmount.Content = Math.Round(Convert.ToDouble(Sum), 2);
+                                lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
+
 
                                 ifFound = true;
-                                flagToEditQuantity = false;
+                                _flagToEditQuantity = false;
                                 lblManuallyTagOfCode.Content = tagForManuDisplCode;
                                 btnEdit.Content = "Edytuj";
                                 btnManuallyAdd.IsEnabled = true;
@@ -177,7 +175,7 @@ namespace SmartShopWpf
             List<Basket> newList = new List<Basket>();
             foreach (var v in listVBasket.SelectedItems)
             {
-                newList.Add((Basket)v);
+                newList.Add((Basket) v);
             }
             float newSuma = float.Parse(lblAmount.Content.ToString());
             float newSumaWithoutDiscounts = float.Parse(lblAmountWithoutDiscount.Content.ToString());
@@ -185,13 +183,15 @@ namespace SmartShopWpf
             {
                 if (v.OverwallDiscountName != null && v.OverwallDiscountName.Contains("%"))
                 {
-                    float OverwallDiscountName = float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 1));
-                    newSuma -= v.ChoseOptionPrice * (1 - (OverwallDiscountName / 100));
+                    float overwallDiscountName =
+                        float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 1));
+                    newSuma -= v.ChoseOptionPrice * (1 - (overwallDiscountName / 100));
                     newSumaWithoutDiscounts -= v.BeforeDiscount;
                 }
                 else if (v.OverwallDiscountName != null && v.OverwallDiscountName.Contains("zł"))
                 {
-                    float OverwallDiscountName = float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 2));
+                    float overwallDiscountName =
+                        float.Parse(v.OverwallDiscountName.Remove(v.OverwallDiscountName.Length - 2));
                     newSuma = newSuma - v.ChoseOptionPrice;
                     newSumaWithoutDiscounts -= v.BeforeDiscount;
                 }
@@ -200,9 +200,9 @@ namespace SmartShopWpf
                     newSuma -= v.ChoseOptionPrice;
                     newSumaWithoutDiscounts -= v.BeforeDiscount;
                 }
-                listOfBoughtItems.Remove(v);
+                ListOfBoughtItems.Remove(v);
                 listVBasket.Items.Remove(v);
-                listOfDeletedItems.Add(v);
+                ListOfDeletedItems.Add(v);
             }
             lblAmount.Content = Math.Round(Convert.ToDouble(newSuma), 2);
             lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(newSumaWithoutDiscounts), 2);
@@ -341,7 +341,7 @@ namespace SmartShopWpf
 
         private void btnFromListAdd_Click(object sender, RoutedEventArgs e)
         {
-            Product p = (Product)listVFromListListOfProducts.SelectedItem;
+            Product p = (Product) listVFromListListOfProducts.SelectedItem;
             txtManuallyCodeEntry.Text = p.Code.ToString();
             tabService.SelectedItem = tabManually;
         }
@@ -355,7 +355,7 @@ namespace SmartShopWpf
             DataHandler data = DataHandler.GetInstance();
             Binding myBinding = new Binding();
 
-            if (flagToTagForManuDisp)
+            if (_flagToTagForManuDisp)
             {
                 string code = txtManuallyCodeEntry.Text.ToString().Trim();
                 bool checkCode = manCod.CheckTheCode(code, data.Products);
@@ -364,7 +364,7 @@ namespace SmartShopWpf
                 {
                     lblManuallyTagOfCode.Content = tagForManuDisplQuan;
                     txtManuallyCodeEntry.Text = "";
-                    flagToTagForManuDisp = false;
+                    _flagToTagForManuDisp = false;
                     tabFromList.IsEnabled = false;
                 }
                 else
@@ -396,31 +396,31 @@ namespace SmartShopWpf
 
                     double SumOfPrices = Convert.ToDouble(lblAmountWithoutDiscount.Content.ToString().Trim());
 
-                    if (flagToVat)
+                    if (_flagToVat)
                     {
                         basket.ChoseOptionPrice = manCod.BasketContainer.TotalPriceWithVat;
                         basket.BeforeDiscount = basket.ChoseOptionPrice;
-                        overwallAmount = (float)Math.Round((SumOfPrices + basket.ChoseOptionPrice), 2);
-                        lblAmount.Content = overwallAmount;
+                        OverwallAmount = (float) Math.Round((SumOfPrices + basket.ChoseOptionPrice), 2);
+                        lblAmount.Content = OverwallAmount;
                         lblAmountWithoutDiscount.Content = lblAmount.Content;
                     }
                     else
                     {
                         basket.ChoseOptionPrice = manCod.BasketContainer.TotalPriceWithoutVat;
                         basket.BeforeDiscount = basket.ChoseOptionPrice;
-                        overwallAmount = (float)Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
-                        lblAmount.Content = overwallAmount;
+                        OverwallAmount = (float) Math.Round(((float) SumOfPrices + basket.ChoseOptionPrice), 2);
+                        lblAmount.Content = OverwallAmount;
                         lblAmountWithoutDiscount.Content = lblAmount.Content;
                     }
 
-                    if (flagToOverwallDiscount)
+                    if (FlagToOverwallDiscount)
                     {
                         bool flagToChar = true;
 
                         string discountValue = "";
-                        basket.OverwallDiscountName = DiscountWindow.overwallDiscount;
+                        basket.OverwallDiscountName = DiscountWindow.OverwallDiscount;
 
-                        char[] takeDisCount = DiscountWindow.overwallDiscount.ToCharArray();
+                        char[] takeDisCount = DiscountWindow.OverwallDiscount.ToCharArray();
                         foreach (char v in takeDisCount)
                         {
                             if (v == '%')
@@ -440,16 +440,18 @@ namespace SmartShopWpf
 
                         if (flagToChar)
                         {
-                            DiscountWindow.overwallAmountWithDiscount = (float)Math.Round((overwallAmount * percent), 2);
-                            lblAmountWithoutDiscount.Content = overwallAmount;
-                            lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
+                            DiscountWindow.OverwallAmountWithDiscount =
+                                (float) Math.Round((OverwallAmount * percent), 2);
+                            lblAmountWithoutDiscount.Content = OverwallAmount;
+                            lblAmount.Content = DiscountWindow.OverwallAmountWithDiscount;
                         }
                         else if (!flagToChar)
 
                         {
-                            DiscountWindow.overwallAmountWithDiscount = (float)(overwallAmount - Convert.ToDouble(discountValue));
-                            lblAmountWithoutDiscount.Content = overwallAmount;
-                            lblAmount.Content = DiscountWindow.overwallAmountWithDiscount;
+                            DiscountWindow.OverwallAmountWithDiscount =
+                                (float) (OverwallAmount - Convert.ToDouble(discountValue));
+                            lblAmountWithoutDiscount.Content = OverwallAmount;
+                            lblAmount.Content = DiscountWindow.OverwallAmountWithDiscount;
                         }
                     }
                     else
@@ -457,11 +459,11 @@ namespace SmartShopWpf
                         basket.DiscountValue = 0;
                     }
 
-                    listOfBoughtItems.Add(basket);
+                    ListOfBoughtItems.Add(basket);
                     listVBasket.Items.Add(basket);
                     btnVat.IsEnabled = false;
                     lblManuallyTagOfCode.Content = tagForManuDisplCode;
-                    flagToTagForManuDisp = true;
+                    _flagToTagForManuDisp = true;
                     txtManuallyCodeEntry.Text = "";
 
                     await taskOne.ContinueWith(_ =>
@@ -475,11 +477,13 @@ namespace SmartShopWpf
             }
         }
 
-        public float DiscountValueForOrders(float totalPriceWithSingleAndOverwallDiscount, float totalPriceWithSingleAndWithoutOverwallDiscount, float optionPriceOfSingleBasket)
+        public float DiscountValueForOrders(float totalPriceWithSingleAndOverwallDiscount,
+            float totalPriceWithSingleAndWithoutOverwallDiscount, float optionPriceOfSingleBasket)
         {
             float percentWithoutOverallDiscount, discountValue;
 
-            percentWithoutOverallDiscount = (optionPriceOfSingleBasket * 100) / totalPriceWithSingleAndWithoutOverwallDiscount;
+            percentWithoutOverallDiscount = (optionPriceOfSingleBasket * 100) /
+                                            totalPriceWithSingleAndWithoutOverwallDiscount;
             discountValue = (percentWithoutOverallDiscount * totalPriceWithSingleAndOverwallDiscount) / 100;
 
             return discountValue;
@@ -488,31 +492,32 @@ namespace SmartShopWpf
         private void btnPayment_Click(object sender, RoutedEventArgs e)
         {
             DataHandler data = DataHandler.GetInstance();
-            totalPriceToPaymentLabel = lblAmount.Content.ToString();
-            overwallAmount = (float)Convert.ToDouble(totalPriceToPaymentLabel);
+            TotalPriceToPaymentLabel = lblAmount.Content.ToString();
+            OverwallAmount = (float) Convert.ToDouble(TotalPriceToPaymentLabel);
 
             float amountWithSingleWithoutOverwall = 0;
-            listOfBoughtItems.Clear();
+            ListOfBoughtItems.Clear();
 
             foreach (Basket b in listVBasket.Items)
             {
                 amountWithSingleWithoutOverwall = amountWithSingleWithoutOverwall + b.ChoseOptionPrice;
-                listOfBoughtItems.Add(b);
+                ListOfBoughtItems.Add(b);
             }
 
             if (data.Transaction != null)
             {
                 PaymentWindow pW = new PaymentWindow(data.Transaction.TotalPrice, data.Transaction.Id);
 
-                foreach (Basket b in listOfBoughtItems)
+                foreach (Basket b in ListOfBoughtItems)
                 {
-                    b.DiscountValue = DiscountValueForOrders(overwallAmount, amountWithSingleWithoutOverwall, b.ChoseOptionPrice);
+                    b.DiscountValue = DiscountValueForOrders(OverwallAmount, amountWithSingleWithoutOverwall,
+                        b.ChoseOptionPrice);
                 }
 
                 float price = float.Parse(lblAmount.Content.ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 data.Transaction.TotalPrice = price / 100;
 
-                new TransactionManager().AddOrdersToTransaction(listOfBoughtItems);
+                new TransactionManager().AddOrdersToTransaction(ListOfBoughtItems);
 
                 new TransactionFinalizationInvoker().FinalizeCurrentTransaction();
 
@@ -542,17 +547,17 @@ namespace SmartShopWpf
             string ContentTick = "Zaznacz Wszystkie";
             string ContentUnTick = "Odznacz Wszystkie";
 
-            if (flagToTickAll == true)
+            if (_flagToTickAll == true)
             {
                 btnTickAll.Content = ContentUnTick;
                 listVBasket.SelectAll();
-                flagToTickAll = false;
+                _flagToTickAll = false;
             }
             else
             {
                 btnTickAll.Content = ContentTick;
                 listVBasket.UnselectAll();
-                flagToTickAll = true;
+                _flagToTickAll = true;
             }
         }
 
@@ -577,17 +582,17 @@ namespace SmartShopWpf
         {
             float totalPrice = 0;
 
-            if (flagToVat)
+            if (_flagToVat)
             {
                 lblVat.Content = "";
-                flagToVat = false;
+                _flagToVat = false;
 
                 foreach (Basket v in listVBasket.Items)
                 {
                     v.ChoseOptionPrice = v.TotalPriceWithoutVat;
                     totalPrice = totalPrice + v.ChoseOptionPrice;
                 }
-                foreach (Basket v2 in listOfBoughtItems)
+                foreach (Basket v2 in ListOfBoughtItems)
                 {
                     v2.ChoseOptionPrice = v2.TotalPriceWithoutVat;
                 }
@@ -597,7 +602,7 @@ namespace SmartShopWpf
             else
             {
                 lblVat.Content = "VAT";
-                flagToVat = true;
+                _flagToVat = true;
 
                 foreach (Basket v in listVBasket.Items)
                 {
@@ -605,7 +610,7 @@ namespace SmartShopWpf
 
                     totalPrice = totalPrice + v.ChoseOptionPrice;
                 }
-                foreach (Basket v2 in listOfBoughtItems)
+                foreach (Basket v2 in ListOfBoughtItems)
                 {
                     v2.ChoseOptionPrice = v2.TotalPriceWithVat;
                 }
@@ -613,8 +618,8 @@ namespace SmartShopWpf
                 listVBasket.Items.Refresh();
             }
 
-            overwallAmount = (float)Math.Round(totalPrice, 2);
-            lblAmount.Content = overwallAmount;
+            OverwallAmount = (float) Math.Round(totalPrice, 2);
+            lblAmount.Content = OverwallAmount;
             lblAmountWithoutDiscount.Content = lblAmount.Content;
         }
 
@@ -640,12 +645,12 @@ namespace SmartShopWpf
                 if (counter > 0)
                 {
                     dW.lblKindOfDis.Content = "Zniżka Pojedyncza";
-                    flagToTagKindOfDiscount = false;
+                    FlagToTagKindOfDiscount = false;
                 }
                 else
                 {
                     dW.lblKindOfDis.Content = "Zniżka Całościowa";
-                    flagToTagKindOfDiscount = true;
+                    FlagToTagKindOfDiscount = true;
                 }
 
                 dW.Owner = this;
@@ -660,11 +665,18 @@ namespace SmartShopWpf
             string idTransactionText = txtReturnsNumberOfTransaction.Text;
             int idTransaction = 0;
 
-            try { idTransaction = Convert.ToInt32(idTransactionText); }
-            catch { MessageBox.Show("Zły format"); }
+            try
+            {
+                idTransaction = Convert.ToInt32(idTransactionText);
+            }
+            catch
+            {
+                MessageBox.Show("Zły format");
+            }
 
             ReturnSearchInvoker returnSearchInvoker = new ReturnSearchInvoker();
-            returnSearchInvoker.ShowReturnedProducts(idTransaction, listVReturnsListOfProductsToReturn, informationLabel);
+            returnSearchInvoker.ShowReturnedProducts(idTransaction, listVReturnsListOfProductsToReturn,
+                informationLabel);
             informationLabel.Content = "Szukam transakcji...";
         }
 
@@ -673,17 +685,17 @@ namespace SmartShopWpf
             string ContentTick = "Zaznacz Wszystkie";
             string ContentUnTick = "Odznacz Wszystkie";
 
-            if (flagToTickAll == true)
+            if (_flagToTickAll == true)
             {
                 btnReturnsTickAll.Content = ContentUnTick;
                 listVReturnsListOfProductsToReturn.SelectAll();
-                flagToTickAll = false;
+                _flagToTickAll = false;
             }
             else
             {
                 btnReturnsTickAll.Content = ContentTick;
                 listVReturnsListOfProductsToReturn.UnselectAll();
-                flagToTickAll = true;
+                _flagToTickAll = true;
             }
         }
 
@@ -711,7 +723,7 @@ namespace SmartShopWpf
                 if (returnObject.ReturnedText.Equals("NIE"))
                 {
                     listRecipeBeforeReturn.Add(returnObject);
-                    totalPriceAfterReturn = totalPriceAfterReturn + (float)returnObject.Discount;
+                    totalPriceAfterReturn = totalPriceAfterReturn + (float) returnObject.Discount;
                 }
             }
 
@@ -723,8 +735,8 @@ namespace SmartShopWpf
                 }
 
                 listReturns.Add(returnObject);
-                priceToReturn = priceToReturn + (float)returnObject.Discount;
-                totalPriceAfterReturn = totalPriceAfterReturn - (float)returnObject.Discount;
+                priceToReturn = priceToReturn + (float) returnObject.Discount;
+                totalPriceAfterReturn = totalPriceAfterReturn - (float) returnObject.Discount;
             }
 
             if (listVReturnsListOfProductsToReturn.SelectedItems.Count >= 1)

@@ -1,18 +1,12 @@
-﻿using Newtonsoft.Json;
-using RestSharp;
-using SmartShop.CommunicateToWebService.Clients;
+﻿using System.Collections.Generic;
+using SmartShop.CommunicateToWebService.Utils;
 using SmartShopWpf.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SmartShop.CommunicateToWebService
+namespace SmartShop.CommunicateToWebService.Clients
 {
     public class ProductsClient : BaseClient<Product>
     {
-        public ProductsClient(string token) : base(token, Endpoint.PRODUCTS)
+        public ProductsClient(string token) : base(token, Endpoint.Products)
         {
         }
 

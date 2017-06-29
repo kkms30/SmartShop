@@ -1,9 +1,6 @@
 ﻿using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SmartShop.CommunicateToWebService.Utils;
 
 namespace SmartShop.CommunicateToWebService.Authentication
 {
@@ -11,18 +8,17 @@ namespace SmartShop.CommunicateToWebService.Authentication
     {
         public static string ReuqestToken(string id, string password)
         {
-            var request = new RestRequest(Endpoint.TOKEN, Method.POST);
-            string encodedBody = string.Format("grant_type=password&username={0}&password={1}",
-                id, password);
+            var request = new RestRequest(Endpoint.Token, Method.POST);
+            string encodedBody = $"grant_type=password&username={id}&password={password}";
 
             request.AddParameter("application/x-www-form-urlencoded", encodedBody, ParameterType.RequestBody);
             request.AddParameter("Content-Type", "application/x-www-form-urlencoded", ParameterType.HttpHeader);
 
-            var response = new RestClient(Endpoint.BASE_URL).Execute<ApiAuthenticationResponse>(request);
+            var response = new RestClient(Endpoint.BaseUrl).Execute<ApiAuthenticationResponse>(request);
 
-            Console.WriteLine(response.Data.access_token);
+            Console.WriteLine(response.Data.AccessToken);
 
-            return response.Data.access_token;
+            return response.Data.AccessToken;
         }
     }
 }

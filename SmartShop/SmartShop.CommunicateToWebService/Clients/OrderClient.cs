@@ -1,11 +1,12 @@
 ﻿using SmartShopWpf.Models;
 using System.Collections.Generic;
+using SmartShop.CommunicateToWebService.Utils;
 
 namespace SmartShop.CommunicateToWebService.Clients
 {
     public class OrderClient : BaseClient<Order>
     {
-        public OrderClient(string token) : base(token, Endpoint.ORDER)
+        public OrderClient(string token) : base(token, Endpoint.Order)
         {
         }
 

@@ -22,9 +22,6 @@ namespace SmartShopWpf
         public LoginWindow()
         {
             InitializeComponent();
-
-            //txtLogin.Text = "5";
-            //pswPassword.Password = "test";
             _directoryInfo = new DirectoryInfo(".");
         }
 
@@ -38,34 +35,35 @@ namespace SmartShopWpf
             List<Product> products = new List<Product>();
             string token = "";
             btnLogin.IsEnabled = false;
-            Task.Factory.StartNew((Action)delegate { 
-            foreach (FileInfo fi in _directoryInfo.GetFiles("PluginLogIn.dll"))
+            Task.Factory.StartNew((Action) delegate
             {
-                Assembly pluginAssembly = Assembly.LoadFrom(fi.FullName);
-                foreach (Type pluginType in pluginAssembly.GetExportedTypes())
+                foreach (FileInfo fi in _directoryInfo.GetFiles("PluginLogIn.dll"))
                 {
-                    if (pluginType.GetInterface(typeof(ILogIn).Name) != null)
+                    Assembly pluginAssembly = Assembly.LoadFrom(fi.FullName);
+                    foreach (Type pluginType in pluginAssembly.GetExportedTypes())
                     {
-                        ILogIn typeLoadedFromPlugin = (ILogIn)Activator.CreateInstance(pluginType);
-                        if (typeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient, ref cashier, ref products, ref token))
+                        if (pluginType.GetInterface(typeof(ILogIn).Name) != null)
                         {
-
+                            ILogIn typeLoadedFromPlugin = (ILogIn) Activator.CreateInstance(pluginType);
+                            if (typeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient,
+                                ref cashier, ref products, ref token))
+                            {
                                 InitAppData(cashier, products, token);
                                 Dispatcher.BeginInvoke(new Action(delegate
                                 {
-                                    
-                                    MainWindow mW = new MainWindow(false);
-                                    mW.Show();
-                                    this.Close();
+                                    MainWindow mainWindow = new MainWindow();
+                                    mainWindow.Show();
+                                    Close();
                                 }));
                             }
-                        else
-                        {
-                            MessageBox.Show("Nieprawidłowy login lub hasło!", "Błąd logowania", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            else
+                            {
+                                MessageBox.Show("Nieprawidłowy login lub hasło!", "Błąd logowania", MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation);
+                            }
                         }
                     }
                 }
-            }
             });
         }
 
@@ -91,6 +89,5 @@ namespace SmartShopWpf
             data.Products = products;
             data.Cashbox = cashbox;
         }
-
     }
 }
