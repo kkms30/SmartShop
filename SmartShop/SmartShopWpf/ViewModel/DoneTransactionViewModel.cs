@@ -1,9 +1,4 @@
 ﻿using SmartShopWpf.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartShopWpf.ViewModel
 {
@@ -12,8 +7,8 @@ namespace SmartShopWpf.ViewModel
         public int CashboxId { get; set; }
         public int CashierId { get; set; }
         public int Id { get; set; }
-        public String TotalPrice { get; set; }
-        public String DateFormatted { get; set; }
+        public string TotalPrice { get; set; }
+        public string DateFormatted { get; set; }
 
         public DoneTransactionViewModel(Transaction transaction)
         {

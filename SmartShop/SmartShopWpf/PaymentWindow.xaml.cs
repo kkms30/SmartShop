@@ -47,22 +47,22 @@ namespace SmartShopWpf
             //recp.TransactionNumber = data.Transaction.Id;
             recp.TransactionNumber = dataId;
             recp.Data = DateTime.Now;
-            recp.listOfBoughtProducts = MainWindow.listOfBoughtItems;
+            recp.ListOfBoughtProducts = MainWindow.listOfBoughtItems;
             recp.PriceSum = dataTotalPrice;
             if (flagToKindOfPayment)
             {
-                recp.kindOfPayment = "Gotowka";
+                recp.KindOfPayment = "Gotowka";
             }
             else
             {
-                recp.kindOfPayment = "Karta";
+                recp.KindOfPayment = "Karta";
             }
 
             recp.PriceSum = dataTotalPrice;
             recp.CashNumber = Convert.ToInt32(mW.lblCashRegisterNumber.Content);
             recp.CashierNumber = Convert.ToInt32(mW.lblCashierNumber.Content);
             if (MainWindow.listOfDeletedItems.Count > 0)
-                recp.listOfDeletedProducts = MainWindow.listOfDeletedItems;
+                recp.ListOfDeletedProducts = MainWindow.listOfDeletedItems;
             ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
             rPDFGen.GeneratePDF();
 

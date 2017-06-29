@@ -13,7 +13,7 @@ namespace SmartShopWpf.Asynchronous
     {
         public void Download(ListView transactionsListView)
         {
-            Task.Factory.StartNew<List<DoneTransactionViewModel>>(() =>
+            Task.Factory.StartNew(() =>
             {
                 List<Transaction> transactions = new TransactionManager().GetTransactions();
                 List<DoneTransactionViewModel> viewModels = new List<DoneTransactionViewModel>();

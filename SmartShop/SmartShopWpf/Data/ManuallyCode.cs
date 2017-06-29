@@ -6,11 +6,11 @@ namespace SmartShopWpf.Data
 {
     public sealed class ManuallyCode
     {
-        public Product checkedProduct = new Product();
-        public Basket basketContainer = new Basket();
-        private const float vat = 1.23F;
+        public Product CheckedProduct = new Product();
+        public Basket BasketContainer = new Basket();
+        private const float Vat = 1.23F;
 
-        private static ManuallyCode instance;
+        private static ManuallyCode _instance;
 
         private ManuallyCode()
         {
@@ -18,11 +18,11 @@ namespace SmartShopWpf.Data
 
         public static ManuallyCode GetInstance()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new ManuallyCode();
+                _instance = new ManuallyCode();
             }
-            return instance;
+            return _instance;
         }
 
         public Basket AddToBasketList(int getCount, int counter)
@@ -30,22 +30,30 @@ namespace SmartShopWpf.Data
             if (getCount < 0 || counter < 0)
                 throw new ArgumentException();
 
-            string getName = checkedProduct.Name.Trim();
-            byte[] getImage = checkedProduct.Image;
-            float getSingleWithoutVatPrice = checkedProduct.Price;
-            int getIdProduct = checkedProduct.IdProduct;
+            string getName = CheckedProduct.Name.Trim();
+            byte[] getImage = CheckedProduct.Image;
+            float getSingleWithoutVatPrice = CheckedProduct.Price;
+            int getIdProduct = CheckedProduct.IdProduct;
 
-            double countSingleWithVat = Math.Round(getSingleWithoutVatPrice * vat, 2);
-            float getSingleWithVatPrice = (float)countSingleWithVat;
+            double countSingleWithVat = Math.Round(getSingleWithoutVatPrice * Vat, 2);
+            float getSingleWithVatPrice = (float) countSingleWithVat;
             float getTotalPriceWithVat = getSingleWithVatPrice * getCount;
             float getTotalPriceWithoutVat = getSingleWithoutVatPrice * getCount;
 
-            //MessageBox.Show("Cena Pobrana z bazy"+getSingleWithoutVatPrice);
-            //MessageBox.Show("Cena z Vatem przed float"+countSingleWithVat);
-            //MessageBox.Show("Cena z Vatem po float" + getSingleWithVatPrice);
-
-            Basket basket = new Basket() { Number = counter, IdProduct = getIdProduct, Product = checkedProduct, Name = getName, Image = getImage, Count = getCount, SigleWithoutVatPrice = getSingleWithoutVatPrice, SingleWithVatPrice = getSingleWithVatPrice, TotalPriceWithoutVat = getTotalPriceWithoutVat, TotalPriceWithVat = getTotalPriceWithVat };
-            basketContainer = basket;
+            Basket basket = new Basket()
+            {
+                Number = counter,
+                IdProduct = getIdProduct,
+                Product = CheckedProduct,
+                Name = getName,
+                Image = getImage,
+                Count = getCount,
+                SigleWithoutVatPrice = getSingleWithoutVatPrice,
+                SingleWithVatPrice = getSingleWithVatPrice,
+                TotalPriceWithoutVat = getTotalPriceWithoutVat,
+                TotalPriceWithVat = getTotalPriceWithVat
+            };
+            BasketContainer = basket;
             return basket;
         }
 
@@ -58,12 +66,11 @@ namespace SmartShopWpf.Data
             {
                 if (codeToCheck.Equals(codeInList.Code.Trim()))
                 {
-                    checkedProduct = codeInList;
+                    CheckedProduct = codeInList;
 
                     return true;
                 }
             }
-
             return false;
         }
     }

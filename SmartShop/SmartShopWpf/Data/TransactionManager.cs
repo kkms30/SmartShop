@@ -7,31 +7,32 @@ namespace SmartShopWpf.Data
 {
     public class TransactionManager
     {
-        private DataHandler data;
+        private DataHandler _data;
 
         public TransactionManager()
         {
-            data = DataHandler.GetInstance();
+            _data = DataHandler.GetInstance();
         }
 
         public List<Transaction> GetTransactions()
         {
-            return new TransactionClient(data.Token).GetTransactions();
+            return new TransactionClient(_data.Token).GetTransactions();
         }
 
         public void PrepareNewTransaction()
         {
-            Transaction transaction = new Transaction();
+            Transaction transaction = new Transaction
+            {
+                CashboxId = _data.Cashbox.IdCashbox,
+                CashierId = _data.Cashier.IdCashier,
+                Date = DateTime.Now
+            };
 
-            transaction.CashboxId = data.Cashbox.IdCashbox;
-            transaction.CashierId = data.Cashier.IdCashier;
-            transaction.Date = DateTime.Now;
-
-            TransactionClient transactionClient = new TransactionClient(data.Token);
+            TransactionClient transactionClient = new TransactionClient(_data.Token);
 
             Transaction newTransaction = transactionClient.CreateNew(transaction);
 
-            data.Transaction = newTransaction;
+            _data.Transaction = newTransaction;
         }
 
         public void AddOrdersToTransaction(List<Basket> basketsList)
@@ -44,20 +45,22 @@ namespace SmartShopWpf.Data
 
         public void AddNewOrderToTransaction(Basket basket)
         {
-            Order order = new Order();
-            order.Product = basket.Product;
-            order.Count = (sbyte)basket.Count;
-            order.Discount = basket.DiscountValue;
-            order.ProductId = basket.Product.IdProduct;
-            order.TransactionId = data.Transaction.IdTransaction;
-            data.Transaction.Orders.Add(order);
+            Order order = new Order
+            {
+                Product = basket.Product,
+                Count = (sbyte) basket.Count,
+                Discount = basket.DiscountValue,
+                ProductId = basket.Product.IdProduct,
+                TransactionId = _data.Transaction.IdTransaction
+            };
+            _data.Transaction.Orders.Add(order);
         }
-     
+
 
         public void FinalizeTransaction()
         {
-            TransactionClient transactionClient = new TransactionClient(data.Token);
-            transactionClient.UpdateTransaction(data.Transaction);
+            TransactionClient transactionClient = new TransactionClient(_data.Token);
+            transactionClient.UpdateTransaction(_data.Transaction);
         }
     }
 }

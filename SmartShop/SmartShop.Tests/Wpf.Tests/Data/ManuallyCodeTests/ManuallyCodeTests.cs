@@ -68,7 +68,7 @@ namespace SmartShop.Tests.Wpf.Tests
             byte[] image = new byte[] { 0x20 };
             Product product = new Product() { Name = "ex", Image = new byte[] { 0x20 }, Price = 20 };
             ManuallyCode mC = ManuallyCode.GetInstance();
-            mC.checkedProduct = product;
+            mC.CheckedProduct = product;
             //ACT
             Basket basketExpected = new Basket() { Name = product.Name, Image = product.Image,
                 SigleWithoutVatPrice = product.Price, Number = y, Count = x };

@@ -398,7 +398,7 @@ namespace SmartShopWpf
 
                     if (flagToVat)
                     {
-                        basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithVat;
+                        basket.ChoseOptionPrice = manCod.BasketContainer.TotalPriceWithVat;
                         basket.BeforeDiscount = basket.ChoseOptionPrice;
                         overwallAmount = (float)Math.Round((SumOfPrices + basket.ChoseOptionPrice), 2);
                         lblAmount.Content = overwallAmount;
@@ -406,7 +406,7 @@ namespace SmartShopWpf
                     }
                     else
                     {
-                        basket.ChoseOptionPrice = manCod.basketContainer.TotalPriceWithoutVat;
+                        basket.ChoseOptionPrice = manCod.BasketContainer.TotalPriceWithoutVat;
                         basket.BeforeDiscount = basket.ChoseOptionPrice;
                         overwallAmount = (float)Math.Round(((float)SumOfPrices + basket.ChoseOptionPrice), 2);
                         lblAmount.Content = overwallAmount;
@@ -737,14 +737,14 @@ namespace SmartShopWpf
                     Receipe recp = new Receipe();
                     recp.TransactionNumber = IdTransToReturn;
                     recp.Data = DateTime.Now;
-                    recp.listOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
+                    recp.ListOfAllOrdersInTransactionToReturn = listRecipeBeforeReturn;
                     recp.PriceToReturn = priceToReturn;
                     recp.PriceSum = totalPriceAfterReturn;
                     recp.CashNumber = Convert.ToInt32(lblCashRegisterNumber.Content);
                     recp.CashierNumber = Convert.ToInt32(lblCashierNumber.Content);
 
                     if (listReturns.Count > 0)
-                        recp.listOfReturnsOrders = listReturns;
+                        recp.ListOfReturnsOrders = listReturns;
                     ReturnPDFGenerator rPDFGen = new ReturnPDFGenerator(recp);
                     rPDFGen.GeneratePDF();
 

@@ -46,11 +46,11 @@ namespace SmartShopWpf.ReceipeMethods
 
             PdfStringFormat centerAlignment
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString(Receipe.NAME,
+            page.Canvas.DrawString(Receipe.Name,
                 font, brush, page.Canvas.ClientSize.Width / 2, 20, centerAlignment);
             PdfStringFormat centerAlignment2
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString(Receipe.ADDRESS,
+            page.Canvas.DrawString(Receipe.Address,
                 font, brush, page.Canvas.ClientSize.Width / 2, 30, centerAlignment2);
             PdfStringFormat centerAlignment3
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
@@ -69,7 +69,7 @@ namespace SmartShopWpf.ReceipeMethods
             float pagethreeh = 20;
             float pagefourh = 20;
             //_recp.listOfBoughtProducts.RemoveRange(24, _recp.listOfBoughtProducts.Count-24);
-            foreach (var x in _recp.listOfBoughtProducts)
+            foreach (var x in _recp.ListOfBoughtProducts)
             {
                 string ilosc = "";
                 string cena = x.ChoseOptionPrice.ToString();
@@ -130,9 +130,9 @@ namespace SmartShopWpf.ReceipeMethods
                     pagefourh += 10;
                 }
             }
-            if (_recp.listOfDeletedProducts != null && _recp.listOfDeletedProducts.Count > 0)
+            if (_recp.ListOfDeletedProducts != null && _recp.ListOfDeletedProducts.Count > 0)
             {
-                foreach (var x in _recp.listOfDeletedProducts)
+                foreach (var x in _recp.ListOfDeletedProducts)
                 {
                     string ilosc = x.Count.ToString();
                     string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;
@@ -189,7 +189,7 @@ namespace SmartShopWpf.ReceipeMethods
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page4.Canvas.DrawPath(pen2, path2);
 
-                page4.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagefourh + 10, leftAlignment);
+                page4.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagefourh + 10, leftAlignment);
                 page4.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
 
             }
@@ -201,7 +201,7 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page3.Canvas.DrawPath(pen2, path2);
-                page3.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagethreeh + 10, leftAlignment);
+                page3.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagethreeh + 10, leftAlignment);
                 page3.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
 
             }
@@ -213,7 +213,7 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page2.Canvas.DrawPath(pen2, path2);
-                page2.Canvas.DrawString("PLATNOSC: " + _recp.kindOfPayment, font2, brush, 0, pagetwoh + 10, leftAlignment);
+                page2.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagetwoh + 10, leftAlignment);
                 page2.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
 
             }
@@ -225,7 +225,7 @@ namespace SmartShopWpf.ReceipeMethods
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page.Canvas.DrawPath(pen2, path2);
-                page.Canvas.DrawString("PLATNOSC: "+_recp.kindOfPayment, font2, brush, 0, pageoneh + 10, leftAlignment);
+                page.Canvas.DrawString("PLATNOSC: "+_recp.KindOfPayment, font2, brush, 0, pageoneh + 10, leftAlignment);
                 page.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
 
             }

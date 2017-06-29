@@ -9,7 +9,8 @@ namespace SmartShopWpf.Asynchronous
 {
     public class ReturnSearchInvoker
     {
-        public void ShowReturnedProducts(int idTransaction, ListView listVReturnsListOfProductsToReturn, Label informationLabel)
+        public void ShowReturnedProducts(int idTransaction, ListView listVReturnsListOfProductsToReturn,
+            Label informationLabel)
         {
             Task.Factory.StartNew(() =>
             {
@@ -35,7 +36,16 @@ namespace SmartShopWpf.Asynchronous
                 {
                     counter++;
 
-                    ReturnObject rO = new ReturnObject { IdOrder = o.IdOrder, Number = counter, Name = o.Product.Name, Image = o.Product.Image, Count = o.Count, Price = o.Product.Price, Discount = o.Discount };
+                    ReturnObject rO = new ReturnObject
+                    {
+                        IdOrder = o.IdOrder,
+                        Number = counter,
+                        Name = o.Product.Name,
+                        Image = o.Product.Image,
+                        Count = o.Count,
+                        Price = o.Product.Price,
+                        Discount = o.Discount
+                    };
                     if (o.Return == 1)
                     {
                         rO.ReturnedText = "TAK";

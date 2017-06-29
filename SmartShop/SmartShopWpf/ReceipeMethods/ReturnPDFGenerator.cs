@@ -41,11 +41,11 @@ namespace SmartShopWpf.ReceipeMethods
 
             PdfStringFormat centerAlignment
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString(Receipe.NAME,
+            page.Canvas.DrawString(Receipe.Name,
                 font, brush, page.Canvas.ClientSize.Width / 2, 20, centerAlignment);
             PdfStringFormat centerAlignment2
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString(Receipe.ADDRESS,
+            page.Canvas.DrawString(Receipe.Address,
                 font, brush, page.Canvas.ClientSize.Width / 2, 30, centerAlignment2);
             PdfStringFormat centerAlignment3
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
@@ -64,9 +64,9 @@ namespace SmartShopWpf.ReceipeMethods
             float pagethreeh = 20;
             float pagefourh = 20;
             //_recp.listOfBoughtProducts.RemoveRange(24, _recp.listOfBoughtProducts.Count-24);
-            foreach (var x in _recp.listOfAllOrdersInTransactionToReturn)
+            foreach (var x in _recp.ListOfAllOrdersInTransactionToReturn)
             {
-                if (!_recp.listOfReturnsOrders.Contains(x))
+                if (!_recp.ListOfReturnsOrders.Contains(x))
                 {
                     string ilosc = "";
                     string cena = x.Discount.ToString();
@@ -115,9 +115,9 @@ namespace SmartShopWpf.ReceipeMethods
                     }
                 }
             }
-            if (_recp.listOfReturnsOrders != null && _recp.listOfReturnsOrders.Count > 0)
+            if (_recp.ListOfReturnsOrders != null && _recp.ListOfReturnsOrders.Count > 0)
             {
-                foreach (var x in _recp.listOfReturnsOrders)
+                foreach (var x in _recp.ListOfReturnsOrders)
                 {
                     string ilosc = x.Count.ToString();
                     string nazwa = x.Name.Substring(0, x.Name.Length > 45 ? 45 : x.Name.Length) + " Il." + ilosc;

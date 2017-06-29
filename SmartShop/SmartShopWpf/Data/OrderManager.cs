@@ -1,22 +1,21 @@
 ﻿using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SmartShopWpf.Data
 {
     internal class OrderManager
     {
-        private DataHandler data;
+        private DataHandler _data;
 
         public OrderManager()
         {
-            data = DataHandler.GetInstance();
+            _data = DataHandler.GetInstance();
         }
 
         public List<Order> GetOrders()
         {
-            return new OrderClient(data.Token).GetOrders();
+            return new OrderClient(_data.Token).GetOrders();
         }
     }
 }

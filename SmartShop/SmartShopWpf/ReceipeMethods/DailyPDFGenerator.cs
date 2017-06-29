@@ -47,11 +47,11 @@ namespace SmartShopWpf.ReceipeMethods
 
             PdfStringFormat centerAlignment
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString(Receipe.NAME,
+            page.Canvas.DrawString(Receipe.Name,
                 font, brush, page.Canvas.ClientSize.Width / 2, 20, centerAlignment);
             PdfStringFormat centerAlignment2
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString(Receipe.ADDRESS,
+            page.Canvas.DrawString(Receipe.Address,
                 font, brush, page.Canvas.ClientSize.Width / 2, 30, centerAlignment2);
             PdfStringFormat centerAlignment3
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
