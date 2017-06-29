@@ -1,9 +1,5 @@
 ﻿using SmartShopWebApp.Core;
 using SmartShopWebApp.Core.GeneratedModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using SmartShopWebApp.Core.Repositories;
 using SmartShopWebApp.Persistance.Repositories;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SmartShop.CommunicateToWebService;
+﻿using System.Collections.Generic;
 using SmartShop.CommunicateToWebService.Clients;
 using SmartShop.CommunicateToWebService.Authentication;
 using SmartShop.Models.Models;

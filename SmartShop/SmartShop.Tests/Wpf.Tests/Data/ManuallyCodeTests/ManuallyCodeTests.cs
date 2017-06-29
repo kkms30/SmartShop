@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using SmartShopWpf.Data;
-using NUnit.Framework.Constraints;
 using SmartShop.Models.Models;
+using SmartShopWpf.Data;
 
-namespace SmartShop.Tests.Wpf.Tests
+namespace SmartShop.Tests.Wpf.Tests.Data.ManuallyCodeTests
 {
     [TestFixture]
     public class ManuallyCodeTests
@@ -28,6 +24,7 @@ namespace SmartShop.Tests.Wpf.Tests
             //ASSERT
             Assert.AreEqual(expected, result);
         }
+
         [Test]
         public void CheckTheCodeIfResultIsWrong()
         {
@@ -43,6 +40,7 @@ namespace SmartShop.Tests.Wpf.Tests
             //ASSERT
             Assert.AreEqual(expected, result);
         }
+
         [Test]
         public void CheckTheCodeIfOneOfParametersIsNull()
         {
@@ -60,26 +58,34 @@ namespace SmartShop.Tests.Wpf.Tests
             Assert.AreEqual(expected, result);
             Assert.AreEqual(expected, secondResult);
         }
+
         [Test]
-        [TestCase(1,2)]
+        [TestCase(1, 2)]
         public void AddToBasketListIfReturnGoodBasket(int x, int y)
         {
             //ARRANGE
-            byte[] image = new byte[] { 0x20 };
-            Product product = new Product() { Name = "ex", Image = new byte[] { 0x20 }, Price = 20 };
+            byte[] image = new byte[] {0x20};
+            Product product = new Product() {Name = "ex", Image = new byte[] {0x20}, Price = 20};
             ManuallyCode mC = ManuallyCode.GetInstance();
             mC.CheckedProduct = product;
             //ACT
-            Basket basketExpected = new Basket() { Name = product.Name, Image = product.Image,
-                SigleWithoutVatPrice = product.Price, Number = y, Count = x };
-            Basket basketResult =  mC.AddToBasketList(x, y);
+            Basket basketExpected = new Basket()
+            {
+                Name = product.Name,
+                Image = product.Image,
+                SigleWithoutVatPrice = product.Price,
+                Number = y,
+                Count = x
+            };
+            Basket basketResult = mC.AddToBasketList(x, y);
             //ASSERT
             Assert.IsTrue(basketExpected.Count == basketResult.Count &&
-                basketExpected.Number == basketResult.Number &&
-                basketExpected.Name == basketResult.Name &&
-                basketExpected.Image == basketResult.Image &&
-                basketExpected.SigleWithoutVatPrice == basketResult.SigleWithoutVatPrice);
+                          basketExpected.Number == basketResult.Number &&
+                          basketExpected.Name == basketResult.Name &&
+                          basketExpected.Image == basketResult.Image &&
+                          basketExpected.SigleWithoutVatPrice == basketResult.SigleWithoutVatPrice);
         }
+
         [Test]
         public void AddToBasketListIfGetCountOrCounterAreLessThenOneAndThrowArgumentException()
         {

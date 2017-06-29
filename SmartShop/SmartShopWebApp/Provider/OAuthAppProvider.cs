@@ -1,10 +1,6 @@
 ﻿using Microsoft.Owin.Security.OAuth;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Threading.Tasks;
-using SmartShopWebApp.Core.Repositories;
 using SmartShopWebApp.Persistance;
 using SmartShopWebApp.Core.GeneratedModels;
 using System.Security.Claims;

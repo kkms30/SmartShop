@@ -1,10 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance.Mappers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace SmartShopWebApp.Persistance
 {
