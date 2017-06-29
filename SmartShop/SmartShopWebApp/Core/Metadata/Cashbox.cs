@@ -10,27 +10,27 @@ namespace SmartShopWebApp.Core.GeneratedModels
     [MetadataType(typeof(CashboxMetaData))]
     public partial class Cashbox
     {
-        private bool shouldSerializeShop = true;
-        private bool shouldSerializeTransactions = true;
+        private bool _shouldSerializeShop = true;
+        private bool _shouldSerializeTransactions = true;
 
         public void SetShouldSerializeShop(bool should)
         {
-            shouldSerializeShop = should;
+            _shouldSerializeShop = should;
         }
 
         public void SetShouldSerializeTransactions(bool should)
         {
-            shouldSerializeTransactions = should;
+            _shouldSerializeTransactions = should;
         }
 
         public bool ShouldSerializeShop()
         {
-            return shouldSerializeShop;
+            return _shouldSerializeShop;
         }
 
         public bool ShouldSerializeTransactions()
         {
-            return shouldSerializeTransactions;
+            return _shouldSerializeTransactions;
         }
     }
 

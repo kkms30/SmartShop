@@ -10,16 +10,16 @@ namespace SmartShopWebApp.Core.GeneratedModels
     [MetadataType(typeof(CashierMetaData))]
     public partial class Cashier
     {
-        private bool shouldSerializeTransactions = true;
+        private bool _shouldSerializeTransactions = true;
 
         public void SetShouldSerializeTransactions(bool should)
         {
-            shouldSerializeTransactions = should;
+            _shouldSerializeTransactions = should;
         }
 
         public bool ShouldSerializeTransactions()
         {
-            return shouldSerializeTransactions;
+            return _shouldSerializeTransactions;
         }
     }
 

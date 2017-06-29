@@ -11,11 +11,11 @@ namespace SmartShopWebApp.Persistance
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ShopContext context;
+        private readonly ShopContext _context;
         
         public UnitOfWork(ShopContext context)
         {
-            this.context = context;
+            _context = context;
             Shops = new ShopRepository(context);
             Cashboxes = new CashboxRepository(context);
             Transactions = new TransactionRepository(context);
@@ -36,12 +36,12 @@ namespace SmartShopWebApp.Persistance
 
         public int Complete()
         {
-            return context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 }

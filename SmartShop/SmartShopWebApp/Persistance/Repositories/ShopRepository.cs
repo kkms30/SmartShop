@@ -17,17 +17,21 @@ namespace SmartShopWebApp.Persistance.Repositories
         public Shop GetShopWithCashboxes(int id)
         {
             Shop shop = ShopContext.Shops.Include(s => s.Cashboxes).SingleOrDefault(s => s.IdShop == id);
-            shop.Cashboxes.ToList().ForEach(c =>
+            if (shop != null)
             {
-                c.SetShouldSerializeShop(false);
-                c.SetShouldSerializeTransactions(false);
-            });
-            return shop;
+                shop.Cashboxes.ToList().ForEach(c =>
+                {
+                    c.SetShouldSerializeShop(false);
+                    c.SetShouldSerializeTransactions(false);
+                });
+                return shop;
+            }
+            return null;
         }
 
         public ShopContext ShopContext
         {
-            get { return context as ShopContext; }
+            get { return Context as ShopContext; }
         }
     }
 }

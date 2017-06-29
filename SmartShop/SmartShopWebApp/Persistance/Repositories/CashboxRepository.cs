@@ -16,7 +16,7 @@ namespace SmartShopWebApp.Persistance.Repositories
 
         public ShopContext ShopContext
         {
-            get { return context as ShopContext; }
+            get { return Context as ShopContext; }
         }
 
         public Cashbox GetCashboxById(int id)
@@ -29,10 +29,7 @@ namespace SmartShopWebApp.Persistance.Repositories
         public List<Cashbox> GetCashboxes()
         {
             List<Cashbox> cashboxes = GetAll().ToList();
-            cashboxes.ForEach(c =>
-            {
-                SetSerialization(c);
-            });
+            cashboxes.ForEach(SetSerialization);
             return cashboxes;
         }
 

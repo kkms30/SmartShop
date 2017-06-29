@@ -16,13 +16,13 @@ namespace SmartShopWebApp.Persistance.Repositories
         }
         public ShopContext ShopContext
         {
-            get { return context as ShopContext; }
+            get { return Context as ShopContext; }
         }
 
         public List<Transaction> GetTransactions()
         {
             List<Transaction> transactions = GetAll().ToList();
-            transactions.ForEach(t => SetSerialization(t));
+            transactions.ForEach(SetSerialization);
             return transactions;
         }
 

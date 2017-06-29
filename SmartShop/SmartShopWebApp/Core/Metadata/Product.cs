@@ -10,24 +10,24 @@ namespace SmartShopWebApp.Core.GeneratedModels
     [MetadataType(typeof(ProductMetaData))]
     public partial class Product
     {
-        private bool shouldSerializeCategory = true;
-        private bool shouldSerializeOrders = true;
+        private bool _shouldSerializeCategory = true;
+        private bool _shouldSerializeOrders = true;
 
         public void SetShouldSerializeCategory(bool should)
         {
-            shouldSerializeCategory = should;
+            _shouldSerializeCategory = should;
         }
         public void SetShouldSerializeOrders(bool should)
         {
-            shouldSerializeOrders = should;
+            _shouldSerializeOrders = should;
         }
         public bool ShouldSerializeCategory()
         {
-            return shouldSerializeCategory;
+            return _shouldSerializeCategory;
         }
         public bool ShouldSerializeOrders()
         {
-            return shouldSerializeOrders;
+            return _shouldSerializeOrders;
         }
     }
 

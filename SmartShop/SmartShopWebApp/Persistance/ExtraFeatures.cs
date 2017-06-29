@@ -23,14 +23,13 @@ namespace SmartShopWebApp.Persistance
         {
             using (var context = new ShopContext())
             {
-                MySqlParameter[] queryParams = new MySqlParameter[] {
+                MySqlParameter[] queryParams = {
                      new MySqlParameter("@IdOrder", returnOrder.IdOrder),
                      new MySqlParameter("@Count", returnOrder.Count)
             };
 
                 var affectedRows = context.Database.ExecuteSqlCommand("CALL returnProduct({0}, {1});", returnOrder.IdOrder, returnOrder.Count);
-
-
+                
             }
         }
 
