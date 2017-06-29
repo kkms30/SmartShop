@@ -745,8 +745,8 @@ namespace SmartShopWpf
 
                     if (listReturns.Count > 0)
                         recp.ListOfReturnsOrders = listReturns;
-                    ReturnPDFGenerator rPDFGen = new ReturnPDFGenerator(recp);
-                    rPDFGen.GeneratePDF();
+                    ReturnPdfGenerator rPDFGen = new ReturnPdfGenerator(recp);
+                    rPDFGen.GeneratePdf();
 
                     listVReturnsListOfProductsToReturn.Items.Clear();
                     txtReturnsNumberOfTransaction.Text = "";

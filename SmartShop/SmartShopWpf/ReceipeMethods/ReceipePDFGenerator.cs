@@ -1,33 +1,28 @@
 ﻿using SmartShopWpf.Data;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
-using Spire.Pdf.Lists;
-using Spire.Pdf.Tables;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartShopWpf.ReceipeMethods
 {
-    public class ReceipePDFGenerator
+    public class ReceipePdfGenerator
     {
-        Receipe _recp;
-        public ReceipePDFGenerator(Receipe recp)
+        private Receipe _recp;
+
+        public ReceipePdfGenerator(Receipe recp)
         {
             _recp = recp;
         }
 
-        public void GeneratePDF()
+        public void GeneratePdf()
         {
             PdfDocument doc = new PdfDocument();
             PdfPageBase page = doc.Pages.Add(PdfPageSize.A6);
             PdfPageBase page2 = null;
             PdfPageBase page3 = null;
             PdfPageBase page4 = null;
-            PdfPageBase[] pages = new PdfPageBase[] { page, page2, page3, page4 };
+            PdfPageBase[] pages = new PdfPageBase[] {page, page2, page3, page4};
 
             //save graphics state
             PdfGraphicsState state = page.Canvas.Save();
@@ -42,7 +37,8 @@ namespace SmartShopWpf.ReceipeMethods
             page.Canvas.DrawString(_recp.Data.ToString(), font, brush, 0, 40, leftAlignment);
 
             PdfStringFormat rightAlignment = new PdfStringFormat(PdfTextAlignment.Right, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString("Nr. transakcji: " + Convert.ToString(_recp.TransactionNumber), font, brush, page.Canvas.ClientSize.Width, 40, rightAlignment);
+            page.Canvas.DrawString("Nr. transakcji: " + Convert.ToString(_recp.TransactionNumber), font, brush,
+                page.Canvas.ClientSize.Width, 40, rightAlignment);
 
             PdfStringFormat centerAlignment
                 = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
@@ -73,17 +69,18 @@ namespace SmartShopWpf.ReceipeMethods
             {
                 string ilosc = "";
                 string cena = x.ChoseOptionPrice.ToString();
-                if (x.OverwallDiscountName!=null && x.SigleDiscountName==null)
+                if (x.OverwallDiscountName != null && x.SigleDiscountName == null)
                 {
                     ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName);
                 }
-                else if(x.SigleDiscountName!=null && x.OverwallDiscountName==null)
+                else if (x.SigleDiscountName != null && x.OverwallDiscountName == null)
                 {
                     ilosc = (x.Count.ToString() + ",Znizka Poj." + x.SigleDiscountName);
                 }
                 else if (x.SigleDiscountName != null && x.OverwallDiscountName != null)
                 {
-                    ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName + ",Znizka Poj." + x.SigleDiscountName);
+                    ilosc = (x.Count.ToString() + ",Znizka Cal." + x.OverwallDiscountName + ",Znizka Poj." +
+                             x.SigleDiscountName);
                 }
                 else
                 {
@@ -115,7 +112,8 @@ namespace SmartShopWpf.ReceipeMethods
                 if (pagetwoh == 310 && pagethreeh < 310)
                 {
                     page3.Canvas.DrawString(nazwa, font2, brush, 0, pagethreeh, leftAlignment);
-                    page3.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagethreeh, rightAlignment);
+                    page3.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagethreeh,
+                        rightAlignment);
                     pagethreeh += 10;
                 }
                 if (pagethreeh == 310)
@@ -126,7 +124,8 @@ namespace SmartShopWpf.ReceipeMethods
                 if (pagethreeh == 310 && pagefourh < 310)
                 {
                     page4.Canvas.DrawString(nazwa, font2, brush, 0, pagefourh, leftAlignment);
-                    page4.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagefourh, rightAlignment);
+                    page4.Canvas.DrawString(cena, font2, brush, page.Canvas.ClientSize.Width, pagefourh,
+                        rightAlignment);
                     pagefourh += 10;
                 }
             }
@@ -140,7 +139,8 @@ namespace SmartShopWpf.ReceipeMethods
                     if (pageoneh < 310)
                     {
                         page.Canvas.DrawString(nazwa, font3, brush, 0, pageoneh, leftAlignment);
-                        page.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pageoneh, rightAlignment);
+                        page.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pageoneh,
+                            rightAlignment);
                         pageoneh += 10;
                     }
                     if (pageoneh == 310)
@@ -151,7 +151,8 @@ namespace SmartShopWpf.ReceipeMethods
                     if (pageoneh == 310 && pagetwoh < 310)
                     {
                         page2.Canvas.DrawString(nazwa, font3, brush, 0, pagetwoh, leftAlignment);
-                        page2.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagetwoh, rightAlignment);
+                        page2.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagetwoh,
+                            rightAlignment);
                         pagetwoh += 10;
                     }
                     if (pagetwoh == 310)
@@ -162,7 +163,8 @@ namespace SmartShopWpf.ReceipeMethods
                     if (pagetwoh == 310 && pagethreeh < 310)
                     {
                         page3.Canvas.DrawString(nazwa, font3, brush, 0, pagethreeh, leftAlignment);
-                        page3.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagethreeh, rightAlignment);
+                        page3.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagethreeh,
+                            rightAlignment);
                         pagethreeh += 10;
                     }
                     if (pagethreeh == 310)
@@ -173,7 +175,8 @@ namespace SmartShopWpf.ReceipeMethods
                     if (pagethreeh == 310 && pagefourh < 310)
                     {
                         page4.Canvas.DrawString(nazwa, font3, brush, 0, pagefourh, leftAlignment);
-                        page4.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagefourh, rightAlignment);
+                        page4.Canvas.DrawString(cena, font3, brush, page.Canvas.ClientSize.Width, pagefourh,
+                            rightAlignment);
                         pagefourh += 10;
                     }
                 }
@@ -184,54 +187,59 @@ namespace SmartShopWpf.ReceipeMethods
             {
                 path2 = new PdfPath();
 
-                path2.AddLine(new PointF(10, pagefourh + 5), new PointF(page.Canvas.ClientSize.Width - 10, pagefourh + 5));
+                path2.AddLine(new PointF(10, pagefourh + 5),
+                    new PointF(page.Canvas.ClientSize.Width - 10, pagefourh + 5));
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page4.Canvas.DrawPath(pen2, path2);
 
-                page4.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagefourh + 10, leftAlignment);
-                page4.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
-
+                page4.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagefourh + 10,
+                    leftAlignment);
+                page4.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush,
+                    page.Canvas.ClientSize.Width, pagefourh + 10, rightAlignment);
             }
             else if (page4 == null && page3 != null)
             {
                 path2 = new PdfPath();
 
-                path2.AddLine(new PointF(10, pagethreeh + 5), new PointF(page.Canvas.ClientSize.Width - 10, pagethreeh + 5));
+                path2.AddLine(new PointF(10, pagethreeh + 5),
+                    new PointF(page.Canvas.ClientSize.Width - 10, pagethreeh + 5));
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page3.Canvas.DrawPath(pen2, path2);
-                page3.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagethreeh + 10, leftAlignment);
-                page3.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
-
+                page3.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagethreeh + 10,
+                    leftAlignment);
+                page3.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush,
+                    page.Canvas.ClientSize.Width, pagethreeh + 10, rightAlignment);
             }
             else if (page3 == null && page2 != null)
             {
                 path2 = new PdfPath();
 
-                path2.AddLine(new PointF(10, pagetwoh + 5), new PointF(page.Canvas.ClientSize.Width - 10, pagetwoh + 5));
+                path2.AddLine(new PointF(10, pagetwoh + 5),
+                    new PointF(page.Canvas.ClientSize.Width - 10, pagetwoh + 5));
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page2.Canvas.DrawPath(pen2, path2);
-                page2.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagetwoh + 10, leftAlignment);
-                page2.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
-
+                page2.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pagetwoh + 10,
+                    leftAlignment);
+                page2.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush,
+                    page.Canvas.ClientSize.Width, pagetwoh + 10, rightAlignment);
             }
             else if (page2 == null && page != null)
             {
                 path2 = new PdfPath();
 
-                path2.AddLine(new PointF(10, pageoneh + 5), new PointF(page.Canvas.ClientSize.Width - 10, pageoneh + 5));
+                path2.AddLine(new PointF(10, pageoneh + 5),
+                    new PointF(page.Canvas.ClientSize.Width - 10, pageoneh + 5));
 
                 pen2 = new PdfPen(System.Drawing.Color.Black, 0.8f);
                 page.Canvas.DrawPath(pen2, path2);
-                page.Canvas.DrawString("PLATNOSC: "+_recp.KindOfPayment, font2, brush, 0, pageoneh + 10, leftAlignment);
-                page.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush, page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
-
+                page.Canvas.DrawString("PLATNOSC: " + _recp.KindOfPayment, font2, brush, 0, pageoneh + 10,
+                    leftAlignment);
+                page.Canvas.DrawString("SUMA PLN DO ZAPLATY: " + _recp.PriceSum, font2, brush,
+                    page.Canvas.ClientSize.Width, pageoneh + 10, rightAlignment);
             }
-            //page.Canvas.DrawString("Left!", font, brush, 0, 60, leftAlignment);
-
-
 
             //restor graphics
             page.Canvas.Restore(state);
@@ -244,8 +252,5 @@ namespace SmartShopWpf.ReceipeMethods
             //Launching the Pdf file.
             System.Diagnostics.Process.Start(fileName);
         }
-
     }
-
 }
-

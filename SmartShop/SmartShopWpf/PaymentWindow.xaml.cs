@@ -63,8 +63,8 @@ namespace SmartShopWpf
             recp.CashierNumber = Convert.ToInt32(mW.lblCashierNumber.Content);
             if (MainWindow.listOfDeletedItems.Count > 0)
                 recp.ListOfDeletedProducts = MainWindow.listOfDeletedItems;
-            ReceipePDFGenerator rPDFGen = new ReceipePDFGenerator(recp);
-            rPDFGen.GeneratePDF();
+            ReceipePdfGenerator rPDFGen = new ReceipePdfGenerator(recp);
+            rPDFGen.GeneratePdf();
 
             mW.listVBasket.Items.Clear();
             MainWindow.listOfBoughtItems.Clear();

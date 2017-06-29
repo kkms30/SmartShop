@@ -12,7 +12,7 @@ namespace SmartShopWpf.Asynchronous
     {
         public void Download()
         {
-            DailyPDFGenerator dailyPdfGenerator;
+            DailyPdfGenerator dailyPdfGenerator;
             Task.Factory.StartNew(() =>
             {
                 DailyReportClient reportClient = new DailyReportClient(DataHandler.GetInstance().Token);
@@ -20,8 +20,8 @@ namespace SmartShopWpf.Asynchronous
                 return dailyReport;
             }).ContinueWith((dailyReport) =>
             {
-                dailyPdfGenerator = new DailyPDFGenerator(dailyReport.Result);
-                dailyPdfGenerator.GeneratePDF();
+                dailyPdfGenerator = new DailyPdfGenerator(dailyReport.Result);
+                dailyPdfGenerator.GeneratePdf();
                 Trace.WriteLine("POBRANO PODSUMOWANIE DNIA");
             });
         }

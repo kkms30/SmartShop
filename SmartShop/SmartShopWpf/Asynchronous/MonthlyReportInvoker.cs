@@ -12,7 +12,7 @@ namespace SmartShopWpf.Asynchronous
     {
         public void Download()
         {
-            MonthlyPDFGenerator monthlyPdfGenerator;
+            MonthlyPdfGenerator monthlyPdfGenerator;
             Task.Factory.StartNew(() =>
             {
                 MonthlyReportClient reportClient = new MonthlyReportClient(DataHandler.GetInstance().Token);
@@ -20,8 +20,8 @@ namespace SmartShopWpf.Asynchronous
                 return monthlyReport;
             }).ContinueWith((monthlyReport) =>
             {
-                monthlyPdfGenerator = new MonthlyPDFGenerator(monthlyReport.Result);
-                monthlyPdfGenerator.GeneratePDF();
+                monthlyPdfGenerator = new MonthlyPdfGenerator(monthlyReport.Result);
+                monthlyPdfGenerator.GeneratePdf();
                 Trace.WriteLine("POBRANO PODSUMOWANIE MIESIACA");
             });
         }
