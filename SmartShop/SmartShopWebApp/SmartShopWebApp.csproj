@@ -216,9 +216,6 @@
       <LastGenOutput>ShopModel.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
-    <None Include="log4net.config">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

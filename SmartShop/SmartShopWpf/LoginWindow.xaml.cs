@@ -1,7 +1,5 @@
 ﻿using PluginLogIn;
-using PluginMockLogowanie;
 using SmartShop.CommunicateToWebService;
-using SmartShop.CommunicateToWebService.Authentication;
 using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
 using SmartShopWpf.Models;

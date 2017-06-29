@@ -176,12 +176,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PluginMockLogowanie\PluginMockLogowanie.csproj">
-      <Project>{77fc000d-71fa-4b52-8361-5259834c7767}</Project>
-      <Name>PluginMockLogowanie</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Rescources\Images\FrameToDiscount.png" />
     <Resource Include="Rescources\Images\SMlogo.png" />
   </ItemGroup>
