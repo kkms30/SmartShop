@@ -25,8 +25,6 @@ namespace SmartShop.Tests.Wpf.Tests.Data
         public void PrepareNewTrasactionIfHappend()
         {
             //ARRANGE
-            //TransactionManager tM = new TransactionManager();
-            //DataHandler data = DataHandler.GetInstance();
             data.Cashbox = new Cashbox() { IdCashbox = 5 };
             data.Cashier = new Cashier() { IdCashier = 5 };
             data.Token = "opo";

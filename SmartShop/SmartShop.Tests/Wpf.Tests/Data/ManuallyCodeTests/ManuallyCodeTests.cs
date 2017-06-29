@@ -70,7 +70,8 @@ namespace SmartShop.Tests.Wpf.Tests
             ManuallyCode mC = ManuallyCode.GetInstance();
             mC.checkedProduct = product;
             //ACT
-            Basket basketExpected = new Basket() { Name = product.Name, Image = product.Image, SigleWithoutVatPrice = product.Price, Number = y, Count = x };
+            Basket basketExpected = new Basket() { Name = product.Name, Image = product.Image,
+                SigleWithoutVatPrice = product.Price, Number = y, Count = x };
             Basket basketResult =  mC.AddToBasketList(x, y);
             //ASSERT
             Assert.IsTrue(basketExpected.Count == basketResult.Count &&
