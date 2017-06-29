@@ -17,13 +17,13 @@ namespace SmartShopWebApp.Controllers
 {
     public class TransactionsController : ApiController
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
+        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Transactions
         [Authorize]
         public List<Transaction> GetTransactions()
         {
-            return unitOfWork.Transactions.GetTransactions();
+            return _unitOfWork.Transactions.GetTransactions();
         }
 
         // GET: api/Transactions/5
@@ -31,12 +31,12 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetTransaction(int id)
         {
-            Transaction transaction = unitOfWork.Transactions.GetTransactionByIdTransaction(id);
+            Transaction transaction = _unitOfWork.Transactions.GetTransactionByIdTransaction(id);
             if (transaction == null)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    Content = new StringContent(string.Format("No transaction with id = {0} found", id))
+                    Content = new StringContent($"No transaction with id = {id} found")
                 };
                 throw new HttpResponseException(message);
             }
@@ -56,8 +56,8 @@ namespace SmartShopWebApp.Controllers
             {
                 Task addTransaction = Task.Factory.StartNew(() =>
                 {
-                    unitOfWork.Transactions.Add(transaction);
-                    unitOfWork.Complete();
+                    _unitOfWork.Transactions.Add(transaction);
+                    _unitOfWork.Complete();
                 });
                 addTransaction.Wait();
             }
@@ -70,7 +70,7 @@ namespace SmartShopWebApp.Controllers
                 throw new HttpResponseException(message);
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, unitOfWork.Transactions.GetTransactionById(transaction.Id));
+            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, _unitOfWork.Transactions.GetTransactionById(transaction.Id));
         }
 
 
@@ -90,8 +90,8 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest();
             };
 
-            unitOfWork.Transactions.ModifyWithNewOrders(transaction);
-            unitOfWork.Complete();
+            _unitOfWork.Transactions.ModifyWithNewOrders(transaction);
+            _unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -100,7 +100,7 @@ namespace SmartShopWebApp.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -307,7 +307,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\OAuthAppProvider.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Util\LogHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -329,9 +328,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

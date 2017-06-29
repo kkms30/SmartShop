@@ -15,13 +15,13 @@ namespace SmartShopWebApp.Controllers
 {
     public class ProductsController : ApiController
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
+        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Products
         [Authorize]
         public IEnumerable<Product> GetProducts()
         {
-            return unitOfWork.Products.GetProductsWithCategories();
+            return _unitOfWork.Products.GetProductsWithCategories();
         }
 
 
@@ -29,7 +29,7 @@ namespace SmartShopWebApp.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }      

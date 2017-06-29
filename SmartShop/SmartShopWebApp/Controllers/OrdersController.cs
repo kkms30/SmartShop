@@ -15,13 +15,13 @@ namespace SmartShopWebApp.Controllers
 {
     public class OrdersController : ApiController
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
+        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Orders
         [Authorize]
         public IEnumerable<Order> GetOrders()
         {
-            return unitOfWork.Orders.GetOrderWithProducts();
+            return _unitOfWork.Orders.GetOrderWithProducts();
         }
 
         // PUT: api/Orders/5
@@ -39,9 +39,9 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest();
             }
 
-            unitOfWork.Orders.Modify(order);
+            _unitOfWork.Orders.Modify(order);
 
-            unitOfWork.Complete();
+            _unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -50,7 +50,7 @@ namespace SmartShopWebApp.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

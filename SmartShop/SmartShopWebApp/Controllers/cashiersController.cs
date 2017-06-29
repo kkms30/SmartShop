@@ -15,19 +15,19 @@ namespace SmartShopWebApp.Controllers
 {
     public class CashiersController : ApiController
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
+        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Cashiers/5
         [Authorize]
         [ResponseType(typeof(Cashier))]
         public IHttpActionResult GetCashier(string id)
         {
-            Cashier cashier = unitOfWork.Cashiers.GetCashierById(id);
+            Cashier cashier = _unitOfWork.Cashiers.GetCashierById(id);
             if (cashier == null)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    Content = new StringContent(string.Format("No cashier with id = {0} found", id))
+                    Content = new StringContent($"No cashier with id = {id} found")
                 };
                 throw new HttpResponseException(message);
             }
@@ -38,7 +38,7 @@ namespace SmartShopWebApp.Controllers
         [Authorize]
         public List<Cashier> GetCashiers()
         {
-            return unitOfWork.Cashiers.GetCashiers();
+            return _unitOfWork.Cashiers.GetCashiers();
         }
 
         // PUT: api/Cashiers/5
@@ -55,8 +55,8 @@ namespace SmartShopWebApp.Controllers
                 return BadRequest();
             }
 
-            unitOfWork.Cashiers.Modify(cashier);
-            unitOfWork.Complete();
+            _unitOfWork.Cashiers.Modify(cashier);
+            _unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -65,7 +65,7 @@ namespace SmartShopWebApp.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }        

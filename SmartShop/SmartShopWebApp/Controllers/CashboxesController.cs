@@ -15,13 +15,13 @@ namespace SmartShopWebApp.Controllers
 {
     public class CashboxesController : ApiController
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(new ShopContext());
+        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
 
         // GET: api/Cashboxes
         [Authorize]
         public List<Cashbox> GetCashboxes()
         {
-            return unitOfWork.Cashboxes.GetCashboxes();
+            return _unitOfWork.Cashboxes.GetCashboxes();
         }
 
         // GET: api/Cashboxes/5
@@ -29,12 +29,12 @@ namespace SmartShopWebApp.Controllers
         [ResponseType(typeof(Cashbox))]
         public IHttpActionResult GetCashbox(int id)
         {
-            Cashbox cashbox = unitOfWork.Cashboxes.GetCashboxById(id);
+            Cashbox cashbox = _unitOfWork.Cashboxes.GetCashboxById(id);
             if (cashbox == null)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    Content = new StringContent(string.Format("No cashbox with id = {0} found", id))
+                    Content = new StringContent($"No cashbox with id = {id} found")
                 };
                 throw new HttpResponseException(message);
             }
@@ -45,7 +45,7 @@ namespace SmartShopWebApp.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
