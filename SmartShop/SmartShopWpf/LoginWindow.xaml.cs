@@ -26,6 +26,11 @@ namespace SmartShopWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            HandleBtnLoginClick();
+        }
+
+        private void HandleBtnLoginClick()
+        {
             string id = txtLogin.Text;
             string password = pswPassword.Password;
             ProductsClient productsClient = null;
@@ -34,7 +39,7 @@ namespace SmartShopWpf
             List<Product> products = new List<Product>();
             string token = "";
             btnLogin.IsEnabled = false;
-            Task.Factory.StartNew((Action) delegate
+            Task.Factory.StartNew((Action)delegate
             {
                 foreach (FileInfo fi in _directoryInfo.GetFiles("PluginLogIn.dll"))
                 {
@@ -43,7 +48,7 @@ namespace SmartShopWpf
                     {
                         if (pluginType.GetInterface(typeof(ILogIn).Name) != null)
                         {
-                            ILogIn typeLoadedFromPlugin = (ILogIn) Activator.CreateInstance(pluginType);
+                            ILogIn typeLoadedFromPlugin = (ILogIn)Activator.CreateInstance(pluginType);
                             if (typeLoadedFromPlugin.CheckLoginData(id, password, ref productsClient, ref cashierClient,
                                 ref cashier, ref products, ref token))
                             {

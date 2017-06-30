@@ -25,6 +25,16 @@ namespace SmartShopWpf
 
         private void btnTypeOfDiscount_Click(object sender, RoutedEventArgs e)
         {
+            HandleBtnDiscountTypeClick();
+        }
+
+        private void btnAddDiscount_Click(object sender, RoutedEventArgs e)
+        {
+            HandleBtnAddDiscountClick();
+        }
+
+        private void HandleBtnDiscountTypeClick()
+        {
             if (_flagToTagTypeOfDiscount)
             {
                 btnTypeOfDiscount.Content = "zł";
@@ -37,7 +47,7 @@ namespace SmartShopWpf
             }
         }
 
-        private void btnAddDiscount_Click(object sender, RoutedEventArgs e)
+        private void HandleBtnAddDiscountClick()
         {
             double discountValueConverter = 0;
 
