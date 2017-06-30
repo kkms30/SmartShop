@@ -23,12 +23,7 @@ namespace PluginLogIn
 
             if (cashier != null && products.Count > 0 && result)
             {
-                result = true;
-                //InitAppData(cashier, products, token);
-
-                //MainWindow mW = new MainWindow(false);
-                //mW.Show();
-                //this.Close();
+                result = true;;
             }else { result = false; }
             return result;
         }

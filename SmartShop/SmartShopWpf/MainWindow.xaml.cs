@@ -99,7 +99,6 @@ namespace SmartShopWpf
             {
                 MessageBox.Show("Musisz zaznaczyć jeden produkt");
             }
-
             else
             {
                 Basket basketToEditHisQuantity = (Basket) listVBasket.SelectedItem;
@@ -139,8 +138,7 @@ namespace SmartShopWpf
 
                                 basketToEditHisQuantity.Count = Convert.ToInt32(txtManuallyCodeEntry.Text);
                                 v.BeforeDiscount = singlePrice * v.Count;
-
-
+                                
                                 //Do sumy pdodajemy cenę Orderu przed zniżką
                                 Sum += v.BeforeDiscount;
 
@@ -149,8 +147,7 @@ namespace SmartShopWpf
                                 basketToEditHisQuantity.ChoseOptionPrice = basketToEditHisQuantity.BeforeDiscount;
                                 lblAmount.Content = Math.Round(Convert.ToDouble(Sum), 2);
                                 lblAmountWithoutDiscount.Content = Math.Round(Convert.ToDouble(Sum), 2);
-
-
+                                
                                 ifFound = true;
                                 _flagToEditQuantity = false;
                                 lblManuallyTagOfCode.Content = tagForManuDisplCode;
