@@ -480,11 +480,9 @@ namespace SmartShopWpf
         public float DiscountValueForOrders(float totalPriceWithSingleAndOverwallDiscount,
             float totalPriceWithSingleAndWithoutOverwallDiscount, float optionPriceOfSingleBasket)
         {
-            float percentWithoutOverallDiscount, discountValue;
-
-            percentWithoutOverallDiscount = (optionPriceOfSingleBasket * 100) /
-                                            totalPriceWithSingleAndWithoutOverwallDiscount;
-            discountValue = (percentWithoutOverallDiscount * totalPriceWithSingleAndOverwallDiscount) / 100;
+            var percentWithoutOverallDiscount = (optionPriceOfSingleBasket * 100) /
+                                                totalPriceWithSingleAndWithoutOverwallDiscount;
+            var discountValue = (percentWithoutOverallDiscount * totalPriceWithSingleAndOverwallDiscount) / 100;
 
             return discountValue;
         }

@@ -1,5 +1,4 @@
 ﻿using PluginLogIn;
-using SmartShop.CommunicateToWebService;
 using SmartShop.CommunicateToWebService.Clients;
 using SmartShopWpf.Data;
 using System;

@@ -7,8 +7,8 @@ namespace SmartShopWebApp.Controllers
 {
     public class ReportController : ApiController
     {
-
         [Route("api/report/daily")]
+        [Authorize]
         public List<Report> GetDailyReport()
         {
             ExtraFeatures features = new ExtraFeatures();
@@ -17,11 +17,11 @@ namespace SmartShopWebApp.Controllers
 
 
         [Route("api/report/monthly")]
+        [Authorize]
         public List<Report> GetMonthlyReport()
         {
             ExtraFeatures features = new ExtraFeatures();
             return features.GetMonthlyReport();
         }
-
     }
 }

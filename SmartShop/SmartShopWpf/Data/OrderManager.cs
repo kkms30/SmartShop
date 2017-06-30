@@ -4,7 +4,7 @@ using SmartShop.Models.Models;
 
 namespace SmartShopWpf.Data
 {
-    internal class OrderManager
+    public class OrderManager
     {
         private DataHandler _data;
 

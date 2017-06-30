@@ -73,7 +73,7 @@ namespace SmartShop.Tests.Wpf.Tests.Data.ManuallyCodeTests
             {
                 Name = product.Name,
                 Image = product.Image,
-                SigleWithoutVatPrice = product.Price,
+                SingleWithoutVatPrice = product.Price,
                 Number = y,
                 Count = x
             };
@@ -83,7 +83,7 @@ namespace SmartShop.Tests.Wpf.Tests.Data.ManuallyCodeTests
                           basketExpected.Number == basketResult.Number &&
                           basketExpected.Name == basketResult.Name &&
                           basketExpected.Image == basketResult.Image &&
-                          basketExpected.SigleWithoutVatPrice == basketResult.SigleWithoutVatPrice);
+                          basketExpected.SingleWithoutVatPrice == basketResult.SingleWithoutVatPrice);
         }
 
         [Test]

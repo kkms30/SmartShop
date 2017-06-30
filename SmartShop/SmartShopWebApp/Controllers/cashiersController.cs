@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using SmartShopWebApp.Core;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
 
@@ -10,7 +11,17 @@ namespace SmartShopWebApp.Controllers
 {
     public class CashiersController : ApiController
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
+        private IUnitOfWork _unitOfWork;
+
+        public CashiersController()
+        {
+            _unitOfWork = new UnitOfWork(new ShopContext());
+        }
+
+        public CashiersController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: api/Cashiers/5
         [Authorize]

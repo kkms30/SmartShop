@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using SmartShopWebApp.Core;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
 
@@ -7,7 +8,17 @@ namespace SmartShopWebApp.Controllers
 {
     public class ProductsController : ApiController
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
+        private IUnitOfWork _unitOfWork;
+
+        public ProductsController()
+        {
+            _unitOfWork = new UnitOfWork(new ShopContext());
+        }
+
+        public ProductsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: api/Products
         [Authorize]
@@ -15,8 +26,7 @@ namespace SmartShopWebApp.Controllers
         {
             return _unitOfWork.Products.GetProductsWithCategories();
         }
-
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

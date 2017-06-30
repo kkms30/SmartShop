@@ -4,7 +4,7 @@ using SmartShop.Models.Models;
 
 namespace SmartShopWpf.Data
 {
-    public sealed class ManuallyCode
+    public class ManuallyCode
     {
         public Product CheckedProduct = new Product();
         public Basket BasketContainer = new Basket();
@@ -48,7 +48,7 @@ namespace SmartShopWpf.Data
                 Name = getName,
                 Image = getImage,
                 Count = getCount,
-                SigleWithoutVatPrice = getSingleWithoutVatPrice,
+                SingleWithoutVatPrice = getSingleWithoutVatPrice,
                 SingleWithVatPrice = getSingleWithVatPrice,
                 TotalPriceWithoutVat = getTotalPriceWithoutVat,
                 TotalPriceWithVat = getTotalPriceWithVat

@@ -15,7 +15,7 @@ namespace SmartShopWpf.Data
         public int Count { get; set; }
 
         //Cena pojedyczego produktu bez Vatu
-        public float SigleWithoutVatPrice { get; set; }
+        public float SingleWithoutVatPrice { get; set; }
 
         //Cena pojedycznego produktu z Vatem
         public float SingleWithVatPrice { get; set; }

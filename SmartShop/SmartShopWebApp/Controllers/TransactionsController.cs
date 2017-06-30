@@ -7,12 +7,23 @@ using System.Web.Http.Description;
 using SmartShopWebApp.Core.GeneratedModels;
 using SmartShopWebApp.Persistance;
 using System.Threading.Tasks;
+using SmartShopWebApp.Core;
 
 namespace SmartShopWebApp.Controllers
 {
     public class TransactionsController : ApiController
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new ShopContext());
+        private IUnitOfWork _unitOfWork;
+
+        public TransactionsController()
+        {
+            _unitOfWork = new UnitOfWork(new ShopContext());
+        }
+
+        public TransactionsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: api/Transactions
         [Authorize]
@@ -65,9 +76,9 @@ namespace SmartShopWebApp.Controllers
                 throw new HttpResponseException(message);
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.Id }, _unitOfWork.Transactions.GetTransactionById(transaction.Id));
+            return CreatedAtRoute("DefaultApi", new {id = transaction.Id},
+                _unitOfWork.Transactions.GetTransactionById(transaction.Id));
         }
-
 
 
         // PUT: api/Transactions/5
@@ -83,7 +94,8 @@ namespace SmartShopWebApp.Controllers
             if (id != transaction.IdTransaction)
             {
                 return BadRequest();
-            };
+            }
+            ;
 
             _unitOfWork.Transactions.ModifyWithNewOrders(transaction);
             _unitOfWork.Complete();
