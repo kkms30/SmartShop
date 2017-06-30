@@ -1,10 +1,10 @@
-﻿using SmartShopWpf.Data;
-using SmartShopWpf.ReceipeMethods;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
+using SmartShopWpf.Data;
+using SmartShopWpf.ReceipeMethods;
 
 namespace SmartShopWpf
 {
@@ -16,9 +16,9 @@ namespace SmartShopWpf
         private const int GwlStyle = -16;
         private const int WsSysmenu = 0x80000;
 
-        public float dataTotalPrice;
-        public int dataId;
-        public bool flagToKindOfPayment = true;
+        private float _dataTotalPrice;
+        private int _dataId;
+        private bool _flagToKindOfPayment = true;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
@@ -28,45 +28,39 @@ namespace SmartShopWpf
 
         public PaymentWindow(float dataTotalPrice, int dataId)
         {
-            this.dataId = dataId;
-            this.dataTotalPrice = dataTotalPrice;
+            _dataId = dataId;
+            _dataTotalPrice = dataTotalPrice;
             InitializeComponent();
             lblToPayTag.Content = lblToPayTag.Content + " " + MainWindow.TotalPriceToPaymentLabel;
         }
 
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
+            HandleBtnPayClick();
+        }
+
+        private void btnKinfOfPayment_Click(object sender, RoutedEventArgs e)
+        {
+            HandleBtnKindOfPaymentClick();
+        }
+
+        private void HandleBtnPayClick()
+        {
             MainWindow mainWindow = Owner as MainWindow;
 
             float price = float.Parse(mainWindow.lblAmount.Content.ToString(),
                 CultureInfo.InvariantCulture.NumberFormat);
 
-            //dataTotalPrice = price / 100;
-            dataTotalPrice = (float) Convert.ToDouble(MainWindow.TotalPriceToPaymentLabel);
+            _dataTotalPrice = (float) Convert.ToDouble(MainWindow.TotalPriceToPaymentLabel);
 
-            Receipe receipe = new Receipe();
-            //recp.TransactionNumber = data.Transaction.Id;
-            receipe.TransactionNumber = dataId;
-            receipe.Data = DateTime.Now;
-            receipe.ListOfBoughtProducts = MainWindow.ListOfBoughtItems;
-            receipe.PriceSum = dataTotalPrice;
-            if (flagToKindOfPayment)
-            {
-                receipe.KindOfPayment = "Gotowka";
-            }
-            else
-            {
-                receipe.KindOfPayment = "Karta";
-            }
+            GenerateReceipe(mainWindow);
+            InvokeResultsOnMainWindow(mainWindow);
 
-            receipe.PriceSum = dataTotalPrice;
-            receipe.CashNumber = Convert.ToInt32(mainWindow.lblCashRegisterNumber.Content);
-            receipe.CashierNumber = Convert.ToInt32(mainWindow.lblCashierNumber.Content);
-            if (MainWindow.ListOfDeletedItems.Count > 0)
-                receipe.ListOfDeletedProducts = MainWindow.ListOfDeletedItems;
-            ReceipePdfGenerator receipePdfGenerator = new ReceipePdfGenerator(receipe);
-            receipePdfGenerator.GeneratePdf();
+            Close();
+        }
 
+        private void InvokeResultsOnMainWindow(MainWindow mainWindow)
+        {
             mainWindow.listVBasket.Items.Clear();
             MainWindow.ListOfBoughtItems.Clear();
             MainWindow.ListOfDeletedItems.Clear();
@@ -76,21 +70,39 @@ namespace SmartShopWpf
             MainWindow.FlagToOverwallDiscount = false;
             mainWindow.btnEdit.IsEnabled = true;
             mainWindow.btnVat.IsEnabled = true;
-
-            this.Close();
         }
 
-        private void btnKinfOfPayment_Click(object sender, RoutedEventArgs e)
+        private void GenerateReceipe(MainWindow mainWindow)
         {
-            if (flagToKindOfPayment)
+            Receipe receipe = new Receipe
+            {
+                TransactionNumber = _dataId,
+                Data = DateTime.Now,
+                ListOfBoughtProducts = MainWindow.ListOfBoughtItems,
+                PriceSum = _dataTotalPrice,
+                KindOfPayment = _flagToKindOfPayment ? "Gotowka" : "Karta"
+            };
+
+            receipe.PriceSum = _dataTotalPrice;
+            receipe.CashNumber = Convert.ToInt32(mainWindow.lblCashRegisterNumber.Content);
+            receipe.CashierNumber = Convert.ToInt32(mainWindow.lblCashierNumber.Content);
+            if (MainWindow.ListOfDeletedItems.Count > 0)
+                receipe.ListOfDeletedProducts = MainWindow.ListOfDeletedItems;
+            ReceipePdfGenerator receipePdfGenerator = new ReceipePdfGenerator(receipe);
+            receipePdfGenerator.GeneratePdf();
+        }
+
+        private void HandleBtnKindOfPaymentClick()
+        {
+            if (_flagToKindOfPayment)
             {
                 btnKinfOfPayment.Content = "Karta";
-                flagToKindOfPayment = false;
+                _flagToKindOfPayment = false;
             }
             else
             {
                 btnKinfOfPayment.Content = "Gotówka";
-                flagToKindOfPayment = true;
+                _flagToKindOfPayment = true;
             }
         }
 
